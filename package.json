@@ -1,18 +1,16 @@
 {
-  "name": "ember-unit-test-helpers",
+  "name": "ember-qunit",
   "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "unit test helpers for ember",
+  "main": "dist/cjs/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "rm -rf dist && broccoli build dist && karma start --single-run"
   },
-  "author": "",
-  "license": "BSD-2-Clause",
-  "dependencies": {
+  "author": "Stefan Penner",
+  "license": "MIT",
+  "devDependencies": {
     "broccoli": "~0.2.0",
     "broccoli-dist-es6-module": "0.0.2"
-  },
-  "devDependencies": {
     "karma-script-launcher": "~0.1.0",
     "karma-chrome-launcher": "~0.1.2",
     "karma-firefox-launcher": "~0.1.3",
