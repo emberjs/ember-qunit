@@ -1,3 +1,5 @@
+emq.globalize();
+
 var registry = {
   'component:x-foo': Ember.Component.extend(),
   'route:foo': Ember.Route.extend(),
@@ -14,23 +16,23 @@ setResolver(Resolver.create());
 
 
 
-moduleForRoute('foo', 'FooRoute');
+//moduleForRoute('foo', 'FooRoute');
 
-test('creates route instance', function() {
-  expect(1);
-  var route = this.subject();
-  ok(route instanceof registry['route:foo']);
-});
+//test('creates route instance', function() {
+  //expect(1);
+  //var route = this.subject();
+  //ok(route instanceof registry['route:foo']);
+//});
 
 
 
-moduleForController('bar', 'BarController');
+//moduleForController('bar', 'BarController');
 
-test('creates controller instance', function() {
-  expect(1);
-  var controller = this.subject();
-  ok(controller instanceof registry['controller:bar']);
-});
+//test('creates controller instance', function() {
+  //expect(1);
+  //var controller = this.subject();
+  //ok(controller instanceof registry['controller:bar']);
+//});
 
 
 
