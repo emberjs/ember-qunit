@@ -2,7 +2,8 @@
   "name": "ember-qunit",
   "version": "0.0.0",
   "authors": [
-    "Stefan Penner"
+    "Stefan Penner",
+    "Ryan Florence"
   ],
   "license": "MIT",
   "ignore": [

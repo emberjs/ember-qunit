@@ -6,7 +6,10 @@
   "scripts": {
     "test": "rm -rf dist && broccoli build dist && karma start --single-run"
   },
-  "author": "Stefan Penner",
+  "authors": [
+    "Stefan Penner",
+    "Ryan Florence"
+  ],
   "license": "MIT",
   "devDependencies": {
     "broccoli": "~0.2.0",
