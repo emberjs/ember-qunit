@@ -4,7 +4,7 @@
   "description": "unit test helpers for ember",
   "main": "dist/cjs/main.js",
   "scripts": {
-    "test": "rm -rf dist && broccoli build dist && karma start --single-run"
+    "test": "karma start --single-run"
   },
   "authors": [
     "Stefan Penner",
