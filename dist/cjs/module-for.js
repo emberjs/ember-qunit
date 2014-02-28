@@ -1,7 +1,8 @@
 "use strict";
+var Ember = require("ember")["default"] || require("ember");
+var QUnit = require("qunit")["default"] || require("qunit");
 var testContext = require("./test-context")["default"] || require("./test-context");
 var isolatedContainer = require("./isolated-container")["default"] || require("./isolated-container");
-var QUnit = window.QUnit;
 
 exports["default"] = function moduleFor(fullName, description, callbacks, delegate) {
   callbacks = callbacks || { };

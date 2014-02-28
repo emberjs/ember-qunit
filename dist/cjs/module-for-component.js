@@ -1,5 +1,6 @@
 "use strict";
 var testResolver = require("./test-resolver")["default"] || require("./test-resolver");
+var Ember = require("ember")["default"] || require("ember");
 
 exports["default"] = function moduleForComponent(name, description, callbacks) {
   var resolver = testResolver.get();

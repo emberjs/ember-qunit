@@ -1,8 +1,9 @@
 define(
-  ["./test-resolver","exports"],
-  function(__dependency1__, __exports__) {
+  ["./test-resolver","ember","exports"],
+  function(__dependency1__, __dependency2__, __exports__) {
     "use strict";
     var testResolver = __dependency1__["default"] || __dependency1__;
+    var Ember = __dependency2__["default"] || __dependency2__;
 
     __exports__["default"] = function moduleForComponent(name, description, callbacks) {
       var resolver = testResolver.get();

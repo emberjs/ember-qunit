@@ -1,4 +1,6 @@
 "use strict";
+var Ember = require("ember")["default"] || require("ember");
+var QUnit = require("qunit")["default"] || require("qunit");
 var testContext = require("./test-context")["default"] || require("./test-context");
 
 function resetViews() {

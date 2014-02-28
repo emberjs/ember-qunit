@@ -1,8 +1,7 @@
 !function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.emq=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
-
-},{}],2:[function(_dereq_,module,exports){
 "use strict";
 var testResolver = _dereq_("./test-resolver")["default"] || _dereq_("./test-resolver");
+var Ember = window.Ember["default"] || window.Ember;
 
 exports["default"] = function isolatedContainer(fullNames) {
   var resolver = testResolver.get();
@@ -18,9 +17,9 @@ exports["default"] = function isolatedContainer(fullNames) {
   }
   return container;
 }
-},{"./test-resolver":7}],3:[function(_dereq_,module,exports){
+},{"./test-resolver":6}],2:[function(_dereq_,module,exports){
 "use strict";
-var Ember = _dereq_("ember")["default"] || _dereq_("ember");
+var Ember = window.Ember["default"] || window.Ember;
 var isolatedContainer = _dereq_("./isolated-container")["default"] || _dereq_("./isolated-container");
 var moduleFor = _dereq_("./module-for")["default"] || _dereq_("./module-for");
 var moduleForComponent = _dereq_("./module-for-component")["default"] || _dereq_("./module-for-component");
@@ -45,9 +44,10 @@ exports.moduleFor = moduleFor;
 exports.moduleForComponent = moduleForComponent;
 exports.test = test;
 exports.setResolver = setResolver;
-},{"./isolated-container":2,"./module-for":5,"./module-for-component":4,"./test":8,"./test-resolver":7,"ember":1}],4:[function(_dereq_,module,exports){
+},{"./isolated-container":1,"./module-for":4,"./module-for-component":3,"./test":7,"./test-resolver":6}],3:[function(_dereq_,module,exports){
 "use strict";
 var testResolver = _dereq_("./test-resolver")["default"] || _dereq_("./test-resolver");
+var Ember = window.Ember["default"] || window.Ember;
 
 exports["default"] = function moduleForComponent(name, description, callbacks) {
   var resolver = testResolver.get();
@@ -77,11 +77,12 @@ exports["default"] = function moduleForComponent(name, description, callbacks) {
     context.__setup_properties__.$ = context.__setup_properties__.append;
   });
 }
-},{"./test-resolver":7}],5:[function(_dereq_,module,exports){
+},{"./test-resolver":6}],4:[function(_dereq_,module,exports){
 "use strict";
+var Ember = window.Ember["default"] || window.Ember;
+var QUnit = window.QUnit["default"] || window.QUnit;
 var testContext = _dereq_("./test-context")["default"] || _dereq_("./test-context");
 var isolatedContainer = _dereq_("./isolated-container")["default"] || _dereq_("./isolated-container");
-var QUnit = window.QUnit;
 
 exports["default"] = function moduleFor(fullName, description, callbacks, delegate) {
   callbacks = callbacks || { };
@@ -159,7 +160,7 @@ function buildContextVariables(context) {
     };
   });
 }
-},{"./isolated-container":2,"./test-context":6}],6:[function(_dereq_,module,exports){
+},{"./isolated-container":1,"./test-context":5}],5:[function(_dereq_,module,exports){
 "use strict";
 var __test_context__;
 
@@ -172,7 +173,7 @@ exports.set = set;function get() {
 }
 
 exports.get = get;
-},{}],7:[function(_dereq_,module,exports){
+},{}],6:[function(_dereq_,module,exports){
 "use strict";
 var __resolver__;
 
@@ -186,8 +187,10 @@ exports.set = set;function get() {
 }
 
 exports.get = get;
-},{}],8:[function(_dereq_,module,exports){
+},{}],7:[function(_dereq_,module,exports){
 "use strict";
+var Ember = window.Ember["default"] || window.Ember;
+var QUnit = window.QUnit["default"] || window.QUnit;
 var testContext = _dereq_("./test-context")["default"] || _dereq_("./test-context");
 
 function resetViews() {
@@ -213,6 +216,6 @@ exports["default"] = function test(testName, callback) {
 
   QUnit.test(testName, wrapper);
 }
-},{"./test-context":6}]},{},[3])
-(3)
+},{"./test-context":5}]},{},[2])
+(2)
 });

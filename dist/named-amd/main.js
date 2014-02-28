@@ -1,8 +1,9 @@
 define("ember-qunit/isolated-container",
-  ["./test-resolver","exports"],
-  function(__dependency1__, __exports__) {
+  ["./test-resolver","ember","exports"],
+  function(__dependency1__, __dependency2__, __exports__) {
     "use strict";
     var testResolver = __dependency1__["default"] || __dependency1__;
+    var Ember = __dependency2__["default"] || __dependency2__;
 
     __exports__["default"] = function isolatedContainer(fullNames) {
       var resolver = testResolver.get();
@@ -48,10 +49,11 @@ define("ember-qunit/isolated-container",
     __exports__.test = test;
     __exports__.setResolver = setResolver;
   });define("ember-qunit/module-for-component",
-  ["./test-resolver","exports"],
-  function(__dependency1__, __exports__) {
+  ["./test-resolver","ember","exports"],
+  function(__dependency1__, __dependency2__, __exports__) {
     "use strict";
     var testResolver = __dependency1__["default"] || __dependency1__;
+    var Ember = __dependency2__["default"] || __dependency2__;
 
     __exports__["default"] = function moduleForComponent(name, description, callbacks) {
       var resolver = testResolver.get();
@@ -106,12 +108,13 @@ define("ember-qunit/isolated-container",
       //});
     //}
   });define("ember-qunit/module-for",
-  ["./test-context","./isolated-container","exports"],
-  function(__dependency1__, __dependency2__, __exports__) {
+  ["ember","qunit","./test-context","./isolated-container","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
     "use strict";
-    var testContext = __dependency1__["default"] || __dependency1__;
-    var isolatedContainer = __dependency2__["default"] || __dependency2__;
-    var QUnit = window.QUnit;
+    var Ember = __dependency1__["default"] || __dependency1__;
+    var QUnit = __dependency2__["default"] || __dependency2__;
+    var testContext = __dependency3__["default"] || __dependency3__;
+    var isolatedContainer = __dependency4__["default"] || __dependency4__;
 
     __exports__["default"] = function moduleFor(fullName, description, callbacks, delegate) {
       callbacks = callbacks || { };
@@ -221,10 +224,12 @@ define("ember-qunit/isolated-container",
 
     __exports__.get = get;
   });define("ember-qunit/test",
-  ["./test-context","exports"],
-  function(__dependency1__, __exports__) {
+  ["ember","qunit","./test-context","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
     "use strict";
-    var testContext = __dependency1__["default"] || __dependency1__;
+    var Ember = __dependency1__["default"] || __dependency1__;
+    var QUnit = __dependency2__["default"] || __dependency2__;
+    var testContext = __dependency3__["default"] || __dependency3__;
 
     function resetViews() {
       Ember.View.views = {};
