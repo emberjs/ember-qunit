@@ -147,6 +147,9 @@ define("ember-qunit/isolated-container",
       }
 
       var context = testContext.get();
+      // TODO: move this to component|view callbacks when infrastructure is added
+      // to make it simpler
+      var dispatcher = Ember.EventDispatcher.create();
       var _callbacks = {
         setup: function(){
           Ember.$('<div id="ember-testing"/>').appendTo(document.body);
@@ -157,6 +160,7 @@ define("ember-qunit/isolated-container",
         teardown: function(){
           Ember.run(function(){
             container.destroy();
+            dispatcher.destroy();
           });
           Ember.$('#ember-testing').empty();
           callbacks.teardown(container);
