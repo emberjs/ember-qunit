@@ -43,6 +43,7 @@ define(
       var dispatcher = Ember.EventDispatcher.create();
       var _callbacks = {
         setup: function(){
+          dispatcher.setup();
           Ember.$('<div id="ember-testing"/>').appendTo(document.body);
           buildContextVariables(context);
           callbacks.setup.call(context, container);
