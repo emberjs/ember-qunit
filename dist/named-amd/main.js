@@ -49,11 +49,12 @@ define("ember-qunit/isolated-container",
     __exports__.test = test;
     __exports__.setResolver = setResolver;
   });define("ember-qunit/module-for-component",
-  ["./test-resolver","ember","exports"],
-  function(__dependency1__, __dependency2__, __exports__) {
+  ["./test-resolver","./module-for","ember","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
     "use strict";
     var testResolver = __dependency1__["default"] || __dependency1__;
-    var Ember = __dependency2__["default"] || __dependency2__;
+    var moduleFor = __dependency2__["default"] || __dependency2__;
+    var Ember = __dependency3__["default"] || __dependency3__;
 
     __exports__["default"] = function moduleForComponent(name, description, callbacks) {
       var resolver = testResolver.get();
