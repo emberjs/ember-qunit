@@ -47,6 +47,7 @@ exports.setResolver = setResolver;
 },{"./isolated-container":1,"./module-for":4,"./module-for-component":3,"./test":7,"./test-resolver":6}],3:[function(_dereq_,module,exports){
 "use strict";
 var testResolver = _dereq_("./test-resolver")["default"] || _dereq_("./test-resolver");
+var moduleFor = _dereq_("./module-for")["default"] || _dereq_("./module-for");
 var Ember = window.Ember["default"] || window.Ember;
 
 exports["default"] = function moduleForComponent(name, description, callbacks) {
@@ -77,7 +78,7 @@ exports["default"] = function moduleForComponent(name, description, callbacks) {
     context.__setup_properties__.$ = context.__setup_properties__.append;
   });
 }
-},{"./test-resolver":6}],4:[function(_dereq_,module,exports){
+},{"./module-for":4,"./test-resolver":6}],4:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
 var QUnit = window.QUnit["default"] || window.QUnit;
