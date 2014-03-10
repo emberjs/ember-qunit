@@ -14,7 +14,7 @@
   "license": "MIT",
   "devDependencies": {
     "broccoli": "~0.2.0",
-    "broccoli-dist-es6-module": "0.1.5",
+    "broccoli-dist-es6-module": "^0.1.8",
     "karma-script-launcher": "~0.1.0",
     "karma-chrome-launcher": "~0.1.2",
     "karma-firefox-launcher": "~0.1.3",
