@@ -20,15 +20,16 @@ define("ember-qunit/isolated-container",
       return container;
     }
   });define("ember-qunit",
-  ["ember","./isolated-container","./module-for","./module-for-component","./test","./test-resolver","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __exports__) {
+  ["ember","./isolated-container","./module-for","./module-for-component","./module-for-model","./test","./test-resolver","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __exports__) {
     "use strict";
     var Ember = __dependency1__["default"] || __dependency1__;
     var isolatedContainer = __dependency2__["default"] || __dependency2__;
     var moduleFor = __dependency3__["default"] || __dependency3__;
     var moduleForComponent = __dependency4__["default"] || __dependency4__;
-    var test = __dependency5__["default"] || __dependency5__;
-    var testResolver = __dependency6__["default"] || __dependency6__;
+    var moduleForModel = __dependency5__["default"] || __dependency5__;
+    var test = __dependency6__["default"] || __dependency6__;
+    var testResolver = __dependency7__["default"] || __dependency7__;
 
     Ember.testing = true;
 
@@ -39,6 +40,7 @@ define("ember-qunit/isolated-container",
     function globalize() {
       window.moduleFor = moduleFor;
       window.moduleForComponent = moduleForComponent;
+      window.moduleForModel = moduleForModel;
       window.test = test;
       window.setResolver = setResolver;
     }
@@ -46,6 +48,7 @@ define("ember-qunit/isolated-container",
     __exports__.globalize = globalize;
     __exports__.moduleFor = moduleFor;
     __exports__.moduleForComponent = moduleForComponent;
+    __exports__.moduleForModel = moduleForModel;
     __exports__.test = test;
     __exports__.setResolver = setResolver;
   });define("ember-qunit/module-for-component",
@@ -85,29 +88,31 @@ define("ember-qunit/isolated-container",
       });
     }
   });define("ember-qunit/module-for-model",
-  [],
-  function() {
+  ["./module-for","ember","exports"],
+  function(__dependency1__, __dependency2__, __exports__) {
     "use strict";
-    // TODO
-    //function moduleForModel(name, description, callbacks) {
-      //moduleFor('model:' + name, description, callbacks, function(container, context) {
-        //// custom model specific awesomeness
-        //container.register('store:main', DS.Store);
-        //container.register('adapter:application', DS.FixtureAdapter);
+    var moduleFor = __dependency1__["default"] || __dependency1__;
+    var Ember = __dependency2__["default"] || __dependency2__;
 
-        //context.__setup_properties__.store = function(){
-          //return container.lookup('store:main');
-        //};
+    __exports__["default"] = function moduleForModel(name, description, callbacks) {
+      moduleFor('model:' + name, description, callbacks, function(container, context, defaultSubject) {
+        // custom model specific awesomeness
+        container.register('store:main', DS.Store);
+        container.register('adapter:application', DS.FixtureAdapter);
 
-        //if (context.__setup_properties__.subject === defaultSubject) {
-          //context.__setup_properties__.subject = function(factory, options) {
-            //return Ember.run(function() {
-              //return container.lookup('store:main').createRecord(name, options);
-            //});
-          //};
-        //}
-      //});
-    //}
+        context.__setup_properties__.store = function(){
+          return container.lookup('store:main');
+        };
+
+        if (context.__setup_properties__.subject === defaultSubject) {
+          context.__setup_properties__.subject = function(factory, options) {
+            return Ember.run(function() {
+              return container.lookup('store:main').createRecord(name, options);
+            });
+          };
+        }
+      });
+    }
   });define("ember-qunit/module-for",
   ["ember","qunit","./test-context","./isolated-container","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
@@ -144,7 +149,7 @@ define("ember-qunit/isolated-container",
       });
 
       if (delegate) {
-        delegate(container, testContext.get());
+        delegate(container, testContext.get(), defaultSubject);
       }
 
       var context = testContext.get();

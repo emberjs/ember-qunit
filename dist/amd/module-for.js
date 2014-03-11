@@ -34,7 +34,7 @@ define(
       });
 
       if (delegate) {
-        delegate(container, testContext.get());
+        delegate(container, testContext.get(), defaultSubject);
       }
 
       var context = testContext.get();
