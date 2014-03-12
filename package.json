@@ -4,8 +4,7 @@
   "description": "unit test helpers for ember",
   "main": "dist/cjs/main.js",
   "scripts": {
-    "test": "./node_modules/.bin/karma start --browsers Firefox --single-run",
-    "postinstall": "node_modules/.bin/bower install"
+    "test": "node_modules/.bin/bower install && rm -rf dist && node_modules/.bin/broccoli build dist && ./node_modules/.bin/karma start --browsers Firefox --single-run"
   },
   "authors": [
     "Stefan Penner",
@@ -27,10 +26,7 @@
     "karma": "~0.10.9",
     "qunitjs": "~1.12.0",
     "karma-qunit": "~0.1.1",
-    "bower": "^1.2.8"
-  },
-  "dependencies": {
-    "broccoli-dist-es6-module": "^0.1.8",
-    "browserify": "^3.31.2"
+    "bower": "^1.2.8",
+    "broccoli-cli": "0.0.1"
   }
 }
