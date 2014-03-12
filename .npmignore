@@ -8,3 +8,4 @@ test
 bower.json
 Brocfile.js
 karma.conf.js
+tmp
