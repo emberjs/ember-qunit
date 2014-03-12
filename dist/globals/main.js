@@ -17,12 +17,13 @@ exports["default"] = function isolatedContainer(fullNames) {
   }
   return container;
 }
-},{"./test-resolver":6}],2:[function(_dereq_,module,exports){
+},{"./test-resolver":7}],2:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
 var isolatedContainer = _dereq_("./isolated-container")["default"] || _dereq_("./isolated-container");
 var moduleFor = _dereq_("./module-for")["default"] || _dereq_("./module-for");
 var moduleForComponent = _dereq_("./module-for-component")["default"] || _dereq_("./module-for-component");
+var moduleForModel = _dereq_("./module-for-model")["default"] || _dereq_("./module-for-model");
 var test = _dereq_("./test")["default"] || _dereq_("./test");
 var testResolver = _dereq_("./test-resolver")["default"] || _dereq_("./test-resolver");
 
@@ -35,6 +36,7 @@ function setResolver(resolver) {
 function globalize() {
   window.moduleFor = moduleFor;
   window.moduleForComponent = moduleForComponent;
+  window.moduleForModel = moduleForModel;
   window.test = test;
   window.setResolver = setResolver;
 }
@@ -42,9 +44,10 @@ function globalize() {
 exports.globalize = globalize;
 exports.moduleFor = moduleFor;
 exports.moduleForComponent = moduleForComponent;
+exports.moduleForModel = moduleForModel;
 exports.test = test;
 exports.setResolver = setResolver;
-},{"./isolated-container":1,"./module-for":4,"./module-for-component":3,"./test":7,"./test-resolver":6}],3:[function(_dereq_,module,exports){
+},{"./isolated-container":1,"./module-for":5,"./module-for-component":3,"./module-for-model":4,"./test":8,"./test-resolver":7}],3:[function(_dereq_,module,exports){
 "use strict";
 var testResolver = _dereq_("./test-resolver")["default"] || _dereq_("./test-resolver");
 var moduleFor = _dereq_("./module-for")["default"] || _dereq_("./module-for");
@@ -78,7 +81,31 @@ exports["default"] = function moduleForComponent(name, description, callbacks) {
     context.__setup_properties__.$ = context.__setup_properties__.append;
   });
 }
-},{"./module-for":4,"./test-resolver":6}],4:[function(_dereq_,module,exports){
+},{"./module-for":5,"./test-resolver":7}],4:[function(_dereq_,module,exports){
+"use strict";
+var moduleFor = _dereq_("./module-for")["default"] || _dereq_("./module-for");
+var Ember = window.Ember["default"] || window.Ember;
+
+exports["default"] = function moduleForModel(name, description, callbacks) {
+  moduleFor('model:' + name, description, callbacks, function(container, context, defaultSubject) {
+    // custom model specific awesomeness
+    container.register('store:main', DS.Store);
+    container.register('adapter:application', DS.FixtureAdapter);
+
+    context.__setup_properties__.store = function(){
+      return container.lookup('store:main');
+    };
+
+    if (context.__setup_properties__.subject === defaultSubject) {
+      context.__setup_properties__.subject = function(factory, options) {
+        return Ember.run(function() {
+          return container.lookup('store:main').createRecord(name, options);
+        });
+      };
+    }
+  });
+}
+},{"./module-for":5}],5:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
 var QUnit = window.QUnit["default"] || window.QUnit;
@@ -112,7 +139,7 @@ exports["default"] = function moduleFor(fullName, description, callbacks, delega
   });
 
   if (delegate) {
-    delegate(container, testContext.get());
+    delegate(container, testContext.get(), defaultSubject);
   }
 
   var context = testContext.get();
@@ -166,7 +193,7 @@ function buildContextVariables(context) {
     };
   });
 }
-},{"./isolated-container":1,"./test-context":5}],5:[function(_dereq_,module,exports){
+},{"./isolated-container":1,"./test-context":6}],6:[function(_dereq_,module,exports){
 "use strict";
 var __test_context__;
 
@@ -179,7 +206,7 @@ exports.set = set;function get() {
 }
 
 exports.get = get;
-},{}],6:[function(_dereq_,module,exports){
+},{}],7:[function(_dereq_,module,exports){
 "use strict";
 var __resolver__;
 
@@ -193,7 +220,7 @@ exports.set = set;function get() {
 }
 
 exports.get = get;
-},{}],7:[function(_dereq_,module,exports){
+},{}],8:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
 var QUnit = window.QUnit["default"] || window.QUnit;
@@ -222,6 +249,6 @@ exports["default"] = function test(testName, callback) {
 
   QUnit.test(testName, wrapper);
 }
-},{"./test-context":5}]},{},[2])
+},{"./test-context":6}]},{},[2])
 (2)
 });

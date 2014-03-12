@@ -1,9 +1,20 @@
 emq.globalize();
 
+var Post = DS.Model.extend({ 
+  title: DS.attr(),
+  user: DS.attr(),
+  comments: DS.hasMany('comment')
+});
+var Comment = DS.Model.extend({
+  post: DS.belongsTo('post')
+});
+
 var registry = {
   'component:x-foo': Ember.Component.extend(),
   'route:foo': Ember.Route.extend(),
-  'controller:bar': Ember.Controller.extend()
+  'controller:bar': Ember.Controller.extend(),
+  'model:post': Post,
+  'model:comment': Comment
 };
 
 var Resolver = Ember.DefaultResolver.extend({
@@ -34,6 +45,17 @@ setResolver(Resolver.create());
   //ok(controller instanceof registry['controller:bar']);
 //});
 
+
+moduleForModel('post', 'moduleForModel with post', {
+  needs: ['model:comment']
+});
+
+test('exists', function() {
+  var post = this.subject({title: 'A title for a post', user: 'bob'});
+  ok(post);
+  ok(post instanceof DS.Model);
+  ok(post instanceof Post);
+});
 
 
 moduleForComponent('x-foo', 'moduleForComponent with x-foo');

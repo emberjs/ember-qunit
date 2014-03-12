@@ -13,6 +13,7 @@
     "test"
   ],
   "dependencies": {
-    "ember": "^1.3.0"
+    "ember": "^1.3.0",
+    "ember-data": "~1.0.0-beta.7"
   }
 }
