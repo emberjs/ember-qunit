@@ -1,20 +1,26 @@
 emq.globalize();
 
-var Post = DS.Model.extend({ 
+var Post = DS.Model.extend({
   title: DS.attr(),
   user: DS.attr(),
   comments: DS.hasMany('comment')
 });
+
 var Comment = DS.Model.extend({
   post: DS.belongsTo('post')
 });
+
+function upcase (value) {
+  return value.toUpperCase();
+};
 
 var registry = {
   'component:x-foo': Ember.Component.extend(),
   'route:foo': Ember.Route.extend(),
   'controller:bar': Ember.Controller.extend(),
   'model:post': Post,
-  'model:comment': Comment
+  'model:comment': Comment,
+  'helper:upcase': upcase
 };
 
 var Resolver = Ember.DefaultResolver.extend({
@@ -57,6 +63,47 @@ test('exists', function() {
   ok(post instanceof Post);
 });
 
+moduleForHelper('upcase', 'moduleForHelper');
+
+test('with unbound helper renders', function() {
+  expect(3);
+  var snippet = this.subject({
+    template: '{{upcase name}}',
+    context: { name: 'Robert' }
+  });
+  equal(snippet.state, 'preRender');
+  this.append()
+  equal(snippet.state, 'inDOM');
+  equal(snippet.$().text(), 'ROBERT');
+});
+
+test('with bound helper renders', function() {
+  expect(2);
+  var templateContext = { name: 'Tomster' };
+  var snippet = this.subject({
+    template: '{{upcase name}}',
+    context: templateContext
+  });
+  this.append()
+  equal(snippet.$().text(), 'TOMSTER');
+  Ember.run(function(){
+    Ember.set(templateContext, 'name', 'Ember');  
+  });
+  equal(snippet.$().text(), 'EMBER');  
+});
+
+moduleForHelper('upcase', 'moduleForHelper with custom setup/teardown', {
+  setup: function() {
+    ok(true, 'custom setup ran');
+  },
+  teardown: function() {
+    ok(true, 'custom teardown ran');
+  }
+});
+
+test('performs custom setup and teardown', function() {
+  expect(2);
+});
 
 moduleForComponent('x-foo', 'moduleForComponent with x-foo');
 
@@ -95,4 +142,3 @@ test('clears out views from test to test', function() {
   this.append();
   ok(true, 'rendered without id already being used from another test');
 });
-

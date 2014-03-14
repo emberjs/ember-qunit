@@ -17,13 +17,14 @@ exports["default"] = function isolatedContainer(fullNames) {
   }
   return container;
 }
-},{"./test-resolver":7}],2:[function(_dereq_,module,exports){
+},{"./test-resolver":8}],2:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
 var isolatedContainer = _dereq_("./isolated-container")["default"] || _dereq_("./isolated-container");
 var moduleFor = _dereq_("./module-for")["default"] || _dereq_("./module-for");
 var moduleForComponent = _dereq_("./module-for-component")["default"] || _dereq_("./module-for-component");
 var moduleForModel = _dereq_("./module-for-model")["default"] || _dereq_("./module-for-model");
+var moduleForHelper = _dereq_("./module-for-helper")["default"] || _dereq_("./module-for-helper");
 var test = _dereq_("./test")["default"] || _dereq_("./test");
 var testResolver = _dereq_("./test-resolver")["default"] || _dereq_("./test-resolver");
 
@@ -37,6 +38,7 @@ function globalize() {
   window.moduleFor = moduleFor;
   window.moduleForComponent = moduleForComponent;
   window.moduleForModel = moduleForModel;
+  window.moduleForHelper = moduleForHelper;
   window.test = test;
   window.setResolver = setResolver;
 }
@@ -45,9 +47,10 @@ exports.globalize = globalize;
 exports.moduleFor = moduleFor;
 exports.moduleForComponent = moduleForComponent;
 exports.moduleForModel = moduleForModel;
+exports.moduleForHelper = moduleForHelper;
 exports.test = test;
 exports.setResolver = setResolver;
-},{"./isolated-container":1,"./module-for":5,"./module-for-component":3,"./module-for-model":4,"./test":8,"./test-resolver":7}],3:[function(_dereq_,module,exports){
+},{"./isolated-container":1,"./module-for":6,"./module-for-component":3,"./module-for-helper":4,"./module-for-model":5,"./test":9,"./test-resolver":8}],3:[function(_dereq_,module,exports){
 "use strict";
 var testResolver = _dereq_("./test-resolver")["default"] || _dereq_("./test-resolver");
 var moduleFor = _dereq_("./module-for")["default"] || _dereq_("./module-for");
@@ -81,7 +84,68 @@ exports["default"] = function moduleForComponent(name, description, callbacks) {
     context.__setup_properties__.$ = context.__setup_properties__.append;
   });
 }
-},{"./module-for":5,"./test-resolver":7}],4:[function(_dereq_,module,exports){
+},{"./module-for":6,"./test-resolver":8}],4:[function(_dereq_,module,exports){
+"use strict";
+var testResolver = _dereq_("./test-resolver")["default"] || _dereq_("./test-resolver");
+var moduleFor = _dereq_("./module-for")["default"] || _dereq_("./module-for");
+var Ember = window.Ember["default"] || window.Ember;
+
+var originalHelper;
+
+exports["default"] = function moduleForHelper(name, description, callbacks) {
+  var resolver = testResolver.get();
+
+  if (!callbacks) { callbacks = {} };
+
+  var _callbacks = {
+    setup: function(container){
+      var helper = resolver.resolve('helper:' + name)
+      originalHelper = Ember.Handlebars.helpers[name];
+
+      Ember.Handlebars.helper(name, helper);
+
+      if (typeof callbacks.setup === 'function') {
+        callbacks.setup(container);        
+      }
+    },
+
+    teardown: function(container){
+      Ember.Handlebars.helpers[name] = originalHelper;
+      if (typeof callbacks.teardown === 'function') {
+        callbacks.teardown(container);
+      }
+    }
+  };
+
+  moduleFor('helper:' + name, description, _callbacks, function(container, context) {
+    context.__setup_properties__.append = function(selector) {
+      var containerView = Ember.ContainerView.create({container: container});
+      var view = Ember.run(function(){
+        var subject = context.subject();
+        containerView.pushObject(subject);
+        containerView.appendTo(Ember.$('#ember-testing')[0]);
+        return subject;
+      });
+
+      return view.$();
+    };
+
+    context.__setup_properties__.subject = function(helper, options){
+      var template = options.template;
+      var context = options.context;
+
+      if (!context) { context = {}; }
+      var View = Ember.View.extend({
+        controller: context,
+        template: Ember.Handlebars.compile(template)
+      });
+      return View.create();
+    };
+
+    context.__setup_properties__.$ = context.__setup_properties__.append;
+  });
+};
+},{"./module-for":6,"./test-resolver":8}],5:[function(_dereq_,module,exports){
 "use strict";
 var moduleFor = _dereq_("./module-for")["default"] || _dereq_("./module-for");
 var Ember = window.Ember["default"] || window.Ember;
@@ -105,7 +169,7 @@ exports["default"] = function moduleForModel(name, description, callbacks) {
     }
   });
 }
-},{"./module-for":5}],5:[function(_dereq_,module,exports){
+},{"./module-for":6}],6:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
 var QUnit = window.QUnit["default"] || window.QUnit;
@@ -193,7 +257,7 @@ function buildContextVariables(context) {
     };
   });
 }
-},{"./isolated-container":1,"./test-context":6}],6:[function(_dereq_,module,exports){
+},{"./isolated-container":1,"./test-context":7}],7:[function(_dereq_,module,exports){
 "use strict";
 var __test_context__;
 
@@ -206,7 +270,7 @@ exports.set = set;function get() {
 }
 
 exports.get = get;
-},{}],7:[function(_dereq_,module,exports){
+},{}],8:[function(_dereq_,module,exports){
 "use strict";
 var __resolver__;
 
@@ -220,7 +284,7 @@ exports.set = set;function get() {
 }
 
 exports.get = get;
-},{}],8:[function(_dereq_,module,exports){
+},{}],9:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
 var QUnit = window.QUnit["default"] || window.QUnit;
@@ -249,6 +313,6 @@ exports["default"] = function test(testName, callback) {
 
   QUnit.test(testName, wrapper);
 }
-},{"./test-context":6}]},{},[2])
+},{"./test-context":7}]},{},[2])
 (2)
 });

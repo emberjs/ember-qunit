@@ -4,6 +4,7 @@ var isolatedContainer = require("./isolated-container")["default"] || require(".
 var moduleFor = require("./module-for")["default"] || require("./module-for");
 var moduleForComponent = require("./module-for-component")["default"] || require("./module-for-component");
 var moduleForModel = require("./module-for-model")["default"] || require("./module-for-model");
+var moduleForHelper = require("./module-for-helper")["default"] || require("./module-for-helper");
 var test = require("./test")["default"] || require("./test");
 var testResolver = require("./test-resolver")["default"] || require("./test-resolver");
 
@@ -17,6 +18,7 @@ function globalize() {
   window.moduleFor = moduleFor;
   window.moduleForComponent = moduleForComponent;
   window.moduleForModel = moduleForModel;
+  window.moduleForHelper = moduleForHelper;
   window.test = test;
   window.setResolver = setResolver;
 }
@@ -25,5 +27,6 @@ exports.globalize = globalize;
 exports.moduleFor = moduleFor;
 exports.moduleForComponent = moduleForComponent;
 exports.moduleForModel = moduleForModel;
+exports.moduleForHelper = moduleForHelper;
 exports.test = test;
 exports.setResolver = setResolver;
