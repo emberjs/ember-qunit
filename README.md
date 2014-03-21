@@ -23,14 +23,28 @@ methods are found on `window.emq`.
 Examples
 --------
 
+### Global build setup:
+
 ```js
 // inject test helpers onto window
 emq.globalize();
+```
 
-// set the resolver, if you don't have a custom resolver, do it
-// like this:
+### Setting the resolver
+
+```js
+// if you don't have a custom resolver, do it like this:
 setResolver(Ember.DefaultResolver.create({namespace: App});
 
+// otherwise something like:
+import Resolver from './path/to/resolver';
+import {setResolver} from 'ember-qunit';
+setResolver(Resolver.create());
+```
+
+### Simple example:
+
+```
 // tell ember qunit what you are testing, it will find it from the
 // resolver
 moduleForComponent('x-foo', 'XFooComponent');
@@ -47,8 +61,11 @@ test('it renders', function() {
   this.append();
   equal(component.state, 'inDOM');
 });
+```
 
+### Complex example
 
+```js
 // a more complex example taken from ic-tabs
 moduleForComponent('ic-tabs', 'TabsComponent', {
 
