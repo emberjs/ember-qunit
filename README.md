@@ -44,7 +44,7 @@ setResolver(Resolver.create());
 
 ### Simple example:
 
-```
+```js
 // tell ember qunit what you are testing, it will find it from the
 // resolver
 moduleForComponent('x-foo', 'XFooComponent');
