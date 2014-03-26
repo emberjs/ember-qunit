@@ -133,6 +133,7 @@ Contributing
 
 ```sh
 $ npm install
+$ bower install
 $ broccoli serve
 # new tab
 $ karma start
