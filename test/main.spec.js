@@ -12,7 +12,10 @@ var Comment = DS.Model.extend({
 var registry = {
   'component:x-foo': Ember.Component.extend(),
   'route:foo': Ember.Route.extend(),
-  'controller:bar': Ember.Controller.extend(),
+  'controller:foos': Ember.ArrayController.extend(),
+  'controller:bar': Ember.Controller.extend({
+    needs: ['foos']
+  }),
   'model:post': Post,
   'model:comment': Comment
 };
@@ -45,6 +48,29 @@ setResolver(Resolver.create());
   //ok(controller instanceof registry['controller:bar']);
 //});
 
+moduleFor('controller:bar', 'moduleFor with bar controller', {
+  needs: ['controller:foos']
+});
+
+test('exists', function() {
+  var bar = this.subject();
+  
+  foos = bar.get('controllers.foos');
+  
+  ok(bar);
+  ok(bar instanceof Ember.Controller);
+  ok(foos instanceof Ember.ArrayController);
+});
+
+test('exists again', function() {
+  var bar = this.subject();
+  
+  foos = bar.get('controllers.foos');
+
+  ok(bar);
+  ok(bar instanceof Ember.Controller);
+  ok(foos instanceof Ember.ArrayController);
+});
 
 moduleForModel('post', 'moduleForModel with post', {
   needs: ['model:comment']
