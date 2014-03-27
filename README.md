@@ -34,8 +34,7 @@ emq.globalize();
 
 ```js
 // if you don't have a custom resolver, do it like this:
-App.Resolver = Ember.DefaultResolver.extend({ namespace: App });
-setResolver(App.Resolver.create());
+setResolver(Ember.DefaultResolver.create({namespace: App}));
 
 // otherwise something like:
 import Resolver from './path/to/resolver';
