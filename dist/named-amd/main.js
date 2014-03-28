@@ -20,16 +20,17 @@ define("ember-qunit/isolated-container",
       return container;
     }
   });define("ember-qunit",
-  ["ember","./isolated-container","./module-for","./module-for-component","./module-for-model","./test","./test-resolver","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __exports__) {
+  ["ember","./isolated-container","./module-for","./module-for-component","./module-for-model","./module-for-helper","./test","./test-resolver","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __exports__) {
     "use strict";
     var Ember = __dependency1__["default"] || __dependency1__;
     var isolatedContainer = __dependency2__["default"] || __dependency2__;
     var moduleFor = __dependency3__["default"] || __dependency3__;
     var moduleForComponent = __dependency4__["default"] || __dependency4__;
     var moduleForModel = __dependency5__["default"] || __dependency5__;
-    var test = __dependency6__["default"] || __dependency6__;
-    var testResolver = __dependency7__["default"] || __dependency7__;
+    var moduleForHelper = __dependency6__["default"] || __dependency6__;
+    var test = __dependency7__["default"] || __dependency7__;
+    var testResolver = __dependency8__["default"] || __dependency8__;
 
     Ember.testing = true;
 
@@ -41,6 +42,7 @@ define("ember-qunit/isolated-container",
       window.moduleFor = moduleFor;
       window.moduleForComponent = moduleForComponent;
       window.moduleForModel = moduleForModel;
+      window.moduleForHelper = moduleForHelper;
       window.test = test;
       window.setResolver = setResolver;
     }
@@ -49,6 +51,7 @@ define("ember-qunit/isolated-container",
     __exports__.moduleFor = moduleFor;
     __exports__.moduleForComponent = moduleForComponent;
     __exports__.moduleForModel = moduleForModel;
+    __exports__.moduleForHelper = moduleForHelper;
     __exports__.test = test;
     __exports__.setResolver = setResolver;
   });define("ember-qunit/module-for-component",
@@ -87,6 +90,69 @@ define("ember-qunit/isolated-container",
         context.__setup_properties__.$ = context.__setup_properties__.append;
       });
     }
+  });define("ember-qunit/module-for-helper",
+  ["./test-resolver","./module-for","ember","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    "use strict";
+    var testResolver = __dependency1__["default"] || __dependency1__;
+    var moduleFor = __dependency2__["default"] || __dependency2__;
+    var Ember = __dependency3__["default"] || __dependency3__;
+
+    var originalHelper;
+
+    __exports__["default"] = function moduleForHelper(name, description, callbacks) {
+      var resolver = testResolver.get();
+
+      if (!callbacks) { callbacks = {} };
+
+      var _callbacks = {
+        setup: function(container){
+          var helper = resolver.resolve('helper:' + name)
+          originalHelper = Ember.Handlebars.helpers[name];
+
+          Ember.Handlebars.helper(name, helper);
+
+          if (typeof callbacks.setup === 'function') {
+            callbacks.setup(container);        
+          }
+        },
+
+        teardown: function(container){
+          Ember.Handlebars.helpers[name] = originalHelper;
+          if (typeof callbacks.teardown === 'function') {
+            callbacks.teardown(container);
+          }
+        }
+      };
+
+      moduleFor('helper:' + name, description, _callbacks, function(container, context) {
+        context.__setup_properties__.append = function(selector) {
+          var containerView = Ember.ContainerView.create({container: container});
+          var view = Ember.run(function(){
+            var subject = context.subject();
+            containerView.pushObject(subject);
+            containerView.appendTo(Ember.$('#ember-testing')[0]);
+            return subject;
+          });
+
+          return view.$();
+        };
+
+        context.__setup_properties__.subject = function(helper, options){
+          var template = options.template;
+          var context = options.context;
+
+          if (!context) { context = {}; }
+          var View = Ember.View.extend({
+            controller: context,
+            template: Ember.Handlebars.compile(template)
+          });
+          return View.create();
+        };
+
+        context.__setup_properties__.$ = context.__setup_properties__.append;
+      });
+    };
   });define("ember-qunit/module-for-model",
   ["./module-for","ember","exports"],
   function(__dependency1__, __dependency2__, __exports__) {
