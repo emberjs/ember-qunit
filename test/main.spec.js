@@ -72,6 +72,25 @@ test('exists again', function() {
   ok(foos instanceof Ember.ArrayController);
 });
 
+var perModuleRegistry = {
+  'controller:baz': Ember.ArrayController.extend()
+};
+
+var PerModuleResolver = Ember.DefaultResolver.extend({
+    resolve: function(fullName) {
+      return perModuleRegistry[fullName];
+    }
+}).create();
+
+moduleFor('controller:baz', 'moduleFor with a resolver', {
+  resolver: PerModuleResolver
+});
+
+test('resolves with the given resolver', function() {
+  var baz = this.subject();
+  ok(baz instanceof Ember.ArrayController);
+});
+
 moduleForModel('post', 'moduleForModel with post', {
   needs: ['model:comment']
 });
