@@ -9,8 +9,18 @@ var Comment = DS.Model.extend({
   post: DS.belongsTo('post')
 });
 
+var PrettyColor = Ember.Component.extend({
+  classNames: ['pretty-color'],
+  attributeBindings: ['style'],
+  style: function(){
+    return 'color: ' + this.get('name') + ';';
+  }.property('name')
+});
+
 var registry = {
   'component:x-foo': Ember.Component.extend(),
+  'component:pretty-color': PrettyColor,
+  'template:components/pretty-color': "Pretty Color: {{name}}".compile(),
   'route:foo': Ember.Route.extend(),
   'controller:foos': Ember.ArrayController.extend(),
   'controller:bar': Ember.Controller.extend({
@@ -78,6 +88,7 @@ moduleForModel('post', 'moduleForModel with post', {
 
 test('exists', function() {
   var post = this.subject({title: 'A title for a post', user: 'bob'});
+  
   ok(post);
   ok(post instanceof DS.Model);
   ok(post instanceof Post);
@@ -122,3 +133,21 @@ test('clears out views from test to test', function() {
   ok(true, 'rendered without id already being used from another test');
 });
 
+moduleForComponent('pretty-color', 'moduleForComponent with pretty-color');
+
+test("className", function(){
+  // first call to this.$() renders the component.
+  ok(this.$().is('.pretty-color'));
+});
+
+test("template", function(){
+  var component = this.subject();
+
+  equal($.trim(this.$().text()), 'Pretty Color:');
+
+  Ember.run(function(){
+    component.set('name', 'green');
+  });
+
+  equal($.trim(this.$().text()), 'Pretty Color: green');
+});
