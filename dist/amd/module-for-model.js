@@ -16,7 +16,7 @@ define(
         };
 
         if (context.__setup_properties__.subject === defaultSubject) {
-          context.__setup_properties__.subject = function(factory, options) {
+          context.__setup_properties__.subject = function(options) {
             return Ember.run(function() {
               return container.lookup('store:main').createRecord(name, options);
             });
