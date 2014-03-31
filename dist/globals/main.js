@@ -56,7 +56,7 @@ var Ember = window.Ember["default"] || window.Ember;
 exports["default"] = function moduleForComponent(name, description, callbacks) {
   var resolver = testResolver.get();
 
-  moduleFor('component:' + name, description, callbacks, function(container, context) {
+  moduleFor('component:' + name, description, callbacks, function(container, context, defaultSubject) {
     var templateName = 'template:components/' + name;
 
     var template = resolver.resolve(templateName);
@@ -65,6 +65,9 @@ exports["default"] = function moduleForComponent(name, description, callbacks) {
       container.register(templateName, template);
       container.injection('component:' + name, 'template', templateName);
     }
+    
+    context.dispatcher = Ember.EventDispatcher.create();
+    context.dispatcher.setup({}, '#ember-testing');
 
     context.__setup_properties__.append = function(selector) {
       var containerView = Ember.ContainerView.create({container: container});
@@ -72,7 +75,7 @@ exports["default"] = function moduleForComponent(name, description, callbacks) {
         var subject = context.subject();
         containerView.pushObject(subject);
         // TODO: destory this somewhere
-        containerView.appendTo(Ember.$('#ember-testing')[0]);
+        containerView.appendTo('#ember-testing');
         return subject;
       });
 
@@ -97,7 +100,7 @@ exports["default"] = function moduleForModel(name, description, callbacks) {
     };
 
     if (context.__setup_properties__.subject === defaultSubject) {
-      context.__setup_properties__.subject = function(factory, options) {
+      context.__setup_properties__.subject = function(options) {
         return Ember.run(function() {
           return container.lookup('store:main').createRecord(name, options);
         });
@@ -113,44 +116,42 @@ var testContext = _dereq_("./test-context")["default"] || _dereq_("./test-contex
 var isolatedContainer = _dereq_("./isolated-container")["default"] || _dereq_("./isolated-container");
 
 exports["default"] = function moduleFor(fullName, description, callbacks, delegate) {
-  callbacks = callbacks || { };
-
-  var needs = [fullName].concat(callbacks.needs || []);
-  var container = isolatedContainer(needs);
-
-  callbacks.subject = callbacks.subject || defaultSubject;
-
-  callbacks.setup    = callbacks.setup    || function() { };
-  callbacks.teardown = callbacks.teardown || function() { };
-
-  function factory() {
-    return container.lookupFactory(fullName);
-  }
-
-  function subject(options) {
-    return callbacks.subject(factory(), options);
-  }
-
-  testContext.set({
-    container: container,
-    subject: subject,
-    factory: factory,
-    __setup_properties__: callbacks
-  });
-
-  if (delegate) {
-    delegate(container, testContext.get(), defaultSubject);
-  }
-
-  var context = testContext.get();
-  // TODO: move this to component|view callbacks when infrastructure is added
-  // to make it simpler
-  var dispatcher = Ember.EventDispatcher.create();
+  var container;
+  var context;
+  
   var _callbacks = {
     setup: function(){
+      callbacks = callbacks || { };
+
+      var needs = [fullName].concat(callbacks.needs || []);
       container = isolatedContainer(needs);
-      dispatcher.setup();
-      Ember.$('<div id="ember-testing"/>').appendTo(document.body);
+
+      callbacks.subject   = callbacks.subject || defaultSubject;
+
+      callbacks.setup     = callbacks.setup    || function() { };
+      callbacks.teardown  = callbacks.teardown || function() { };
+      
+      function factory() {
+        return container.lookupFactory(fullName);
+      }
+      
+      testContext.set({
+        container:            container,
+        factory:              factory,
+        dispatcher:           null,
+        __setup_properties__: callbacks
+      });
+      
+      context = testContext.get();
+
+      if (delegate) {
+        delegate(container, context, defaultSubject);
+      }
+      
+      if (Ember.$('#ember-testing').length === 0) {
+        Ember.$('<div id="ember-testing"/>').appendTo(document.body);
+      }
+      
       buildContextVariables(context);
       callbacks.setup.call(context, container);
     },
@@ -158,37 +159,39 @@ exports["default"] = function moduleFor(fullName, description, callbacks, delega
     teardown: function(){
       Ember.run(function(){
         container.destroy();
-        dispatcher.destroy();
+        
+        if (context.dispatcher) {
+          context.dispatcher.destroy();
+        }
       });
-      Ember.$('#ember-testing').empty();
+      
       callbacks.teardown(container);
+      Ember.$('#ember-testing').empty();
     }
   };
 
   QUnit.module(description || fullName, _callbacks);
 }
 
-function defaultSubject(factory, options) {
+function defaultSubject(options, factory) {
   return factory.create(options);
 }
 
 // allow arbitrary named factories, like rspec let
 function buildContextVariables(context) {
-  var cache = { };
+  var cache     = { };
   var callbacks = context.__setup_properties__;
-  var factory = context.factory;
   var container = context.container;
-
+  var factory   = context.factory;
+    
   Ember.keys(callbacks).filter(function(key){
     // ignore the default setup/teardown keys
     return key !== 'setup' && key !== 'teardown';
   }).forEach(function(key){
     context[key] = function(options) {
-      if (cache[key]) {
-        return cache[key];
-      }
+      if (cache[key]) { return cache[key]; }
 
-      var result = callbacks[key](factory(), options, container);
+      var result = callbacks[key](options, factory(), container);
       cache[key] = result;
       return result;
     };
@@ -232,9 +235,10 @@ function resetViews() {
 }
 
 exports["default"] = function test(testName, callback) {
-  var context = testContext.get(); // save refence
 
   function wrapper() {
+    var context = testContext.get();
+    
     resetViews();
     var result = callback.call(context);
 

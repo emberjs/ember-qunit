@@ -11,9 +11,10 @@ define(
     }
 
     __exports__["default"] = function test(testName, callback) {
-      var context = testContext.get(); // save refence
 
       function wrapper() {
+        var context = testContext.get();
+        
         resetViews();
         var result = callback.call(context);
 
