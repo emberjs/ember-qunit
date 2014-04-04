@@ -111,7 +111,7 @@ exports["default"] = function moduleForModel(name, description, callbacks) {
 },{"./module-for":5}],5:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
-var QUnit = window.QUnit["default"] || window.QUnit;
+//import QUnit from 'qunit'; // Assumed global in runner
 var testContext = _dereq_("./test-context")["default"] || _dereq_("./test-context");
 var isolatedContainer = _dereq_("./isolated-container")["default"] || _dereq_("./isolated-container");
 
@@ -227,7 +227,7 @@ exports.get = get;
 },{}],8:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
-var QUnit = window.QUnit["default"] || window.QUnit;
+//import QUnit from 'qunit'; // Assumed global in runner
 var testContext = _dereq_("./test-context")["default"] || _dereq_("./test-context");
 
 function resetViews() {
