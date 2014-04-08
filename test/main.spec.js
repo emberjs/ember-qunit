@@ -17,6 +17,18 @@ var PrettyColor = Ember.Component.extend({
   }.property('name')
 });
 
+
+var Whazzit = DS.Model.extend({ gear: DS.attr('string') });
+var whazzitCreateRecordCalled = false;
+var WhazzitAdapter = DS.FixtureAdapter.extend({
+  createRecord: function(){
+    whazzitCreateRecordCalled = true;
+    return this._super.apply(this, arguments);
+  }
+});
+
+var ApplicationAdapter = DS.FixtureAdapter.extend();
+
 var registry = {
   'component:x-foo': Ember.Component.extend(),
   'component:pretty-color': PrettyColor,
@@ -27,7 +39,10 @@ var registry = {
     needs: ['foos']
   }),
   'model:post': Post,
-  'model:comment': Comment
+  'model:comment': Comment,
+  'model:whazzit': Whazzit,
+  'adapter:whazzit': WhazzitAdapter,
+  'adapter:application': ApplicationAdapter,
 };
 
 var Resolver = Ember.DefaultResolver.extend({
@@ -82,16 +97,83 @@ test('exists again', function() {
   ok(foos instanceof Ember.ArrayController);
 });
 
-moduleForModel('post', 'moduleForModel with post', {
-  needs: ['model:comment']
+moduleForModel('whazzit', 'moduleForModel whazzit without adapter');
+
+test('store exists', function() {
+  var store = this.store();
+  ok(store instanceof DS.Store);
 });
 
-test('exists', function() {
-  var post = this.subject({title: 'A title for a post', user: 'bob'});
+test('model exists as subject', function() {
+  var model = this.subject();
+  ok(model);
+  ok(model instanceof DS.Model);
+  ok(model instanceof Whazzit);
+});
 
-  ok(post);
-  ok(post instanceof DS.Model);
-  ok(post instanceof Post);
+test('model is using the FixtureAdapter', function() {
+  var model = this.subject(),
+      store = this.store();
+
+  ok(store.adapterFor(model.constructor) instanceof DS.FixtureAdapter);
+  ok(!(store.adapterFor(model.constructor) instanceof WhazzitAdapter));
+});
+
+moduleForModel('whazzit', 'moduleForModel whazzit with adapter', {
+  needs: ['adapter:whazzit'],
+  teardown: function(){
+    whazzitCreateRecordCalled = false;
+  }
+});
+
+test('model is using the WhazzitAdapter', function() {
+  var model = this.subject(),
+      store = this.store();
+
+  ok(store.adapterFor(model.constructor) instanceof WhazzitAdapter);
+});
+
+if (DS._setupContainer) {
+  test('creates the custom adapter', function() {
+    expect(2);
+    ok(!whazzitCreateRecordCalled, 'precond - custom adapter is not yet instantiated');
+
+    var model = this.subject();
+
+    return Ember.run(function(){
+      model.set('gear', '42');
+      return model.save().then(function(){
+        ok(whazzitCreateRecordCalled, 'uses the custom adapter');
+      });
+    });
+  });
+} else {
+  test('without DS._setupContainer fails to create the custom adapter', function() {
+    var thrown = false;
+    try {
+      var model = this.subject();
+      Ember.run(function(){
+        model.set('gear', '42');
+        return model.save();
+      });
+    } catch(e) {
+      thrown = true;
+    }
+    ok(thrown, 'error is thrown without DS._setupContainer');
+  });
+}
+
+
+moduleForModel('whazzit', 'moduleForModel whazzit with application adapter', {
+  needs: ['adapter:application']
+});
+
+test('model is using the ApplicationAdapter', function() {
+  var model = this.subject(),
+      store = this.store();
+
+  ok(store.adapterFor(model.constructor) instanceof ApplicationAdapter);
+  ok(!(store.adapterFor(model.constructor) instanceof WhazzitAdapter));
 });
 
 moduleForComponent('x-foo', 'moduleForComponent with x-foo');
