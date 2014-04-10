@@ -1,6 +1,6 @@
 emq.globalize();
 
-var Post = DS.Model.extend({ 
+var Post = DS.Model.extend({
   title: DS.attr(),
   user: DS.attr(),
   comments: DS.hasMany('comment')
@@ -64,9 +64,9 @@ moduleFor('controller:bar', 'moduleFor with bar controller', {
 
 test('exists', function() {
   var bar = this.subject();
-  
-  foos = bar.get('controllers.foos');
-  
+
+  var foos = bar.get('controllers.foos');
+
   ok(bar);
   ok(bar instanceof Ember.Controller);
   ok(foos instanceof Ember.ArrayController);
@@ -74,8 +74,8 @@ test('exists', function() {
 
 test('exists again', function() {
   var bar = this.subject();
-  
-  foos = bar.get('controllers.foos');
+
+  var foos = bar.get('controllers.foos');
 
   ok(bar);
   ok(bar instanceof Ember.Controller);
@@ -88,12 +88,11 @@ moduleForModel('post', 'moduleForModel with post', {
 
 test('exists', function() {
   var post = this.subject({title: 'A title for a post', user: 'bob'});
-  
+
   ok(post);
   ok(post instanceof DS.Model);
   ok(post instanceof Post);
 });
-
 
 moduleForComponent('x-foo', 'moduleForComponent with x-foo');
 
@@ -108,17 +107,17 @@ test('renders', function() {
 test('yields', function() {
   expect(2);
   var component = this.subject({
-    template: "yield me".compile()
+    layout: "yield me".compile()
   });
   equal(component.state, 'preRender');
   this.append();
   equal(component.state, 'inDOM');
 });
 
-test('can lookup components in its template', function() {
+test('can lookup components in its layout', function() {
   expect(1);
   var component = this.subject({
-    template: "{{x-foo id='yodawg-i-heard-you-liked-x-foo-in-ur-x-foo'}}".compile()
+    layout: "{{x-foo id='yodawg-i-heard-you-liked-x-foo-in-ur-x-foo'}}".compile()
   });
   this.append();
   equal(component.state, 'inDOM');
@@ -127,7 +126,7 @@ test('can lookup components in its template', function() {
 test('clears out views from test to test', function() {
   expect(1);
   var component = this.subject({
-    template: "{{x-foo id='yodawg-i-heard-you-liked-x-foo-in-ur-x-foo'}}".compile()
+    layout: "{{x-foo id='yodawg-i-heard-you-liked-x-foo-in-ur-x-foo'}}".compile()
   });
   this.append();
   ok(true, 'rendered without id already being used from another test');
