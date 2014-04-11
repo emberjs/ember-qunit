@@ -63,15 +63,15 @@ define("ember-qunit/isolated-container",
       var resolver = testResolver.get();
 
       moduleFor('component:' + name, description, callbacks, function(container, context, defaultSubject) {
-        var templateName = 'template:components/' + name;
+        var layoutName = 'template:components/' + name;
 
-        var template = resolver.resolve(templateName);
+        var layout = resolver.resolve(layoutName);
 
-        if (template) {
-          container.register(templateName, template);
-          container.injection('component:' + name, 'template', templateName);
+        if (layout) {
+          container.register(layoutName, layout);
+          container.injection('component:' + name, 'layout', layoutName);
         }
-        
+
         context.dispatcher = Ember.EventDispatcher.create();
         context.dispatcher.setup({}, '#ember-testing');
 
@@ -99,9 +99,16 @@ define("ember-qunit/isolated-container",
 
     __exports__["default"] = function moduleForModel(name, description, callbacks) {
       moduleFor('model:' + name, description, callbacks, function(container, context, defaultSubject) {
-        // custom model specific awesomeness
-        container.register('store:main', DS.Store);
-        container.register('adapter:application', DS.FixtureAdapter);
+        if (DS._setupContainer) {
+          DS._setupContainer(container);
+        } else {
+          container.register('store:main', DS.Store);
+        }
+
+        var adapterFactory = container.lookupFactory('adapter:application');
+        if (!adapterFactory) {
+          container.register('adapter:application', DS.FixtureAdapter);
+        }
 
         context.__setup_properties__.store = function(){
           return container.lookup('store:main');
