@@ -128,6 +128,23 @@ Helpers
 - `name`: (String) - the short name of the model you'd use in `store`
   operations ie `user`, `assignmentGroup`, etc.
 
+### Skipping teardown
+
+- when testing components you sometimes want to use the thing in the
+  browser as you develop. This can be done on an individual test by
+  setting noCleanup to true. (This should be used like a debugger, so
+  should be removed after building the test otherwise it will break
+  other tests).
+
+```js
+test('it renders', function() {
+  this.noCleanup = true;
+  this.append();
+  equal(component.state, 'inDOM');
+});
+```
+
+
 Contributing
 ------------
 
