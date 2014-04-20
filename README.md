@@ -134,7 +134,7 @@ Contributing
 ```sh
 $ npm install
 $ bower install
-$ npm install -g karma-cli
+$ npm install -g karma-cli broccoli-cli
 $ broccoli serve
 # new tab
 $ karma start
