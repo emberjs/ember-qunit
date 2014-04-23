@@ -33,8 +33,8 @@ define(
     }
 
     __exports__["default"] = function moduleForModel(name, description, callbacks) {
+      // TODO: continue abstraction, make moduleForModel a simple assignment
       qunitModule(builderForModel, delegate.bind(null, name))(name, description, callbacks, delegate.bind(null, name));
-      // moduleFor('model:' + name, description, callbacks, delegate.bind(null, name));
     }
 
     function builderForModel(name, needs) {

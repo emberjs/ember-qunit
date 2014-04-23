@@ -52,37 +52,46 @@ exports.setResolver = setResolver;
 var testResolver = _dereq_("./test-resolver")["default"] || _dereq_("./test-resolver");
 var moduleFor = _dereq_("./module-for")["default"] || _dereq_("./module-for");
 var Ember = window.Ember["default"] || window.Ember;
+var builder = _dereq_("./module-for").builder;
+var qunitModule = _dereq_("./module-for").qunitModule;
+
+
+function delegate(name, resolver, container, context, defaultSubject) {
+  var layoutName = 'template:components/' + name;
+
+  var layout = resolver.resolve(layoutName);
+
+  if (layout) {
+    container.register(layoutName, layout);
+    container.injection('component:' + name, 'layout', layoutName);
+  }
+
+  context.dispatcher = Ember.EventDispatcher.create();
+  context.dispatcher.setup({}, '#ember-testing');
+
+  context.__setup_properties__.append = function(selector) {
+    var containerView = Ember.ContainerView.create({container: container});
+    var view = Ember.run(function(){
+      var subject = context.subject();
+      containerView.pushObject(subject);
+      // TODO: destory this somewhere
+      containerView.appendTo('#ember-testing');
+      return subject;
+    });
+
+    return view.$();
+  };
+  context.__setup_properties__.$ = context.__setup_properties__.append;
+}
 
 exports["default"] = function moduleForComponent(name, description, callbacks) {
   var resolver = testResolver.get();
 
-  moduleFor('component:' + name, description, callbacks, function(container, context, defaultSubject) {
-    var layoutName = 'template:components/' + name;
+  moduleFor('component:' + name, description, callbacks, delegate.bind(null, name, resolver));
+}
 
-    var layout = resolver.resolve(layoutName);
-
-    if (layout) {
-      container.register(layoutName, layout);
-      container.injection('component:' + name, 'layout', layoutName);
-    }
-
-    context.dispatcher = Ember.EventDispatcher.create();
-    context.dispatcher.setup({}, '#ember-testing');
-
-    context.__setup_properties__.append = function(selector) {
-      var containerView = Ember.ContainerView.create({container: container});
-      var view = Ember.run(function(){
-        var subject = context.subject();
-        containerView.pushObject(subject);
-        // TODO: destory this somewhere
-        containerView.appendTo('#ember-testing');
-        return subject;
-      });
-
-      return view.$();
-    };
-    context.__setup_properties__.$ = context.__setup_properties__.append;
-  });
+function builderForComponent(name, needs) {
+  return builder('component:' + name, needs);
 }
 },{"./module-for":5,"./test-resolver":7}],4:[function(_dereq_,module,exports){
 "use strict";
@@ -117,8 +126,8 @@ function delegate(name, container, context, defaultSubject) {
 }
 
 exports["default"] = function moduleForModel(name, description, callbacks) {
+  // TODO: continue abstraction, make moduleForModel a simple assignment
   qunitModule(builderForModel, delegate.bind(null, name))(name, description, callbacks, delegate.bind(null, name));
-  // moduleFor('model:' + name, description, callbacks, delegate.bind(null, name));
 }
 
 function builderForModel(name, needs) {
