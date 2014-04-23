@@ -1,11 +1,11 @@
 define(
-  ["./module-for","ember","exports"],
-  function(__dependency1__, __dependency2__, __exports__) {
+  ["./module-for","ember","./builder","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
     "use strict";
     var moduleFor = __dependency1__["default"] || __dependency1__;
     var Ember = __dependency2__["default"] || __dependency2__;
-    var builder = __dependency1__.builder;
     var qunitModule = __dependency1__.qunitModule;
+    var builderForModel = __dependency3__.builderForModel;
 
     function delegate(name, container, context, defaultSubject) {
       if (DS._setupContainer) {
@@ -35,9 +35,5 @@ define(
     __exports__["default"] = function moduleForModel(name, description, callbacks) {
       // TODO: continue abstraction, make moduleForModel a simple assignment
       qunitModule(builderForModel, delegate.bind(null, name))(name, description, callbacks, delegate.bind(null, name));
-    }
-
-    function builderForModel(name, needs) {
-      return builder('model:' + name, needs);
     }
   });

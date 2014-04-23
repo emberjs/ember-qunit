@@ -1,8 +1,8 @@
 "use strict";
 var moduleFor = require("./module-for")["default"] || require("./module-for");
 var Ember = require("ember")["default"] || require("ember");
-var builder = require("./module-for").builder;
 var qunitModule = require("./module-for").qunitModule;
+var builderForModel = require("./builder").builderForModel;
 
 function delegate(name, container, context, defaultSubject) {
   if (DS._setupContainer) {
@@ -32,8 +32,4 @@ function delegate(name, container, context, defaultSubject) {
 exports["default"] = function moduleForModel(name, description, callbacks) {
   // TODO: continue abstraction, make moduleForModel a simple assignment
   qunitModule(builderForModel, delegate.bind(null, name))(name, description, callbacks, delegate.bind(null, name));
-}
-
-function builderForModel(name, needs) {
-  return builder('model:' + name, needs);
 }

@@ -2,8 +2,8 @@
 var testResolver = require("./test-resolver")["default"] || require("./test-resolver");
 var moduleFor = require("./module-for")["default"] || require("./module-for");
 var Ember = require("ember")["default"] || require("ember");
-var builder = require("./module-for").builder;
 var qunitModule = require("./module-for").qunitModule;
+var builderForComponent = require("./builder").builderForComponent;
 
 
 function delegate(name, resolver, container, context, defaultSubject) {
@@ -35,11 +35,8 @@ function delegate(name, resolver, container, context, defaultSubject) {
 }
 
 exports["default"] = function moduleForComponent(name, description, callbacks) {
+  // TODO: continue abstraction, make moduleForModel a simple assignment
   var resolver = testResolver.get();
-
-  moduleFor('component:' + name, description, callbacks, delegate.bind(null, name, resolver));
-}
-
-function builderForComponent(name, needs) {
-  return builder('component:' + name, needs);
+  var del = delegate.bind(null, name, resolver);
+  qunitModule(builderForComponent, del)(name, description, callbacks, del);
 }

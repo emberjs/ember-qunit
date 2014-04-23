@@ -1,5 +1,32 @@
 !function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.emq=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 "use strict";
+var Ember = window.Ember["default"] || window.Ember;
+var isolatedContainer = _dereq_("./isolated-container")["default"] || _dereq_("./isolated-container");
+
+function builder(fullName, needs) {
+  var container = isolatedContainer([fullName].concat(needs || []));
+  var factory = function() {
+    return container.lookupFactory(fullName);
+  };
+  return {
+    container: container,
+    factory: factory
+  };
+};
+
+function builderForModel(name, needs) {
+  return builder('model:' + name, needs);
+}
+
+function builderForComponent(name, needs) {
+  return builder('component:' + name, needs);
+}
+
+exports.builder = builder;
+exports.builderForModel = builderForModel;
+exports.builderForComponent = builderForComponent;
+},{"./isolated-container":2}],2:[function(_dereq_,module,exports){
+"use strict";
 var testResolver = _dereq_("./test-resolver")["default"] || _dereq_("./test-resolver");
 var Ember = window.Ember["default"] || window.Ember;
 
@@ -17,7 +44,7 @@ exports["default"] = function isolatedContainer(fullNames) {
   }
   return container;
 }
-},{"./test-resolver":7}],2:[function(_dereq_,module,exports){
+},{"./test-resolver":8}],3:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
 var isolatedContainer = _dereq_("./isolated-container")["default"] || _dereq_("./isolated-container");
@@ -47,13 +74,13 @@ exports.moduleForComponent = moduleForComponent;
 exports.moduleForModel = moduleForModel;
 exports.test = test;
 exports.setResolver = setResolver;
-},{"./isolated-container":1,"./module-for":5,"./module-for-component":3,"./module-for-model":4,"./test":8,"./test-resolver":7}],3:[function(_dereq_,module,exports){
+},{"./isolated-container":2,"./module-for":6,"./module-for-component":4,"./module-for-model":5,"./test":9,"./test-resolver":8}],4:[function(_dereq_,module,exports){
 "use strict";
 var testResolver = _dereq_("./test-resolver")["default"] || _dereq_("./test-resolver");
 var moduleFor = _dereq_("./module-for")["default"] || _dereq_("./module-for");
 var Ember = window.Ember["default"] || window.Ember;
-var builder = _dereq_("./module-for").builder;
 var qunitModule = _dereq_("./module-for").qunitModule;
+var builderForComponent = _dereq_("./builder").builderForComponent;
 
 
 function delegate(name, resolver, container, context, defaultSubject) {
@@ -85,20 +112,17 @@ function delegate(name, resolver, container, context, defaultSubject) {
 }
 
 exports["default"] = function moduleForComponent(name, description, callbacks) {
+  // TODO: continue abstraction, make moduleForModel a simple assignment
   var resolver = testResolver.get();
-
-  moduleFor('component:' + name, description, callbacks, delegate.bind(null, name, resolver));
+  var del = delegate.bind(null, name, resolver);
+  qunitModule(builderForComponent, del)(name, description, callbacks, del);
 }
-
-function builderForComponent(name, needs) {
-  return builder('component:' + name, needs);
-}
-},{"./module-for":5,"./test-resolver":7}],4:[function(_dereq_,module,exports){
+},{"./builder":1,"./module-for":6,"./test-resolver":8}],5:[function(_dereq_,module,exports){
 "use strict";
 var moduleFor = _dereq_("./module-for")["default"] || _dereq_("./module-for");
 var Ember = window.Ember["default"] || window.Ember;
-var builder = _dereq_("./module-for").builder;
 var qunitModule = _dereq_("./module-for").qunitModule;
+var builderForModel = _dereq_("./builder").builderForModel;
 
 function delegate(name, container, context, defaultSubject) {
   if (DS._setupContainer) {
@@ -129,27 +153,14 @@ exports["default"] = function moduleForModel(name, description, callbacks) {
   // TODO: continue abstraction, make moduleForModel a simple assignment
   qunitModule(builderForModel, delegate.bind(null, name))(name, description, callbacks, delegate.bind(null, name));
 }
-
-function builderForModel(name, needs) {
-  return builder('model:' + name, needs);
-}
-},{"./module-for":5}],5:[function(_dereq_,module,exports){
+},{"./builder":1,"./module-for":6}],6:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
 //import QUnit from 'qunit'; // Assumed global in runner
 var testContext = _dereq_("./test-context")["default"] || _dereq_("./test-context");
 var isolatedContainer = _dereq_("./isolated-container")["default"] || _dereq_("./isolated-container");
 
-function builder(fullName, needs) {
-  var container = isolatedContainer([fullName].concat(needs || []));
-  var factory = function() {
-    return container.lookupFactory(fullName);
-  };
-  return {
-    container: container,
-    factory: factory
-  };
-};
+var builder = _dereq_("./builder").builder;
 
 function qunitModule(builder, delegate) {
   return function moduleFor(fullName, description, callbacks, delegate) {
@@ -233,7 +244,7 @@ function qunitModule(builder, delegate) {
 exports["default"] = qunitModule(builder, null);
 exports.builder = builder;
 exports.qunitModule = qunitModule;
-},{"./isolated-container":1,"./test-context":6}],6:[function(_dereq_,module,exports){
+},{"./builder":1,"./isolated-container":2,"./test-context":7}],7:[function(_dereq_,module,exports){
 "use strict";
 var __test_context__;
 
@@ -246,7 +257,7 @@ exports.set = set;function get() {
 }
 
 exports.get = get;
-},{}],7:[function(_dereq_,module,exports){
+},{}],8:[function(_dereq_,module,exports){
 "use strict";
 var __resolver__;
 
@@ -260,7 +271,7 @@ exports.set = set;function get() {
 }
 
 exports.get = get;
-},{}],8:[function(_dereq_,module,exports){
+},{}],9:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
 //import QUnit from 'qunit'; // Assumed global in runner
@@ -290,6 +301,6 @@ exports["default"] = function test(testName, callback) {
 
   QUnit.test(testName, wrapper);
 }
-},{"./test-context":6}]},{},[2])
-(2)
+},{"./test-context":7}]},{},[3])
+(3)
 });

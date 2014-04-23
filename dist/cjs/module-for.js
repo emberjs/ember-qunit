@@ -4,16 +4,7 @@ var Ember = require("ember")["default"] || require("ember");
 var testContext = require("./test-context")["default"] || require("./test-context");
 var isolatedContainer = require("./isolated-container")["default"] || require("./isolated-container");
 
-function builder(fullName, needs) {
-  var container = isolatedContainer([fullName].concat(needs || []));
-  var factory = function() {
-    return container.lookupFactory(fullName);
-  };
-  return {
-    container: container,
-    factory: factory
-  };
-};
+var builder = require("./builder").builder;
 
 function qunitModule(builder, delegate) {
   return function moduleFor(fullName, description, callbacks, delegate) {

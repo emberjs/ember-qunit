@@ -1,12 +1,12 @@
 define(
-  ["./test-resolver","./module-for","ember","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+  ["./test-resolver","./module-for","ember","./builder","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
     "use strict";
     var testResolver = __dependency1__["default"] || __dependency1__;
     var moduleFor = __dependency2__["default"] || __dependency2__;
     var Ember = __dependency3__["default"] || __dependency3__;
-    var builder = __dependency2__.builder;
     var qunitModule = __dependency2__.qunitModule;
+    var builderForComponent = __dependency4__.builderForComponent;
 
 
     function delegate(name, resolver, container, context, defaultSubject) {
@@ -38,12 +38,9 @@ define(
     }
 
     __exports__["default"] = function moduleForComponent(name, description, callbacks) {
+      // TODO: continue abstraction, make moduleForModel a simple assignment
       var resolver = testResolver.get();
-
-      moduleFor('component:' + name, description, callbacks, delegate.bind(null, name, resolver));
-    }
-
-    function builderForComponent(name, needs) {
-      return builder('component:' + name, needs);
+      var del = delegate.bind(null, name, resolver);
+      qunitModule(builderForComponent, del)(name, description, callbacks, del);
     }
   });
