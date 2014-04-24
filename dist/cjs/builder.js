@@ -1,6 +1,19 @@
 "use strict";
 var Ember = require("ember")["default"] || require("ember");
-var isolatedContainer = require("./isolated-container")["default"] || require("./isolated-container");
+
+function isolatedContainer(fullNames, resolver) {
+  var container = new Ember.Container();
+  container.optionsForType('component', { singleton: false });
+  container.optionsForType('view', { singleton: false });
+  container.optionsForType('template', { instantiate: false });
+  container.optionsForType('helper', { instantiate: false });
+  container.register('component-lookup:main', Ember.ComponentLookup);
+  for (var i = fullNames.length; i > 0; i--) {
+    var fullName = fullNames[i - 1];
+    container.register(fullName, resolver.resolve(fullName));
+  }
+  return container;
+}
 
 function builder(fullName, needs, resolver) {
   var container = isolatedContainer([fullName].concat(needs || []), resolver);

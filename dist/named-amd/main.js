@@ -1,9 +1,22 @@
 define("ember-qunit/builder",
-  ["ember","./isolated-container","exports"],
-  function(__dependency1__, __dependency2__, __exports__) {
+  ["ember","exports"],
+  function(__dependency1__, __exports__) {
     "use strict";
     var Ember = __dependency1__["default"] || __dependency1__;
-    var isolatedContainer = __dependency2__["default"] || __dependency2__;
+
+    function isolatedContainer(fullNames, resolver) {
+      var container = new Ember.Container();
+      container.optionsForType('component', { singleton: false });
+      container.optionsForType('view', { singleton: false });
+      container.optionsForType('template', { instantiate: false });
+      container.optionsForType('helper', { instantiate: false });
+      container.register('component-lookup:main', Ember.ComponentLookup);
+      for (var i = fullNames.length; i > 0; i--) {
+        var fullName = fullNames[i - 1];
+        container.register(fullName, resolver.resolve(fullName));
+      }
+      return container;
+    }
 
     function builder(fullName, needs, resolver) {
       var container = isolatedContainer([fullName].concat(needs || []), resolver);
@@ -77,36 +90,16 @@ define("ember-qunit/builder",
     __exports__.builder = builder;
     __exports__.builderForModel = builderForModel;
     __exports__.builderForComponent = builderForComponent;
-  });define("ember-qunit/isolated-container",
-  ["ember","exports"],
-  function(__dependency1__, __exports__) {
-    "use strict";
-    var Ember = __dependency1__["default"] || __dependency1__;
-
-    __exports__["default"] = function isolatedContainer(fullNames, resolver) {
-      var container = new Ember.Container();
-      container.optionsForType('component', { singleton: false });
-      container.optionsForType('view', { singleton: false });
-      container.optionsForType('template', { instantiate: false });
-      container.optionsForType('helper', { instantiate: false });
-      container.register('component-lookup:main', Ember.ComponentLookup);
-      for (var i = fullNames.length; i > 0; i--) {
-        var fullName = fullNames[i - 1];
-        container.register(fullName, resolver.resolve(fullName));
-      }
-      return container;
-    }
   });define("ember-qunit",
-  ["ember","./isolated-container","./module-for","./module-for-component","./module-for-model","./test","./test-resolver","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __exports__) {
+  ["ember","./module-for","./module-for-component","./module-for-model","./test","./test-resolver","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __exports__) {
     "use strict";
     var Ember = __dependency1__["default"] || __dependency1__;
-    var isolatedContainer = __dependency2__["default"] || __dependency2__;
-    var moduleFor = __dependency3__["default"] || __dependency3__;
-    var moduleForComponent = __dependency4__["default"] || __dependency4__;
-    var moduleForModel = __dependency5__["default"] || __dependency5__;
-    var test = __dependency6__["default"] || __dependency6__;
-    var testResolver = __dependency7__["default"] || __dependency7__;
+    var moduleFor = __dependency2__["default"] || __dependency2__;
+    var moduleForComponent = __dependency3__["default"] || __dependency3__;
+    var moduleForModel = __dependency4__["default"] || __dependency4__;
+    var test = __dependency5__["default"] || __dependency5__;
+    var testResolver = __dependency6__["default"] || __dependency6__;
 
     Ember.testing = true;
 

@@ -1,9 +1,22 @@
 define(
-  ["ember","./isolated-container","exports"],
-  function(__dependency1__, __dependency2__, __exports__) {
+  ["ember","exports"],
+  function(__dependency1__, __exports__) {
     "use strict";
     var Ember = __dependency1__["default"] || __dependency1__;
-    var isolatedContainer = __dependency2__["default"] || __dependency2__;
+
+    function isolatedContainer(fullNames, resolver) {
+      var container = new Ember.Container();
+      container.optionsForType('component', { singleton: false });
+      container.optionsForType('view', { singleton: false });
+      container.optionsForType('template', { instantiate: false });
+      container.optionsForType('helper', { instantiate: false });
+      container.register('component-lookup:main', Ember.ComponentLookup);
+      for (var i = fullNames.length; i > 0; i--) {
+        var fullName = fullNames[i - 1];
+        container.register(fullName, resolver.resolve(fullName));
+      }
+      return container;
+    }
 
     function builder(fullName, needs, resolver) {
       var container = isolatedContainer([fullName].concat(needs || []), resolver);

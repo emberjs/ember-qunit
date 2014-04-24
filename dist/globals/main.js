@@ -1,7 +1,20 @@
 !function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.emq=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
-var isolatedContainer = _dereq_("./isolated-container")["default"] || _dereq_("./isolated-container");
+
+function isolatedContainer(fullNames, resolver) {
+  var container = new Ember.Container();
+  container.optionsForType('component', { singleton: false });
+  container.optionsForType('view', { singleton: false });
+  container.optionsForType('template', { instantiate: false });
+  container.optionsForType('helper', { instantiate: false });
+  container.register('component-lookup:main', Ember.ComponentLookup);
+  for (var i = fullNames.length; i > 0; i--) {
+    var fullName = fullNames[i - 1];
+    container.register(fullName, resolver.resolve(fullName));
+  }
+  return container;
+}
 
 function builder(fullName, needs, resolver) {
   var container = isolatedContainer([fullName].concat(needs || []), resolver);
@@ -75,27 +88,9 @@ function builderForComponent(name, needs, resolver) {
 exports.builder = builder;
 exports.builderForModel = builderForModel;
 exports.builderForComponent = builderForComponent;
-},{"./isolated-container":2}],2:[function(_dereq_,module,exports){
+},{}],2:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
-
-exports["default"] = function isolatedContainer(fullNames, resolver) {
-  var container = new Ember.Container();
-  container.optionsForType('component', { singleton: false });
-  container.optionsForType('view', { singleton: false });
-  container.optionsForType('template', { instantiate: false });
-  container.optionsForType('helper', { instantiate: false });
-  container.register('component-lookup:main', Ember.ComponentLookup);
-  for (var i = fullNames.length; i > 0; i--) {
-    var fullName = fullNames[i - 1];
-    container.register(fullName, resolver.resolve(fullName));
-  }
-  return container;
-}
-},{}],3:[function(_dereq_,module,exports){
-"use strict";
-var Ember = window.Ember["default"] || window.Ember;
-var isolatedContainer = _dereq_("./isolated-container")["default"] || _dereq_("./isolated-container");
 var moduleFor = _dereq_("./module-for")["default"] || _dereq_("./module-for");
 var moduleForComponent = _dereq_("./module-for-component")["default"] || _dereq_("./module-for-component");
 var moduleForModel = _dereq_("./module-for-model")["default"] || _dereq_("./module-for-model");
@@ -122,7 +117,7 @@ exports.moduleForComponent = moduleForComponent;
 exports.moduleForModel = moduleForModel;
 exports.test = test;
 exports.setResolver = setResolver;
-},{"./isolated-container":2,"./module-for":6,"./module-for-component":4,"./module-for-model":5,"./test":9,"./test-resolver":8}],4:[function(_dereq_,module,exports){
+},{"./module-for":5,"./module-for-component":3,"./module-for-model":4,"./test":8,"./test-resolver":7}],3:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
 var qunitModule = _dereq_("./module-for").qunitModule;
@@ -133,7 +128,7 @@ exports["default"] = qunitModule(builderForComponent, function(products, context
   context.__setup_properties__.append = products.append(function() { return context.subject() });
   context.__setup_properties__.$ = context.__setup_properties__.append;
 });
-},{"./builder":1,"./module-for":6}],5:[function(_dereq_,module,exports){
+},{"./builder":1,"./module-for":5}],4:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
 var qunitModule = _dereq_("./module-for").qunitModule;
@@ -144,7 +139,7 @@ exports["default"] = qunitModule(builderForModel, function(products, context, op
   context.__setup_properties__.subject = options.subjectIsDefault ?
     products.subject : context.__setup_properties__.subject;
 });
-},{"./builder":1,"./module-for":6}],6:[function(_dereq_,module,exports){
+},{"./builder":1,"./module-for":5}],5:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
 //import QUnit from 'qunit'; // Assumed global in runner
@@ -237,7 +232,7 @@ function qunitModule(builder, delegate) {
 exports["default"] = qunitModule(builder, null);
 exports.builder = builder;
 exports.qunitModule = qunitModule;
-},{"./builder":1,"./test-context":7,"./test-resolver":8}],7:[function(_dereq_,module,exports){
+},{"./builder":1,"./test-context":6,"./test-resolver":7}],6:[function(_dereq_,module,exports){
 "use strict";
 var __test_context__;
 
@@ -250,7 +245,7 @@ exports.set = set;function get() {
 }
 
 exports.get = get;
-},{}],8:[function(_dereq_,module,exports){
+},{}],7:[function(_dereq_,module,exports){
 "use strict";
 var __resolver__;
 
@@ -264,7 +259,7 @@ exports.set = set;function get() {
 }
 
 exports.get = get;
-},{}],9:[function(_dereq_,module,exports){
+},{}],8:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
 //import QUnit from 'qunit'; // Assumed global in runner
@@ -294,6 +289,6 @@ exports["default"] = function test(testName, callback) {
 
   QUnit.test(testName, wrapper);
 }
-},{"./test-context":7}]},{},[3])
-(3)
+},{"./test-context":6}]},{},[2])
+(2)
 });
