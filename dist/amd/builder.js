@@ -23,10 +23,24 @@ define(
       var factory = function() {
         return container.lookupFactory(fullName);
       };
-      return {
-        container: container,
-        factory: factory
+
+      if (Ember.$('#ember-testing').length === 0) {
+        Ember.$('<div id="ember-testing"/>').appendTo(document.body);
+      }
+
+      var result = {};
+      result.container = container;
+      result.factory = factory
+      result.teardown = function(cb) {
+        Ember.run(function(){
+          container.destroy();
+          if (result.dispatcher) {
+            result.dispatcher.destroy();
+          }
+        });
+        Ember.$('#ember-testing').empty();
       };
+      return result;
     };
 
     function builderForModel(name, needs, resolver) {
@@ -42,6 +56,10 @@ define(
       if (!adapterFactory) {
         result.container.register('adapter:application', DS.FixtureAdapter);
       }
+
+      result.teardown = function() {
+
+      };
 
       result.store = function() {
         return result.container.lookup('store:main');

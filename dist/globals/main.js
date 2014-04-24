@@ -21,10 +21,24 @@ function builder(fullName, needs, resolver) {
   var factory = function() {
     return container.lookupFactory(fullName);
   };
-  return {
-    container: container,
-    factory: factory
+
+  if (Ember.$('#ember-testing').length === 0) {
+    Ember.$('<div id="ember-testing"/>').appendTo(document.body);
+  }
+
+  var result = {};
+  result.container = container;
+  result.factory = factory
+  result.teardown = function(cb) {
+    Ember.run(function(){
+      container.destroy();
+      if (result.dispatcher) {
+        result.dispatcher.destroy();
+      }
+    });
+    Ember.$('#ember-testing').empty();
   };
+  return result;
 };
 
 function builderForModel(name, needs, resolver) {
@@ -40,6 +54,10 @@ function builderForModel(name, needs, resolver) {
   if (!adapterFactory) {
     result.container.register('adapter:application', DS.FixtureAdapter);
   }
+
+  result.teardown = function() {
+
+  };
 
   result.store = function() {
     return result.container.lookup('store:main');
@@ -154,25 +172,13 @@ exports["default"] = function qunitModule(builder, delegate) {
           });
         }
         
-        if (Ember.$('#ember-testing').length === 0) {
-          Ember.$('<div id="ember-testing"/>').appendTo(document.body);
-        }
-        
         buildContextVariables(context);
         callbacks.setup.call(context, products.container);
       },
 
       teardown: function(){
-        Ember.run(function(){
-          products.container.destroy();
-          
-          if (context.dispatcher) {
-            context.dispatcher.destroy();
-          }
-        });
-        
+        products.teardown();
         callbacks.teardown(products.container);
-        Ember.$('#ember-testing').empty();
       }
     };
 
