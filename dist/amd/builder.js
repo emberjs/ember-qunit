@@ -69,11 +69,11 @@ define(
       result.dispatcher = Ember.EventDispatcher.create();
       result.dispatcher.setup({}, '#ember-testing');
 
-      result.append = function(subjectFn) {
+      result.append = function(subject) {
         return function(selector) {
           var containerView = Ember.ContainerView.create({container: result.container});
           var view = Ember.run(function(){
-            var subject = subjectFn();
+            if (typeof subject === "function") { subject = subject(); }
             containerView.pushObject(subject);
             // TODO: destory this somewhere
             containerView.appendTo('#ember-testing');
