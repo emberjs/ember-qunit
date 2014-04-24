@@ -120,8 +120,7 @@ define("ember-qunit/builder",
 
     __exports__["default"] = function moduleForComponent(name, description, callbacks) {
       // TODO: continue abstraction, make moduleForModel a simple assignment
-      var del = delegate.bind(null, name);
-      qunitModule(builderForComponent, del)(name, description, callbacks, del);
+      qunitModule(builderForComponent, delegate.bind(null, name)).apply(null, arguments);
     }
   });define("ember-qunit/module-for-model",
   ["./module-for","ember","./builder","exports"],
@@ -159,7 +158,7 @@ define("ember-qunit/builder",
 
     __exports__["default"] = function moduleForModel(name, description, callbacks) {
       // TODO: continue abstraction, make moduleForModel a simple assignment
-      qunitModule(builderForModel, delegate.bind(null, name))(name, description, callbacks, delegate.bind(null, name));
+      qunitModule(builderForModel, delegate.bind(null, name)).apply(null, arguments);
     }
   });define("ember-qunit/module-for",
   ["ember","./test-context","./test-resolver","./isolated-container","./builder","exports"],
@@ -174,7 +173,7 @@ define("ember-qunit/builder",
     var builder = __dependency5__.builder;
 
     function qunitModule(builder, delegate) {
-      return function moduleFor(fullName, description, callbacks, delegate) {
+      return function moduleFor(fullName, description, callbacks) {
         var products;
         var context;
         

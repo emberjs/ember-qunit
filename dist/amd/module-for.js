@@ -11,7 +11,7 @@ define(
     var builder = __dependency5__.builder;
 
     function qunitModule(builder, delegate) {
-      return function moduleFor(fullName, description, callbacks, delegate) {
+      return function moduleFor(fullName, description, callbacks) {
         var products;
         var context;
         

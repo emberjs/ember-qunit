@@ -38,7 +38,6 @@ define(
 
     __exports__["default"] = function moduleForComponent(name, description, callbacks) {
       // TODO: continue abstraction, make moduleForModel a simple assignment
-      var del = delegate.bind(null, name);
-      qunitModule(builderForComponent, del)(name, description, callbacks, del);
+      qunitModule(builderForComponent, delegate.bind(null, name)).apply(null, arguments);
     }
   });

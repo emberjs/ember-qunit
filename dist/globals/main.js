@@ -112,8 +112,7 @@ function delegate(name, container, context, defaultSubject, resolver) {
 
 exports["default"] = function moduleForComponent(name, description, callbacks) {
   // TODO: continue abstraction, make moduleForModel a simple assignment
-  var del = delegate.bind(null, name);
-  qunitModule(builderForComponent, del)(name, description, callbacks, del);
+  qunitModule(builderForComponent, delegate.bind(null, name)).apply(null, arguments);
 }
 },{"./builder":1,"./module-for":6}],5:[function(_dereq_,module,exports){
 "use strict";
@@ -149,7 +148,7 @@ function delegate(name, container, context, defaultSubject) {
 
 exports["default"] = function moduleForModel(name, description, callbacks) {
   // TODO: continue abstraction, make moduleForModel a simple assignment
-  qunitModule(builderForModel, delegate.bind(null, name))(name, description, callbacks, delegate.bind(null, name));
+  qunitModule(builderForModel, delegate.bind(null, name)).apply(null, arguments);
 }
 },{"./builder":1,"./module-for":6}],6:[function(_dereq_,module,exports){
 "use strict";
@@ -162,7 +161,7 @@ var isolatedContainer = _dereq_("./isolated-container")["default"] || _dereq_(".
 var builder = _dereq_("./builder").builder;
 
 function qunitModule(builder, delegate) {
-  return function moduleFor(fullName, description, callbacks, delegate) {
+  return function moduleFor(fullName, description, callbacks) {
     var products;
     var context;
     

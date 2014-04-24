@@ -8,7 +8,7 @@ var isolatedContainer = require("./isolated-container")["default"] || require(".
 var builder = require("./builder").builder;
 
 function qunitModule(builder, delegate) {
-  return function moduleFor(fullName, description, callbacks, delegate) {
+  return function moduleFor(fullName, description, callbacks) {
     var products;
     var context;
     
