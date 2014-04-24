@@ -7,7 +7,9 @@ define(
     var qunitModule = __dependency1__.qunitModule;
     var builderForModel = __dependency3__.builderForModel;
 
-    function delegate(name, container, context, defaultSubject) {
+    function delegate(fullName, container, context, defaultSubject) {
+      var name = fullName.split(':', 2).pop();
+
       if (DS._setupContainer) {
         DS._setupContainer(container);
       } else {

@@ -82,7 +82,8 @@ var qunitModule = _dereq_("./module-for").qunitModule;
 var builderForComponent = _dereq_("./builder").builderForComponent;
 
 
-function delegate(name, container, context, defaultSubject, resolver) {
+function delegate(fullName, container, context, defaultSubject, resolver) {
+  var name = fullName.split(':', 2).pop();
   var layoutName = 'template:components/' + name;
 
   var layout = resolver.resolve(layoutName);
@@ -121,7 +122,9 @@ var Ember = window.Ember["default"] || window.Ember;
 var qunitModule = _dereq_("./module-for").qunitModule;
 var builderForModel = _dereq_("./builder").builderForModel;
 
-function delegate(name, container, context, defaultSubject) {
+function delegate(fullName, container, context, defaultSubject) {
+  var name = fullName.split(':', 2).pop();
+
   if (DS._setupContainer) {
     DS._setupContainer(container);
   } else {

@@ -4,7 +4,9 @@ var Ember = require("ember")["default"] || require("ember");
 var qunitModule = require("./module-for").qunitModule;
 var builderForModel = require("./builder").builderForModel;
 
-function delegate(name, container, context, defaultSubject) {
+function delegate(fullName, container, context, defaultSubject) {
+  var name = fullName.split(':', 2).pop();
+
   if (DS._setupContainer) {
     DS._setupContainer(container);
   } else {

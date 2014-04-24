@@ -8,7 +8,8 @@ define(
     var builderForComponent = __dependency3__.builderForComponent;
 
 
-    function delegate(name, container, context, defaultSubject, resolver) {
+    function delegate(fullName, container, context, defaultSubject, resolver) {
+      var name = fullName.split(':', 2).pop();
       var layoutName = 'template:components/' + name;
 
       var layout = resolver.resolve(layoutName);
