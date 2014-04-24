@@ -76,14 +76,13 @@ exports.test = test;
 exports.setResolver = setResolver;
 },{"./isolated-container":2,"./module-for":6,"./module-for-component":4,"./module-for-model":5,"./test":9,"./test-resolver":8}],4:[function(_dereq_,module,exports){
 "use strict";
-var testResolver = _dereq_("./test-resolver")["default"] || _dereq_("./test-resolver");
 var moduleFor = _dereq_("./module-for")["default"] || _dereq_("./module-for");
 var Ember = window.Ember["default"] || window.Ember;
 var qunitModule = _dereq_("./module-for").qunitModule;
 var builderForComponent = _dereq_("./builder").builderForComponent;
 
 
-function delegate(name, resolver, container, context, defaultSubject) {
+function delegate(name, container, context, defaultSubject, resolver) {
   var layoutName = 'template:components/' + name;
 
   var layout = resolver.resolve(layoutName);
@@ -113,11 +112,10 @@ function delegate(name, resolver, container, context, defaultSubject) {
 
 exports["default"] = function moduleForComponent(name, description, callbacks) {
   // TODO: continue abstraction, make moduleForModel a simple assignment
-  var resolver = testResolver.get();
-  var del = delegate.bind(null, name, resolver);
+  var del = delegate.bind(null, name);
   qunitModule(builderForComponent, del)(name, description, callbacks, del);
 }
-},{"./builder":1,"./module-for":6,"./test-resolver":8}],5:[function(_dereq_,module,exports){
+},{"./builder":1,"./module-for":6}],5:[function(_dereq_,module,exports){
 "use strict";
 var moduleFor = _dereq_("./module-for")["default"] || _dereq_("./module-for");
 var Ember = window.Ember["default"] || window.Ember;
@@ -158,6 +156,7 @@ exports["default"] = function moduleForModel(name, description, callbacks) {
 var Ember = window.Ember["default"] || window.Ember;
 //import QUnit from 'qunit'; // Assumed global in runner
 var testContext = _dereq_("./test-context")["default"] || _dereq_("./test-context");
+var testResolver = _dereq_("./test-resolver")["default"] || _dereq_("./test-resolver");
 var isolatedContainer = _dereq_("./isolated-container")["default"] || _dereq_("./isolated-container");
 
 var builder = _dereq_("./builder").builder;
@@ -187,7 +186,7 @@ function qunitModule(builder, delegate) {
         context = testContext.get();
 
         if (delegate) {
-          delegate(products.container, context, defaultSubject);
+          delegate(products.container, context, defaultSubject, testResolver.get());
         }
         
         if (Ember.$('#ember-testing').length === 0) {
@@ -244,7 +243,7 @@ function qunitModule(builder, delegate) {
 exports["default"] = qunitModule(builder, null);
 exports.builder = builder;
 exports.qunitModule = qunitModule;
-},{"./builder":1,"./isolated-container":2,"./test-context":7}],7:[function(_dereq_,module,exports){
+},{"./builder":1,"./isolated-container":2,"./test-context":7,"./test-resolver":8}],7:[function(_dereq_,module,exports){
 "use strict";
 var __test_context__;
 

@@ -81,17 +81,16 @@ define("ember-qunit/builder",
     __exports__.test = test;
     __exports__.setResolver = setResolver;
   });define("ember-qunit/module-for-component",
-  ["./test-resolver","./module-for","ember","./builder","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+  ["./module-for","ember","./builder","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
     "use strict";
-    var testResolver = __dependency1__["default"] || __dependency1__;
-    var moduleFor = __dependency2__["default"] || __dependency2__;
-    var Ember = __dependency3__["default"] || __dependency3__;
-    var qunitModule = __dependency2__.qunitModule;
-    var builderForComponent = __dependency4__.builderForComponent;
+    var moduleFor = __dependency1__["default"] || __dependency1__;
+    var Ember = __dependency2__["default"] || __dependency2__;
+    var qunitModule = __dependency1__.qunitModule;
+    var builderForComponent = __dependency3__.builderForComponent;
 
 
-    function delegate(name, resolver, container, context, defaultSubject) {
+    function delegate(name, container, context, defaultSubject, resolver) {
       var layoutName = 'template:components/' + name;
 
       var layout = resolver.resolve(layoutName);
@@ -121,8 +120,7 @@ define("ember-qunit/builder",
 
     __exports__["default"] = function moduleForComponent(name, description, callbacks) {
       // TODO: continue abstraction, make moduleForModel a simple assignment
-      var resolver = testResolver.get();
-      var del = delegate.bind(null, name, resolver);
+      var del = delegate.bind(null, name);
       qunitModule(builderForComponent, del)(name, description, callbacks, del);
     }
   });define("ember-qunit/module-for-model",
@@ -164,15 +162,16 @@ define("ember-qunit/builder",
       qunitModule(builderForModel, delegate.bind(null, name))(name, description, callbacks, delegate.bind(null, name));
     }
   });define("ember-qunit/module-for",
-  ["ember","./test-context","./isolated-container","./builder","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+  ["ember","./test-context","./test-resolver","./isolated-container","./builder","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
     "use strict";
     var Ember = __dependency1__["default"] || __dependency1__;
     //import QUnit from 'qunit'; // Assumed global in runner
     var testContext = __dependency2__["default"] || __dependency2__;
-    var isolatedContainer = __dependency3__["default"] || __dependency3__;
+    var testResolver = __dependency3__["default"] || __dependency3__;
+    var isolatedContainer = __dependency4__["default"] || __dependency4__;
 
-    var builder = __dependency4__.builder;
+    var builder = __dependency5__.builder;
 
     function qunitModule(builder, delegate) {
       return function moduleFor(fullName, description, callbacks, delegate) {
@@ -199,7 +198,7 @@ define("ember-qunit/builder",
             context = testContext.get();
 
             if (delegate) {
-              delegate(products.container, context, defaultSubject);
+              delegate(products.container, context, defaultSubject, testResolver.get());
             }
             
             if (Ember.$('#ember-testing').length === 0) {

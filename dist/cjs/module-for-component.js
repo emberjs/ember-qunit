@@ -1,12 +1,11 @@
 "use strict";
-var testResolver = require("./test-resolver")["default"] || require("./test-resolver");
 var moduleFor = require("./module-for")["default"] || require("./module-for");
 var Ember = require("ember")["default"] || require("ember");
 var qunitModule = require("./module-for").qunitModule;
 var builderForComponent = require("./builder").builderForComponent;
 
 
-function delegate(name, resolver, container, context, defaultSubject) {
+function delegate(name, container, context, defaultSubject, resolver) {
   var layoutName = 'template:components/' + name;
 
   var layout = resolver.resolve(layoutName);
@@ -36,7 +35,6 @@ function delegate(name, resolver, container, context, defaultSubject) {
 
 exports["default"] = function moduleForComponent(name, description, callbacks) {
   // TODO: continue abstraction, make moduleForModel a simple assignment
-  var resolver = testResolver.get();
-  var del = delegate.bind(null, name, resolver);
+  var del = delegate.bind(null, name);
   qunitModule(builderForComponent, del)(name, description, callbacks, del);
 }
