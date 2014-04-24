@@ -1,6 +1,6 @@
 {
   "name": "ember-qunit",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "unit test helpers for ember",
   "main": "dist/cjs/main.js",
   "scripts": {
