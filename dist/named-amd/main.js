@@ -119,10 +119,7 @@ define("ember-qunit/builder",
       context.__setup_properties__.$ = context.__setup_properties__.append;
     }
 
-    __exports__["default"] = function moduleForComponent(name, description, callbacks) {
-      // TODO: continue abstraction, make moduleForModel a simple assignment
-      qunitModule(builderForComponent, delegate.bind(null, name)).apply(null, arguments);
-    }
+    __exports__["default"] = qunitModule(builderForComponent, delegate);
   });define("ember-qunit/module-for-model",
   ["./module-for","ember","./builder","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
@@ -159,10 +156,7 @@ define("ember-qunit/builder",
       }
     }
 
-    __exports__["default"] = function moduleForModel(name, description, callbacks) {
-      // TODO: continue abstraction, make moduleForModel a simple assignment
-      qunitModule(builderForModel, delegate.bind(null, name)).apply(null, arguments);
-    }
+    __exports__["default"] = qunitModule(builderForModel, delegate);
   });define("ember-qunit/module-for",
   ["ember","./test-context","./test-resolver","./isolated-container","./builder","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
@@ -200,7 +194,7 @@ define("ember-qunit/builder",
             context = testContext.get();
 
             if (delegate) {
-              delegate(products.container, context, defaultSubject, testResolver.get());
+              delegate(fullName, products.container, context, defaultSubject, testResolver.get());
             }
             
             if (Ember.$('#ember-testing').length === 0) {

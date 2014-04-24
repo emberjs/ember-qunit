@@ -37,8 +37,5 @@ define(
       context.__setup_properties__.$ = context.__setup_properties__.append;
     }
 
-    __exports__["default"] = function moduleForComponent(name, description, callbacks) {
-      // TODO: continue abstraction, make moduleForModel a simple assignment
-      qunitModule(builderForComponent, delegate.bind(null, name)).apply(null, arguments);
-    }
+    __exports__["default"] = qunitModule(builderForComponent, delegate);
   });

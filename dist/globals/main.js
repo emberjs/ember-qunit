@@ -111,10 +111,7 @@ function delegate(fullName, container, context, defaultSubject, resolver) {
   context.__setup_properties__.$ = context.__setup_properties__.append;
 }
 
-exports["default"] = function moduleForComponent(name, description, callbacks) {
-  // TODO: continue abstraction, make moduleForModel a simple assignment
-  qunitModule(builderForComponent, delegate.bind(null, name)).apply(null, arguments);
-}
+exports["default"] = qunitModule(builderForComponent, delegate);
 },{"./builder":1,"./module-for":6}],5:[function(_dereq_,module,exports){
 "use strict";
 var moduleFor = _dereq_("./module-for")["default"] || _dereq_("./module-for");
@@ -149,10 +146,7 @@ function delegate(fullName, container, context, defaultSubject) {
   }
 }
 
-exports["default"] = function moduleForModel(name, description, callbacks) {
-  // TODO: continue abstraction, make moduleForModel a simple assignment
-  qunitModule(builderForModel, delegate.bind(null, name)).apply(null, arguments);
-}
+exports["default"] = qunitModule(builderForModel, delegate);
 },{"./builder":1,"./module-for":6}],6:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
@@ -188,7 +182,7 @@ function qunitModule(builder, delegate) {
         context = testContext.get();
 
         if (delegate) {
-          delegate(products.container, context, defaultSubject, testResolver.get());
+          delegate(fullName, products.container, context, defaultSubject, testResolver.get());
         }
         
         if (Ember.$('#ember-testing').length === 0) {

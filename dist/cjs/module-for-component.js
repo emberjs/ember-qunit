@@ -34,7 +34,4 @@ function delegate(fullName, container, context, defaultSubject, resolver) {
   context.__setup_properties__.$ = context.__setup_properties__.append;
 }
 
-exports["default"] = function moduleForComponent(name, description, callbacks) {
-  // TODO: continue abstraction, make moduleForModel a simple assignment
-  qunitModule(builderForComponent, delegate.bind(null, name)).apply(null, arguments);
-}
+exports["default"] = qunitModule(builderForComponent, delegate);

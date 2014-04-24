@@ -35,7 +35,7 @@ define(
             context = testContext.get();
 
             if (delegate) {
-              delegate(products.container, context, defaultSubject, testResolver.get());
+              delegate(fullName, products.container, context, defaultSubject, testResolver.get());
             }
             
             if (Ember.$('#ember-testing').length === 0) {

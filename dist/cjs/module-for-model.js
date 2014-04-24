@@ -31,7 +31,4 @@ function delegate(fullName, container, context, defaultSubject) {
   }
 }
 
-exports["default"] = function moduleForModel(name, description, callbacks) {
-  // TODO: continue abstraction, make moduleForModel a simple assignment
-  qunitModule(builderForModel, delegate.bind(null, name)).apply(null, arguments);
-}
+exports["default"] = qunitModule(builderForModel, delegate);
