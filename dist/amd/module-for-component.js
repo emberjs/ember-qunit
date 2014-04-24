@@ -7,17 +7,7 @@ define(
     var qunitModule = __dependency1__.qunitModule;
     var builderForComponent = __dependency3__.builderForComponent;
 
-    __exports__["default"] = qunitModule(builderForComponent, function(fullName, container, context, defaultSubject, resolver) {
-      var name = fullName.split(':', 2).pop();
-      var layoutName = 'template:components/' + name;
-
-      var layout = resolver.resolve(layoutName);
-
-      if (layout) {
-        container.register(layoutName, layout);
-        container.injection('component:' + name, 'layout', layoutName);
-      }
-
+    __exports__["default"] = qunitModule(builderForComponent, function(fullName, container, context, defaultSubject) {
       context.dispatcher = Ember.EventDispatcher.create();
       context.dispatcher.setup({}, '#ember-testing');
 

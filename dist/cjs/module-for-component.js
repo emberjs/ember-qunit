@@ -4,17 +4,7 @@ var Ember = require("ember")["default"] || require("ember");
 var qunitModule = require("./module-for").qunitModule;
 var builderForComponent = require("./builder").builderForComponent;
 
-exports["default"] = qunitModule(builderForComponent, function(fullName, container, context, defaultSubject, resolver) {
-  var name = fullName.split(':', 2).pop();
-  var layoutName = 'template:components/' + name;
-
-  var layout = resolver.resolve(layoutName);
-
-  if (layout) {
-    container.register(layoutName, layout);
-    container.injection('component:' + name, 'layout', layoutName);
-  }
-
+exports["default"] = qunitModule(builderForComponent, function(fullName, container, context, defaultSubject) {
   context.dispatcher = Ember.EventDispatcher.create();
   context.dispatcher.setup({}, '#ember-testing');
 

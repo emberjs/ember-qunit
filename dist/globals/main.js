@@ -31,8 +31,17 @@ function builderForModel(name, needs) {
   return result;
 }
 
-function builderForComponent(name, needs) {
-  return builder('component:' + name, needs);
+function builderForComponent(name, needs, resolver) {
+  var result = builder('component:' + name, needs);
+  var layoutName = 'template:components/' + name;
+  var layout = resolver.resolve(layoutName);
+
+  if (layout) {
+    result.container.register(layoutName, layout);
+    result.container.injection('component:' + name, 'layout', layoutName);
+  }
+
+  return result;
 }
 
 exports.builder = builder;
@@ -94,17 +103,7 @@ var Ember = window.Ember["default"] || window.Ember;
 var qunitModule = _dereq_("./module-for").qunitModule;
 var builderForComponent = _dereq_("./builder").builderForComponent;
 
-exports["default"] = qunitModule(builderForComponent, function(fullName, container, context, defaultSubject, resolver) {
-  var name = fullName.split(':', 2).pop();
-  var layoutName = 'template:components/' + name;
-
-  var layout = resolver.resolve(layoutName);
-
-  if (layout) {
-    container.register(layoutName, layout);
-    container.injection('component:' + name, 'layout', layoutName);
-  }
-
+exports["default"] = qunitModule(builderForComponent, function(fullName, container, context, defaultSubject) {
   context.dispatcher = Ember.EventDispatcher.create();
   context.dispatcher.setup({}, '#ember-testing');
 
@@ -131,17 +130,6 @@ var builderForModel = _dereq_("./builder").builderForModel;
 
 exports["default"] = qunitModule(builderForModel, function(fullName, container, context, defaultSubject) {
   var name = fullName.split(':', 2).pop();
-
-  // if (DS._setupContainer) {
-  //   DS._setupContainer(container);
-  // } else {
-  //   container.register('store:main', DS.Store);
-  // }
-
-  // var adapterFactory = container.lookupFactory('adapter:application');
-  // if (!adapterFactory) {
-  //   container.register('adapter:application', DS.FixtureAdapter);
-  // }
 
   context.__setup_properties__.store = function(){
     return container.lookup('store:main');
@@ -178,7 +166,7 @@ function qunitModule(builder, delegate) {
         callbacks.setup     = callbacks.setup    || function() { };
         callbacks.teardown  = callbacks.teardown || function() { };
         
-        products = builder(fullName, callbacks.needs);
+        products = builder(fullName, callbacks.needs, testResolver.get());
 
         testContext.set({
           container:            products.container,
@@ -190,7 +178,7 @@ function qunitModule(builder, delegate) {
         context = testContext.get();
 
         if (delegate) {
-          delegate(fullName, products.container, context, defaultSubject, testResolver.get());
+          delegate(fullName, products.container, context, defaultSubject);
         }
         
         if (Ember.$('#ember-testing').length === 0) {

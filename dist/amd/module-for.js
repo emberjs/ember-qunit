@@ -23,7 +23,7 @@ define(
             callbacks.setup     = callbacks.setup    || function() { };
             callbacks.teardown  = callbacks.teardown || function() { };
             
-            products = builder(fullName, callbacks.needs);
+            products = builder(fullName, callbacks.needs, testResolver.get());
 
             testContext.set({
               container:            products.container,
@@ -35,7 +35,7 @@ define(
             context = testContext.get();
 
             if (delegate) {
-              delegate(fullName, products.container, context, defaultSubject, testResolver.get());
+              delegate(fullName, products.container, context, defaultSubject);
             }
             
             if (Ember.$('#ember-testing').length === 0) {

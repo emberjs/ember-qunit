@@ -30,8 +30,17 @@ function builderForModel(name, needs) {
   return result;
 }
 
-function builderForComponent(name, needs) {
-  return builder('component:' + name, needs);
+function builderForComponent(name, needs, resolver) {
+  var result = builder('component:' + name, needs);
+  var layoutName = 'template:components/' + name;
+  var layout = resolver.resolve(layoutName);
+
+  if (layout) {
+    result.container.register(layoutName, layout);
+    result.container.injection('component:' + name, 'layout', layoutName);
+  }
+
+  return result;
 }
 
 exports.builder = builder;
