@@ -28,6 +28,16 @@ function builderForModel(name, needs) {
     result.container.register('adapter:application', DS.FixtureAdapter);
   }
 
+  result.store = function() {
+    return result.container.lookup('store:main');
+  };
+
+  result.subject = function(options) {
+    return Ember.run(function() {
+      return result.container.lookup('store:main').createRecord(name, options);
+    });
+  };
+
   return result;
 }
 
@@ -40,6 +50,24 @@ function builderForComponent(name, needs, resolver) {
     result.container.register(layoutName, layout);
     result.container.injection('component:' + name, 'layout', layoutName);
   }
+
+  result.dispatcher = Ember.EventDispatcher.create();
+  result.dispatcher.setup({}, '#ember-testing');
+
+  result.append = function(subjectFn) {
+    return function(selector) {
+      var containerView = Ember.ContainerView.create({container: result.container});
+      var view = Ember.run(function(){
+        var subject = subjectFn();
+        containerView.pushObject(subject);
+        // TODO: destory this somewhere
+        containerView.appendTo('#ember-testing');
+        return subject;
+      });
+
+      return view.$();
+    };
+  };
 
   return result;
 }
@@ -103,22 +131,24 @@ var Ember = window.Ember["default"] || window.Ember;
 var qunitModule = _dereq_("./module-for").qunitModule;
 var builderForComponent = _dereq_("./builder").builderForComponent;
 
-exports["default"] = qunitModule(builderForComponent, function(fullName, container, context, defaultSubject) {
-  context.dispatcher = Ember.EventDispatcher.create();
-  context.dispatcher.setup({}, '#ember-testing');
+exports["default"] = qunitModule(builderForComponent, function(fullName, container, context, defaultSubject, products) {
+  context.dispatcher = products.dispatcher;
+  // context.dispatcher = Ember.EventDispatcher.create();
+  // context.dispatcher.setup({}, '#ember-testing');
 
-  context.__setup_properties__.append = function(selector) {
-    var containerView = Ember.ContainerView.create({container: container});
-    var view = Ember.run(function(){
-      var subject = context.subject();
-      containerView.pushObject(subject);
-      // TODO: destory this somewhere
-      containerView.appendTo('#ember-testing');
-      return subject;
-    });
+  context.__setup_properties__.append = products.append(function() { return context.subject() });
+  // context.__setup_properties__.append = function(selector) {
+  //   var containerView = Ember.ContainerView.create({container: container});
+  //   var view = Ember.run(function(){
+  //     var subject = context.subject();
+  //     containerView.pushObject(subject);
+  //     // TODO: destory this somewhere
+  //     containerView.appendTo('#ember-testing');
+  //     return subject;
+  //   });
 
-    return view.$();
-  };
+  //   return view.$();
+  // };
   context.__setup_properties__.$ = context.__setup_properties__.append;
 });
 },{"./builder":1,"./module-for":6}],5:[function(_dereq_,module,exports){
@@ -128,19 +158,10 @@ var Ember = window.Ember["default"] || window.Ember;
 var qunitModule = _dereq_("./module-for").qunitModule;
 var builderForModel = _dereq_("./builder").builderForModel;
 
-exports["default"] = qunitModule(builderForModel, function(fullName, container, context, defaultSubject) {
-  var name = fullName.split(':', 2).pop();
-
-  context.__setup_properties__.store = function(){
-    return container.lookup('store:main');
-  };
-
+exports["default"] = qunitModule(builderForModel, function(fullName, container, context, defaultSubject, products) {
+  context.__setup_properties__.store = products.store;
   if (context.__setup_properties__.subject === defaultSubject) {
-    context.__setup_properties__.subject = function(options) {
-      return Ember.run(function() {
-        return container.lookup('store:main').createRecord(name, options);
-      });
-    };
+    context.__setup_properties__.subject = products.subject;
   }
 });
 },{"./builder":1,"./module-for":6}],6:[function(_dereq_,module,exports){
@@ -178,7 +199,7 @@ function qunitModule(builder, delegate) {
         context = testContext.get();
 
         if (delegate) {
-          delegate(fullName, products.container, context, defaultSubject);
+          delegate(fullName, products.container, context, defaultSubject, products);
         }
         
         if (Ember.$('#ember-testing').length === 0) {

@@ -30,6 +30,16 @@ define(
         result.container.register('adapter:application', DS.FixtureAdapter);
       }
 
+      result.store = function() {
+        return result.container.lookup('store:main');
+      };
+
+      result.subject = function(options) {
+        return Ember.run(function() {
+          return result.container.lookup('store:main').createRecord(name, options);
+        });
+      };
+
       return result;
     }
 
@@ -42,6 +52,24 @@ define(
         result.container.register(layoutName, layout);
         result.container.injection('component:' + name, 'layout', layoutName);
       }
+
+      result.dispatcher = Ember.EventDispatcher.create();
+      result.dispatcher.setup({}, '#ember-testing');
+
+      result.append = function(subjectFn) {
+        return function(selector) {
+          var containerView = Ember.ContainerView.create({container: result.container});
+          var view = Ember.run(function(){
+            var subject = subjectFn();
+            containerView.pushObject(subject);
+            // TODO: destory this somewhere
+            containerView.appendTo('#ember-testing');
+            return subject;
+          });
+
+          return view.$();
+        };
+      };
 
       return result;
     }

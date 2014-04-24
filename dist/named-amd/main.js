@@ -30,6 +30,16 @@ define("ember-qunit/builder",
         result.container.register('adapter:application', DS.FixtureAdapter);
       }
 
+      result.store = function() {
+        return result.container.lookup('store:main');
+      };
+
+      result.subject = function(options) {
+        return Ember.run(function() {
+          return result.container.lookup('store:main').createRecord(name, options);
+        });
+      };
+
       return result;
     }
 
@@ -42,6 +52,24 @@ define("ember-qunit/builder",
         result.container.register(layoutName, layout);
         result.container.injection('component:' + name, 'layout', layoutName);
       }
+
+      result.dispatcher = Ember.EventDispatcher.create();
+      result.dispatcher.setup({}, '#ember-testing');
+
+      result.append = function(subjectFn) {
+        return function(selector) {
+          var containerView = Ember.ContainerView.create({container: result.container});
+          var view = Ember.run(function(){
+            var subject = subjectFn();
+            containerView.pushObject(subject);
+            // TODO: destory this somewhere
+            containerView.appendTo('#ember-testing');
+            return subject;
+          });
+
+          return view.$();
+        };
+      };
 
       return result;
     }
@@ -111,22 +139,24 @@ define("ember-qunit/builder",
     var qunitModule = __dependency1__.qunitModule;
     var builderForComponent = __dependency3__.builderForComponent;
 
-    __exports__["default"] = qunitModule(builderForComponent, function(fullName, container, context, defaultSubject) {
-      context.dispatcher = Ember.EventDispatcher.create();
-      context.dispatcher.setup({}, '#ember-testing');
+    __exports__["default"] = qunitModule(builderForComponent, function(fullName, container, context, defaultSubject, products) {
+      context.dispatcher = products.dispatcher;
+      // context.dispatcher = Ember.EventDispatcher.create();
+      // context.dispatcher.setup({}, '#ember-testing');
 
-      context.__setup_properties__.append = function(selector) {
-        var containerView = Ember.ContainerView.create({container: container});
-        var view = Ember.run(function(){
-          var subject = context.subject();
-          containerView.pushObject(subject);
-          // TODO: destory this somewhere
-          containerView.appendTo('#ember-testing');
-          return subject;
-        });
+      context.__setup_properties__.append = products.append(function() { return context.subject() });
+      // context.__setup_properties__.append = function(selector) {
+      //   var containerView = Ember.ContainerView.create({container: container});
+      //   var view = Ember.run(function(){
+      //     var subject = context.subject();
+      //     containerView.pushObject(subject);
+      //     // TODO: destory this somewhere
+      //     containerView.appendTo('#ember-testing');
+      //     return subject;
+      //   });
 
-        return view.$();
-      };
+      //   return view.$();
+      // };
       context.__setup_properties__.$ = context.__setup_properties__.append;
     });
   });define("ember-qunit/module-for-model",
@@ -138,19 +168,10 @@ define("ember-qunit/builder",
     var qunitModule = __dependency1__.qunitModule;
     var builderForModel = __dependency3__.builderForModel;
 
-    __exports__["default"] = qunitModule(builderForModel, function(fullName, container, context, defaultSubject) {
-      var name = fullName.split(':', 2).pop();
-
-      context.__setup_properties__.store = function(){
-        return container.lookup('store:main');
-      };
-
+    __exports__["default"] = qunitModule(builderForModel, function(fullName, container, context, defaultSubject, products) {
+      context.__setup_properties__.store = products.store;
       if (context.__setup_properties__.subject === defaultSubject) {
-        context.__setup_properties__.subject = function(options) {
-          return Ember.run(function() {
-            return container.lookup('store:main').createRecord(name, options);
-          });
-        };
+        context.__setup_properties__.subject = products.subject;
       }
     });
   });define("ember-qunit/module-for",
@@ -190,7 +211,7 @@ define("ember-qunit/builder",
             context = testContext.get();
 
             if (delegate) {
-              delegate(fullName, products.container, context, defaultSubject);
+              delegate(fullName, products.container, context, defaultSubject, products);
             }
             
             if (Ember.$('#ember-testing').length === 0) {
