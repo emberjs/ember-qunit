@@ -131,7 +131,7 @@ var Ember = window.Ember["default"] || window.Ember;
 var qunitModule = _dereq_("./module-for").qunitModule;
 var builderForComponent = _dereq_("./builder").builderForComponent;
 
-exports["default"] = qunitModule(builderForComponent, function(context, defaultSubject, products) {
+exports["default"] = qunitModule(builderForComponent, function(products, context) {
   context.dispatcher = products.dispatcher;
   context.__setup_properties__.append = products.append(function() { return context.subject() });
   context.__setup_properties__.$ = context.__setup_properties__.append;
@@ -143,11 +143,10 @@ var Ember = window.Ember["default"] || window.Ember;
 var qunitModule = _dereq_("./module-for").qunitModule;
 var builderForModel = _dereq_("./builder").builderForModel;
 
-exports["default"] = qunitModule(builderForModel, function(context, defaultSubject, products) {
+exports["default"] = qunitModule(builderForModel, function(products, context, options) {
   context.__setup_properties__.store = products.store;
-  if (context.__setup_properties__.subject === defaultSubject) {
-    context.__setup_properties__.subject = products.subject;
-  }
+  context.__setup_properties__.subject = options.subjectIsDefault ?
+    products.subject : context.__setup_properties__.subject;
 });
 },{"./builder":1,"./module-for":6}],6:[function(_dereq_,module,exports){
 "use strict";
@@ -184,7 +183,9 @@ function qunitModule(builder, delegate) {
         context = testContext.get();
 
         if (delegate) {
-          delegate(context, defaultSubject, products);
+          delegate(products, context, {
+            subjectIsDefault: (context.__setup_properties__.subject === defaultSubject)
+          });
         }
         
         if (Ember.$('#ember-testing').length === 0) {

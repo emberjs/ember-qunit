@@ -7,7 +7,7 @@ define(
     var qunitModule = __dependency1__.qunitModule;
     var builderForComponent = __dependency3__.builderForComponent;
 
-    __exports__["default"] = qunitModule(builderForComponent, function(context, defaultSubject, products) {
+    __exports__["default"] = qunitModule(builderForComponent, function(products, context) {
       context.dispatcher = products.dispatcher;
       context.__setup_properties__.append = products.append(function() { return context.subject() });
       context.__setup_properties__.$ = context.__setup_properties__.append;

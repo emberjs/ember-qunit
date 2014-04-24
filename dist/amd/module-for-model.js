@@ -7,10 +7,9 @@ define(
     var qunitModule = __dependency1__.qunitModule;
     var builderForModel = __dependency3__.builderForModel;
 
-    __exports__["default"] = qunitModule(builderForModel, function(context, defaultSubject, products) {
+    __exports__["default"] = qunitModule(builderForModel, function(products, context, options) {
       context.__setup_properties__.store = products.store;
-      if (context.__setup_properties__.subject === defaultSubject) {
-        context.__setup_properties__.subject = products.subject;
-      }
+      context.__setup_properties__.subject = options.subjectIsDefault ?
+        products.subject : context.__setup_properties__.subject;
     });
   });

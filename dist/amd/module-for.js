@@ -35,7 +35,9 @@ define(
             context = testContext.get();
 
             if (delegate) {
-              delegate(context, defaultSubject, products);
+              delegate(products, context, {
+                subjectIsDefault: (context.__setup_properties__.subject === defaultSubject)
+              });
             }
             
             if (Ember.$('#ember-testing').length === 0) {
