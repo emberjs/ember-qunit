@@ -2,7 +2,6 @@
 var Ember = require("ember")["default"] || require("ember");
 //import QUnit from 'qunit'; // Assumed global in runner
 var testContext = require("./test-context")["default"] || require("./test-context");
-var testResolver = require("./test-resolver")["default"] || require("./test-resolver");
 
 exports["default"] = function qunitModule(builder, delegate) {
   return function moduleFor(fullName, description, callbacks) {
@@ -17,7 +16,7 @@ exports["default"] = function qunitModule(builder, delegate) {
         callbacks.setup     = callbacks.setup    || function() { };
         callbacks.teardown  = callbacks.teardown || function() { };
         
-        products = builder(fullName, callbacks.needs, testResolver.get());
+        products = builder(fullName, callbacks.needs);
 
         testContext.set({
           container:            products.container,

@@ -1,5 +1,6 @@
 "use strict";
 var Ember = require("ember")["default"] || require("ember");
+var testResolver = require("./test-resolver")["default"] || require("./test-resolver");
 
 function isolatedContainer(fullNames, resolver) {
   var container = new Ember.Container();
@@ -15,7 +16,8 @@ function isolatedContainer(fullNames, resolver) {
   return container;
 }
 
-function builder(fullName, needs, resolver) {
+function builder(fullName, needs) {
+  var resolver = testResolver.get();
   var container = isolatedContainer([fullName].concat(needs || []), resolver);
   var factory = function() {
     return container.lookupFactory(fullName);
@@ -40,8 +42,8 @@ function builder(fullName, needs, resolver) {
   return result;
 };
 
-function builderForModel(name, needs, resolver) {
-  var result = builder('model:' + name, needs, resolver);
+function builderForModel(name, needs) {
+  var result = builder('model:' + name, needs);
 
   if (DS._setupContainer) {
     DS._setupContainer(result.container);
@@ -71,8 +73,9 @@ function builderForModel(name, needs, resolver) {
   return result;
 }
 
-function builderForComponent(name, needs, resolver) {
-  var result = builder('component:' + name, needs, resolver);
+function builderForComponent(name, needs) {
+  var resolver = testResolver.get();
+  var result = builder('component:' + name, needs);
   var layoutName = 'template:components/' + name;
   var layout = resolver.resolve(layoutName);
 

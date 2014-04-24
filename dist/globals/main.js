@@ -1,6 +1,7 @@
 !function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.emq=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
+var testResolver = _dereq_("./test-resolver")["default"] || _dereq_("./test-resolver");
 
 function isolatedContainer(fullNames, resolver) {
   var container = new Ember.Container();
@@ -16,7 +17,8 @@ function isolatedContainer(fullNames, resolver) {
   return container;
 }
 
-function builder(fullName, needs, resolver) {
+function builder(fullName, needs) {
+  var resolver = testResolver.get();
   var container = isolatedContainer([fullName].concat(needs || []), resolver);
   var factory = function() {
     return container.lookupFactory(fullName);
@@ -41,8 +43,8 @@ function builder(fullName, needs, resolver) {
   return result;
 };
 
-function builderForModel(name, needs, resolver) {
-  var result = builder('model:' + name, needs, resolver);
+function builderForModel(name, needs) {
+  var result = builder('model:' + name, needs);
 
   if (DS._setupContainer) {
     DS._setupContainer(result.container);
@@ -72,8 +74,9 @@ function builderForModel(name, needs, resolver) {
   return result;
 }
 
-function builderForComponent(name, needs, resolver) {
-  var result = builder('component:' + name, needs, resolver);
+function builderForComponent(name, needs) {
+  var resolver = testResolver.get();
+  var result = builder('component:' + name, needs);
   var layoutName = 'template:components/' + name;
   var layout = resolver.resolve(layoutName);
 
@@ -106,7 +109,7 @@ function builderForComponent(name, needs, resolver) {
 exports.builder = builder;
 exports.builderForModel = builderForModel;
 exports.builderForComponent = builderForComponent;
-},{}],2:[function(_dereq_,module,exports){
+},{"./test-resolver":8}],2:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
 var moduleFor = _dereq_("./module-for")["default"] || _dereq_("./module-for");
@@ -140,7 +143,6 @@ exports.setResolver = setResolver;
 var Ember = window.Ember["default"] || window.Ember;
 //import QUnit from 'qunit'; // Assumed global in runner
 var testContext = _dereq_("./test-context")["default"] || _dereq_("./test-context");
-var testResolver = _dereq_("./test-resolver")["default"] || _dereq_("./test-resolver");
 
 exports["default"] = function qunitModule(builder, delegate) {
   return function moduleFor(fullName, description, callbacks) {
@@ -155,7 +157,7 @@ exports["default"] = function qunitModule(builder, delegate) {
         callbacks.setup     = callbacks.setup    || function() { };
         callbacks.teardown  = callbacks.teardown || function() { };
         
-        products = builder(fullName, callbacks.needs, testResolver.get());
+        products = builder(fullName, callbacks.needs);
 
         testContext.set({
           container:            products.container,
@@ -210,7 +212,7 @@ function buildContextVariables(context) {
     };
   });
 }
-},{"./test-context":7,"./test-resolver":8}],4:[function(_dereq_,module,exports){
+},{"./test-context":7}],4:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
 var qunitModule = _dereq_("./module-base")["default"] || _dereq_("./module-base");
