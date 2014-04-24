@@ -117,38 +117,14 @@ exports.moduleForComponent = moduleForComponent;
 exports.moduleForModel = moduleForModel;
 exports.test = test;
 exports.setResolver = setResolver;
-},{"./module-for":5,"./module-for-component":3,"./module-for-model":4,"./test":8,"./test-resolver":7}],3:[function(_dereq_,module,exports){
-"use strict";
-var Ember = window.Ember["default"] || window.Ember;
-var qunitModule = _dereq_("./module-for").qunitModule;
-var builderForComponent = _dereq_("./builder").builderForComponent;
-
-exports["default"] = qunitModule(builderForComponent, function(products, context) {
-  context.dispatcher = products.dispatcher;
-  context.__setup_properties__.append = products.append(function() { return context.subject() });
-  context.__setup_properties__.$ = context.__setup_properties__.append;
-});
-},{"./builder":1,"./module-for":5}],4:[function(_dereq_,module,exports){
-"use strict";
-var Ember = window.Ember["default"] || window.Ember;
-var qunitModule = _dereq_("./module-for").qunitModule;
-var builderForModel = _dereq_("./builder").builderForModel;
-
-exports["default"] = qunitModule(builderForModel, function(products, context, options) {
-  context.__setup_properties__.store = products.store;
-  context.__setup_properties__.subject = options.subjectIsDefault ?
-    products.subject : context.__setup_properties__.subject;
-});
-},{"./builder":1,"./module-for":5}],5:[function(_dereq_,module,exports){
+},{"./module-for":6,"./module-for-component":4,"./module-for-model":5,"./test":9,"./test-resolver":8}],3:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
 //import QUnit from 'qunit'; // Assumed global in runner
 var testContext = _dereq_("./test-context")["default"] || _dereq_("./test-context");
 var testResolver = _dereq_("./test-resolver")["default"] || _dereq_("./test-resolver");
 
-var builder = _dereq_("./builder").builder;
-
-function qunitModule(builder, delegate) {
+exports["default"] = function qunitModule(builder, delegate) {
   return function moduleFor(fullName, description, callbacks) {
     var products;
     var context;
@@ -228,11 +204,36 @@ function qunitModule(builder, delegate) {
     });
   }
 }
+},{"./test-context":7,"./test-resolver":8}],4:[function(_dereq_,module,exports){
+"use strict";
+var Ember = window.Ember["default"] || window.Ember;
+var qunitModule = _dereq_("./module-base")["default"] || _dereq_("./module-base");
+var builderForComponent = _dereq_("./builder").builderForComponent;
+
+exports["default"] = qunitModule(builderForComponent, function(products, context) {
+  context.dispatcher = products.dispatcher;
+  context.__setup_properties__.append = products.append(function() { return context.subject() });
+  context.__setup_properties__.$ = context.__setup_properties__.append;
+});
+},{"./builder":1,"./module-base":3}],5:[function(_dereq_,module,exports){
+"use strict";
+var Ember = window.Ember["default"] || window.Ember;
+var qunitModule = _dereq_("./module-base")["default"] || _dereq_("./module-base");
+var builderForModel = _dereq_("./builder").builderForModel;
+
+exports["default"] = qunitModule(builderForModel, function(products, context, options) {
+  context.__setup_properties__.store = products.store;
+  context.__setup_properties__.subject = options.subjectIsDefault ?
+    products.subject : context.__setup_properties__.subject;
+});
+},{"./builder":1,"./module-base":3}],6:[function(_dereq_,module,exports){
+"use strict";
+var Ember = window.Ember["default"] || window.Ember;
+var qunitModule = _dereq_("./module-base")["default"] || _dereq_("./module-base");
+var builder = _dereq_("./builder").builder;
 
 exports["default"] = qunitModule(builder, null);
-exports.builder = builder;
-exports.qunitModule = qunitModule;
-},{"./builder":1,"./test-context":6,"./test-resolver":7}],6:[function(_dereq_,module,exports){
+},{"./builder":1,"./module-base":3}],7:[function(_dereq_,module,exports){
 "use strict";
 var __test_context__;
 
@@ -245,7 +246,7 @@ exports.set = set;function get() {
 }
 
 exports.get = get;
-},{}],7:[function(_dereq_,module,exports){
+},{}],8:[function(_dereq_,module,exports){
 "use strict";
 var __resolver__;
 
@@ -259,7 +260,7 @@ exports.set = set;function get() {
 }
 
 exports.get = get;
-},{}],8:[function(_dereq_,module,exports){
+},{}],9:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
 //import QUnit from 'qunit'; // Assumed global in runner
@@ -289,6 +290,6 @@ exports["default"] = function test(testName, callback) {
 
   QUnit.test(testName, wrapper);
 }
-},{"./test-context":6}]},{},[2])
+},{"./test-context":7}]},{},[2])
 (2)
 });

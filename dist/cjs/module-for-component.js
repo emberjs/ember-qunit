@@ -1,6 +1,6 @@
 "use strict";
 var Ember = require("ember")["default"] || require("ember");
-var qunitModule = require("./module-for").qunitModule;
+var qunitModule = require("./module-base")["default"] || require("./module-base");
 var builderForComponent = require("./builder").builderForComponent;
 
 exports["default"] = qunitModule(builderForComponent, function(products, context) {
