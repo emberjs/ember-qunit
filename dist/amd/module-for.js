@@ -1,14 +1,13 @@
 define(
-  ["ember","./test-context","./test-resolver","./isolated-container","./builder","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
+  ["ember","./test-context","./test-resolver","./builder","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
     "use strict";
     var Ember = __dependency1__["default"] || __dependency1__;
     //import QUnit from 'qunit'; // Assumed global in runner
     var testContext = __dependency2__["default"] || __dependency2__;
     var testResolver = __dependency3__["default"] || __dependency3__;
-    var isolatedContainer = __dependency4__["default"] || __dependency4__;
 
-    var builder = __dependency5__.builder;
+    var builder = __dependency4__.builder;
 
     function qunitModule(builder, delegate) {
       return function moduleFor(fullName, description, callbacks) {

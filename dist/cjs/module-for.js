@@ -3,7 +3,6 @@ var Ember = require("ember")["default"] || require("ember");
 //import QUnit from 'qunit'; // Assumed global in runner
 var testContext = require("./test-context")["default"] || require("./test-context");
 var testResolver = require("./test-resolver")["default"] || require("./test-resolver");
-var isolatedContainer = require("./isolated-container")["default"] || require("./isolated-container");
 
 var builder = require("./builder").builder;
 

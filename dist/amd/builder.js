@@ -5,8 +5,8 @@ define(
     var Ember = __dependency1__["default"] || __dependency1__;
     var isolatedContainer = __dependency2__["default"] || __dependency2__;
 
-    function builder(fullName, needs) {
-      var container = isolatedContainer([fullName].concat(needs || []));
+    function builder(fullName, needs, resolver) {
+      var container = isolatedContainer([fullName].concat(needs || []), resolver);
       var factory = function() {
         return container.lookupFactory(fullName);
       };
@@ -16,8 +16,8 @@ define(
       };
     };
 
-    function builderForModel(name, needs) {
-      var result = builder('model:' + name, needs);
+    function builderForModel(name, needs, resolver) {
+      var result = builder('model:' + name, needs, resolver);
 
       if (DS._setupContainer) {
         DS._setupContainer(result.container);
@@ -44,7 +44,7 @@ define(
     }
 
     function builderForComponent(name, needs, resolver) {
-      var result = builder('component:' + name, needs);
+      var result = builder('component:' + name, needs, resolver);
       var layoutName = 'template:components/' + name;
       var layout = resolver.resolve(layoutName);
 

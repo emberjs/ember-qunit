@@ -1,5 +1,4 @@
 "use strict";
-var moduleFor = require("./module-for")["default"] || require("./module-for");
 var Ember = require("ember")["default"] || require("ember");
 var qunitModule = require("./module-for").qunitModule;
 var builderForComponent = require("./builder").builderForComponent;

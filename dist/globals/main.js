@@ -3,8 +3,8 @@
 var Ember = window.Ember["default"] || window.Ember;
 var isolatedContainer = _dereq_("./isolated-container")["default"] || _dereq_("./isolated-container");
 
-function builder(fullName, needs) {
-  var container = isolatedContainer([fullName].concat(needs || []));
+function builder(fullName, needs, resolver) {
+  var container = isolatedContainer([fullName].concat(needs || []), resolver);
   var factory = function() {
     return container.lookupFactory(fullName);
   };
@@ -14,8 +14,8 @@ function builder(fullName, needs) {
   };
 };
 
-function builderForModel(name, needs) {
-  var result = builder('model:' + name, needs);
+function builderForModel(name, needs, resolver) {
+  var result = builder('model:' + name, needs, resolver);
 
   if (DS._setupContainer) {
     DS._setupContainer(result.container);
@@ -42,7 +42,7 @@ function builderForModel(name, needs) {
 }
 
 function builderForComponent(name, needs, resolver) {
-  var result = builder('component:' + name, needs);
+  var result = builder('component:' + name, needs, resolver);
   var layoutName = 'template:components/' + name;
   var layout = resolver.resolve(layoutName);
 
@@ -77,11 +77,9 @@ exports.builderForModel = builderForModel;
 exports.builderForComponent = builderForComponent;
 },{"./isolated-container":2}],2:[function(_dereq_,module,exports){
 "use strict";
-var testResolver = _dereq_("./test-resolver")["default"] || _dereq_("./test-resolver");
 var Ember = window.Ember["default"] || window.Ember;
 
-exports["default"] = function isolatedContainer(fullNames) {
-  var resolver = testResolver.get();
+exports["default"] = function isolatedContainer(fullNames, resolver) {
   var container = new Ember.Container();
   container.optionsForType('component', { singleton: false });
   container.optionsForType('view', { singleton: false });
@@ -94,7 +92,7 @@ exports["default"] = function isolatedContainer(fullNames) {
   }
   return container;
 }
-},{"./test-resolver":8}],3:[function(_dereq_,module,exports){
+},{}],3:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
 var isolatedContainer = _dereq_("./isolated-container")["default"] || _dereq_("./isolated-container");
@@ -126,7 +124,6 @@ exports.test = test;
 exports.setResolver = setResolver;
 },{"./isolated-container":2,"./module-for":6,"./module-for-component":4,"./module-for-model":5,"./test":9,"./test-resolver":8}],4:[function(_dereq_,module,exports){
 "use strict";
-var moduleFor = _dereq_("./module-for")["default"] || _dereq_("./module-for");
 var Ember = window.Ember["default"] || window.Ember;
 var qunitModule = _dereq_("./module-for").qunitModule;
 var builderForComponent = _dereq_("./builder").builderForComponent;
@@ -138,7 +135,6 @@ exports["default"] = qunitModule(builderForComponent, function(products, context
 });
 },{"./builder":1,"./module-for":6}],5:[function(_dereq_,module,exports){
 "use strict";
-var moduleFor = _dereq_("./module-for")["default"] || _dereq_("./module-for");
 var Ember = window.Ember["default"] || window.Ember;
 var qunitModule = _dereq_("./module-for").qunitModule;
 var builderForModel = _dereq_("./builder").builderForModel;
@@ -154,7 +150,6 @@ var Ember = window.Ember["default"] || window.Ember;
 //import QUnit from 'qunit'; // Assumed global in runner
 var testContext = _dereq_("./test-context")["default"] || _dereq_("./test-context");
 var testResolver = _dereq_("./test-resolver")["default"] || _dereq_("./test-resolver");
-var isolatedContainer = _dereq_("./isolated-container")["default"] || _dereq_("./isolated-container");
 
 var builder = _dereq_("./builder").builder;
 
@@ -242,7 +237,7 @@ function qunitModule(builder, delegate) {
 exports["default"] = qunitModule(builder, null);
 exports.builder = builder;
 exports.qunitModule = qunitModule;
-},{"./builder":1,"./isolated-container":2,"./test-context":7,"./test-resolver":8}],7:[function(_dereq_,module,exports){
+},{"./builder":1,"./test-context":7,"./test-resolver":8}],7:[function(_dereq_,module,exports){
 "use strict";
 var __test_context__;
 

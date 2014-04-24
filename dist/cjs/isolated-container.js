@@ -1,9 +1,7 @@
 "use strict";
-var testResolver = require("./test-resolver")["default"] || require("./test-resolver");
 var Ember = require("ember")["default"] || require("ember");
 
-exports["default"] = function isolatedContainer(fullNames) {
-  var resolver = testResolver.get();
+exports["default"] = function isolatedContainer(fullNames, resolver) {
   var container = new Ember.Container();
   container.optionsForType('component', { singleton: false });
   container.optionsForType('view', { singleton: false });
