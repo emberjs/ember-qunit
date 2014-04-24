@@ -32,7 +32,7 @@ function qunitModule(builder, delegate) {
         context = testContext.get();
 
         if (delegate) {
-          delegate(fullName, products.container, context, defaultSubject, products);
+          delegate(context, defaultSubject, products);
         }
         
         if (Ember.$('#ember-testing').length === 0) {

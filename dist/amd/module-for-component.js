@@ -7,24 +7,9 @@ define(
     var qunitModule = __dependency1__.qunitModule;
     var builderForComponent = __dependency3__.builderForComponent;
 
-    __exports__["default"] = qunitModule(builderForComponent, function(fullName, container, context, defaultSubject, products) {
+    __exports__["default"] = qunitModule(builderForComponent, function(context, defaultSubject, products) {
       context.dispatcher = products.dispatcher;
-      // context.dispatcher = Ember.EventDispatcher.create();
-      // context.dispatcher.setup({}, '#ember-testing');
-
       context.__setup_properties__.append = products.append(function() { return context.subject() });
-      // context.__setup_properties__.append = function(selector) {
-      //   var containerView = Ember.ContainerView.create({container: container});
-      //   var view = Ember.run(function(){
-      //     var subject = context.subject();
-      //     containerView.pushObject(subject);
-      //     // TODO: destory this somewhere
-      //     containerView.appendTo('#ember-testing');
-      //     return subject;
-      //   });
-
-      //   return view.$();
-      // };
       context.__setup_properties__.$ = context.__setup_properties__.append;
     });
   });

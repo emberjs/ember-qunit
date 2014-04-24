@@ -7,7 +7,7 @@ define(
     var qunitModule = __dependency1__.qunitModule;
     var builderForModel = __dependency3__.builderForModel;
 
-    __exports__["default"] = qunitModule(builderForModel, function(fullName, container, context, defaultSubject, products) {
+    __exports__["default"] = qunitModule(builderForModel, function(context, defaultSubject, products) {
       context.__setup_properties__.store = products.store;
       if (context.__setup_properties__.subject === defaultSubject) {
         context.__setup_properties__.subject = products.subject;

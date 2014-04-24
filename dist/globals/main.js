@@ -131,24 +131,9 @@ var Ember = window.Ember["default"] || window.Ember;
 var qunitModule = _dereq_("./module-for").qunitModule;
 var builderForComponent = _dereq_("./builder").builderForComponent;
 
-exports["default"] = qunitModule(builderForComponent, function(fullName, container, context, defaultSubject, products) {
+exports["default"] = qunitModule(builderForComponent, function(context, defaultSubject, products) {
   context.dispatcher = products.dispatcher;
-  // context.dispatcher = Ember.EventDispatcher.create();
-  // context.dispatcher.setup({}, '#ember-testing');
-
   context.__setup_properties__.append = products.append(function() { return context.subject() });
-  // context.__setup_properties__.append = function(selector) {
-  //   var containerView = Ember.ContainerView.create({container: container});
-  //   var view = Ember.run(function(){
-  //     var subject = context.subject();
-  //     containerView.pushObject(subject);
-  //     // TODO: destory this somewhere
-  //     containerView.appendTo('#ember-testing');
-  //     return subject;
-  //   });
-
-  //   return view.$();
-  // };
   context.__setup_properties__.$ = context.__setup_properties__.append;
 });
 },{"./builder":1,"./module-for":6}],5:[function(_dereq_,module,exports){
@@ -158,7 +143,7 @@ var Ember = window.Ember["default"] || window.Ember;
 var qunitModule = _dereq_("./module-for").qunitModule;
 var builderForModel = _dereq_("./builder").builderForModel;
 
-exports["default"] = qunitModule(builderForModel, function(fullName, container, context, defaultSubject, products) {
+exports["default"] = qunitModule(builderForModel, function(context, defaultSubject, products) {
   context.__setup_properties__.store = products.store;
   if (context.__setup_properties__.subject === defaultSubject) {
     context.__setup_properties__.subject = products.subject;
@@ -199,7 +184,7 @@ function qunitModule(builder, delegate) {
         context = testContext.get();
 
         if (delegate) {
-          delegate(fullName, products.container, context, defaultSubject, products);
+          delegate(context, defaultSubject, products);
         }
         
         if (Ember.$('#ember-testing').length === 0) {
