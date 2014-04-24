@@ -15,7 +15,20 @@ function builder(fullName, needs) {
 };
 
 function builderForModel(name, needs) {
-  return builder('model:' + name, needs);
+  var result = builder('model:' + name, needs);
+
+  if (DS._setupContainer) {
+    DS._setupContainer(result.container);
+  } else {
+    result.container.register('store:main', DS.Store);
+  }
+
+  var adapterFactory = result.container.lookupFactory('adapter:application');
+  if (!adapterFactory) {
+    result.container.register('adapter:application', DS.FixtureAdapter);
+  }
+
+  return result;
 }
 
 function builderForComponent(name, needs) {
@@ -119,16 +132,16 @@ var builderForModel = _dereq_("./builder").builderForModel;
 exports["default"] = qunitModule(builderForModel, function(fullName, container, context, defaultSubject) {
   var name = fullName.split(':', 2).pop();
 
-  if (DS._setupContainer) {
-    DS._setupContainer(container);
-  } else {
-    container.register('store:main', DS.Store);
-  }
+  // if (DS._setupContainer) {
+  //   DS._setupContainer(container);
+  // } else {
+  //   container.register('store:main', DS.Store);
+  // }
 
-  var adapterFactory = container.lookupFactory('adapter:application');
-  if (!adapterFactory) {
-    container.register('adapter:application', DS.FixtureAdapter);
-  }
+  // var adapterFactory = container.lookupFactory('adapter:application');
+  // if (!adapterFactory) {
+  //   container.register('adapter:application', DS.FixtureAdapter);
+  // }
 
   context.__setup_properties__.store = function(){
     return container.lookup('store:main');

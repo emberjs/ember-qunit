@@ -14,7 +14,20 @@ function builder(fullName, needs) {
 };
 
 function builderForModel(name, needs) {
-  return builder('model:' + name, needs);
+  var result = builder('model:' + name, needs);
+
+  if (DS._setupContainer) {
+    DS._setupContainer(result.container);
+  } else {
+    result.container.register('store:main', DS.Store);
+  }
+
+  var adapterFactory = result.container.lookupFactory('adapter:application');
+  if (!adapterFactory) {
+    result.container.register('adapter:application', DS.FixtureAdapter);
+  }
+
+  return result;
 }
 
 function builderForComponent(name, needs) {
