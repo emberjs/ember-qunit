@@ -7,7 +7,7 @@ define(
     var qunitModule = __dependency1__.qunitModule;
     var builderForModel = __dependency3__.builderForModel;
 
-    function delegate(fullName, container, context, defaultSubject) {
+    __exports__["default"] = qunitModule(builderForModel, function(fullName, container, context, defaultSubject) {
       var name = fullName.split(':', 2).pop();
 
       if (DS._setupContainer) {
@@ -32,7 +32,5 @@ define(
           });
         };
       }
-    }
-
-    __exports__["default"] = qunitModule(builderForModel, delegate);
+    });
   });

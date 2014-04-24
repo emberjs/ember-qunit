@@ -89,8 +89,7 @@ define("ember-qunit/builder",
     var qunitModule = __dependency1__.qunitModule;
     var builderForComponent = __dependency3__.builderForComponent;
 
-
-    function delegate(fullName, container, context, defaultSubject, resolver) {
+    __exports__["default"] = qunitModule(builderForComponent, function(fullName, container, context, defaultSubject, resolver) {
       var name = fullName.split(':', 2).pop();
       var layoutName = 'template:components/' + name;
 
@@ -117,9 +116,7 @@ define("ember-qunit/builder",
         return view.$();
       };
       context.__setup_properties__.$ = context.__setup_properties__.append;
-    }
-
-    __exports__["default"] = qunitModule(builderForComponent, delegate);
+    });
   });define("ember-qunit/module-for-model",
   ["./module-for","ember","./builder","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
@@ -129,7 +126,7 @@ define("ember-qunit/builder",
     var qunitModule = __dependency1__.qunitModule;
     var builderForModel = __dependency3__.builderForModel;
 
-    function delegate(fullName, container, context, defaultSubject) {
+    __exports__["default"] = qunitModule(builderForModel, function(fullName, container, context, defaultSubject) {
       var name = fullName.split(':', 2).pop();
 
       if (DS._setupContainer) {
@@ -154,9 +151,7 @@ define("ember-qunit/builder",
           });
         };
       }
-    }
-
-    __exports__["default"] = qunitModule(builderForModel, delegate);
+    });
   });define("ember-qunit/module-for",
   ["ember","./test-context","./test-resolver","./isolated-container","./builder","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {

@@ -81,8 +81,7 @@ var Ember = window.Ember["default"] || window.Ember;
 var qunitModule = _dereq_("./module-for").qunitModule;
 var builderForComponent = _dereq_("./builder").builderForComponent;
 
-
-function delegate(fullName, container, context, defaultSubject, resolver) {
+exports["default"] = qunitModule(builderForComponent, function(fullName, container, context, defaultSubject, resolver) {
   var name = fullName.split(':', 2).pop();
   var layoutName = 'template:components/' + name;
 
@@ -109,9 +108,7 @@ function delegate(fullName, container, context, defaultSubject, resolver) {
     return view.$();
   };
   context.__setup_properties__.$ = context.__setup_properties__.append;
-}
-
-exports["default"] = qunitModule(builderForComponent, delegate);
+});
 },{"./builder":1,"./module-for":6}],5:[function(_dereq_,module,exports){
 "use strict";
 var moduleFor = _dereq_("./module-for")["default"] || _dereq_("./module-for");
@@ -119,7 +116,7 @@ var Ember = window.Ember["default"] || window.Ember;
 var qunitModule = _dereq_("./module-for").qunitModule;
 var builderForModel = _dereq_("./builder").builderForModel;
 
-function delegate(fullName, container, context, defaultSubject) {
+exports["default"] = qunitModule(builderForModel, function(fullName, container, context, defaultSubject) {
   var name = fullName.split(':', 2).pop();
 
   if (DS._setupContainer) {
@@ -144,9 +141,7 @@ function delegate(fullName, container, context, defaultSubject) {
       });
     };
   }
-}
-
-exports["default"] = qunitModule(builderForModel, delegate);
+});
 },{"./builder":1,"./module-for":6}],6:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;

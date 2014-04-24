@@ -4,8 +4,7 @@ var Ember = require("ember")["default"] || require("ember");
 var qunitModule = require("./module-for").qunitModule;
 var builderForComponent = require("./builder").builderForComponent;
 
-
-function delegate(fullName, container, context, defaultSubject, resolver) {
+exports["default"] = qunitModule(builderForComponent, function(fullName, container, context, defaultSubject, resolver) {
   var name = fullName.split(':', 2).pop();
   var layoutName = 'template:components/' + name;
 
@@ -32,6 +31,4 @@ function delegate(fullName, container, context, defaultSubject, resolver) {
     return view.$();
   };
   context.__setup_properties__.$ = context.__setup_properties__.append;
-}
-
-exports["default"] = qunitModule(builderForComponent, delegate);
+});

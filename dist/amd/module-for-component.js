@@ -7,8 +7,7 @@ define(
     var qunitModule = __dependency1__.qunitModule;
     var builderForComponent = __dependency3__.builderForComponent;
 
-
-    function delegate(fullName, container, context, defaultSubject, resolver) {
+    __exports__["default"] = qunitModule(builderForComponent, function(fullName, container, context, defaultSubject, resolver) {
       var name = fullName.split(':', 2).pop();
       var layoutName = 'template:components/' + name;
 
@@ -35,7 +34,5 @@ define(
         return view.$();
       };
       context.__setup_properties__.$ = context.__setup_properties__.append;
-    }
-
-    __exports__["default"] = qunitModule(builderForComponent, delegate);
+    });
   });

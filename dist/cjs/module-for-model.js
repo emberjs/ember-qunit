@@ -4,7 +4,7 @@ var Ember = require("ember")["default"] || require("ember");
 var qunitModule = require("./module-for").qunitModule;
 var builderForModel = require("./builder").builderForModel;
 
-function delegate(fullName, container, context, defaultSubject) {
+exports["default"] = qunitModule(builderForModel, function(fullName, container, context, defaultSubject) {
   var name = fullName.split(':', 2).pop();
 
   if (DS._setupContainer) {
@@ -29,6 +29,4 @@ function delegate(fullName, container, context, defaultSubject) {
       });
     };
   }
-}
-
-exports["default"] = qunitModule(builderForModel, delegate);
+});
