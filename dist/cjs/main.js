@@ -1,6 +1,5 @@
 "use strict";
 var Ember = require("ember")["default"] || require("ember");
-var isolatedContainer = require("./isolated-container")["default"] || require("./isolated-container");
 var moduleFor = require("./module-for")["default"] || require("./module-for");
 var moduleForComponent = require("./module-for-component")["default"] || require("./module-for-component");
 var moduleForModel = require("./module-for-model")["default"] || require("./module-for-model");
