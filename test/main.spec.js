@@ -32,7 +32,7 @@ var ApplicationAdapter = DS.FixtureAdapter.extend();
 var registry = {
   'component:x-foo': Ember.Component.extend(),
   'component:pretty-color': PrettyColor,
-  'template:components/pretty-color': "Pretty Color: {{name}}".compile(),
+  'template:components/pretty-color': 'Pretty Color: <span class="color-name">{{name}}</span>'.compile(),
   'route:foo': Ember.Route.extend(),
   'controller:foos': Ember.ArrayController.extend(),
   'controller:bar': Ember.Controller.extend({
@@ -231,4 +231,9 @@ test("template", function(){
   });
 
   equal($.trim(this.$().text()), 'Pretty Color: green');
+});
+
+test("selector", function(){
+  var component = this.subject({name: 'green'});
+  equal($.trim(this.$('.color-name').text()), 'green');
 });
