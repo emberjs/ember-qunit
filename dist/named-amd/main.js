@@ -19,7 +19,8 @@ define("ember-qunit/isolated-container",
       }
       return container;
     }
-  });define("ember-qunit",
+  });
+define("ember-qunit",
   ["ember","./isolated-container","./module-for","./module-for-component","./module-for-model","./test","./test-resolver","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __exports__) {
     "use strict";
@@ -51,7 +52,8 @@ define("ember-qunit/isolated-container",
     __exports__.moduleForModel = moduleForModel;
     __exports__.test = test;
     __exports__.setResolver = setResolver;
-  });define("ember-qunit/module-for-component",
+  });
+define("ember-qunit/module-for-component",
   ["./test-resolver","./module-for","ember","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
     "use strict";
@@ -75,7 +77,7 @@ define("ember-qunit/isolated-container",
         context.dispatcher = Ember.EventDispatcher.create();
         context.dispatcher.setup({}, '#ember-testing');
 
-        context.__setup_properties__.append = function(selector) {
+        context.__setup_properties__.render = function() {
           var containerView = Ember.ContainerView.create({container: container});
           var view = Ember.run(function(){
             var subject = context.subject();
@@ -87,10 +89,25 @@ define("ember-qunit/isolated-container",
 
           return view.$();
         };
-        context.__setup_properties__.$ = context.__setup_properties__.append;
+
+        context.__setup_properties__.append = function(){
+          Ember.deprecate('this.append() is deprecated. Please use this.render() instead.');
+          return this.render();
+        };
+
+        context.$ = function(){
+          var $view = this.render(), subject = this.subject();
+
+          if(arguments.length){
+            return subject.$.apply(subject, arguments);
+          }else{
+            return $view;
+          }
+        };
       });
     }
-  });define("ember-qunit/module-for-model",
+  });
+define("ember-qunit/module-for-model",
   ["./module-for","ember","exports"],
   function(__dependency1__, __dependency2__, __exports__) {
     "use strict";
@@ -98,6 +115,8 @@ define("ember-qunit/isolated-container",
     var Ember = __dependency2__["default"] || __dependency2__;
 
     __exports__["default"] = function moduleForModel(name, description, callbacks) {
+      if (!DS) throw new Error('You must have Ember Data installed to use `moduleForModel`.');
+
       moduleFor('model:' + name, description, callbacks, function(container, context, defaultSubject) {
         if (DS._setupContainer) {
           DS._setupContainer(container);
@@ -123,7 +142,8 @@ define("ember-qunit/isolated-container",
         }
       });
     }
-  });define("ember-qunit/module-for",
+  });
+define("ember-qunit/module-for",
   ["ember","./test-context","./isolated-container","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
     "use strict";
@@ -214,7 +234,8 @@ define("ember-qunit/isolated-container",
         };
       });
     }
-  });define("ember-qunit/test-context",
+  });
+define("ember-qunit/test-context",
   ["exports"],
   function(__exports__) {
     "use strict";
@@ -229,7 +250,8 @@ define("ember-qunit/isolated-container",
     }
 
     __exports__.get = get;
-  });define("ember-qunit/test-resolver",
+  });
+define("ember-qunit/test-resolver",
   ["exports"],
   function(__exports__) {
     "use strict";
@@ -245,7 +267,8 @@ define("ember-qunit/isolated-container",
     }
 
     __exports__.get = get;
-  });define("ember-qunit/test",
+  });
+define("ember-qunit/test",
   ["ember","./test-context","exports"],
   function(__dependency1__, __dependency2__, __exports__) {
     "use strict";

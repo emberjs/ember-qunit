@@ -182,8 +182,17 @@ test('renders', function() {
   expect(2);
   var component = this.subject();
   equal(component.state, 'preRender');
+  this.render();
+  equal(component.state, 'inDOM');
+});
+
+test('append', function() {
+  expect(3);
+  var component = this.subject();
+  equal(component.state, 'preRender');
   this.append();
   equal(component.state, 'inDOM');
+  equal(Ember.deprecationWarnings.pop(), 'this.append() is deprecated. Please use this.render() instead.');
 });
 
 test('yields', function() {
@@ -192,7 +201,7 @@ test('yields', function() {
     layout: "yield me".compile()
   });
   equal(component.state, 'preRender');
-  this.append();
+  this.render();
   equal(component.state, 'inDOM');
 });
 
@@ -201,7 +210,7 @@ test('can lookup components in its layout', function() {
   var component = this.subject({
     layout: "{{x-foo id='yodawg-i-heard-you-liked-x-foo-in-ur-x-foo'}}".compile()
   });
-  this.append();
+  this.render();
   equal(component.state, 'inDOM');
 });
 
@@ -210,7 +219,7 @@ test('clears out views from test to test', function() {
   var component = this.subject({
     layout: "{{x-foo id='yodawg-i-heard-you-liked-x-foo-in-ur-x-foo'}}".compile()
   });
-  this.append();
+  this.render();
   ok(true, 'rendered without id already being used from another test');
 });
 
@@ -233,7 +242,8 @@ test("template", function(){
   equal($.trim(this.$().text()), 'Pretty Color: green');
 });
 
-test("selector", function(){
+test("$", function(){
   var component = this.subject({name: 'green'});
   equal($.trim(this.$('.color-name').text()), 'green');
+  equal($.trim(this.$().text()), 'Pretty Color: green');
 });

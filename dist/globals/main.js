@@ -69,7 +69,7 @@ exports["default"] = function moduleForComponent(name, description, callbacks) {
     context.dispatcher = Ember.EventDispatcher.create();
     context.dispatcher.setup({}, '#ember-testing');
 
-    context.__setup_properties__.append = function(selector) {
+    context.__setup_properties__.render = function() {
       var containerView = Ember.ContainerView.create({container: container});
       var view = Ember.run(function(){
         var subject = context.subject();
@@ -81,7 +81,21 @@ exports["default"] = function moduleForComponent(name, description, callbacks) {
 
       return view.$();
     };
-    context.__setup_properties__.$ = context.__setup_properties__.append;
+
+    context.__setup_properties__.append = function(){
+      Ember.deprecate('this.append() is deprecated. Please use this.render() instead.');
+      return this.render();
+    };
+
+    context.$ = function(){
+      var $view = this.render(), subject = this.subject();
+
+      if(arguments.length){
+        return subject.$.apply(subject, arguments);
+      }else{
+        return $view;
+      }
+    };
   });
 }
 },{"./module-for":5,"./test-resolver":7}],4:[function(_dereq_,module,exports){
@@ -90,6 +104,8 @@ var moduleFor = _dereq_("./module-for")["default"] || _dereq_("./module-for");
 var Ember = window.Ember["default"] || window.Ember;
 
 exports["default"] = function moduleForModel(name, description, callbacks) {
+  if (!DS) throw new Error('You must have Ember Data installed to use `moduleForModel`.');
+
   moduleFor('model:' + name, description, callbacks, function(container, context, defaultSubject) {
     if (DS._setupContainer) {
       DS._setupContainer(container);

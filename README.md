@@ -57,8 +57,8 @@ test('it renders', function() {
   var component = this.subject();
   equal(component.state, 'preRender');
 
-  // appends the component to the page
-  this.append();
+  // render the component on the page
+  this.render();
   equal(component.state, 'inDOM');
 });
 ```
@@ -94,7 +94,7 @@ test('selects first tab and shows the panel', function() {
       '{{#ic-tab-panel id="panel3"}}three{{/ic-tab-panel}}'
     })
   });
-  this.append();
+  this.render();
   var tab1 = Ember.View.views['tab1'];
   var panel1 = Ember.View.views['panel1'];
   ok(component.get('activeTab') === tab1);
@@ -188,4 +188,3 @@ $ broccoli build dist
 # Broccoli will not overwrite dist/, so you
 # may need to delete it first
 ```
-

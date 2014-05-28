@@ -22,7 +22,7 @@ define(
         context.dispatcher = Ember.EventDispatcher.create();
         context.dispatcher.setup({}, '#ember-testing');
 
-        context.__setup_properties__.append = function(selector) {
+        context.__setup_properties__.render = function() {
           var containerView = Ember.ContainerView.create({container: container});
           var view = Ember.run(function(){
             var subject = context.subject();
@@ -34,7 +34,21 @@ define(
 
           return view.$();
         };
-        context.__setup_properties__.$ = context.__setup_properties__.append;
+
+        context.__setup_properties__.append = function(){
+          Ember.deprecate('this.append() is deprecated. Please use this.render() instead.');
+          return this.render();
+        };
+
+        context.$ = function(){
+          var $view = this.render(), subject = this.subject();
+
+          if(arguments.length){
+            return subject.$.apply(subject, arguments);
+          }else{
+            return $view;
+          }
+        };
       });
     }
   });
