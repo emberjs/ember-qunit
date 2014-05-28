@@ -79,7 +79,7 @@ moduleForComponent('ic-tabs', 'TabsComponent', {
 
 test('selects first tab and shows the panel', function() {
   expect(3);
-  var component = test.subject({
+  var component = this.subject({
 
     // can provide properties for the subject, like the yielded template
     // of a component (not the layout, in this case)
