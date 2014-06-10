@@ -140,3 +140,12 @@ $ broccoli serve
 $ karma start
 ```
 
+Building dist/
+--------------
+
+```sh
+$ broccoli build dist
+# Broccoli will not overwrite dist/, so you
+# may need to delete it first
+```
+
