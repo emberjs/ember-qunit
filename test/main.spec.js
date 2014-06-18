@@ -237,3 +237,8 @@ test("selector", function(){
   var component = this.subject({name: 'green'});
   equal($.trim(this.$('.color-name').text()), 'green');
 });
+
+test("test with expectations", 2, function(){
+  ok(true, 'expectation 1');
+  ok(true, 'expectation 2');
+});
