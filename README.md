@@ -104,6 +104,21 @@ test('selects first tab and shows the panel', function() {
 });
 ```
 
+### Async Example
+
+```js
+// If you return a promise from a test callback it becomes an asyncTest. This
+// is a key difference between ember-qunit and standard qUnit.
+test('async is awesome', function() {
+  expect(1);
+  var myThing = MyThing.create();
+  // myThing.exampleMethod() returns a promise
+  return myThing.exampleMethod().then(function() {
+    ok(myThing.get('finished'));
+  });
+});
+```
+
 Helpers
 -------
 
