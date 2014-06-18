@@ -106,15 +106,40 @@ test('selects first tab and shows the panel', function() {
 
 ### Async Example
 
+Under the hood, if you use `Ember.RSVP.Promise`, ember-qunit will call
+QUnit's `start` and `stop` helpers to stop the test from tearing down
+and running other tests while your asynchronous code runs. ember-qunit
+also asserts that the promise gets fulfilled.
+
+In addition, you can also return promises in the test body:
+
 ```js
 // If you return a promise from a test callback it becomes an asyncTest. This
-// is a key difference between ember-qunit and standard qUnit.
+// is a key difference between ember-qunit and standard QUnit.
 test('async is awesome', function() {
   expect(1);
   var myThing = MyThing.create();
   // myThing.exampleMethod() returns a promise
   return myThing.exampleMethod().then(function() {
     ok(myThing.get('finished'));
+  });
+});
+```
+
+If an error is thrown in your promise or a promise
+within `test` becomes rejected, ember-qunit will fail the test.
+To assert that a promise should be rejected, you can "catch"
+the error and assert that you got there:
+
+```js
+test('sometimes async gets rejected', function(){
+  expect(1);
+  var myThing = MyThing.create()
+  
+  return myThing.exampleMethod().then(function(){
+    ok(false, "promise should not be fulfilled");
+  })['catch'](function(err){
+    equal(err.message, "User not Authorized");
   });
 });
 ```
