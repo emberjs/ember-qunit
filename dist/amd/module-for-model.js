@@ -6,6 +6,8 @@ define(
     var Ember = __dependency2__["default"] || __dependency2__;
 
     __exports__["default"] = function moduleForModel(name, description, callbacks) {
+      if (!DS) throw new Error('You must have Ember Data installed to use `moduleForModel`.');
+
       moduleFor('model:' + name, description, callbacks, function(container, context, defaultSubject) {
         if (DS._setupContainer) {
           DS._setupContainer(container);
