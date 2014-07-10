@@ -103,6 +103,21 @@ test('selects first tab and shows the panel', function() {
   ok(panel1.$().is(':visible'));
 });
 ```
+If you are using nested components with templates, you have to list them separately - otherwise your templates won't be loaded: 
+```js
+moduleForComponent('ic-tabs', 'TabsComponent', {
+
+  // specify the other units and templates that are required for this test
+  needs: [
+    'component:ic-tab',
+    'template:components/ic-tab',
+    'component:ic-tab-panel',
+    'template:components/ic-tab-panel',
+    'component:ic-tab-list'
+  ]
+});
+.....
+```
 
 ### Async Example
 
