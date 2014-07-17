@@ -1,7 +1,7 @@
 Ember QUnit
 ===========
 
-[![Build Status](https://travis-ci.org/rpflorence/ember-qunit.png)](https://travis-ci.org/rpflorence/ember-qunit)
+[![Build Status](https://travis-ci.org/rjackson/ember-qunit.png)](https://travis-ci.org/rjackson/ember-qunit)
 
 [WIP] Unit test helpers for Ember.
 
@@ -13,6 +13,11 @@ create test subjects for you with the `moduleFor` and `test` helpers.
 
 *This is a work in progress* but its also quite handy already. Feedback
 is highly encouraged.
+
+Simple Usage
+------------
+
+Include `dist/globals/main.js` as a script in your tests index.html
 
 Module Formats
 --------------
