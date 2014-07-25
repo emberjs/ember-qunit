@@ -1,7 +1,7 @@
 Ember QUnit
 ===========
 
-[![Build Status](https://travis-ci.org/rjackson/ember-qunit.png)](https://travis-ci.org/rjackson/ember-qunit)
+[![Build Status](https://travis-ci.org/rjackson/ember-qunit.png)](https://travis-ci.org/rwjblue/ember-qunit)
 
 [WIP] Unit test helpers for Ember.
 
