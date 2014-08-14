@@ -82,10 +82,20 @@ define("ember-qunit/module-for-component",
           var view = Ember.run(function(){
             var subject = context.subject();
             containerView.pushObject(subject);
-            // TODO: destory this somewhere
             containerView.appendTo('#ember-testing');
             return subject;
           });
+
+          var oldTeardown = this.teardown;
+          this.teardown = function() {
+            Ember.run(function() {
+              Ember.tryInvoke(containerView, 'destroy');
+            });
+
+            if (oldTeardown) {
+              return oldTeardown.apply(this, arguments);
+            }
+          };
 
           return view.$();
         };
