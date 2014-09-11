@@ -15,7 +15,8 @@ define("ember-qunit/isolated-container",
       container.register('component-lookup:main', Ember.ComponentLookup);
       for (var i = fullNames.length; i > 0; i--) {
         var fullName = fullNames[i - 1];
-        container.register(fullName, resolver.resolve(fullName));
+        var normalizedFullName = resolver.normalize(fullName);
+        container.register(fullName, resolver.resolve(normalizedFullName));
       }
       return container;
     }

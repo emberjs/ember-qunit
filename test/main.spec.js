@@ -35,8 +35,9 @@ var registry = {
   'template:components/pretty-color': 'Pretty Color: <span class="color-name">{{name}}</span>'.compile(),
   'route:foo': Ember.Route.extend(),
   'controller:foos': Ember.ArrayController.extend(),
+  'controller:hello-world': Ember.ObjectController.extend(),
   'controller:bar': Ember.Controller.extend({
-    needs: ['foos']
+    needs: ['foos', 'helloWorld']
   }),
   'model:post': Post,
   'model:comment': Comment,
@@ -48,6 +49,9 @@ var registry = {
 var Resolver = Ember.DefaultResolver.extend({
   resolve: function(fullName) {
     return registry[fullName] || this._super.apply(this, arguments);
+  },
+  normalize: function(fullName) {
+    return Ember.String.dasherize(fullName);
   }
 });
 
@@ -74,27 +78,31 @@ setResolver(Resolver.create());
 //});
 
 moduleFor('controller:bar', 'moduleFor with bar controller', {
-  needs: ['controller:foos']
+  needs: ['controller:foos', 'controller:helloWorld']
 });
 
 test('exists', function() {
   var bar = this.subject();
 
   var foos = bar.get('controllers.foos');
+  var helloWorld = bar.get('controllers.helloWorld');
 
   ok(bar);
   ok(bar instanceof Ember.Controller);
   ok(foos instanceof Ember.ArrayController);
+  ok(helloWorld instanceof Ember.ObjectController);
 });
 
 test('exists again', function() {
   var bar = this.subject();
 
   var foos = bar.get('controllers.foos');
+  var helloWorld = bar.get('controllers.helloWorld');
 
   ok(bar);
   ok(bar instanceof Ember.Controller);
   ok(foos instanceof Ember.ArrayController);
+  ok(helloWorld instanceof Ember.ObjectController);
 });
 
 moduleForModel('whazzit', 'moduleForModel whazzit without adapter');
