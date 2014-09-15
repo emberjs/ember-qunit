@@ -16,6 +16,6 @@
     "ember": "^1.3.0"
   },
   "devDependencies": {
-    "ember-data": "~1.0.0-beta.7"
+    "ember-data": "~1.0.0-beta.10"
   }
 }
