@@ -53,6 +53,16 @@ var Resolver = Ember.DefaultResolver.extend({
 
 setResolver(Resolver.create());
 
+// NOTE: this must be the first test to run because it relies on the
+// '#ember-testing' div having not been added to the DOM yet; once added
+// it is never removed
+moduleFor('component:x-foo', 'moduleFor with empty DOM', {}, function() {
+  equal(Ember.$('#ember-testing').length, 1, "root element is already in DOM");
+});
+
+test("root element is auto-added before moduleFor callback", function() {
+  expect(1);
+});
 
 
 //moduleForRoute('foo', 'FooRoute');
