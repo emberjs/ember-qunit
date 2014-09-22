@@ -202,7 +202,7 @@ test('append', function() {
   equal(component.state, 'preRender');
   this.append();
   equal(component.state, 'inDOM');
-  equal(Ember.deprecationWarnings.pop(), 'this.append() is deprecated. Please use this.render() instead.');
+  ok(Ember.A(Ember.deprecationWarnings).contains('this.append() is deprecated. Please use this.render() instead.'));
 });
 
 test('yields', function() {
