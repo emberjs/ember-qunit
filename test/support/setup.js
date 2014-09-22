@@ -11,5 +11,3 @@ String.prototype.compile = function() {
 Array.prototype.compile = function() {
   return Ember.Handlebars.compile(this.join('\n'));
 };
-
-document.write('<div id="ember-testing"></div>');
