@@ -1,11 +1,8 @@
 bower_components
-dist/amd
-dist/named-amd
-dist/globals
 lib
-test
+tests
 .travis.yml
 bower.json
 Brocfile.js
-karma.conf.js
+testem.json
 tmp

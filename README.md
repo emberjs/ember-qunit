@@ -1,32 +1,10 @@
-Ember QUnit
-===========
+# Ember QUnit [![Build Status](https://travis-ci.org/rjackson/ember-qunit.png)](https://travis-ci.org/rwjblue/ember-qunit)
 
-[![Build Status](https://travis-ci.org/rjackson/ember-qunit.png)](https://travis-ci.org/rwjblue/ember-qunit)
+Ember QUnit simplifies unit testing of Ember applications with QUnit by
+providing QUnit-specific wrappers around the helpers contained in
+[ember-test-helpers](https://github.com/switchfly/ember-test-helpers).
 
-[WIP] Unit test helpers for Ember.
-
-About
------
-
-Ember QUnit uses your application's resolver to find and automatically
-create test subjects for you with the `moduleFor` and `test` helpers.
-
-*This is a work in progress* but its also quite handy already. Feedback
-is highly encouraged.
-
-Simple Usage
-------------
-
-Include `dist/globals/main.js` as a script in your tests index.html
-
-Module Formats
---------------
-
-You will find all the popular formats in `dist/`. If using globals, all
-methods are found on `window.emq`.
-
-Examples
---------
+## Usage
 
 ### Global build setup:
 
@@ -108,7 +86,7 @@ test('selects first tab and shows the panel', function() {
   ok(panel1.$().is(':visible'));
 });
 ```
-If you are using nested components with templates, you have to list them separately - otherwise your templates won't be loaded: 
+If you are using nested components with templates, you have to list them separately - otherwise your templates won't be loaded:
 ```js
 moduleForComponent('ic-tabs', 'TabsComponent', {
 
@@ -155,7 +133,7 @@ the error and assert that you got there:
 test('sometimes async gets rejected', function(){
   expect(1);
   var myThing = MyThing.create()
-  
+
   return myThing.exampleMethod().then(function(){
     ok(false, "promise should not be fulfilled");
   })['catch'](function(err){
@@ -164,8 +142,7 @@ test('sometimes async gets rejected', function(){
 });
 ```
 
-Helpers
--------
+## Test Helpers
 
 ### `moduleFor(fullName [, description [, callbacks]])`
 
@@ -188,23 +165,41 @@ Helpers
 - `name`: (String) - the short name of the model you'd use in `store`
   operations ie `user`, `assignmentGroup`, etc.
 
-Contributing
-------------
+## Contributing
+
+Contributions are welcome. Please follow the instructions below to install and
+test this library.
+
+### Installation
 
 ```sh
+$ npm install -g bower broccoli-cli
 $ npm install
 $ bower install
-$ npm install -g karma-cli broccoli-cli
-$ broccoli serve
-# new tab
-$ karma start
 ```
 
-Building dist/
---------------
+### Testing
+
+In order to test in the browser:
 
 ```sh
-$ broccoli build dist
-# Broccoli will not overwrite dist/, so you
-# may need to delete it first
+$ broccoli serve
 ```
+
+... and then visit [http://localhost:4200/tests](http://localhost:4200/tests).
+
+In order to perform a CI test:
+
+```sh
+$ rm -rf build && BROCCOLI_ENV=test broccoli build build && testem ci
+```
+
+Or simply:
+
+```sh
+$ npm test
+```
+
+## Copyright and License
+
+Copyright 2014 Ryan Florence and contributors. [MIT License](./LICENSE).
