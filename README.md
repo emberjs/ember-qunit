@@ -108,7 +108,7 @@ test('selects first tab and shows the panel', function() {
   ok(panel1.$().is(':visible'));
 });
 ```
-If you are using nested components with templates, you have to list them separately - otherwise your templates won't be loaded: 
+If you are using nested components with templates, you have to list them separately - otherwise your templates won't be loaded:
 ```js
 moduleForComponent('ic-tabs', 'TabsComponent', {
 
@@ -155,7 +155,7 @@ the error and assert that you got there:
 test('sometimes async gets rejected', function(){
   expect(1);
   var myThing = MyThing.create()
-  
+
   return myThing.exampleMethod().then(function(){
     ok(false, "promise should not be fulfilled");
   })['catch'](function(err){

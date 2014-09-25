@@ -4,7 +4,7 @@
   "description": "unit test helpers for ember",
   "main": "dist/cjs/main.js",
   "scripts": {
-    "test": "bower install && rm -rf dist && broccoli build dist && karma start --browsers Firefox --single-run"
+    "pretest": "bower install && rm -rf dist && broccoli build dist && karma start --browsers Firefox --single-run"
   },
   "authors": [
     "Stefan Penner",
