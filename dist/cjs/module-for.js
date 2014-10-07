@@ -33,14 +33,14 @@ exports["default"] = function moduleFor(fullName, description, callbacks, delega
       
       context = testContext.get();
 
-      if (delegate) {
-        delegate(container, context, defaultSubject);
-      }
-      
       if (Ember.$('#ember-testing').length === 0) {
         Ember.$('<div id="ember-testing"/>').appendTo(document.body);
       }
       
+      if (delegate) {
+        delegate(container, context, defaultSubject);
+      }
+
       buildContextVariables(context);
       callbacks.setup.call(context, container);
     },

@@ -8,6 +8,14 @@ define("ember-qunit/isolated-container",
     __exports__["default"] = function isolatedContainer(fullNames) {
       var resolver = testResolver.get();
       var container = new Ember.Container();
+      var normalize = function(fullName) {
+        return resolver.normalize(fullName);
+      };
+      if (Ember.typeOf(container.normalizeFullName) === 'function') {
+        container.normalizeFullName = normalize;
+      } else {
+        container.normalize = normalize;
+      }
       container.optionsForType('component', { singleton: false });
       container.optionsForType('view', { singleton: false });
       container.optionsForType('template', { instantiate: false });
@@ -192,14 +200,14 @@ define("ember-qunit/module-for",
           
           context = testContext.get();
 
-          if (delegate) {
-            delegate(container, context, defaultSubject);
-          }
-          
           if (Ember.$('#ember-testing').length === 0) {
             Ember.$('<div id="ember-testing"/>').appendTo(document.body);
           }
           
+          if (delegate) {
+            delegate(container, context, defaultSubject);
+          }
+
           buildContextVariables(context);
           callbacks.setup.call(context, container);
         },
