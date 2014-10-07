@@ -5,6 +5,14 @@ var Ember = require("ember")["default"] || require("ember");
 exports["default"] = function isolatedContainer(fullNames) {
   var resolver = testResolver.get();
   var container = new Ember.Container();
+  var normalize = function(fullName) {
+    return resolver.normalize(fullName);
+  };
+  if (Ember.typeOf(container.normalizeFullName) === 'function') {
+    container.normalizeFullName = normalize;
+  } else {
+    container.normalize = normalize;
+  }
   container.optionsForType('component', { singleton: false });
   container.optionsForType('view', { singleton: false });
   container.optionsForType('template', { instantiate: false });
