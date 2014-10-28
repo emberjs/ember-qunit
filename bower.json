@@ -3,19 +3,27 @@
   "version": "0.1.8",
   "authors": [
     "Stefan Penner",
-    "Ryan Florence"
+    "Ryan Florence",
+    "Robert Jackson",
+    "Dan Gebhardt"
   ],
   "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
-    "test"
+    "tests"
   ],
   "dependencies": {
-    "ember": "^1.3.0"
+    "ember": "^1.7.0",
+    "ember-test-helpers": "^0.0.6"
   },
   "devDependencies": {
+    "qunit": "^1.15.0",
+    "loader": "stefanpenner/loader.js#1.0.1",
+    "ember-cli-shims": "stefanpenner/ember-cli-shims#0.0.3",
+    "ember-cli-test-loader": "rwjblue/ember-cli-test-loader#0.0.4",
+    "jquery": "~2.1.1",
     "ember-data": "~1.0.0-beta.10"
   }
 }
