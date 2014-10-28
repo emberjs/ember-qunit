@@ -173,9 +173,7 @@ test this library.
 ### Installation
 
 ```sh
-$ npm install -g bower broccoli-cli
 $ npm install
-$ bower install
 ```
 
 ### Testing
@@ -183,18 +181,12 @@ $ bower install
 In order to test in the browser:
 
 ```sh
-$ broccoli serve
+$ npm start
 ```
 
 ... and then visit [http://localhost:4200/tests](http://localhost:4200/tests).
 
 In order to perform a CI test:
-
-```sh
-$ rm -rf build && BROCCOLI_ENV=test broccoli build build && testem ci
-```
-
-Or simply:
 
 ```sh
 $ npm test
