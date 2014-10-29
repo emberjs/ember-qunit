@@ -2,6 +2,7 @@
   "framework": "qunit",
   "cwd": "build/",
   "serve_files": [
+    "assets/loader.js",
     "assets/vendor.js",
     "assets/ember-qunit-tests.amd.js",
     "assets/test-support.js"
