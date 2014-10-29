@@ -18,7 +18,8 @@
     "deepEqual",
     "test",
     "emq",
-    "setResolver"
+    "setResolver",
+    "QUnit"
   ],
   "node" : false,
   "browser" : false,

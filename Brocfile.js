@@ -2,13 +2,14 @@ var concat     = require('broccoli-concat');
 var pickFiles  = require('broccoli-static-compiler');
 var mergeTrees = require('broccoli-merge-trees');
 var compileES6 = require('broccoli-es6-concatenator');
+var jshintTree = require('broccoli-jshint');
 
 // --- Compile ES6 modules ---
 
 var loader = pickFiles('bower_components', {
   srcDir: 'loader',
   files: ['loader.js'],
-  destDir: '/'
+  destDir: '/assets/'
 });
 
 // TODO - this manual dependency management has got to go!
@@ -36,21 +37,32 @@ var tests = pickFiles('tests', {
   destDir: '/tests'
 });
 
-var main = mergeTrees([loader, deps, lib, tests]);
+var main = mergeTrees([deps, lib]);
 main = compileES6(main, {
-  loaderFile: '/loader.js',
+  inputFiles: ['**/*.js'],
+  ignoredModules: ['ember'],
+  outputFile: '/ember-qunit.amd.js',
+  wrapInEval: false
+});
+
+var jshintLib = jshintTree(lib);
+var jshintTest = jshintTree(tests);
+
+var mainWithTests = mergeTrees([deps, lib, tests, jshintLib, jshintTest]);
+mainWithTests = compileES6(mainWithTests, {
   inputFiles: ['**/*.js'],
   ignoredModules: ['ember'],
   outputFile: '/assets/ember-qunit-tests.amd.js'
 });
-
 // --- Select and concat vendor / support files ---
 
 var vendor = concat('bower_components', {
-  inputFiles: ['jquery/dist/jquery.js',
+  inputFiles: [
+    'jquery/dist/jquery.js',
     'handlebars/handlebars.js',
     'ember/ember.js',
-    'ember-data/ember-data.js'],
+    'ember-data/ember-data.js'
+  ],
   outputFile: '/assets/vendor.js'
 });
 
@@ -72,5 +84,5 @@ var testSupport = concat('bower_components', {
   outputFile: '/assets/test-support.js'
 });
 
-module.exports = mergeTrees([main, vendor, testIndex, qunit, testSupport]);
+module.exports = mergeTrees([loader, main, mainWithTests, vendor, testIndex, qunit, testSupport]);
 
