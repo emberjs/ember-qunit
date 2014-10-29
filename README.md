@@ -1,5 +1,9 @@
 # Ember QUnit [![Build Status](https://travis-ci.org/rwjblue/ember-qunit.png)](https://travis-ci.org/rwjblue/ember-qunit)
 
+**IMPORTANT NOTE** - The build process is currently changing for this project. In v0.1.8 and below, builds were pushed to a `dist/` dir. Going forward, we're going to push builds to a separate repo: [ember-qunit-builds](https://github.com/rwjblue/ember-qunit-builds). Until this transition is complete, please update your bower.json if it's referencing `rwjblue/ember-qunit#master`. Instead specify a version (`rwjblue/ember-qunit#v0.1.8`) or SHA (f3f852789bc80486afae1a9ddb7810356050fe9b or older).
+
+-------
+
 Ember QUnit simplifies unit testing of Ember applications with QUnit by
 providing QUnit-specific wrappers around the helpers contained in
 [ember-test-helpers](https://github.com/switchfly/ember-test-helpers).
