@@ -2,6 +2,7 @@ var concat     = require('broccoli-concat');
 var pickFiles  = require('broccoli-static-compiler');
 var mergeTrees = require('broccoli-merge-trees');
 var compileES6 = require('broccoli-es6-concatenator');
+var jshintTree = require('broccoli-jshint');
 
 // --- Compile ES6 modules ---
 
@@ -44,7 +45,10 @@ main = compileES6(main, {
   wrapInEval: false
 });
 
-var mainWithTests = mergeTrees([deps, lib, tests]);
+var jshintLib = jshintTree(lib);
+var jshintTest = jshintTree(tests);
+
+var mainWithTests = mergeTrees([deps, lib, tests, jshintLib, jshintTest]);
 mainWithTests = compileES6(mainWithTests, {
   inputFiles: ['**/*.js'],
   ignoredModules: ['ember'],

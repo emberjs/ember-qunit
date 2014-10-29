@@ -17,6 +17,7 @@
     "broccoli": "^0.13.0",
     "broccoli-concat": "^0.0.11",
     "broccoli-es6-concatenator": "^0.1.7",
+    "broccoli-jshint": "^0.5.3",
     "broccoli-merge-trees": "^0.1.4",
     "broccoli-static-compiler": "^0.1.4",
     "testem": "0.6.19"
