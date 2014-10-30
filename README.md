@@ -10,13 +10,6 @@ providing QUnit-specific wrappers around the helpers contained in
 
 ## Usage
 
-### Global build setup:
-
-```js
-// inject test helpers onto window
-emq.globalize();
-```
-
 ### Setting the resolver
 
 ```js
