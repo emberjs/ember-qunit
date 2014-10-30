@@ -45,6 +45,17 @@ main = compileES6(main, {
   wrapInEval: false
 });
 
+var globalizedBuildSupport = pickFiles('build-support', {
+  srcDir: '/',
+  files: ['iife-start.js', 'globalize.js', 'iife-stop.js'],
+  destDir: '/'
+});
+
+var globalizedMain = concat(mergeTrees([loader, main, globalizedBuildSupport]), {
+  inputFiles: ['iife-start.js', 'assets/loader.js', 'ember-qunit.amd.js', 'globalize.js', 'iife-stop.js'],
+  outputFile: '/ember-qunit.js'
+});
+
 var jshintLib = jshintTree(lib);
 var jshintTest = jshintTree(tests);
 
@@ -54,6 +65,7 @@ mainWithTests = compileES6(mainWithTests, {
   ignoredModules: ['ember'],
   outputFile: '/assets/ember-qunit-tests.amd.js'
 });
+
 // --- Select and concat vendor / support files ---
 
 var vendor = concat('bower_components', {
@@ -84,5 +96,4 @@ var testSupport = concat('bower_components', {
   outputFile: '/assets/test-support.js'
 });
 
-module.exports = mergeTrees([loader, main, mainWithTests, vendor, testIndex, qunit, testSupport]);
-
+module.exports = mergeTrees([loader, main, mainWithTests, globalizedMain, vendor, testIndex, qunit, testSupport]);
