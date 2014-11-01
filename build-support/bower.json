@@ -1,0 +1,14 @@
+{
+  "name": "ember-qunit",
+  "version": "0.2.0+pre.VERSION_PLACEHOLDER",
+  "authors": [
+    "Stefan Penner",
+    "Ryan Florence",
+    "Robert Jackson",
+    "Dan Gebhardt"
+  ],
+  "license": "MIT",
+  "ignore": [ ],
+  "dependencies": { },
+  "devDependencies": { }
+}

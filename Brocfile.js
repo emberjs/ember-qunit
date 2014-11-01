@@ -3,6 +3,8 @@ var pickFiles  = require('broccoli-static-compiler');
 var mergeTrees = require('broccoli-merge-trees');
 var compileES6 = require('broccoli-es6-concatenator');
 var jshintTree = require('broccoli-jshint');
+var replace    = require('broccoli-string-replace');
+var gitInfo    = require('git-repo-info');
 
 // --- Compile ES6 modules ---
 
@@ -43,6 +45,21 @@ main = compileES6(main, {
   ignoredModules: ['ember'],
   outputFile: '/ember-qunit.amd.js',
   wrapInEval: false
+});
+
+var generatedBowerConfig = pickFiles('build-support', {
+  srcDir: '/',
+  destDir: '/',
+  files: ['bower.json']
+});
+generatedBowerConfig = replace(generatedBowerConfig, {
+  files: ['bower.json'],
+  pattern: {
+    match: /VERSION_PLACEHOLDER/,
+    replacement: function() {
+      return gitInfo().abbreviatedSha;
+    }
+  }
 });
 
 var globalizedBuildSupport = pickFiles('build-support', {
@@ -96,4 +113,4 @@ var testSupport = concat('bower_components', {
   outputFile: '/assets/test-support.js'
 });
 
-module.exports = mergeTrees([loader, main, mainWithTests, globalizedMain, vendor, testIndex, qunit, testSupport]);
+module.exports = mergeTrees([loader, main, mainWithTests, globalizedMain, vendor, testIndex, qunit, testSupport, generatedBowerConfig]);
