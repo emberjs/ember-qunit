@@ -7,3 +7,6 @@ install:
 
 script:
   - npm test
+
+after_success:
+  - "./bin/bower_build"

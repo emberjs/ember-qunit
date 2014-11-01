@@ -8,13 +8,13 @@ SRC_REPO="rwjblue/ember-qunit"
 BUILDS_REPO="rwjblue/ember-qunit-builds"
 
 # Name of source repo as it should appear in commit messages
-SRC_NAME="Ember QUnit"
+SRC_NAME="ember-qunit"
 
 # User associated with the GH_TOKEN
 USER="rwjblue"
 
 # Ensure that no directories within dist will be copied when script is run.
-INCLUDED_FILES=`find dist -maxdepth 1 -type f`
+INCLUDED_FILES=`find build -maxdepth 1 -type f`
 
 echo -e "SRC_REPO: ${SRC_REPO}\n"
 echo -e "BUILDS_REPO: ${BUILDS_REPO}\n"
@@ -24,7 +24,7 @@ echo -e "CURRENT_BRANCH: ${TRAVIS_BRANCH}\n"
 # Set channel to publish to. If no suitable branch is found exit successfully.
 case $TRAVIS_BRANCH in
   "master" )
-    CHANNEL="release" ;;
+    CHANNEL="canary" ;;
   * )
     echo "Not a bower release branch.  Exiting!"
     exit 0 ;;
@@ -41,7 +41,7 @@ git remote rm origin
 # Send output to /dev/null to prevent GH_TOKEN leak on error
 git remote add origin https://${USER}:${GH_TOKEN}@github.com/${BUILDS_REPO}.git &> /dev/null
 git add -A
-git commit -m "${SRC_NAME} Bower Auto build for https://github.com/${SRC_REPO}/commits/${TRAVIS_COMMIT}."
+git commit -m "${SRC_NAME}: https://github.com/${SRC_REPO}/commits/${TRAVIS_COMMIT}."
 
 # Send output to /dev/null to prevent GH_TOKEN leak on error
 git push -fq origin ${CHANNEL} &> /dev/null
