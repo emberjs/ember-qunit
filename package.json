@@ -25,6 +25,8 @@
     "broccoli-jshint": "^0.5.3",
     "broccoli-merge-trees": "^0.1.4",
     "broccoli-static-compiler": "^0.1.4",
+    "broccoli-string-replace": "0.0.2",
+    "git-repo-info": "^1.0.2",
     "testem": "0.6.19"
   }
 }
