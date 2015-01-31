@@ -4,11 +4,11 @@
   "description": "QUnit helpers for testing Ember.js applications",
   "main": "lib/ember-qunit.js",
   "scripts": {
-    "build": "rm -rf build && BROCCOLI_ENV=test broccoli build build",
+    "build": "ember build",
     "prepublish": "bower install",
-    "pretest": "npm run-script build",
+    "pretest": "ember build",
     "test": "testem ci",
-    "start": "BROCCOLI_ENV=test broccoli serve"
+    "start": "ember serve"
   },
   "authors": [
     "Stefan Penner",
@@ -26,6 +26,7 @@
     "broccoli-merge-trees": "^0.1.4",
     "broccoli-sourcemap-concat": "^0.4.3",
     "broccoli-string-replace": "0.0.2",
+    "ember-cli": "^0.1.12",
     "git-repo-info": "^1.0.2",
     "testem": "0.6.22"
   }
