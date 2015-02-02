@@ -20,7 +20,7 @@
   "devDependencies": {
     "bower": "^1.3.12",
     "broccoli": "^0.13.0",
-    "broccoli-es6modules": "^0.4.0",
+    "broccoli-es6modules": "^0.4.2",
     "broccoli-funnel": "^0.1.6",
     "broccoli-jshint": "^0.5.3",
     "broccoli-merge-trees": "^0.1.4",

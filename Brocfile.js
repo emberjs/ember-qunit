@@ -40,7 +40,13 @@ var tests = new Funnel('tests', {
 });
 
 var main = mergeTrees([deps, lib]);
-main = concat(new compileES6(main), {
+var es6Main = new compileES6(main, {
+  esperantoOptions: {
+    _evilES3SafeReExports: true
+  }
+});
+
+main = concat(es6Main, {
   inputFiles: ['**/*.js'],
   outputFile: '/ember-qunit.amd.js'
 });
@@ -75,7 +81,13 @@ var jshintLib = jshintTree(lib);
 var jshintTest = jshintTree(tests);
 
 var mainWithTests = mergeTrees([deps, lib, tests, jshintLib, jshintTest]);
-mainWithTests = concat(new compileES6(mainWithTests), {
+var es6MainWithTests = new compileES6(mainWithTests, {
+  esperantoOptions: {
+    _evilES3SafeReExports: true
+  }
+});
+
+mainWithTests = concat(es6MainWithTests, {
   inputFiles: ['**/*.js'],
   outputFile: '/assets/ember-qunit-tests.amd.js'
 });
