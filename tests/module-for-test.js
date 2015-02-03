@@ -72,6 +72,20 @@ test("setup callbacks called in the correct order", function() {
   deepEqual(callbackOrder, [ 'beforeSetup', 'beforeEach' ]);
 });
 
+moduleFor('component:x-foo', {
+  beforeSetup: setupRegistry,
+
+  beforeEach: function() {
+    setupContext = this;
+  }
+});
+
+test('works properly without description with beforeEach', function() {
+  expect(1);
+
+  equal(setupContext, this, 'beforeEach was called properly');
+});
+
 moduleFor('component:x-foo', 'test callback argument', {
   beforeSetup: setupRegistry
 });
