@@ -45,3 +45,29 @@ moduleFor('component:x-foo', 'TestModule callbacks', {
 test("setup callbacks called in the correct order", function() {
   deepEqual(callbackOrder, [ 'beforeSetup', 'setup' ]);
 });
+
+moduleFor('component:x-foo', 'TestModule callbacks', {
+  beforeSetup: function() {
+    beforeSetupContext = this;
+    callbackOrder = [ 'beforeSetup' ];
+  },
+
+  beforeEach: function() {
+    setupContext = this;
+    callbackOrder.push('beforeEach');
+
+    ok(setupContext !== beforeSetupContext);
+  },
+
+  afterEach: function() {
+    teardownContext = this;
+    callbackOrder.push('afterEach');
+
+    deepEqual(callbackOrder, [ 'beforeSetup', 'beforeEach', 'afterEach']);
+    equal(setupContext, teardownContext);
+  }
+});
+
+test("setup callbacks called in the correct order", function() {
+  deepEqual(callbackOrder, [ 'beforeSetup', 'beforeEach' ]);
+});
