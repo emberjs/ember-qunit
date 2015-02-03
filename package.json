@@ -7,7 +7,7 @@
     "build": "ember build",
     "prepublish": "bower install",
     "pretest": "ember build",
-    "test": "testem ci",
+    "test": "ember test",
     "start": "ember serve"
   },
   "authors": [
@@ -27,7 +27,6 @@
     "broccoli-sourcemap-concat": "^0.4.3",
     "broccoli-string-replace": "0.0.2",
     "ember-cli": "^0.1.12",
-    "git-repo-info": "^1.0.2",
-    "testem": "0.6.22"
+    "git-repo-info": "^1.0.2"
   }
 }
