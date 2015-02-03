@@ -1,6 +1,6 @@
 {
   "name": "ember-qunit",
-  "version": "0.2.2",
+  "version": "0.2.3+pre.VERSION_PLACEHOLDER",
   "authors": [
     "Stefan Penner",
     "Ryan Florence",
