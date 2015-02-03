@@ -4,7 +4,7 @@ var mergeTrees = require('broccoli-merge-trees');
 var compileES6 = require('broccoli-es6modules');
 var jshintTree = require('broccoli-jshint');
 var replace    = require('broccoli-string-replace');
-var gitInfo    = require('git-repo-info');
+var gitVersion = require('git-repo-version');
 
 // --- Compile ES6 modules ---
 
@@ -61,7 +61,8 @@ generatedBowerConfig = replace(generatedBowerConfig, {
   pattern: {
     match: /VERSION_PLACEHOLDER/,
     replacement: function() {
-      return gitInfo().abbreviatedSha;
+      // remove leading `v` (since by default our tags use a `v` prefix)
+      return gitVersion().replace(/^v/, '');
     }
   }
 });
