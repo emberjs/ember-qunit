@@ -46,7 +46,7 @@ test("setup callbacks called in the correct order", function() {
   deepEqual(callbackOrder, [ 'beforeSetup', 'setup' ]);
 });
 
-moduleFor('component:x-foo', 'TestModule callbacks', {
+moduleFor('component:x-foo', 'beforeEach/afterEach callbacks', {
   beforeSetup: function() {
     beforeSetupContext = this;
     callbackOrder = [ 'beforeSetup' ];
@@ -70,4 +70,14 @@ moduleFor('component:x-foo', 'TestModule callbacks', {
 
 test("setup callbacks called in the correct order", function() {
   deepEqual(callbackOrder, [ 'beforeSetup', 'beforeEach' ]);
+});
+
+moduleFor('component:x-foo', 'test callback argument', {
+  beforeSetup: setupRegistry
+});
+
+test('callback receives assert argument', function(assert) {
+  assert.expect(1);
+
+  assert.ok(!!assert, 'assert argument was present');
 });
