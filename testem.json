@@ -1,12 +1,7 @@
 {
   "framework": "qunit",
   "cwd": "build/",
-  "serve_files": [
-    "assets/loader.js",
-    "assets/vendor.js",
-    "assets/ember-qunit-tests.amd.js",
-    "assets/test-support.js"
-  ],
+  "test_page": "tests/index.html?hidepassed",
   "launch_in_ci": ["PhantomJS"],
   "launch_in_dev": ["PhantomJS", "Chrome"]
 }
