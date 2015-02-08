@@ -98,7 +98,7 @@ mainWithTests = concat(es6MainWithTests, {
 var vendor = concat('bower_components', {
   inputFiles: [
     'jquery/dist/jquery.js',
-    'handlebars/handlebars.js',
+    'ember/ember-template-compiler.js',
     'ember/ember.js',
     'ember-data/ember-data.js'
   ],
