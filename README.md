@@ -30,16 +30,16 @@ setResolver(Resolver.create());
 moduleForComponent('x-foo', 'XFooComponent');
 
 // run a test
-test('it renders', function() {
-  expect(2);
+test('it renders', function(assert) {
+  assert.expect(2);
 
   // creates the component instance
   var component = this.subject();
-  equal(component.state, 'preRender');
+  assert.equal(component.state, 'preRender');
 
   // render the component on the page
   this.render();
-  equal(component.state, 'inDOM');
+  assert.equal(component.state, 'inDOM');
 });
 ```
 
@@ -57,8 +57,8 @@ moduleForComponent('ic-tabs', 'TabsComponent', {
   ]
 });
 
-test('selects first tab and shows the panel', function() {
-  expect(3);
+test('selects first tab and shows the panel', function(assert) {
+  assert.expect(3);
   var component = this.subject({
 
     // can provide properties for the subject, like the yielded template
@@ -77,10 +77,10 @@ test('selects first tab and shows the panel', function() {
   this.render();
   var tab1 = Ember.View.views['tab1'];
   var panel1 = Ember.View.views['panel1'];
-  ok(component.get('activeTab') === tab1);
-  ok(tab1.get('active'));
+  assert.ok(component.get('activeTab') === tab1);
+  assert.ok(tab1.get('active'));
   var el = tab1.$();
-  ok(panel1.$().is(':visible'));
+  assert.ok(panel1.$().is(':visible'));
 });
 ```
 If you are using nested components with templates, you have to list them separately - otherwise your templates won't be loaded:
@@ -111,12 +111,12 @@ In addition, you can also return promises in the test body:
 ```js
 // If you return a promise from a test callback it becomes an asyncTest. This
 // is a key difference between ember-qunit and standard QUnit.
-test('async is awesome', function() {
-  expect(1);
+test('async is awesome', function(assert) {
+  assert.expect(1);
   var myThing = MyThing.create();
   // myThing.exampleMethod() returns a promise
   return myThing.exampleMethod().then(function() {
-    ok(myThing.get('finished'));
+    assert.ok(myThing.get('finished'));
   });
 });
 ```
@@ -127,14 +127,14 @@ To assert that a promise should be rejected, you can "catch"
 the error and assert that you got there:
 
 ```js
-test('sometimes async gets rejected', function(){
-  expect(1);
+test('sometimes async gets rejected', function(assert){
+  assert.expect(1);
   var myThing = MyThing.create()
 
   return myThing.exampleMethod().then(function(){
-    ok(false, "promise should not be fulfilled");
+    assert.ok(false, "promise should not be fulfilled");
   })['catch'](function(err){
-    equal(err.message, "User not Authorized");
+    assert.equal(err.message, "User not Authorized");
   });
 });
 ```
