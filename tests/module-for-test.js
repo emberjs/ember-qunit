@@ -87,11 +87,19 @@ test('works properly without description with beforeEach', function() {
 });
 
 moduleFor('component:x-foo', 'test callback argument', {
-  beforeSetup: setupRegistry
+  beforeSetup: setupRegistry,
+
+  beforeEach: function(assert) {
+    assert.ok(!!assert, 'assert was passed into beforeEach');
+  },
+
+  afterEach: function(assert) {
+    assert.ok(!!assert, 'assert was passed into afterEach');
+  }
 });
 
 test('callback receives assert argument', function(assert) {
-  assert.expect(1);
+  assert.expect(3);
 
   assert.ok(!!assert, 'assert argument was present');
 });
