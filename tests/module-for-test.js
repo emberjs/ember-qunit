@@ -103,3 +103,10 @@ test('callback receives assert argument', function(assert) {
 
   assert.ok(!!assert, 'assert argument was present');
 });
+
+test('assert argument is not shared between tests', function(assert) {
+  assert.expect(4);
+
+  assert.ok(!!assert, 'assert argument was present');
+  assert.ok(true, 'dummy extra test');
+});
