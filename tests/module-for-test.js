@@ -48,6 +48,7 @@ test("setup callbacks called in the correct order", function() {
 
 moduleFor('component:x-foo', 'beforeEach/afterEach callbacks', {
   beforeSetup: function() {
+    setupRegistry();
     beforeSetupContext = this;
     callbackOrder = [ 'beforeSetup' ];
   },
