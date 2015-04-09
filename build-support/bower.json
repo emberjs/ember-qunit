@@ -1,6 +1,7 @@
 {
   "name": "ember-qunit",
   "version": "VERSION_PLACEHOLDER",
+  "main": "ember-qunit.js",
   "authors": [
     "Stefan Penner",
     "Ryan Florence",
