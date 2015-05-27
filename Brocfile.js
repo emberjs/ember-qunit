@@ -22,20 +22,20 @@ var klassy = new Funnel('bower_components', {
 });
 var emberTestHelpers = new Funnel('bower_components', {
   srcDir: '/ember-test-helpers/lib',
-  include: [/.js$/],
+  include: [/\.js$/],
   destDir: '/'
 });
 var deps = mergeTrees([klassy, emberTestHelpers]);
 
 var lib = new Funnel('lib', {
   srcDir: '/',
-  include: [/.js$/],
+  include: [/\.js$/],
   destDir: '/'
 });
 
 var tests = new Funnel('tests', {
   srcDir: '/',
-  include: [/test-support\/.+.js$/, /.js$/],
+  include: [/test-support\/.+\.js$/, /\.js$/],
   destDir: '/tests'
 });
 
