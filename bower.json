@@ -25,5 +25,8 @@
     "ember-cli-test-loader": "rwjblue/ember-cli-test-loader#0.0.4",
     "jquery": "~2.1.1",
     "ember-data": "~1.0.0-beta.10"
+  },
+  "resolutions": {
+    "ember-data": "~1.0.0-beta.10"
   }
 }
