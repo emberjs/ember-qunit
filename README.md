@@ -10,6 +10,158 @@ providing QUnit-specific wrappers around the helpers contained in
 
 ## Usage
 
+- [Acceptance Tests](#acceptance-tests)
+- [Component Unit Tests](#component-unit-tests)
+- [Component Integration Tests](#component-integration-tests)
+- [Other Tests](#other-tests)
+- [Ember Data Tests](#ember-data-tests)
+
+### Acceptance Tests
+
+[Ember Guide](http://guides.emberjs.com/v1.13.0/testing/acceptance/)
+
+```js
+module('Visiting the homepage', {
+  beforeEach: function() {
+    App = startApp();
+  },
+  afterEach: function() {
+    Ember.run(App, App.destroy);
+  }
+});
+
+test('The signup form works', function(assert) {
+  assert.expect(2);
+  
+  visit('/');
+  
+  fillIn('.form>input', 'foo@bar.com');
+  click('.submit');
+  
+  andThen(function() {
+    assert.equal(currentPath(), 'results');
+    assert.equal($('.results>li').length, 2);
+  });
+});
+```
+
+### Component Unit Tests
+
+[Ember Guide](http://guides.emberjs.com/v1.13.0/testing/testing-components/)
+
+```js
+moduleForComponent('x-foo', 'XFooComponent', { 
+  unit: true,
+  needs: ['helper:pluralize-string']
+});
+
+// run a test
+test('it renders', function(assert) {
+  assert.expect(3);
+
+  // creates the component instance
+  var subject = this.subject();
+  assert.equal(component.state, 'preRender');
+
+  // render the component on the page
+  this.render();
+  assert.equal(component.state, 'inDOM');
+  assert.equal(this.$('.foo').text(), 'bar');
+});
+```
+
+Unit tests are currently the default mode for component tests (this will eventually change to integration tests).  To flag a test as a unit test, either specify `unit: true` or include `needs: []` in the callbacks object.
+
+Unit tests have the advantage of giving you direct access to the component instance so you can test its internals.  Unit tests have the following features:
+
+- You have access to the component instance through `this.subject()`.
+- If you want to render the componenet's template, call either `this.render()` or `this.$()`.
+- Testing the component's template is through `this.$()`.
+- You are required to specify any dependencies other than the component's template in the `needs: []` option.  This includes helpers, services, partials, and any other componenets (with their templates) that are referenced.
+- Unit tests do not call most of the Ember lifecycle hooks.  `didInsertElement` and `willDestroyElement` will be called, but the remaining hooks introduced in Ember 1.13.x will not be.
+- There is no outer context for the component so testing things such as actions will require directly stubbing the actions on the component.
+
+### Component Integration Tests
+
+```js
+moduleForComponent('x-foo', 'XFooComponent', {
+  integration: true
+});
+
+test('it renders', function(assert) {
+  assert.expect(2);
+
+  // setup the outer context
+  this.set('value', 'cat');
+  this.on('action', function(result) {
+    assert.equal(result, 'bar', 'The correct result was returned');
+  });
+  
+  // render the component
+  this.render('{{ x-foo value=value action="result" }}');
+
+  assert.equal(this.('div>.value').text(), 'cat', 'The component shows the correct value');
+  
+  this.$('button').click();
+});
+```
+
+Component integration tests will be the default mode for `moduleForComponent` in the near future, however currently you will be required to active them by passing `integration: true`.
+
+Integration tests have the advantage of testing your component as Ember would actually use them.  It's helpful to think of this mode as simply testing the inputs and outputs of the component.  These tests allow you interact with both the bound values that are passed into the component as well as its resulting actions.
+
+Component integration tests have the following features:
+- Your test context `this` acts as the outer context for the component.  As a result, you can call `this.set` and `this.on` to setup values and event listeners that you can then have interact with the component.
+- You are required to render the component as a template, e.g. `this.render('{{ your-component-name value=value action="updated" }}')`.  You can render other components as well as block content.
+- All of the normal Ember lifecycle hooks for a component are called (including the new ones from 1.13.x).
+- Testing the component's template is through `this.$()`.
+- You do not require dependencies through `needs:`.  Doing so will force the test into unit mode.
+- You do not have direct access to the component instance.  (`this.subject()` will raise an exception).
+
+### Other Tests
+
+[Controllers Guide](http://guides.emberjs.com/v1.13.0/testing/testing-controllers/)
+
+[Routes Guide](http://guides.emberjs.com/v1.13.0/testing/testing-routes/)
+
+```js
+moduleFor('controller:home');
+
+test('It can calculate the result', function(assert) {
+  assert.expect(1);
+  
+  var subject = this.subject();
+  
+  subject.set('value', 'foo');
+  assert.equal(subject.get('result'), 'bar');
+});
+```
+
+`moduleFor` works for any object you could look up with the Ember Resolver (service, routes, controllers, etc.).
+
+Note: Controllers / Routes do not have access to rendering.  You will need to either use a component test or an acceptance test.
+
+### Ember Data Tests
+
+[Ember Guide](http://guides.emberjs.com/v1.13.0/testing/testing-models/)
+
+```js
+moduleForModel('user', {
+  needs: ['model:child']
+});
+
+test('It can set its child', function(assert) {
+  assert.expect(1);
+  var subject = this.subject();
+  
+  var child = subject.store.createRecord('child');
+  subject.get('children').pushObject(child);
+  
+  assert.equal(subject.get('some-computed-value'), true);  
+});
+```
+
+## Advanced Usage
 ### Setting the resolver
 
 ```js
@@ -20,83 +172,6 @@ setResolver(Ember.DefaultResolver.create({namespace: App}));
 import Resolver from './path/to/resolver';
 import {setResolver} from 'ember-qunit';
 setResolver(Resolver.create());
-```
-
-### Simple example:
-
-```js
-// tell ember qunit what you are testing, it will find it from the
-// resolver
-moduleForComponent('x-foo', 'XFooComponent');
-
-// run a test
-test('it renders', function(assert) {
-  assert.expect(2);
-
-  // creates the component instance
-  var component = this.subject();
-  assert.equal(component.state, 'preRender');
-
-  // render the component on the page
-  this.render();
-  assert.equal(component.state, 'inDOM');
-});
-```
-
-### Complex example
-
-```js
-// a more complex example taken from ic-tabs
-moduleForComponent('ic-tabs', 'TabsComponent', {
-
-  // specify the other units that are required for this test
-  needs: [
-    'component:ic-tab',
-    'component:ic-tab-panel',
-    'component:ic-tab-list'
-  ]
-});
-
-test('selects first tab and shows the panel', function(assert) {
-  assert.expect(3);
-  var component = this.subject({
-
-    // can provide properties for the subject, like the yielded template
-    // of a component (not the layout, in this case)
-    template: Ember.Handlebars.compile(''+
-      '{{#ic-tab-list}}'+
-        '{{#ic-tab id="tab1"}}tab1{{/ic-tab}}'+
-        '{{#ic-tab id="tab2"}}tab2{{/ic-tab}}'+
-        '{{#ic-tab id="tab3"}}tab3{{/ic-tab}}'+
-      '{{/ic-tab-list}}'+
-      '{{#ic-tab-panel id="panel1"}}one{{/ic-tab-panel}}'+
-      '{{#ic-tab-panel id="panel2"}}two{{/ic-tab-panel}}'+
-      '{{#ic-tab-panel id="panel3"}}three{{/ic-tab-panel}}'
-    })
-  });
-  this.render();
-  var tab1 = Ember.View.views['tab1'];
-  var panel1 = Ember.View.views['panel1'];
-  assert.ok(component.get('activeTab') === tab1);
-  assert.ok(tab1.get('active'));
-  var el = tab1.$();
-  assert.ok(panel1.$().is(':visible'));
-});
-```
-If you are using nested components with templates, you have to list them separately - otherwise your templates won't be loaded:
-```js
-moduleForComponent('ic-tabs', 'TabsComponent', {
-
-  // specify the other units and templates that are required for this test
-  needs: [
-    'component:ic-tab',
-    'template:components/ic-tab',
-    'component:ic-tab-panel',
-    'template:components/ic-tab-panel',
-    'component:ic-tab-list'
-  ]
-});
-.....
 ```
 
 ### Async Example
@@ -148,19 +223,33 @@ test('sometimes async gets rejected', function(assert){
 
 - `description`: (String) optional - The description of the module
 
-- `callbacks`: (Object) optional - Normal QUnit callbacks (setup and
-  teardown), with addition to `needs`, which allows you specify the
-  other units the tests will need.
+- `callbacks`: (Object) optional
+   - QUnit callbacks (`beforeEach` and `afterEach`)
+   - `needs` specify any dependencies the tested module will require.
 
 ### `moduleForComponent(name, [description, callbacks])`
 
 - `name`: (String) - the short name of the component that you'd use in a
   template, ie `x-foo`, `ic-tabs`, etc.
 
+- `description`: (String) optional - The description of the module
+
+- `callbacks`: (Object) optional
+   - QUnit callbacks (`beforeEach` and `afterEach`)
+   - `integration: true` or `unit: true` (default)
+   - `needs` specify any dependencies the tested module will require.  (Includig this will force your test into unit mode).
+   
+  
 ### `moduleForModel(name, [description, callbacks])`
 
 - `name`: (String) - the short name of the model you'd use in `store`
   operations ie `user`, `assignmentGroup`, etc.
+
+- `description`: (String) optional - The description of the module
+
+- `callbacks`: (Object) optional
+   - QUnit callbacks (`beforeEach` and `afterEach`)
+   - `needs` specify any dependencies the tested module will require.
 
 ## Contributing
 
