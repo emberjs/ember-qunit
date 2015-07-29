@@ -10,62 +10,32 @@ providing QUnit-specific wrappers around the helpers contained in
 
 ## Usage
 
-- [Acceptance Tests](#acceptance-tests)
 - [Component Unit Tests](#component-unit-tests)
 - [Component Integration Tests](#component-integration-tests)
 - [Other Tests](#other-tests)
 - [Ember Data Tests](#ember-data-tests)
-
-### Acceptance Tests
-
-[Ember Guide](http://guides.emberjs.com/v1.13.0/testing/acceptance/)
-
-```js
-module('Visiting the homepage', {
-  beforeEach: function() {
-    App = startApp();
-  },
-  afterEach: function() {
-    Ember.run(App, App.destroy);
-  }
-});
-
-test('The signup form works', function(assert) {
-  assert.expect(2);
-  
-  visit('/');
-  
-  fillIn('.form>input', 'foo@bar.com');
-  click('.submit');
-  
-  andThen(function() {
-    assert.equal(currentPath(), 'results');
-    assert.equal($('.results>li').length, 2);
-  });
-});
-```
 
 ### Component Unit Tests
 
 [Ember Guide](http://guides.emberjs.com/v1.13.0/testing/testing-components/)
 
 ```js
-moduleForComponent('x-foo', 'XFooComponent', { 
+import { test, moduleForComponent } from 'ember-qunit';
+
+moduleForComponent('x-foo', {
   unit: true,
   needs: ['helper:pluralize-string']
 });
 
 // run a test
 test('it renders', function(assert) {
-  assert.expect(3);
+  assert.expect(1);
 
   // creates the component instance
   var subject = this.subject();
-  assert.equal(component.state, 'preRender');
 
   // render the component on the page
   this.render();
-  assert.equal(component.state, 'inDOM');
   assert.equal(this.$('.foo').text(), 'bar');
 });
 ```
@@ -84,7 +54,10 @@ Unit tests have the advantage of giving you direct access to the component insta
 ### Component Integration Tests
 
 ```js
-moduleForComponent('x-foo', 'XFooComponent', {
+import hbs from 'htmlbars-inline-precompile';
+import { test, moduleForComponent } from 'ember-qunit';
+
+moduleForComponent('x-foo', {
   integration: true
 });
 
@@ -96,23 +69,25 @@ test('it renders', function(assert) {
   this.on('action', function(result) {
     assert.equal(result, 'bar', 'The correct result was returned');
   });
-  
+
   // render the component
-  this.render('{{ x-foo value=value action="result" }}');
+  this.render(hbs`
+    {{ x-foo value=value action="result" }}
+  `);
 
   assert.equal(this.('div>.value').text(), 'cat', 'The component shows the correct value');
-  
+
   this.$('button').click();
 });
 ```
 
-Component integration tests will be the default mode for `moduleForComponent` in the near future, however currently you will be required to active them by passing `integration: true`.
+Component integration tests will be the default mode for `moduleForComponent` in the near future, however currently you will be required to activate them by passing `integration: true`.
 
 Integration tests have the advantage of testing your component as Ember would actually use them.  It's helpful to think of this mode as simply testing the inputs and outputs of the component.  These tests allow you interact with both the bound values that are passed into the component as well as its resulting actions.
 
 Component integration tests have the following features:
 - Your test context `this` acts as the outer context for the component.  As a result, you can call `this.set` and `this.on` to setup values and event listeners that you can then have interact with the component.
-- You are required to render the component as a template, e.g. `this.render('{{ your-component-name value=value action="updated" }}')`.  You can render other components as well as block content.
+- You are required to render the component as a template, e.g. `this.render(hbs`{{ your-component-name value=value action="updated" }}`)`.  You can render other components as well as block content.
 - All of the normal Ember lifecycle hooks for a component are called (including the new ones from 1.13.x).
 - Testing the component's template is through `this.$()`.
 - You do not require dependencies through `needs:`.  Doing so will force the test into unit mode.
@@ -125,13 +100,15 @@ Component integration tests have the following features:
 [Routes Guide](http://guides.emberjs.com/v1.13.0/testing/testing-routes/)
 
 ```js
+import { test, moduleFor } from 'ember-qunit';
+
 moduleFor('controller:home');
 
 test('It can calculate the result', function(assert) {
   assert.expect(1);
-  
+
   var subject = this.subject();
-  
+
   subject.set('value', 'foo');
   assert.equal(subject.get('result'), 'bar');
 });
@@ -146,6 +123,8 @@ Note: Controllers / Routes do not have access to rendering.  You will need to ei
 [Ember Guide](http://guides.emberjs.com/v1.13.0/testing/testing-models/)
 
 ```js
+import { test, moduleForModel } from 'ember-qunit';
+
 moduleForModel('user', {
   needs: ['model:child']
 });
@@ -153,11 +132,11 @@ moduleForModel('user', {
 test('It can set its child', function(assert) {
   assert.expect(1);
   var subject = this.subject();
-  
+
   var child = subject.store.createRecord('child');
   subject.get('children').pushObject(child);
-  
-  assert.equal(subject.get('some-computed-value'), true);  
+
+  assert.equal(subject.get('some-computed-value'), true);
 });
 ```
 
@@ -166,11 +145,11 @@ test('It can set its child', function(assert) {
 
 ```js
 // if you don't have a custom resolver, do it like this:
-setResolver(Ember.DefaultResolver.create({namespace: App}));
+setResolver(Ember.DefaultResolver.create({ namespace: App }));
 
 // otherwise something like:
 import Resolver from './path/to/resolver';
-import {setResolver} from 'ember-qunit';
+import { setResolver } from 'ember-qunit';
 setResolver(Resolver.create());
 ```
 
@@ -202,13 +181,13 @@ To assert that a promise should be rejected, you can "catch"
 the error and assert that you got there:
 
 ```js
-test('sometimes async gets rejected', function(assert){
+test('sometimes async gets rejected', function(assert) {
   assert.expect(1);
   var myThing = MyThing.create()
 
-  return myThing.exampleMethod().then(function(){
+  return myThing.exampleMethod().then(function() {
     assert.ok(false, "promise should not be fulfilled");
-  })['catch'](function(err){
+  })['catch'](function(err) {
     assert.equal(err.message, "User not Authorized");
   });
 });
@@ -238,8 +217,8 @@ test('sometimes async gets rejected', function(assert){
    - QUnit callbacks (`beforeEach` and `afterEach`)
    - `integration: true` or `unit: true` (default)
    - `needs` specify any dependencies the tested module will require.  (Includig this will force your test into unit mode).
-   
-  
+
+
 ### `moduleForModel(name, [description, callbacks])`
 
 - `name`: (String) - the short name of the model you'd use in `store`
