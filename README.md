@@ -47,7 +47,7 @@ Unit tests have the advantage of giving you direct access to the component insta
 - You have access to the component instance through `this.subject()`.
 - If you want to render the componenet's template, call either `this.render()` or `this.$()`.
 - Testing the component's template is through `this.$()`.
-- You are required to specify any dependencies other than the component's template in the `needs: []` option.  This includes helpers, services, partials, and any other componenets (with their templates) that are referenced.
+- You are required to specify any dependencies other than the component's template in the `needs: []` option.  This includes helpers, services, partials, and any other components (with their templates) that are referenced.
 - Unit tests do not call most of the Ember lifecycle hooks.  `didInsertElement` and `willDestroyElement` will be called, but the remaining hooks introduced in Ember 1.13.x will not be.
 - There is no outer context for the component so testing things such as actions will require directly stubbing the actions on the component.
 
