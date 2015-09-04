@@ -75,7 +75,7 @@ test('it renders', function(assert) {
     {{ x-foo value=value action="result" }}
   `);
 
-  assert.equal(this.('div>.value').text(), 'cat', 'The component shows the correct value');
+  assert.equal(this.$('div>.value').text(), 'cat', 'The component shows the correct value');
 
   this.$('button').click();
 });
