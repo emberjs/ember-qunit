@@ -6,7 +6,6 @@
   "scripts": {
     "build": "ember build",
     "prepublish": "bower install",
-    "pretest": "ember build",
     "test": "ember test",
     "start": "ember serve"
   },
