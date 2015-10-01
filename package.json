@@ -16,7 +16,7 @@
     "Dan Gebhardt"
   ],
   "license": "MIT",
-  "dependencies": { },
+  "dependencies": {},
   "devDependencies": {
     "bower": "^1.3.12",
     "broccoli": "^0.13.0",
@@ -27,7 +27,7 @@
     "broccoli-sourcemap-concat": "^0.4.3",
     "broccoli-string-replace": "0.0.2",
     "ember-cli": "^0.1.12",
-    "ember-cli-release": "^0.2.3",
+    "ember-cli-release": "^0.2.7",
     "git-repo-version": "^0.1.2"
   },
   "repository": {
