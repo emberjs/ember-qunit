@@ -16,7 +16,7 @@
   ],
   "dependencies": {
     "ember": "^1.10.0",
-    "ember-test-helpers": "^0.5.11"
+    "ember-test-helpers": "^0.5.12"
   },
   "devDependencies": {
     "qunit": "^1.17.1",
