@@ -261,4 +261,4 @@ $ npm test
 
 ## Copyright and License
 
-Copyright 2014 Ryan Florence and contributors. [MIT License](./LICENSE).
+Copyright 2015 Ryan Florence and contributors. [MIT License](./LICENSE).
