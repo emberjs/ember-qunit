@@ -87,7 +87,7 @@ Integration tests have the advantage of testing your component as Ember would ac
 
 Component integration tests have the following features:
 - Your test context `this` acts as the outer context for the component.  As a result, you can call `this.set` and `this.on` to setup values and event listeners that you can then have interact with the component.
-- You are required to render the component as a template, e.g. `this.render(hbs`{{ your-component-name value=value action="updated" }}`)`.  You can render other components as well as block content.
+- You are required to render the component as a template, e.g. ``this.render(hbs`{{ your-component-name value=value action="updated" }}`)``.  You can render other components as well as block content.
 - All of the normal Ember lifecycle hooks for a component are called (including the new ones from 1.13.x).
 - Testing the component's template is through `this.$()`.
 - You do not require dependencies through `needs:`.  Doing so will force the test into unit mode.
