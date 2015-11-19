@@ -17,19 +17,21 @@ moduleFor('component:x-foo', 'TestModule callbacks', {
     setupRegistry();
   },
 
-  setup: function() {
+  setup: function(assert, context) {
     setupContext = this;
     callbackOrder.push('setup');
 
     ok(setupContext !== beforeSetupContext);
+    equal(setupContext, context);
   },
 
-  teardown: function() {
+  teardown: function(assert, context) {
     teardownContext = this;
     callbackOrder.push('teardown');
 
     deepEqual(callbackOrder, [ 'beforeSetup', 'setup', 'teardown']);
     equal(setupContext, teardownContext);
+    equal(setupContext, context);
   },
 
   afterTeardown: function() {
@@ -110,4 +112,8 @@ test('assert argument is not shared between tests', function(assert) {
 
   assert.ok(!!assert, 'assert argument was present');
   assert.ok(true, 'dummy extra test');
+});
+
+test('context is available as a second param', function(assert, context) {
+  assert.equal(this, context);
 });
