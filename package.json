@@ -1,6 +1,6 @@
 {
   "name": "ember-qunit",
-  "version": "0.4.16",
+  "version": "0.4.17",
   "description": "QUnit helpers for testing Ember.js applications",
   "main": "lib/ember-qunit.js",
   "scripts": {
