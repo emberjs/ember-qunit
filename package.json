@@ -5,7 +5,6 @@
   "main": "lib/ember-qunit.js",
   "scripts": {
     "build": "ember build",
-    "prepublish": "bower install",
     "test": "ember test",
     "start": "ember serve"
   },
