@@ -12,7 +12,7 @@ var Resolver = Ember.DefaultResolver.extend({
   }
 });
 
-var resolver = Resolver.create({registry: {}});
+var resolver = Resolver.create({registry: {}, namespace: {}});
 setResolver(resolver);
 
 export function setResolverRegistry(registry) {

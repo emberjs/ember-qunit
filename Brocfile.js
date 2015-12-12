@@ -1,3 +1,5 @@
+var path = require('path');
+var resolve = require('resolve');
 var concat     = require('broccoli-sourcemap-concat');
 var Funnel     = require('broccoli-funnel');
 var mergeTrees = require('broccoli-merge-trees');
@@ -14,15 +16,19 @@ var loader = new Funnel('bower_components', {
   destDir: '/assets/'
 });
 
-// TODO - this manual dependency management has got to go!
-var klassy = new Funnel('bower_components', {
-  srcDir: '/klassy/lib',
-  files: ['klassy.js'],
+var emberTestHelpersPath = path.dirname(resolve.sync('ember-test-helpers'));
+var klassyPath = path.dirname(resolve.sync('klassy', { basedir: emberTestHelpersPath }));
+
+var emberTestHelpers = new Funnel(emberTestHelpersPath, {
+  srcDir: '/',
+  include: [/\.js$/],
   destDir: '/'
 });
-var emberTestHelpers = new Funnel('bower_components', {
-  srcDir: '/ember-test-helpers/lib',
-  include: [/\.js$/],
+
+// TODO - this manual dependency management has got to go!
+var klassy = new Funnel(klassyPath, {
+  srcDir: '/',
+  files: ['klassy.js'],
   destDir: '/'
 });
 var deps = mergeTrees([klassy, emberTestHelpers]);
