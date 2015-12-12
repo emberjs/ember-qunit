@@ -23,5 +23,7 @@ module.exports = {
     run('cd ../ember-qunit-builds && git commit --message="Release ' + versions.next + '"');
     run('cd ../ember-qunit-builds && git tag ' + versions.next);
     run('cd ../ember-qunit-builds && git push origin master --tags');
+
+    run('npm publish');
   }
 };
