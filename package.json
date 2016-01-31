@@ -16,7 +16,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "ember-test-helpers": "^0.5.19"
+    "ember-test-helpers": "^0.5.22"
   },
   "devDependencies": {
     "bower": "^1.3.12",
