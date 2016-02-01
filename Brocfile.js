@@ -3,10 +3,18 @@ var resolve = require('resolve');
 var concat     = require('broccoli-sourcemap-concat');
 var Funnel     = require('broccoli-funnel');
 var mergeTrees = require('broccoli-merge-trees');
-var compileES6 = require('broccoli-es6modules');
 var jshintTree = require('broccoli-jshint');
 var replace    = require('broccoli-string-replace');
 var gitVersion = require('git-repo-version');
+var BabelTranspiler = require('broccoli-babel-transpiler');
+
+function compileES6(tree) {
+  return new BabelTranspiler(tree, {
+    loose: true,
+    moduleIds: true,
+    modules: 'amdStrict'
+  });
+}
 
 // --- Compile ES6 modules ---
 
@@ -46,11 +54,7 @@ var tests = new Funnel('tests', {
 });
 
 var main = mergeTrees([deps, lib]);
-var es6Main = new compileES6(main, {
-  esperantoOptions: {
-    _evilES3SafeReExports: true
-  }
-});
+var es6Main = compileES6(main);
 
 main = concat(es6Main, {
   inputFiles: ['**/*.js'],
@@ -88,11 +92,7 @@ var jshintLib = jshintTree(lib);
 var jshintTest = jshintTree(tests);
 
 var mainWithTests = mergeTrees([deps, lib, tests, jshintLib, jshintTest]);
-var es6MainWithTests = new compileES6(mainWithTests, {
-  esperantoOptions: {
-    _evilES3SafeReExports: true
-  }
-});
+var es6MainWithTests = compileES6(mainWithTests);
 
 mainWithTests = concat(es6MainWithTests, {
   inputFiles: ['**/*.js'],
