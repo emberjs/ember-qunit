@@ -213,7 +213,7 @@ test('sometimes async gets rejected', function(assert) {
 - `callbacks`: (Object) optional
    - QUnit callbacks (`beforeEach` and `afterEach`)
    - `integration: true` or `unit: true` (default: `integration: true`)
-   - `needs` specify any dependencies the tested module will require.  (Includig this will force your test into unit mode).
+   - `needs` specify any dependencies the tested module will require.  (Including this will force your test into unit mode).
 
 
 ### `moduleForModel(name, [description, callbacks])`
