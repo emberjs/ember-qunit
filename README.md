@@ -11,42 +11,6 @@ providing QUnit-specific wrappers around the helpers contained in
 - [Other Tests](#other-tests)
 - [Ember Data Tests](#ember-data-tests)
 
-### Component Unit Tests
-
-[Ember Guide](http://guides.emberjs.com/v1.13.0/testing/testing-components/)
-
-```js
-import { test, moduleForComponent } from 'ember-qunit';
-
-moduleForComponent('x-foo', {
-  unit: true,
-  needs: ['helper:pluralize-string']
-});
-
-// run a test
-test('it renders', function(assert) {
-  assert.expect(1);
-
-  // creates the component instance
-  var subject = this.subject();
-
-  // render the component on the page
-  this.render();
-  assert.equal(this.$('.foo').text(), 'bar');
-});
-```
-
-Unit tests are currently the default mode for component tests (this will eventually change to integration tests).  To flag a test as a unit test, either specify `unit: true` or include `needs: []` in the callbacks object.
-
-Unit tests have the advantage of giving you direct access to the component instance so you can test its internals.  Unit tests have the following features:
-
-- You have access to the component instance through `this.subject()`.
-- If you want to render the componenet's template, call either `this.render()` or `this.$()`.
-- Testing the component's template is through `this.$()`.
-- You are required to specify any dependencies other than the component's template in the `needs: []` option.  This includes helpers, services, partials, and any other components (with their templates) that are referenced.
-- Unit tests do not call most of the Ember lifecycle hooks.  `didInsertElement` and `willDestroyElement` will be called, but the remaining hooks introduced in Ember 1.13.x will not be.
-- There is no outer context for the component so testing things such as actions will require directly stubbing the actions on the component.
-
 ### Component Integration Tests
 
 ```js
@@ -77,7 +41,7 @@ test('it renders', function(assert) {
 });
 ```
 
-Component integration tests will be the default mode for `moduleForComponent` in the near future, however currently you will be required to activate them by passing `integration: true`.
+Component integration tests are the default mode for `moduleForComponent`. You can still explicitly activate them by passing `integration: true`.
 
 Integration tests have the advantage of testing your component as Ember would actually use them.  It's helpful to think of this mode as simply testing the inputs and outputs of the component.  These tests allow you interact with both the bound values that are passed into the component as well as its resulting actions.
 
@@ -88,6 +52,42 @@ Component integration tests have the following features:
 - Testing the component's template is through `this.$()`.
 - You do not require dependencies through `needs:`.  Doing so will force the test into unit mode.
 - You do not have direct access to the component instance.  (`this.subject()` will raise an exception).
+
+### Component Unit Tests
+
+[Ember Guide](http://guides.emberjs.com/v1.13.0/testing/testing-components/)
+
+```js
+import { test, moduleForComponent } from 'ember-qunit';
+
+moduleForComponent('x-foo', {
+  unit: true,
+  needs: ['helper:pluralize-string']
+});
+
+// run a test
+test('it renders', function(assert) {
+  assert.expect(1);
+
+  // creates the component instance
+  var subject = this.subject();
+
+  // render the component on the page
+  this.render();
+  assert.equal(this.$('.foo').text(), 'bar');
+});
+```
+
+Unit tests used to be the default mode for component tests. To flag a test as a unit test, either specify `unit: true` or include `needs: []` in the callbacks object.
+
+Unit tests have the advantage of giving you direct access to the component instance so you can test its internals.  Unit tests have the following features:
+
+- You have access to the component instance through `this.subject()`.
+- If you want to render the componenet's template, call either `this.render()` or `this.$()`.
+- Testing the component's template is through `this.$()`.
+- You are required to specify any dependencies other than the component's template in the `needs: []` option.  This includes helpers, services, partials, and any other components (with their templates) that are referenced.
+- Unit tests do not call most of the Ember lifecycle hooks.  `didInsertElement` and `willDestroyElement` will be called, but the remaining hooks introduced in Ember 1.13.x will not be.
+- There is no outer context for the component so testing things such as actions will require directly stubbing the actions on the component.
 
 ### Other Tests
 
