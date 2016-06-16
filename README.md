@@ -200,6 +200,7 @@ test('sometimes async gets rejected', function(assert) {
 
 - `callbacks`: (Object) optional
    - QUnit callbacks (`beforeEach` and `afterEach`)
+   - ember-test-helpers callback (`subject`)
    - `integration: true` or `unit: true` (default: `integration: true`)
    - `needs` specify any dependencies the tested module will require.
 
@@ -212,6 +213,7 @@ test('sometimes async gets rejected', function(assert) {
 
 - `callbacks`: (Object) optional
    - QUnit callbacks (`beforeEach` and `afterEach`)
+   - ember-test-helpers callback (`subject`)
    - `integration: true` or `unit: true` (default: `integration: true`)
    - `needs` specify any dependencies the tested module will require.  (Including this will force your test into unit mode).
 
@@ -225,6 +227,7 @@ test('sometimes async gets rejected', function(assert) {
 
 - `callbacks`: (Object) optional
    - QUnit callbacks (`beforeEach` and `afterEach`)
+   - ember-test-helpers callback (`subject`)
    - `integration: true` or `unit: true` (default: `integration: true`)
    - `needs` specify any dependencies the tested module will require.
 
