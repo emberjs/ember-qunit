@@ -20,44 +20,44 @@ moduleFor('component:x-foo', 'TestModule callbacks', {
     setupRegistry();
   },
 
-  setup: function() {
+  beforeEach: function(assert) {
     setupContext = this;
     callbackOrder.push('setup');
 
     return new Ember.RSVP.Promise((resolve) => {
       setTimeout(() => {
-        ok(setupContext !== beforeSetupContext);
+        assert.ok(setupContext !== beforeSetupContext);
         resolve();
       }, 50);
     });
   },
 
-  teardown: function() {
+  afterEach: function(assert) {
     teardownContext = this;
     callbackOrder.push('teardown');
 
     return new Ember.RSVP.Promise((resolve) => {
       setTimeout(() => {
-        deepEqual(callbackOrder, [ 'beforeSetup', 'setup', 'teardown']);
-        equal(setupContext, teardownContext);
+        assert.deepEqual(callbackOrder, [ 'beforeSetup', 'setup', 'teardown']);
+        assert.equal(setupContext, teardownContext);
         resolve();
       }, 50);
     });
   },
 
-  afterTeardown: function() {
+  afterTeardown: function(assert) {
     afterTeardownContext = this;
     callbackOrder.push('afterTeardown');
 
-    deepEqual(callbackOrder, [ 'beforeSetup', 'setup', 'teardown', 'afterTeardown']);
-    equal(afterTeardownContext, beforeSetupContext);
-    ok(afterTeardownContext !== teardownContext);
+    assert.deepEqual(callbackOrder, [ 'beforeSetup', 'setup', 'teardown', 'afterTeardown']);
+    assert.equal(afterTeardownContext, beforeSetupContext);
+    assert.ok(afterTeardownContext !== teardownContext);
   }
 });
 
-test("setup callbacks called in the correct order", function() {
-  expect(7);
-  deepEqual(callbackOrder, [ 'beforeSetup', 'setup' ]);
+test("setup callbacks called in the correct order", function(assert) {
+  assert.expect(7);
+  assert.deepEqual(callbackOrder, [ 'beforeSetup', 'setup' ]);
 });
 
 moduleFor('component:x-foo', 'beforeEach/afterEach callbacks', {
@@ -67,24 +67,24 @@ moduleFor('component:x-foo', 'beforeEach/afterEach callbacks', {
     callbackOrder = [ 'beforeSetup' ];
   },
 
-  beforeEach: function() {
+  beforeEach: function(assert) {
     setupContext = this;
     callbackOrder.push('beforeEach');
 
-    ok(setupContext !== beforeSetupContext);
+    assert.ok(setupContext !== beforeSetupContext);
   },
 
-  afterEach: function() {
+  afterEach: function(assert) {
     teardownContext = this;
     callbackOrder.push('afterEach');
 
-    deepEqual(callbackOrder, [ 'beforeSetup', 'beforeEach', 'afterEach']);
-    equal(setupContext, teardownContext);
+    assert.deepEqual(callbackOrder, [ 'beforeSetup', 'beforeEach', 'afterEach']);
+    assert.equal(setupContext, teardownContext);
   }
 });
 
-test("setup callbacks called in the correct order", function() {
-  deepEqual(callbackOrder, [ 'beforeSetup', 'beforeEach' ]);
+test("setup callbacks called in the correct order", function(assert) {
+  assert.deepEqual(callbackOrder, [ 'beforeSetup', 'beforeEach' ]);
 });
 
 moduleFor('component:x-foo', {
@@ -95,10 +95,10 @@ moduleFor('component:x-foo', {
   }
 });
 
-test('works properly without description with beforeEach', function() {
-  expect(1);
+test('works properly without description with beforeEach', function(assert) {
+  assert.expect(1);
 
-  equal(setupContext, this, 'beforeEach was called properly');
+  assert.equal(setupContext, this, 'beforeEach was called properly');
 });
 
 moduleFor('component:x-foo', 'test callback argument', {
