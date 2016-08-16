@@ -1,8 +1,14 @@
 # Change Log
 
-## [Unreleased](https://github.com/rwjblue/ember-qunit/tree/HEAD)
+## [0.4.22](https://github.com/rwjblue/ember-qunit/tree/0.4.22) (2016-08-16)
+[Full Changelog](https://github.com/rwjblue/ember-qunit/compare/v0.4.21...0.4.22)
 
-[Full Changelog](https://github.com/rwjblue/ember-qunit/compare/v0.4.20...HEAD)
+**Merged pull requests:**
+
+- Add CHANGELOG file [\#236](https://github.com/rwjblue/ember-qunit/pull/236) ([Turbo87](https://github.com/Turbo87))
+
+## [v0.4.21](https://github.com/rwjblue/ember-qunit/tree/v0.4.21) (2016-08-16)
+[Full Changelog](https://github.com/rwjblue/ember-qunit/compare/v0.4.20...v0.4.21)
 
 **Closed issues:**
 
@@ -17,6 +23,7 @@
 
 **Merged pull requests:**
 
+- Use QUnit's test context with ember-test-helpers. [\#238](https://github.com/rwjblue/ember-qunit/pull/238) ([rwjblue](https://github.com/rwjblue))
 - Upgrade package versions [\#235](https://github.com/rwjblue/ember-qunit/pull/235) ([elwayman02](https://github.com/elwayman02))
 - Add callback to README.md [\#230](https://github.com/rwjblue/ember-qunit/pull/230) ([rfb](https://github.com/rfb))
 - \[FIXES \#227\] [\#228](https://github.com/rwjblue/ember-qunit/pull/228) ([stefanpenner](https://github.com/stefanpenner))
