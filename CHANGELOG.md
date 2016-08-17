@@ -1,11 +1,11 @@
 # Change Log
 
-## [Unreleased](https://github.com/rwjblue/ember-qunit/tree/HEAD)
-
-[Full Changelog](https://github.com/rwjblue/ember-qunit/compare/v0.4.21...HEAD)
+## [0.4.23](https://github.com/rwjblue/ember-qunit/tree/0.4.23) (2016-08-17)
+[Full Changelog](https://github.com/rwjblue/ember-qunit/compare/v0.4.21...0.4.23)
 
 **Merged pull requests:**
 
+- Respect beforeEach and afterEach hooks returning promises [\#239](https://github.com/rwjblue/ember-qunit/pull/239) ([trentmwillis](https://github.com/trentmwillis))
 - Add CHANGELOG file [\#236](https://github.com/rwjblue/ember-qunit/pull/236) ([Turbo87](https://github.com/Turbo87))
 
 ## [v0.4.21](https://github.com/rwjblue/ember-qunit/tree/v0.4.21) (2016-08-16)
