@@ -1,7 +1,7 @@
 # Change Log
 
-## [0.4.22](https://github.com/rwjblue/ember-qunit/tree/0.4.22) (2016-08-17)
-[Full Changelog](https://github.com/rwjblue/ember-qunit/compare/v0.4.21...0.4.22)
+## [0.4.22](https://github.com/rwjblue/ember-qunit/tree/v0.4.22) (2016-08-17)
+[Full Changelog](https://github.com/rwjblue/ember-qunit/compare/v0.4.21...v0.4.22)
 
 **Merged pull requests:**
 
