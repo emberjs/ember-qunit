@@ -1,3 +1,6 @@
+/* global setTimeout */
+
+import Ember from 'ember';
 import { moduleFor, test } from 'ember-qunit';
 import { setResolverRegistry } from 'tests/test-support/resolver';
 
@@ -21,15 +24,25 @@ moduleFor('component:x-foo', 'TestModule callbacks', {
     setupContext = this;
     callbackOrder.push('setup');
 
-    ok(setupContext !== beforeSetupContext);
+    return new Ember.RSVP.Promise((resolve) => {
+      setTimeout(() => {
+        ok(setupContext !== beforeSetupContext);
+        resolve();
+      }, 50);
+    });
   },
 
   teardown: function() {
     teardownContext = this;
     callbackOrder.push('teardown');
 
-    deepEqual(callbackOrder, [ 'beforeSetup', 'setup', 'teardown']);
-    equal(setupContext, teardownContext);
+    return new Ember.RSVP.Promise((resolve) => {
+      setTimeout(() => {
+        deepEqual(callbackOrder, [ 'beforeSetup', 'setup', 'teardown']);
+        equal(setupContext, teardownContext);
+        resolve();
+      }, 50);
+    });
   },
 
   afterTeardown: function() {
@@ -43,6 +56,7 @@ moduleFor('component:x-foo', 'TestModule callbacks', {
 });
 
 test("setup callbacks called in the correct order", function() {
+  expect(7);
   deepEqual(callbackOrder, [ 'beforeSetup', 'setup' ]);
 });
 
