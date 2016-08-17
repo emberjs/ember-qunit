@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import { setResolver } from 'ember-test-helpers';
 
 var Resolver = Ember.DefaultResolver.extend({
