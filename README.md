@@ -83,7 +83,7 @@ Unit tests used to be the default mode for component tests. To flag a test as a 
 Unit tests have the advantage of giving you direct access to the component instance so you can test its internals.  Unit tests have the following features:
 
 - You have access to the component instance through `this.subject()`.
-- If you want to render the componenet's template, call either `this.render()` or `this.$()`.
+- If you want to render the component's template, call either `this.render()` or `this.$()`.
 - Testing the component's template is through `this.$()`.
 - You are required to specify any dependencies other than the component's template in the `needs: []` option.  This includes helpers, services, partials, and any other components (with their templates) that are referenced.
 - Unit tests do not call most of the Ember lifecycle hooks.  `didInsertElement` and `willDestroyElement` will be called, but the remaining hooks introduced in Ember 1.13.x will not be.
