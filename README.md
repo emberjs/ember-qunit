@@ -1,4 +1,4 @@
-# Ember QUnit [![Build Status](https://travis-ci.org/rwjblue/ember-qunit.png)](https://travis-ci.org/rwjblue/ember-qunit)
+# Ember QUnit [![Build Status](https://travis-ci.org/emberjs/ember-qunit.png)](https://travis-ci.org/emberjs/ember-qunit)
 
 Ember QUnit simplifies unit testing of Ember applications with QUnit by
 providing QUnit-specific wrappers around the helpers contained in
