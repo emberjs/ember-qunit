@@ -25,7 +25,6 @@ var loader = new Funnel('bower_components', {
 });
 
 var emberTestHelpersPath = path.dirname(resolve.sync('ember-test-helpers'));
-var klassyPath = path.dirname(resolve.sync('klassy', { basedir: emberTestHelpersPath }));
 
 var emberTestHelpers = new Funnel(emberTestHelpersPath, {
   srcDir: '/',
@@ -33,13 +32,7 @@ var emberTestHelpers = new Funnel(emberTestHelpersPath, {
   destDir: '/'
 });
 
-// TODO - this manual dependency management has got to go!
-var klassy = new Funnel(klassyPath, {
-  srcDir: '/',
-  files: ['klassy.js'],
-  destDir: '/'
-});
-var deps = mergeTrees([klassy, emberTestHelpers]);
+var deps = mergeTrees([emberTestHelpers]);
 
 var lib = new Funnel('lib', {
   srcDir: '/',
