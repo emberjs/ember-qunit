@@ -1,5 +1,21 @@
 # Change Log
 
+## [v2.0.0](https://github.com/emberjs/ember-qunit/tree/v2.0.0) (2017-03-23)
+[Full Changelog](https://github.com/emberjs/ember-qunit/compare/v2.0.0-beta.1...v2.0.0)
+
+**Closed issues:**
+
+- Test of the recompute function in an Ember helper always fails [\#254](https://github.com/emberjs/ember-qunit/issues/254)
+- Add TypeScript typings for global helpers [\#251](https://github.com/emberjs/ember-qunit/issues/251)
+- Unable to test `Ember.onError` after upgrading [\#250](https://github.com/emberjs/ember-qunit/issues/250)
+
+## [v2.0.0-beta.1](https://github.com/emberjs/ember-qunit/tree/v2.0.0-beta.1) (2016-11-28)
+[Full Changelog](https://github.com/emberjs/ember-qunit/compare/v1.0.0...v2.0.0-beta.1)
+
+**Merged pull requests:**
+
+- Update "ember-test-helpers" to v0.6.0-beta.1 [\#249](https://github.com/emberjs/ember-qunit/pull/249) ([Turbo87](https://github.com/Turbo87))
+
 ## [v1.0.0](https://github.com/emberjs/ember-qunit/tree/v1.0.0) (2016-10-26)
 [Full Changelog](https://github.com/emberjs/ember-qunit/compare/v1.0.0-beta.1...v1.0.0)
 
