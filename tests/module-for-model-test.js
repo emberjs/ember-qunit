@@ -77,19 +77,6 @@ test('WhazzitAdapter is registered for model', function(assert) {
   assert.ok(store.adapterFor(model.constructor.modelName) instanceof WhazzitAdapter);
 });
 
-QUnit.skip('WhazzitAdapter is used for `findAll`', function(assert) {
-  assert.expect(2);
-  assert.notOk(whazzitAdapterFindAllCalled, 'precond - custom adapter has not yet been called');
-
-  var store = this.store();
-
-  return Ember.run(function() {
-    return store.findAll('whazzit').then(function() {
-      assert.ok(whazzitAdapterFindAllCalled, 'uses the custom adapter');
-    });
-  });
-});
-
 ///////////////////////////////////////////////////////////////////////////////
 
 moduleForModel('whazzit', 'model:whazzit with application adapter', {
