@@ -2,7 +2,8 @@ import {
   module,
   test,
   skip,
-  only
+  only,
+  todo
 } from 'qunit';
 
 module('qunit-shim test');
@@ -17,4 +18,8 @@ test('imports skips', function(assert) {
 
 test('imports only', function(assert) {
   assert.equal(typeof only, 'function', 'imports QUnit.only');
+});
+
+test('imports todo', function(assert) {
+  assert.equal(typeof todo, 'function', 'imports QUnit.todo');
 });
