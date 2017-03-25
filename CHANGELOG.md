@@ -1,5 +1,14 @@
 # Change Log
 
+## [v2.1.0](https://github.com/emberjs/ember-qunit/tree/v2.1.0) (2017-03-25)
+[Full Changelog](https://github.com/emberjs/ember-qunit/compare/v2.0.0...v2.1.0)
+
+**Merged pull requests:**
+
+- Export todo [\#259](https://github.com/emberjs/ember-qunit/pull/259) ([drewchandler](https://github.com/drewchandler))
+- Update package versions for build. [\#257](https://github.com/emberjs/ember-qunit/pull/257) ([rwjblue](https://github.com/rwjblue))
+- Ensure all exports are globalized. [\#252](https://github.com/emberjs/ember-qunit/pull/252) ([rwjblue](https://github.com/rwjblue))
+
 ## [v2.0.0](https://github.com/emberjs/ember-qunit/tree/v2.0.0) (2017-03-23)
 [Full Changelog](https://github.com/emberjs/ember-qunit/compare/v2.0.0-beta.1...v2.0.0)
 
