@@ -61,14 +61,14 @@ test("setup callbacks called in the correct order", function(assert) {
 });
 
 moduleFor('component:x-foo', 'beforeEach/afterEach callbacks', {
+  before: function() {
+    callbackOrder = [ 'before' ];
+  },
+
   beforeSetup: function() {
     setupRegistry();
     beforeSetupContext = this;
-    callbackOrder = [ 'beforeSetup' ];
-  },
-
-  before: function() {
-    callbackOrder.push('before');
+    callbackOrder.push('beforeSetup');
   },
 
   beforeEach: function(assert) {
@@ -82,17 +82,18 @@ moduleFor('component:x-foo', 'beforeEach/afterEach callbacks', {
     teardownContext = this;
     callbackOrder.push('afterEach');
 
-    assert.deepEqual(callbackOrder, [ 'beforeSetup', 'beforeEach', 'afterEach']);
     assert.equal(setupContext, teardownContext);
   },
 
-  after: function() {
+  after: function(assert) {
     callbackOrder.push('after');
+    assert.deepEqual(callbackOrder, [ 'before', 'beforeSetup', 'beforeEach', 'afterEach', 'after' ]);
   }
 });
 
 test("setup callbacks called in the correct order", function(assert) {
-  assert.deepEqual(callbackOrder, [ 'beforeSetup', 'beforeEach' ]);
+  assert.expect(4);
+  assert.deepEqual(callbackOrder, [ 'before', 'beforeSetup', 'beforeEach' ]);
 });
 
 moduleFor('component:x-foo', {
