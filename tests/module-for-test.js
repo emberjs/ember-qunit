@@ -67,6 +67,10 @@ moduleFor('component:x-foo', 'beforeEach/afterEach callbacks', {
     callbackOrder = [ 'beforeSetup' ];
   },
 
+  before: function() {
+    callbackOrder.push('before');
+  },
+
   beforeEach: function(assert) {
     setupContext = this;
     callbackOrder.push('beforeEach');
@@ -80,6 +84,10 @@ moduleFor('component:x-foo', 'beforeEach/afterEach callbacks', {
 
     assert.deepEqual(callbackOrder, [ 'beforeSetup', 'beforeEach', 'afterEach']);
     assert.equal(setupContext, teardownContext);
+  },
+
+  after: function() {
+    callbackOrder.push('after');
   }
 });
 
