@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import DS from 'ember-data';
 import { moduleForModel, test } from 'ember-qunit';
 import { setResolverRegistry } from 'tests/test-support/resolver';
