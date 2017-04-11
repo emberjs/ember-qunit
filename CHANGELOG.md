@@ -1,5 +1,35 @@
 # Change Log
 
+## [v2.1.1](https://github.com/emberjs/ember-qunit/tree/v2.1.1) (2017-04-11)
+[Full Changelog](https://github.com/emberjs/ember-qunit/compare/v0.4.24...v2.1.1)
+
+**Fixed bugs:**
+
+- `needs` not resolving after module change [\#262](https://github.com/emberjs/ember-qunit/issues/262)
+
+**Closed issues:**
+
+- 0.4.23 breaks tests in PhantomJS [\#264](https://github.com/emberjs/ember-qunit/issues/264)
+
+**Merged pull requests:**
+
+- Handle async behaviour outside of tests [\#253](https://github.com/emberjs/ember-qunit/pull/253) ([mydea](https://github.com/mydea))
+
+## [v0.4.24](https://github.com/emberjs/ember-qunit/tree/v0.4.24) (2017-04-10)
+[Full Changelog](https://github.com/emberjs/ember-qunit/compare/v0.4.23...v0.4.24)
+
+**Merged pull requests:**
+
+- Revert "Reset `module` variable after all tests in module are completed." [\#263](https://github.com/emberjs/ember-qunit/pull/263) ([trentmwillis](https://github.com/trentmwillis))
+- Reset `module` variable after all tests in module are completed. [\#260](https://github.com/emberjs/ember-qunit/pull/260) ([rwjblue](https://github.com/rwjblue))
+
+## [v0.4.23](https://github.com/emberjs/ember-qunit/tree/v0.4.23) (2017-04-06)
+[Full Changelog](https://github.com/emberjs/ember-qunit/compare/v2.1.0...v0.4.23)
+
+**Merged pull requests:**
+
+- Reset `module` variable after all tests in module are completed. [\#261](https://github.com/emberjs/ember-qunit/pull/261) ([rwjblue](https://github.com/rwjblue))
+
 ## [v2.1.0](https://github.com/emberjs/ember-qunit/tree/v2.1.0) (2017-03-25)
 [Full Changelog](https://github.com/emberjs/ember-qunit/compare/v2.0.0...v2.1.0)
 
@@ -411,7 +441,7 @@
 - Allow usage of beforeEach and afterEach. [\#125](https://github.com/emberjs/ember-qunit/pull/125) ([rwjblue](https://github.com/rwjblue))
 
 ## [v0.2.1](https://github.com/emberjs/ember-qunit/tree/v0.2.1) (2015-02-02)
-[Full Changelog](https://github.com/emberjs/ember-qunit/compare/v0.2.0...v0.2.1)
+[Full Changelog](https://github.com/emberjs/ember-qunit/compare/latest...v0.2.1)
 
 **Closed issues:**
 
@@ -421,11 +451,11 @@
 
 - Ensure build output is ES3 safe. [\#124](https://github.com/emberjs/ember-qunit/pull/124) ([rwjblue](https://github.com/rwjblue))
 
-## [v0.2.0](https://github.com/emberjs/ember-qunit/tree/v0.2.0) (2015-01-31)
-[Full Changelog](https://github.com/emberjs/ember-qunit/compare/latest...v0.2.0)
-
 ## [latest](https://github.com/emberjs/ember-qunit/tree/latest) (2015-01-31)
-[Full Changelog](https://github.com/emberjs/ember-qunit/compare/v0.1.8...latest)
+[Full Changelog](https://github.com/emberjs/ember-qunit/compare/v0.2.0...latest)
+
+## [v0.2.0](https://github.com/emberjs/ember-qunit/tree/v0.2.0) (2015-01-31)
+[Full Changelog](https://github.com/emberjs/ember-qunit/compare/v0.1.8...v0.2.0)
 
 **Closed issues:**
 
