@@ -1,5 +1,12 @@
 # Change Log
 
+## [v2.1.2](https://github.com/emberjs/ember-qunit/tree/v2.1.2) (2017-04-11)
+[Full Changelog](https://github.com/emberjs/ember-qunit/compare/v2.1.1...v2.1.2)
+
+**Merged pull requests:**
+
+- Fix modules with no callbacks [\#267](https://github.com/emberjs/ember-qunit/pull/267) ([trentmwillis](https://github.com/trentmwillis))
+
 ## [v2.1.1](https://github.com/emberjs/ember-qunit/tree/v2.1.1) (2017-04-11)
 [Full Changelog](https://github.com/emberjs/ember-qunit/compare/v0.4.24...v2.1.1)
 
@@ -13,6 +20,7 @@
 
 **Merged pull requests:**
 
+- Add RELEASE.md to document release process [\#266](https://github.com/emberjs/ember-qunit/pull/266) ([trentmwillis](https://github.com/trentmwillis))
 - Handle async behaviour outside of tests [\#253](https://github.com/emberjs/ember-qunit/pull/253) ([mydea](https://github.com/mydea))
 
 ## [v0.4.24](https://github.com/emberjs/ember-qunit/tree/v0.4.24) (2017-04-10)
