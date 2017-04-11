@@ -1,7 +1,7 @@
 /* global setTimeout */
 
 import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
+import { module, moduleFor, test } from 'ember-qunit';
 import { setResolverRegistry } from 'tests/test-support/resolver';
 
 function setupRegistry() {
@@ -133,4 +133,22 @@ test('assert argument is not shared between tests', function(assert) {
 
   assert.ok(!!assert, 'assert argument was present');
   assert.ok(true, 'dummy extra test');
+});
+
+module('Wrapper', function(hooks) {
+  hooks.beforeEach(setupRegistry);
+
+  moduleFor('component:x-foo', 'Some description');
+
+  test('works properly without callbacks', function(assert) {
+    assert.expect(1);
+    assert.ok(this.subject());
+  });
+
+  moduleFor('component:x-foo');
+
+  test('works properly without description or callbacks', function(assert) {
+    assert.expect(1);
+    assert.ok(this.subject());
+  });
 });
