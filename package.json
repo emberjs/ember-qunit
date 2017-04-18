@@ -31,6 +31,7 @@
     "ember-cli-release": "^1.0.0-beta.2",
     "exists-sync": "^0.0.4",
     "git-repo-version": "^0.4.1",
+    "loader.js": "^4.2.3",
     "phantomjs-prebuilt": "^2.1.12",
     "resolve": "^1.1.7"
   },
