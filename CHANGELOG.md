@@ -1,5 +1,21 @@
 # Change Log
 
+## [v2.1.3](https://github.com/emberjs/ember-qunit/tree/v2.1.3) (2017-04-30)
+[Full Changelog](https://github.com/emberjs/ember-qunit/compare/v2.1.2...v2.1.3)
+
+**Fixed bugs:**
+
+- Tests failing in beforeEach\(\) due to module being undefined [\#268](https://github.com/emberjs/ember-qunit/issues/268)
+
+**Closed issues:**
+
+- a skip before test fails when this.subject\(\) is called in beforeEach [\#269](https://github.com/emberjs/ember-qunit/issues/269)
+- Error: Could not find module `ember-qunit` [\#265](https://github.com/emberjs/ember-qunit/issues/265)
+
+**Merged pull requests:**
+
+- Convert "loader.js" from bower to npm dependency [\#270](https://github.com/emberjs/ember-qunit/pull/270) ([Turbo87](https://github.com/Turbo87))
+
 ## [v2.1.2](https://github.com/emberjs/ember-qunit/tree/v2.1.2) (2017-04-11)
 [Full Changelog](https://github.com/emberjs/ember-qunit/compare/v2.1.1...v2.1.2)
 
