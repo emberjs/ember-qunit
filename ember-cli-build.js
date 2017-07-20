@@ -123,5 +123,15 @@ module.exports = function() {
     outputFile: '/assets/test-support.js'
   });
 
-  return mergeTrees([loader, main, mainWithTests, globalizedMain, vendor, testIndex, qunit, testSupport, generatedBowerConfig]);
+  return mergeTrees([
+    loader,
+    main,
+    mainWithTests,
+    globalizedMain,
+    vendor,
+    testIndex,
+    qunit,
+    testSupport,
+    generatedBowerConfig
+  ]);
 }
