@@ -15,7 +15,7 @@
     "tests"
   ],
   "dependencies": {
-    "ember": "^2.12.0"
+    "ember": "^2.13.0"
   },
   "devDependencies": {
     "qunit": "^2.0.1",
@@ -23,5 +23,8 @@
     "ember-cli-test-loader": "0.0.4",
     "jquery": "~2.1.4",
     "ember-data": "~2.12.1"
+  },
+  "resolutions": {
+    "ember-cli-shims": "^1.1.0"
   }
 }
