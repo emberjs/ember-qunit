@@ -98,8 +98,8 @@ module.exports = function() {
   var vendor = concat('bower_components', {
     inputFiles: [
       'jquery/dist/jquery.js',
+      'ember/ember.debug.js',
       'ember/ember-template-compiler.js',
-      'ember/ember.js',
       'ember-data/ember-data.js'
     ],
     outputFile: '/assets/vendor.js'
@@ -123,5 +123,15 @@ module.exports = function() {
     outputFile: '/assets/test-support.js'
   });
 
-  return mergeTrees([loader, main, mainWithTests, globalizedMain, vendor, testIndex, qunit, testSupport, generatedBowerConfig]);
+  return mergeTrees([
+    loader,
+    main,
+    mainWithTests,
+    globalizedMain,
+    vendor,
+    testIndex,
+    qunit,
+    testSupport,
+    generatedBowerConfig
+  ]);
 }
