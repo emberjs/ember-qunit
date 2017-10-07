@@ -15,6 +15,14 @@ cache:
   directories:
     - $HOME/.npm
 
+
+branches:
+  only:
+    - master
+    - /^v\d+\.\d+\.\d+$/
+    - /^greenkeeper.*$/
+
+
 env:
   # we recommend new addons test the current and previous LTS
   # as well as latest stable release (bonus points to beta/canary)
