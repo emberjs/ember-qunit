@@ -1,5 +1,12 @@
 # Change Log
 
+## [v3.0.0-beta.2](https://github.com/emberjs/ember-qunit/tree/v3.0.0-beta.2) (2017-10-07)
+[Full Changelog](https://github.com/emberjs/ember-qunit/compare/v3.0.0-beta.1...v3.0.0-beta.2)
+
+**Merged pull requests:**
+
+- Bring over more functionality from ember-cli-qunit. [\#283](https://github.com/emberjs/ember-qunit/pull/283) ([rwjblue](https://github.com/rwjblue))
+
 ## [v3.0.0-beta.1](https://github.com/emberjs/ember-qunit/tree/v3.0.0-beta.1) (2017-10-07)
 [Full Changelog](https://github.com/emberjs/ember-qunit/compare/v2.2.0...v3.0.0-beta.1)
 
