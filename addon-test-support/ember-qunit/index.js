@@ -23,12 +23,15 @@ import { QUnitAdapter } from 'ember-qunit';
  */
 export function setupTestContainer() {
   let testContainer = document.getElementById('ember-testing-container');
-  if (!testContainer) { return; }
+  if (!testContainer) {
+    return;
+  }
 
   let params = QUnit.urlParams;
 
   let containerVisibility = params.nocontainer ? 'hidden' : 'visible';
-  let containerPosition = (params.dockcontainer || params.devmode) ? 'fixed' : 'relative';
+  let containerPosition =
+    params.dockcontainer || params.devmode ? 'fixed' : 'relative';
 
   if (params.devmode) {
     testContainer.className = ' full-screen';
@@ -39,7 +42,9 @@ export function setupTestContainer() {
 
   let qunitContainer = document.getElementById('qunit');
   if (params.dockcontainer) {
-    qunitContainer.style.marginBottom = window.getComputedStyle(testContainer).height;
+    qunitContainer.style.marginBottom = window.getComputedStyle(
+      testContainer
+    ).height;
   }
 }
 
@@ -71,7 +76,7 @@ export function setupTestAdapter() {
    @param {Boolean} [options.setupTestAdapter] If `false` the default Ember.Test adapter will
    not be updated.
  */
-export function start(options = { }) {
+export function start(options = {}) {
   if (options.loadTests !== false) {
     loadTests();
   }

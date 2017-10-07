@@ -1,10 +1,4 @@
-import {
-  module,
-  test,
-  skip,
-  only,
-  todo
-} from 'qunit';
+import { module, test, skip, only, todo } from 'qunit';
 
 module('qunit-shim test');
 

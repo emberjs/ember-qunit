@@ -13,7 +13,7 @@ function setupRegistry() {
   setResolverRegistry({
     'model:whazzit': Whazzit,
     'adapter:whazzit': WhazzitAdapter,
-    'adapter:application': ApplicationAdapter
+    'adapter:application': ApplicationAdapter,
   });
 }
 
@@ -26,7 +26,7 @@ moduleForModel('whazzit', 'model:whazzit without adapter', {
 
   beforeEach: function() {
     Whazzit.FIXTURES = [];
-  }
+  },
 });
 
 test('store exists', function(assert) {
@@ -59,14 +59,16 @@ moduleForModel('whazzit', 'model:whazzit with custom adapter', {
 
   setup: function() {
     Whazzit.FIXTURES = [];
-  }
+  },
 });
 
 test('WhazzitAdapter is registered for model', function(assert) {
   var model = this.subject(),
     store = this.store();
 
-  assert.ok(store.adapterFor(model.constructor.modelName) instanceof WhazzitAdapter);
+  assert.ok(
+    store.adapterFor(model.constructor.modelName) instanceof WhazzitAdapter
+  );
 });
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -80,13 +82,17 @@ moduleForModel('whazzit', 'model:whazzit with application adapter', {
 
   setup: function() {
     Whazzit.FIXTURES = [];
-  }
+  },
 });
 
 test('ApplicationAdapter is registered for model', function(assert) {
   var model = this.subject(),
-      store = this.store();
+    store = this.store();
 
-  assert.ok(store.adapterFor(model.constructor.modelName) instanceof ApplicationAdapter);
-  assert.notOk(store.adapterFor(model.constructor.modelName) instanceof WhazzitAdapter);
+  assert.ok(
+    store.adapterFor(model.constructor.modelName) instanceof ApplicationAdapter
+  );
+  assert.notOk(
+    store.adapterFor(model.constructor.modelName) instanceof WhazzitAdapter
+  );
 });

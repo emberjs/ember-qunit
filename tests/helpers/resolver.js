@@ -10,19 +10,18 @@ const Resolver = AppResolver.extend({
 
   normalize: function(fullName) {
     return Ember.String.dasherize(fullName);
-  }
+  },
 });
 const resolver = Resolver.create();
 
 resolver.namespace = {
   modulePrefix: config.modulePrefix,
-  podModulePrefix: config.podModulePrefix
+  podModulePrefix: config.podModulePrefix,
 };
 
 export default resolver;
 
 setResolver(resolver);
-
 
 export function setResolverRegistry(registry) {
   resolver.set('registry', registry);

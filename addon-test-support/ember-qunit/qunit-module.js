@@ -4,8 +4,12 @@ import { module as qunitModule } from 'qunit';
 function noop() {}
 
 function callbackFor(name, callbacks) {
-  if (typeof callbacks !== 'object') { return noop; }
-  if (!callbacks) { return noop; }
+  if (typeof callbacks !== 'object') {
+    return noop;
+  }
+  if (!callbacks) {
+    return noop;
+  }
 
   var callback = noop;
 
@@ -25,8 +29,8 @@ export function createModule(Constructor, name, description, callbacks) {
 
   var before = callbackFor('before', callbacks);
   var beforeEach = callbackFor('beforeEach', callbacks);
-  var afterEach  = callbackFor('afterEach', callbacks);
-  var after  = callbackFor('after', callbacks);
+  var afterEach = callbackFor('afterEach', callbacks);
+  var after = callbackFor('after', callbacks);
 
   var module;
   var moduleName = typeof description === 'string' ? description : name;
@@ -50,7 +54,9 @@ export function createModule(Constructor, name, description, callbacks) {
 
     afterEach() {
       let result = afterEach.apply(this, arguments);
-      return Ember.RSVP.resolve(result).then(() => module.teardown(...arguments));
+      return Ember.RSVP
+        .resolve(result)
+        .then(() => module.teardown(...arguments));
     },
 
     after() {

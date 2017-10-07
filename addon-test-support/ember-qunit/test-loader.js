@@ -1,12 +1,11 @@
 import QUnit from 'qunit';
 import AbstractTestLoader, {
   addModuleExcludeMatcher,
-  addModuleIncludeMatcher
+  addModuleIncludeMatcher,
 } from 'ember-cli-test-loader/test-support/index';
 
 addModuleExcludeMatcher(function(moduleName) {
-  return QUnit.urlParams.nolint &&
-    moduleName.match(/\.(jshint|lint-test)$/);
+  return QUnit.urlParams.nolint && moduleName.match(/\.(jshint|lint-test)$/);
 });
 
 addModuleIncludeMatcher(function(moduleName) {

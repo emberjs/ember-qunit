@@ -15,7 +15,9 @@ test('asyncStart waits for asyncEnd to finish a test', function(assert) {
   }, 50);
 });
 
-test('asyncStart waits for equal numbers of asyncEnd to finish a test', function(assert) {
+test('asyncStart waits for equal numbers of asyncEnd to finish a test', function(
+  assert
+) {
   const adapter = QUnitAdapter.create();
 
   adapter.asyncStart();
