@@ -1,8 +1,8 @@
-# Ember QUnit [![Build Status](https://travis-ci.org/emberjs/ember-qunit.png)](https://travis-ci.org/emberjs/ember-qunit)
+# ember-qunit [![Build Status](https://travis-ci.org/emberjs/ember-qunit.png)](https://travis-ci.org/emberjs/ember-qunit)
 
 Ember QUnit simplifies unit testing of Ember applications with QUnit by
 providing QUnit-specific wrappers around the helpers contained in
-[ember-test-helpers](https://github.com/switchfly/ember-test-helpers).
+[ember-test-helpers](https://github.com/emberjs/ember-test-helpers).
 
 ## Usage
 
@@ -217,7 +217,6 @@ test('sometimes async gets rejected', function(assert) {
    - `integration: true` or `unit: true` (default: `integration: true`)
    - `needs` specify any dependencies the tested module will require.  (Including this will force your test into unit mode).
 
-
 ### `moduleForModel(name, [description, callbacks])`
 
 - `name`: (String) - the short name of the model you'd use in `store`
@@ -233,31 +232,25 @@ test('sometimes async gets rejected', function(assert) {
 
 ## Contributing
 
-Contributions are welcome. Please follow the instructions below to install and
-test this library.
-
 ### Installation
 
-```sh
-$ npm install
-```
+* `git clone <repository-url>` this repository
+* `cd ember-qunit`
+* `npm install`
 
-### Testing
+### Running
 
-In order to test in the browser:
+* `ember serve`
+* Visit your app at [http://localhost:4200](http://localhost:4200).
 
-```sh
-$ npm start
-```
+### Running Tests
 
-... and then visit [http://localhost:4200/tests](http://localhost:4200/tests).
+* `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
+* `ember test`
+* `ember test --server`
 
-In order to perform a CI test:
+### Building
 
-```sh
-$ npm test
-```
+* `ember build`
 
-## Copyright and License
-
-Copyright 2015 Ryan Florence and contributors. [MIT License](./LICENSE).
+For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
