@@ -1,13 +1,11 @@
 module.exports = {
   root: true,
+  extends: ['eslint:recommended', 'prettier'],
+  plugins: ['prettier'],
   parserOptions: {
     ecmaVersion: 2017,
-    sourceType: 'module'
-  },
-  extends: 'eslint:recommended',
-  env: {
-    browser: true
   },
   rules: {
-  }
+    'prettier/prettier': ['error', { singleQuote: true, trailingComma: 'es5' }],
+  },
 };
