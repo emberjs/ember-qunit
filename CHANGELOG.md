@@ -1,5 +1,16 @@
 # Change Log
 
+## [v3.0.0-beta.3](https://github.com/emberjs/ember-qunit/tree/v3.0.0-beta.3) (2017-10-11)
+[Full Changelog](https://github.com/emberjs/ember-qunit/compare/v3.0.0-beta.2...v3.0.0-beta.3)
+
+**Closed issues:**
+
+- 0.4.24 is not tagged on bower install? [\#271](https://github.com/emberjs/ember-qunit/issues/271)
+
+**Merged pull requests:**
+
+- Properly call `setTestGenerator` method. [\#284](https://github.com/emberjs/ember-qunit/pull/284) ([rwjblue](https://github.com/rwjblue))
+
 ## [v3.0.0-beta.2](https://github.com/emberjs/ember-qunit/tree/v3.0.0-beta.2) (2017-10-07)
 [Full Changelog](https://github.com/emberjs/ember-qunit/compare/v3.0.0-beta.1...v3.0.0-beta.2)
 
