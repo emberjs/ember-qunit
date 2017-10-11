@@ -7,6 +7,12 @@ const stripIndent = require('common-tags').stripIndent;
 module.exports = {
   name: 'ember-qunit',
 
+  init() {
+    this._super.init && this._super.init.apply(this, arguments);
+
+    this.setTestGenerator();
+  },
+
   included() {
     this._super.included.apply(this, arguments);
 
