@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import $ from 'jquery';
 import { moduleForComponent, test } from 'ember-qunit';
-import { setResolverRegistry } from '../helpers/resolver';
+import { setResolverRegistry } from '../../helpers/resolver';
 import hbs from 'htmlbars-inline-precompile';
 
 var PrettyColor = Ember.Component.extend({

@@ -1,6 +1,6 @@
 import DS from 'ember-data';
 import { moduleForModel, test } from 'ember-qunit';
-import { setResolverRegistry } from '../helpers/resolver';
+import { setResolverRegistry } from '../../helpers/resolver';
 
 var Adapter = DS.JSONAPIAdapter || DS.FixutreAdapter;
 

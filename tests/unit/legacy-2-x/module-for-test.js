@@ -2,7 +2,7 @@
 
 import Ember from 'ember';
 import { module, moduleFor, test } from 'ember-qunit';
-import { setResolverRegistry } from '../helpers/resolver';
+import { setResolverRegistry } from '../../helpers/resolver';
 
 function setupRegistry() {
   setResolverRegistry({

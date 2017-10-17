@@ -1,6 +1,8 @@
-export { default as moduleFor } from './module-for';
-export { default as moduleForComponent } from './module-for-component';
-export { default as moduleForModel } from './module-for-model';
+export { default as moduleFor } from './legacy-2-x/module-for';
+export {
+  default as moduleForComponent,
+} from './legacy-2-x/module-for-component';
+export { default as moduleForModel } from './legacy-2-x/module-for-model';
 export { default as QUnitAdapter } from './adapter';
 export { setResolver } from 'ember-test-helpers';
 export { module, test, skip, only, todo } from 'qunit';
@@ -9,7 +11,7 @@ export { loadTests } from './test-loader';
 import { loadTests } from './test-loader';
 import Ember from 'ember';
 import QUnit from 'qunit';
-import { QUnitAdapter } from 'ember-qunit';
+import QUnitAdapter from './adapter';
 
 /**
    Uses current URL configuration to setup the test container.
