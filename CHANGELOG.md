@@ -1,5 +1,63 @@
 # Change Log
 
+## [v3.0.0-beta.4](https://github.com/emberjs/ember-qunit/tree/v3.0.0-beta.4) (2017-10-17)
+[Full Changelog](https://github.com/emberjs/ember-qunit/compare/v3.0.0-beta.3...v3.0.0-beta.4)
+
+**Implemented enhancements:**
+
+- Implement RFC 232 \(New QUnit Testing API\) [\#208](https://github.com/emberjs/ember-qunit/issues/208)
+- Add basic implementation of new ember-qunit API. [\#286](https://github.com/emberjs/ember-qunit/pull/286) ([rwjblue](https://github.com/rwjblue))
+
+**Closed issues:**
+
+- Model unit tests silently cache this.subject\(\) [\#278](https://github.com/emberjs/ember-qunit/issues/278)
+- assert.throws fails in component integration tests with ember 2.12 [\#256](https://github.com/emberjs/ember-qunit/issues/256)
+- Better assertion message when ember asserts.  [\#247](https://github.com/emberjs/ember-qunit/issues/247)
+- When a service is injected in a router the routes unit tests fail [\#218](https://github.com/emberjs/ember-qunit/issues/218)
+- \[QUESTION\]: can we update this test to show what ember 2.x tests would do? [\#215](https://github.com/emberjs/ember-qunit/issues/215)
+- cannot get async test to work [\#209](https://github.com/emberjs/ember-qunit/issues/209)
+- Addons "Unable to find partial with name" [\#202](https://github.com/emberjs/ember-qunit/issues/202)
+- needs fails with single-character underscore helper name [\#201](https://github.com/emberjs/ember-qunit/issues/201)
+- Intermittent issues triggering events on elements with bound actions [\#193](https://github.com/emberjs/ember-qunit/issues/193)
+- Make beforeEach & afterEach respect returned promises [\#192](https://github.com/emberjs/ember-qunit/issues/192)
+- async beforeEach [\#186](https://github.com/emberjs/ember-qunit/issues/186)
+- Access to the component instance in moduleForComponent should be possible [\#184](https://github.com/emberjs/ember-qunit/issues/184)
+- Merge unit / integration component tests [\#183](https://github.com/emberjs/ember-qunit/issues/183)
+- .jshintignore ignored in addon [\#173](https://github.com/emberjs/ember-qunit/issues/173)
+- You cannot use the same root element \(\#ember-testing\) multiple times in an Ember.Application [\#168](https://github.com/emberjs/ember-qunit/issues/168)
+- App.destroy doesn't properly cleanup, possible regression [\#166](https://github.com/emberjs/ember-qunit/issues/166)
+- Does beforeEach support more than 1 promise resolve? [\#165](https://github.com/emberjs/ember-qunit/issues/165)
+- Called start\(\) outside of a test context [\#143](https://github.com/emberjs/ember-qunit/issues/143)
+- problem returning application from qunit setup module callback [\#123](https://github.com/emberjs/ember-qunit/issues/123)
+- Release New Version -- 0.2.0 [\#121](https://github.com/emberjs/ember-qunit/issues/121)
+- moduleFor undefined function [\#117](https://github.com/emberjs/ember-qunit/issues/117)
+- Update QUnit hook names: setup/teardown is deprecated for beforeEach/afterEach [\#114](https://github.com/emberjs/ember-qunit/issues/114)
+- Does delegate functionality still exist in moduleFor? [\#112](https://github.com/emberjs/ember-qunit/issues/112)
+- Child belongsTo Father, then Father belongsTo GrandFather issue.. [\#109](https://github.com/emberjs/ember-qunit/issues/109)
+- async func test fails after stored in sessionStorage [\#107](https://github.com/emberjs/ember-qunit/issues/107)
+- qunit master now supports the promise start/stop stuff [\#95](https://github.com/emberjs/ember-qunit/issues/95)
+- New helper moduleForAdapter? [\#92](https://github.com/emberjs/ember-qunit/issues/92)
+- How to erase contents in store\(\) after each test? [\#83](https://github.com/emberjs/ember-qunit/issues/83)
+- Writing unit tests which will work with templates. [\#68](https://github.com/emberjs/ember-qunit/issues/68)
+- I believe these deps, are incorrect [\#59](https://github.com/emberjs/ember-qunit/issues/59)
+- Can't call `this.append\(\)` in `setup` and still have tests work [\#58](https://github.com/emberjs/ember-qunit/issues/58)
+- Document that es6 transpiler must enable CompatFix or change exports [\#43](https://github.com/emberjs/ember-qunit/issues/43)
+- You cannot use the same root element \(body\) [\#29](https://github.com/emberjs/ember-qunit/issues/29)
+- figure out how to resolve templates on a default resolver [\#23](https://github.com/emberjs/ember-qunit/issues/23)
+- refactor moduleForComponent view logic [\#21](https://github.com/emberjs/ember-qunit/issues/21)
+- Unit + Intergration Test Conflicts [\#20](https://github.com/emberjs/ember-qunit/issues/20)
+- Extending test for 3rd party additions [\#14](https://github.com/emberjs/ember-qunit/issues/14)
+- using needs does weird things when you have multiple tests under the module [\#12](https://github.com/emberjs/ember-qunit/issues/12)
+- Gotchas [\#10](https://github.com/emberjs/ember-qunit/issues/10)
+- noCleanup option [\#6](https://github.com/emberjs/ember-qunit/issues/6)
+- potential container variable leek [\#3](https://github.com/emberjs/ember-qunit/issues/3)
+- moduleFor\(View|Component\) needs eventDispatcher [\#2](https://github.com/emberjs/ember-qunit/issues/2)
+- stricter about cleanup/leaks [\#1](https://github.com/emberjs/ember-qunit/issues/1)
+
+**Merged pull requests:**
+
+- Use yarn instead of npm [\#285](https://github.com/emberjs/ember-qunit/pull/285) ([Turbo87](https://github.com/Turbo87))
+
 ## [v3.0.0-beta.3](https://github.com/emberjs/ember-qunit/tree/v3.0.0-beta.3) (2017-10-11)
 [Full Changelog](https://github.com/emberjs/ember-qunit/compare/v3.0.0-beta.2...v3.0.0-beta.3)
 
