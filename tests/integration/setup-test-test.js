@@ -6,6 +6,10 @@ import hasEmberVersion from 'ember-test-helpers/has-ember-version';
 import { setResolverRegistry } from '../helpers/resolver';
 
 module('setupTest tests', function(hooks) {
+  if (!hasEmberVersion(2, 4)) {
+    return;
+  }
+
   hooks.beforeEach(function() {
     setResolverRegistry({});
   });

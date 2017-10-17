@@ -4,8 +4,13 @@ import { helper } from '@ember/component/helper';
 import hbs from 'htmlbars-inline-precompile';
 import { setupRenderingTest, render } from 'ember-qunit';
 import { setResolverRegistry } from '../helpers/resolver';
+import hasEmberVersion from 'ember-test-helpers/has-ember-version';
 
 module('setupRenderingTest tests', function(hooks) {
+  if (!hasEmberVersion(2, 4)) {
+    return;
+  }
+
   hooks.beforeEach(function() {
     setResolverRegistry({});
   });
