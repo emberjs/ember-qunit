@@ -2,7 +2,7 @@ export { default as moduleFor } from './legacy-2-x/module-for';
 export { default as moduleForComponent } from './legacy-2-x/module-for-component';
 export { default as moduleForModel } from './legacy-2-x/module-for-model';
 export { default as QUnitAdapter } from './adapter';
-export { setResolver } from 'ember-test-helpers';
+export { setResolver, render, clearRender, settled } from 'ember-test-helpers';
 export { module, test, skip, only, todo } from 'qunit';
 export { loadTests } from './test-loader';
 
@@ -10,6 +10,34 @@ import { loadTests } from './test-loader';
 import Ember from 'ember';
 import QUnit from 'qunit';
 import QUnitAdapter from './adapter';
+import {
+  setupContext,
+  teardownContext,
+  setupRenderingContext,
+  teardownRenderingContext,
+} from 'ember-test-helpers';
+
+export function setupTest(hooks, options) {
+  hooks.beforeEach(function() {
+    setupContext(this, options);
+  });
+
+  hooks.afterEach(function() {
+    teardownContext(this);
+  });
+}
+
+export function setupRenderingTest(hooks, options) {
+  setupTest(hooks, options);
+
+  hooks.beforeEach(function() {
+    setupRenderingContext(this);
+  });
+
+  hooks.afterEach(function() {
+    teardownRenderingContext(this);
+  });
+}
 
 /**
    Uses current URL configuration to setup the test container.
