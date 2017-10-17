@@ -1,6 +1,6 @@
 import DS from 'ember-data';
 import { moduleForModel, test } from 'ember-qunit';
-import { setResolverRegistry } from '../helpers/resolver';
+import { setResolverRegistry } from '../../helpers/resolver';
 
 var Adapter = DS.JSONAPIAdapter || DS.FixutreAdapter;
 
@@ -66,9 +66,7 @@ test('WhazzitAdapter is registered for model', function(assert) {
   var model = this.subject(),
     store = this.store();
 
-  assert.ok(
-    store.adapterFor(model.constructor.modelName) instanceof WhazzitAdapter
-  );
+  assert.ok(store.adapterFor(model.constructor.modelName) instanceof WhazzitAdapter);
 });
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -89,10 +87,6 @@ test('ApplicationAdapter is registered for model', function(assert) {
   var model = this.subject(),
     store = this.store();
 
-  assert.ok(
-    store.adapterFor(model.constructor.modelName) instanceof ApplicationAdapter
-  );
-  assert.notOk(
-    store.adapterFor(model.constructor.modelName) instanceof WhazzitAdapter
-  );
+  assert.ok(store.adapterFor(model.constructor.modelName) instanceof ApplicationAdapter);
+  assert.notOk(store.adapterFor(model.constructor.modelName) instanceof WhazzitAdapter);
 });

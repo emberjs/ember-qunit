@@ -2133,9 +2133,9 @@ ember-source@~2.15.0:
     simple-dom "^0.3.0"
     simple-html-tokenizer "^0.4.1"
 
-ember-test-helpers@^0.7.0-beta.2:
-  version "0.7.0-beta.4"
-  resolved "https://registry.yarnpkg.com/ember-test-helpers/-/ember-test-helpers-0.7.0-beta.4.tgz#bdd1b538719072da1206637fe7aef3aec089fa0d"
+ember-test-helpers@^0.7.0-beta.7:
+  version "0.7.0-beta.7"
+  resolved "https://registry.yarnpkg.com/ember-test-helpers/-/ember-test-helpers-0.7.0-beta.7.tgz#7a8d594af90875e2fc75ff0face5494d27b68446"
   dependencies:
     broccoli-funnel "^2.0.1"
     ember-cli-babel "^6.8.1"
@@ -2287,6 +2287,12 @@ eslint-config-prettier@^2.6.0:
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-2.6.0.tgz#f21db0ebb438ad678fb98946097c4bb198befccc"
   dependencies:
     get-stdin "^5.0.1"
+
+eslint-plugin-disable-features@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-disable-features/-/eslint-plugin-disable-features-0.1.2.tgz#a5e53dd61e517d897938b8451bce13b24677597f"
+  dependencies:
+    requireindex "~1.1.0"
 
 eslint-plugin-prettier@^2.3.1:
   version "2.3.1"
@@ -4567,6 +4573,10 @@ require-uncached@^1.0.3:
   dependencies:
     caller-path "^0.1.0"
     resolve-from "^1.0.0"
+
+requireindex@~1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/requireindex/-/requireindex-1.1.0.tgz#e5404b81557ef75db6e49c5a72004893fe03e162"
 
 requires-port@1.x.x:
   version "1.0.0"
