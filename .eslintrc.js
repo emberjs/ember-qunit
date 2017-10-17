@@ -33,5 +33,15 @@ module.exports = {
         qunit: true
       }
     },
+    {
+      files: ['./index.js', 'addon-test-support/**/*.js', 'config/**/*.js'],
+      plugins: [
+        'disable-features',
+      ],
+      rules: {
+        'disable-features/disable-async-await': 'error',
+        'disable-features/disable-generator-functions': 'error',
+      }
+    },
   ]
 };
