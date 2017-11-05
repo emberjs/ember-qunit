@@ -1,6 +1,13 @@
 # Change Log
 
-## [v3.0.0-beta.5](https://github.com/emberjs/ember-qunit/tree/v3.0.0-beta.5) (2017-11-04)
+## [v3.0.0-beta.6](https://github.com/emberjs/ember-qunit/tree/v3.0.0-beta.6) (2017-11-05)
+[Full Changelog](https://github.com/emberjs/ember-qunit/compare/v3.0.0-beta.5...v3.0.0-beta.6)
+
+**Merged pull requests:**
+
+- Make `setupTest` and `setupRenderingTest` async. [\#292](https://github.com/emberjs/ember-qunit/pull/292) ([rwjblue](https://github.com/rwjblue))
+
+## [v3.0.0-beta.5](https://github.com/emberjs/ember-qunit/tree/v3.0.0-beta.5) (2017-11-05)
 [Full Changelog](https://github.com/emberjs/ember-qunit/compare/v3.0.0-beta.4...v3.0.0-beta.5)
 
 **Implemented enhancements:**
