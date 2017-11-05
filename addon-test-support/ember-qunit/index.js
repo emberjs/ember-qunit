@@ -26,18 +26,18 @@ import {
 
 export function setupTest(hooks, options) {
   hooks.beforeEach(function(assert) {
-    setupContext(this, options);
+    return setupContext(this, options).then(() => {
+      let originalPauseTest = this.pauseTest;
+      this.pauseTest = function QUnit_pauseTest() {
+        assert.timeout(-1); // prevent the test from timing out
 
-    let originalPauseTest = this.pauseTest;
-    this.pauseTest = function QUnit_pauseTest() {
-      assert.timeout(-1); // prevent the test from timing out
-
-      return originalPauseTest.call(this);
-    };
+        return originalPauseTest.call(this);
+      };
+    });
   });
 
   hooks.afterEach(function() {
-    teardownContext(this);
+    return teardownContext(this);
   });
 }
 
@@ -45,11 +45,11 @@ export function setupRenderingTest(hooks, options) {
   setupTest(hooks, options);
 
   hooks.beforeEach(function() {
-    setupRenderingContext(this);
+    return setupRenderingContext(this);
   });
 
   hooks.afterEach(function() {
-    teardownRenderingContext(this);
+    return teardownRenderingContext(this);
   });
 }
 

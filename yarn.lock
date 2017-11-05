@@ -2133,9 +2133,9 @@ ember-source@~2.15.0:
     simple-dom "^0.3.0"
     simple-html-tokenizer "^0.4.1"
 
-ember-test-helpers@^0.7.0-beta.9:
-  version "0.7.0-beta.9"
-  resolved "https://registry.yarnpkg.com/ember-test-helpers/-/ember-test-helpers-0.7.0-beta.9.tgz#f1272d78821d988946d3d25dcf2cac81d3e79918"
+ember-test-helpers@^0.7.0-beta.10:
+  version "0.7.0-beta.10"
+  resolved "https://registry.yarnpkg.com/ember-test-helpers/-/ember-test-helpers-0.7.0-beta.10.tgz#d14fb1feb469e2943d3f852423f152efa0a9a4aa"
   dependencies:
     broccoli-funnel "^2.0.1"
     ember-cli-babel "^6.8.1"
