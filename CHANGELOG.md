@@ -1,5 +1,26 @@
 # Change Log
 
+## [v3.0.0-beta.5](https://github.com/emberjs/ember-qunit/tree/v3.0.0-beta.5) (2017-11-04)
+[Full Changelog](https://github.com/emberjs/ember-qunit/compare/v3.0.0-beta.4...v3.0.0-beta.5)
+
+**Implemented enhancements:**
+
+- Update ember-test-helpers to expose `pauseTest` / `resumeTest` [\#291](https://github.com/emberjs/ember-qunit/pull/291) ([rwjblue](https://github.com/rwjblue))
+
+**Fixed bugs:**
+
+- Add `pauseTest` and `resumeTest` functionality in `setupTest`. [\#287](https://github.com/emberjs/ember-qunit/issues/287)
+
+**Closed issues:**
+
+- beta.2 model unit tests failing w/codemod [\#289](https://github.com/emberjs/ember-qunit/issues/289)
+- Async behavior outside of a test [\#246](https://github.com/emberjs/ember-qunit/issues/246)
+- Upgrading to v0.4.12 causes error: `calling set on destroyed object` [\#233](https://github.com/emberjs/ember-qunit/issues/233)
+- Does it work with model POJO attributes? [\#139](https://github.com/emberjs/ember-qunit/issues/139)
+- moduleFor not allowing Adapter to use its Serializer. [\#69](https://github.com/emberjs/ember-qunit/issues/69)
+- moduleForComponent issue with {{link-to}} helpers [\#52](https://github.com/emberjs/ember-qunit/issues/52)
+- moduleForComponent and callbacks not working? [\#37](https://github.com/emberjs/ember-qunit/issues/37)
+
 ## [v3.0.0-beta.4](https://github.com/emberjs/ember-qunit/tree/v3.0.0-beta.4) (2017-10-17)
 [Full Changelog](https://github.com/emberjs/ember-qunit/compare/v3.0.0-beta.3...v3.0.0-beta.4)
 
