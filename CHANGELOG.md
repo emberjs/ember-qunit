@@ -1,5 +1,12 @@
 # Change Log
 
+## [v3.0.0-beta.7](https://github.com/emberjs/ember-qunit/tree/v3.0.0-beta.7) (2017-11-05)
+[Full Changelog](https://github.com/emberjs/ember-qunit/compare/v3.0.0-beta.6...v3.0.0-beta.7)
+
+**Merged pull requests:**
+
+- Migrate from `qunitjs` to `qunit` package. [\#295](https://github.com/emberjs/ember-qunit/pull/295) ([rwjblue](https://github.com/rwjblue))
+
 ## [v3.0.0-beta.6](https://github.com/emberjs/ember-qunit/tree/v3.0.0-beta.6) (2017-11-05)
 [Full Changelog](https://github.com/emberjs/ember-qunit/compare/v3.0.0-beta.5...v3.0.0-beta.6)
 
