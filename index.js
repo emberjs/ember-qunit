@@ -72,7 +72,7 @@ module.exports = {
   treeForVendor: function(tree) {
     const MergeTrees = require('broccoli-merge-trees');
     const Funnel = require('broccoli-funnel');
-    let qunitPath = path.dirname(require.resolve('qunitjs'));
+    let qunitPath = path.dirname(require.resolve('qunit'));
 
     let qunitTree = new Funnel(this.treeGenerator(qunitPath), {
       destDir: 'qunit',
