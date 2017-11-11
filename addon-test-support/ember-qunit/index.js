@@ -9,7 +9,7 @@ export {
   settled,
   pauseTest,
   resumeTest,
-} from 'ember-test-helpers';
+} from '@ember/test-helpers';
 export { module, test, skip, only, todo } from 'qunit';
 export { loadTests } from './test-loader';
 
@@ -22,7 +22,7 @@ import {
   teardownContext,
   setupRenderingContext,
   teardownRenderingContext,
-} from 'ember-test-helpers';
+} from '@ember/test-helpers';
 
 export function setupTest(hooks, options) {
   hooks.beforeEach(function(assert) {
