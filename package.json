@@ -1,6 +1,6 @@
 {
   "name": "ember-qunit",
-  "version": "3.0.0-beta.8",
+  "version": "3.0.0",
   "description": "QUnit helpers for testing Ember.js applications",
   "keywords": [
     "ember-addon"
@@ -26,12 +26,12 @@
     "test": "ember try:each"
   },
   "dependencies": {
+    "@ember/test-helpers": "^0.7.0",
     "broccoli-funnel": "^2.0.1",
     "broccoli-merge-trees": "^2.0.0",
     "common-tags": "^1.4.0",
     "ember-cli-babel": "^6.3.0",
     "ember-cli-test-loader": "^2.2.0",
-    "@ember/test-helpers": "^0.7.0",
     "qunit": "^2.4.1"
   },
   "devDependencies": {
