@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@ember/test-helpers@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-0.7.0.tgz#4ba5a98eb0aab81dbe8b3318f421a919aa0b8548"
+  dependencies:
+    broccoli-funnel "^2.0.1"
+    ember-cli-babel "^6.8.1"
+
 "@glimmer/compiler@^0.25.3":
   version "0.25.3"
   resolved "https://registry.yarnpkg.com/@glimmer/compiler/-/compiler-0.25.3.tgz#25eb06394f3ba1c1fae5af25c9cf7deb2c11ef4e"
@@ -2132,13 +2139,6 @@ ember-source@~2.15.0:
     rsvp "^3.6.1"
     simple-dom "^0.3.0"
     simple-html-tokenizer "^0.4.1"
-
-ember-test-helpers@^0.7.0-beta.11:
-  version "0.7.0-beta.11"
-  resolved "https://registry.yarnpkg.com/ember-test-helpers/-/ember-test-helpers-0.7.0-beta.11.tgz#a712a2faa665653c694e649d6aceacecc89ea2e8"
-  dependencies:
-    broccoli-funnel "^2.0.1"
-    ember-cli-babel "^6.8.1"
 
 ember-try-config@^2.0.1:
   version "2.1.0"
