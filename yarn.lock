@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@ember/test-helpers@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-0.7.0.tgz#4ba5a98eb0aab81dbe8b3318f421a919aa0b8548"
+"@ember/test-helpers@^0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-0.7.1.tgz#14ba828ebc5b7b0e6eb7889352cb40af0c995349"
   dependencies:
     broccoli-funnel "^2.0.1"
     ember-cli-babel "^6.8.1"
