@@ -1,6 +1,16 @@
 # Change Log
 
-## [v3.0.0-beta.7](https://github.com/emberjs/ember-qunit/tree/v3.0.0-beta.7) (2017-11-05)
+## [v3.0.0](https://github.com/emberjs/ember-qunit/tree/v3.0.0) (2017-11-11)
+[Full Changelog](https://github.com/emberjs/ember-qunit/compare/v3.0.0-beta.8...v3.0.0)
+
+**Implemented enhancements:**
+
+- Update to @ember/test-helpers \(from ember-test-helpers\). [\#296](https://github.com/emberjs/ember-qunit/pull/296) ([rwjblue](https://github.com/rwjblue))
+
+## [v3.0.0-beta.8](https://github.com/emberjs/ember-qunit/tree/v3.0.0-beta.8) (2017-11-11)
+[Full Changelog](https://github.com/emberjs/ember-qunit/compare/v3.0.0-beta.7...v3.0.0-beta.8)
+
+## [v3.0.0-beta.7](https://github.com/emberjs/ember-qunit/tree/v3.0.0-beta.7) (2017-11-06)
 [Full Changelog](https://github.com/emberjs/ember-qunit/compare/v3.0.0-beta.6...v3.0.0-beta.7)
 
 **Merged pull requests:**
