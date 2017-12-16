@@ -15,6 +15,8 @@ import {
   teardownContext,
   setupRenderingContext,
   teardownRenderingContext,
+  setupApplicationContext,
+  teardownApplicationContext,
 } from '@ember/test-helpers';
 
 export function setupTest(hooks, options) {
@@ -43,6 +45,18 @@ export function setupRenderingTest(hooks, options) {
 
   hooks.afterEach(function() {
     return teardownRenderingContext(this);
+  });
+}
+
+export function setupApplicationTest(hooks, options) {
+  setupTest(hooks, options);
+
+  hooks.beforeEach(function() {
+    return setupApplicationContext(this);
+  });
+
+  hooks.afterEach(function() {
+    return teardownApplicationContext(this);
   });
 }
 
