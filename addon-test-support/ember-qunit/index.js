@@ -2,14 +2,7 @@ export { default as moduleFor } from './legacy-2-x/module-for';
 export { default as moduleForComponent } from './legacy-2-x/module-for-component';
 export { default as moduleForModel } from './legacy-2-x/module-for-model';
 export { default as QUnitAdapter } from './adapter';
-export {
-  setResolver,
-  render,
-  clearRender,
-  settled,
-  pauseTest,
-  resumeTest,
-} from '@ember/test-helpers';
+export { setResolver } from '@ember/test-helpers';
 export { module, test, skip, only, todo } from 'qunit';
 export { loadTests } from './test-loader';
 
@@ -22,6 +15,8 @@ import {
   teardownContext,
   setupRenderingContext,
   teardownRenderingContext,
+  setupApplicationContext,
+  teardownApplicationContext,
 } from '@ember/test-helpers';
 
 export function setupTest(hooks, options) {
@@ -50,6 +45,18 @@ export function setupRenderingTest(hooks, options) {
 
   hooks.afterEach(function() {
     return teardownRenderingContext(this);
+  });
+}
+
+export function setupApplicationTest(hooks, options) {
+  setupTest(hooks, options);
+
+  hooks.beforeEach(function() {
+    return setupApplicationContext(this);
+  });
+
+  hooks.afterEach(function() {
+    return teardownApplicationContext(this);
   });
 }
 
