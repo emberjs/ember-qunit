@@ -1,5 +1,13 @@
 # Change Log
 
+## v3.2.1 (2017-12-17)
+
+#### :bug: Bug Fix
+* [#303](https://github.com/emberjs/ember-qunit/pull/303) Ensure Ember.testing is set properly during *ALL* tests.. ([@rwjblue](https://github.com/rwjblue))
+
+#### Committers: 1
+- Robert Jackson ([rwjblue](https://github.com/rwjblue))
+
 ## v3.2.0 (2017-12-17)
 
 #### :rocket: Enhancement
