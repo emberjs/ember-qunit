@@ -1,5 +1,17 @@
 # Change Log
 
+## v3.2.0 (2017-12-17)
+
+#### :rocket: Enhancement
+* [#302](https://github.com/emberjs/ember-qunit/pull/302) Implement `startApplicationTest` from emberjs/rfcs#268. ([@rwjblue](https://github.com/rwjblue))
+
+#### :house: Internal
+* [#299](https://github.com/emberjs/ember-qunit/pull/299) CI: Use Node 4 for tests. ([@Turbo87](https://github.com/Turbo87))
+
+#### Committers: 2
+- Robert Jackson ([rwjblue](https://github.com/rwjblue))
+- Tobias Bieniek ([Turbo87](https://github.com/Turbo87))
+
 ## [v3.0.0](https://github.com/emberjs/ember-qunit/tree/v3.0.0) (2017-11-11)
 [Full Changelog](https://github.com/emberjs/ember-qunit/compare/v3.0.0-beta.8...v3.0.0)
 
