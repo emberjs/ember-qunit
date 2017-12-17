@@ -22,6 +22,7 @@
   },
   "scripts": {
     "build": "ember build",
+    "changelog": "lerna-changelog",
     "start": "ember server",
     "test": "ember try:each"
   },
@@ -50,11 +51,22 @@
     "eslint-config-prettier": "^2.6.0",
     "eslint-plugin-disable-features": "^0.1.3",
     "eslint-plugin-prettier": "^2.3.1",
+    "lerna-changelog": "^0.7.0",
     "loader.js": "^4.2.3",
     "prettier": "^1.7.4"
   },
   "engines": {
     "node": "^4.5 || 6.* || >= 7.*"
+  },
+  "changelog": {
+    "repo": "emberjs/ember-qunit",
+    "labels": {
+      "breaking": ":boom: Breaking Change",
+      "enhancement": ":rocket: Enhancement",
+      "bug": ":bug: Bug Fix",
+      "documentation": ":memo: Documentation",
+      "internal": ":house: Internal"
+    }
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
