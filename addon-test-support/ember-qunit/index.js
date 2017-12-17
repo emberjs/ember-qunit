@@ -112,6 +112,22 @@ export function setupTestAdapter() {
 }
 
 /**
+  Ensures that `Ember.testing` is set to `true` before each test begins
+  (including `before` / `beforeEach`), and reset to `false` after each test is
+  completed. This is done via `QUnit.testStart` and `QUnit.testDone`.
+
+ */
+export function setupEmberTesting() {
+  QUnit.testStart(() => {
+    Ember.testing = true;
+  });
+
+  QUnit.testDone(() => {
+    Ember.testing = false;
+  });
+}
+
+/**
    @method start
    @param {Object} [options] Options to be used for enabling/disabling behaviors
    @param {Boolean} [options.loadTests] If `false` tests will not be loaded automatically.
@@ -121,6 +137,9 @@ export function setupTestAdapter() {
    (you must run `QUnit.start()` to kick them off).
    @param {Boolean} [options.setupTestAdapter] If `false` the default Ember.Test adapter will
    not be updated.
+   @param {Boolean} [options.setupEmberTesting] `false` opts out of the
+   default behavior of setting `Ember.testing` to `true` before all tests and
+   back to `false` after each test will.
  */
 export function start(options = {}) {
   if (options.loadTests !== false) {
@@ -133,6 +152,10 @@ export function start(options = {}) {
 
   if (options.setupTestAdapter !== false) {
     setupTestAdapter();
+  }
+
+  if (options.setupEmberTesting !== false) {
+    setupEmberTesting();
   }
 
   if (options.startTests !== false) {
