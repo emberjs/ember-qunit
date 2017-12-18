@@ -15,7 +15,7 @@ function unhandledRejectionAssertion(current, error) {
     source = 'unknown source';
   }
 
-  current.pushResult({
+  current.assert.pushResult({
     result: false,
     actual: false,
     expected: true,
