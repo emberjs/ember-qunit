@@ -1,5 +1,13 @@
 # Change Log
 
+## v3.2.2 (2017-12-18)
+
+#### :bug: Bug Fix
+* [#305](https://github.com/emberjs/ember-qunit/pull/305) Bring back re-exports (with a deprecation).. ([@rwjblue](https://github.com/rwjblue))
+
+#### Committers: 1
+- Robert Jackson ([rwjblue](https://github.com/rwjblue))
+
 ## v3.2.1 (2017-12-17)
 
 #### :bug: Bug Fix
