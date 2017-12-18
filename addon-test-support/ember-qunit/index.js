@@ -23,6 +23,7 @@ import {
   teardownRenderingContext,
   setupApplicationContext,
   teardownApplicationContext,
+  validateErrorHandler,
 } from '@ember/test-helpers';
 
 export function setResolver() {
@@ -206,6 +207,22 @@ export function setupEmberTesting() {
 }
 
 /**
+  Ensures that `Ember.onerror` (if present) is properly configured to re-throw
+  errors that occur while `Ember.testing` is `true`.
+*/
+export function setupEmberOnerrorValidation() {
+  QUnit.module('ember-qunit: Ember.onerror validation', function() {
+    QUnit.test('Ember.onerror is functioning properly', function(assert) {
+      let result = validateErrorHandler();
+      assert.ok(
+        result.isValid,
+        `Ember.onerror handler with invalid testing behavior detected. An Ember.onerror handler _must_ rethrow exceptions when \`Ember.testing\` is \`true\` or the test suite is unreliable. See https://git.io/vbine for more details.`
+      );
+    });
+  });
+}
+
+/**
    @method start
    @param {Object} [options] Options to be used for enabling/disabling behaviors
    @param {Boolean} [options.loadTests] If `false` tests will not be loaded automatically.
@@ -218,6 +235,8 @@ export function setupEmberTesting() {
    @param {Boolean} [options.setupEmberTesting] `false` opts out of the
    default behavior of setting `Ember.testing` to `true` before all tests and
    back to `false` after each test will.
+   @param {Boolean} [options.setupEmberOnerrorValidation] If `false` validation
+   of `Ember.onerror` will be disabled.
  */
 export function start(options = {}) {
   if (options.loadTests !== false) {
@@ -234,6 +253,10 @@ export function start(options = {}) {
 
   if (options.setupEmberTesting !== false) {
     setupEmberTesting();
+  }
+
+  if (options.setupEmberOnerrorValidation !== false) {
+    setupEmberOnerrorValidation();
   }
 
   if (options.startTests !== false) {
