@@ -2,7 +2,14 @@ export { default as moduleFor } from './legacy-2-x/module-for';
 export { default as moduleForComponent } from './legacy-2-x/module-for-component';
 export { default as moduleForModel } from './legacy-2-x/module-for-model';
 export { default as QUnitAdapter } from './adapter';
-export { setResolver } from '@ember/test-helpers';
+export {
+  setResolver,
+  render,
+  clearRender,
+  settled,
+  pauseTest,
+  resumeTest,
+} from '@ember/test-helpers';
 export { module, test, skip, only, todo } from 'qunit';
 export { loadTests } from './test-loader';
 
