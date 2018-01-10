@@ -29,6 +29,7 @@ import {
 export function setResolver() {
   deprecate(
     '`setResolver` should be imported from `@ember/test-helpers`, but was imported from `ember-qunit`',
+    false,
     {
       id: 'ember-qunit.deprecated-reexports.setResolver',
       until: '4.0.0',
@@ -41,6 +42,7 @@ export function setResolver() {
 export function render() {
   deprecate(
     '`render` should be imported from `@ember/test-helpers`, but was imported from `ember-qunit`',
+    false,
     {
       id: 'ember-qunit.deprecated-reexports.render',
       until: '4.0.0',
@@ -53,6 +55,7 @@ export function render() {
 export function clearRender() {
   deprecate(
     '`clearRender` should be imported from `@ember/test-helpers`, but was imported from `ember-qunit`',
+    false,
     {
       id: 'ember-qunit.deprecated-reexports.clearRender',
       until: '4.0.0',
@@ -65,6 +68,7 @@ export function clearRender() {
 export function settled() {
   deprecate(
     '`settled` should be imported from `@ember/test-helpers`, but was imported from `ember-qunit`',
+    false,
     {
       id: 'ember-qunit.deprecated-reexports.settled',
       until: '4.0.0',
@@ -77,6 +81,7 @@ export function settled() {
 export function pauseTest() {
   deprecate(
     '`pauseTest` should be imported from `@ember/test-helpers`, but was imported from `ember-qunit`',
+    false,
     {
       id: 'ember-qunit.deprecated-reexports.pauseTest',
       until: '4.0.0',
@@ -89,6 +94,7 @@ export function pauseTest() {
 export function resumeTest() {
   deprecate(
     '`resumeTest` should be imported from `@ember/test-helpers`, but was imported from `ember-qunit`',
+    false,
     {
       id: 'ember-qunit.deprecated-reexports.resumeTest',
       until: '4.0.0',
