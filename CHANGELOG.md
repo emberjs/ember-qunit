@@ -1,5 +1,26 @@
 # Change Log
 
+## v3.3.0 (2018-01-17)
+
+#### :rocket: Enhancement
+* [#307](https://github.com/emberjs/ember-qunit/pull/307) Remove `exception` method from QUnit test adapter when using Ember 2.17+. ([@rwjblue](https://github.com/rwjblue))
+* [#306](https://github.com/emberjs/ember-qunit/pull/306) Update to QUnit 2.5.0. ([@rwjblue](https://github.com/rwjblue))
+* [#304](https://github.com/emberjs/ember-qunit/pull/304) Add validation for `Ember.onerror` in testing. ([@rwjblue](https://github.com/rwjblue))
+
+#### :bug: Bug Fix
+* [#308](https://github.com/emberjs/ember-qunit/pull/308) Fix deprecations for `@ember/test-helpers` reexports. ([@dfreeman](https://github.com/dfreeman))
+
+#### :memo: Documentation
+* [#310](https://github.com/emberjs/ember-qunit/pull/310) README: Use SVG badge. ([@olleolleolle](https://github.com/olleolleolle))
+
+#### :house: Internal
+* [#311](https://github.com/emberjs/ember-qunit/pull/311) Fix issues with sudo: false infra on Travis CI. ([@rwjblue](https://github.com/rwjblue))
+
+#### Committers: 3
+- Dan Freeman ([dfreeman](https://github.com/dfreeman))
+- Olle Jonsson ([olleolleolle](https://github.com/olleolleolle))
+- Robert Jackson ([rwjblue](https://github.com/rwjblue))
+
 ## v3.2.2 (2017-12-18)
 
 #### :bug: Bug Fix
