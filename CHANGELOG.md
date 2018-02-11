@@ -1,5 +1,23 @@
 # Change Log
 
+yarn run v1.3.2
+$ lerna-changelog
+
+## v3.3.1 (2018-02-11)
+
+#### :rocket: Enhancement
+* [#313](https://github.com/emberjs/ember-qunit/pull/313) Update `@ember/test-helpers` to v0.7.17. ([@Turbo87](https://github.com/Turbo87))
+
+#### :bug: Bug Fix
+* [#312](https://github.com/emberjs/ember-qunit/pull/312) Ensure `exception` is _actually_ removed for Ember 2.17+. ([@rwjblue](https://github.com/rwjblue))
+
+#### :house: Internal
+* [#312](https://github.com/emberjs/ember-qunit/pull/312) Update ember-try config to avoid bower for Ember channels. ([@rwjblue](https://github.com/rwjblue))
+
+#### Committers: 2
+- Robert Jackson ([rwjblue](https://github.com/rwjblue))
+- Tobias Bieniek ([Turbo87](https://github.com/Turbo87))
+
 ## v3.3.0 (2018-01-17)
 
 #### :rocket: Enhancement
