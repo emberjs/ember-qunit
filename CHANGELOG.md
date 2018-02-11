@@ -1,8 +1,5 @@
 # Change Log
 
-yarn run v1.3.2
-$ lerna-changelog
-
 ## v3.3.1 (2018-02-11)
 
 #### :rocket: Enhancement
