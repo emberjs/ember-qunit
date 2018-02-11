@@ -41,6 +41,10 @@ let Adapter = Ember.Test.Adapter.extend({
       done();
     }
   },
+
+  // clobber default implementation of `exception` will be added back for Ember
+  // < 2.17 just below...
+  exception: null,
 });
 
 // Ember 2.17 and higher do not require the test adapter to have an `exception`
