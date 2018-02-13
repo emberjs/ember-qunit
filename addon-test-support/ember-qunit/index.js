@@ -6,6 +6,7 @@ export { module, test, skip, only, todo } from 'qunit';
 export { loadTests } from './test-loader';
 
 import { deprecate } from '@ember/debug';
+import { run } from '@ember/runloop';
 import { loadTests } from './test-loader';
 import Ember from 'ember';
 import QUnit from 'qunit';
@@ -24,7 +25,10 @@ import {
   setupApplicationContext,
   teardownApplicationContext,
   validateErrorHandler,
+  getSettledState,
 } from '@ember/test-helpers';
+
+const TESTS_WITH_LEAKY_ASYNC = [];
 
 export function setResolver() {
   deprecate(
@@ -228,6 +232,28 @@ export function setupEmberOnerrorValidation() {
   });
 }
 
+export function setupAsyncTimerLeakDetection() {
+  QUnit.testDone(({ module, name }) => {
+    let { hasPendingTimers } = getSettledState();
+
+    if (hasPendingTimers) {
+      TESTS_WITH_LEAKY_ASYNC.push(`${module}: ${name}`);
+      run.cancelTimers();
+    }
+  });
+
+  QUnit.done(() => {
+    if (TESTS_WITH_LEAKY_ASYNC.length > 0) {
+      throw new Error(
+        `ASYNC LEAKAGE DETECTED IN TESTS
+         The following (${TESTS_WITH_LEAKY_ASYNC.length}) tests setup a timer that was never torn down before the test completed: \n
+         ${TESTS_WITH_LEAKY_ASYNC.join('\n')}
+        `
+      );
+    }
+  });
+}
+
 /**
    @method start
    @param {Object} [options] Options to be used for enabling/disabling behaviors
@@ -263,6 +289,10 @@ export function start(options = {}) {
 
   if (options.setupEmberOnerrorValidation !== false) {
     setupEmberOnerrorValidation();
+  }
+
+  if (options.setupAsyncTimerLeakDetection !== false) {
+    setupAsyncTimerLeakDetection();
   }
 
   if (options.startTests !== false) {
