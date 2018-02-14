@@ -2,9 +2,7 @@ import { module, test } from 'qunit';
 import { detectPendingTimers, reportPendingTimers } from 'ember-qunit/async-timer-leak-detection';
 
 module('setupEmberOnerrorValidation', function() {
-  test('detectPendingTimers does not queue test info when leaky async timers not detected', function(
-    assert
-  ) {
+  test('detectPendingTimers does not queue test info when leaky async timers not detected', function(assert) {
     assert.expect(2);
 
     let hasPendingTimers = false;
@@ -20,9 +18,7 @@ module('setupEmberOnerrorValidation', function() {
     assert.equal(pendingTimers.length, 0, 'pending timers has no pending messages');
   });
 
-  test('detectPendingTimers correctly queues test info when leaky async timers detected', function(
-    assert
-  ) {
+  test('detectPendingTimers correctly queues test info when leaky async timers detected', function(assert) {
     assert.expect(3);
 
     let hasPendingTimers = true;
