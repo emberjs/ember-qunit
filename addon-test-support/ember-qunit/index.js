@@ -27,6 +27,7 @@ import {
   validateErrorHandler,
   getSettledState,
 } from '@ember/test-helpers';
+import { detectPendingTimers, reportPendingTimers } from './async-timer-leak-detection';
 
 const TESTS_WITH_LEAKY_ASYNC = [];
 
@@ -236,21 +237,11 @@ export function setupAsyncTimerLeakDetection() {
   QUnit.testDone(({ module, name }) => {
     let { hasPendingTimers } = getSettledState();
 
-    if (hasPendingTimers) {
-      TESTS_WITH_LEAKY_ASYNC.push(`${module}: ${name}`);
-      run.cancelTimers();
-    }
+    detectPendingTimers(hasPendingTimers, TESTS_WITH_LEAKY_ASYNC, module, name, run.cancelTimers);
   });
 
   QUnit.done(() => {
-    if (TESTS_WITH_LEAKY_ASYNC.length > 0) {
-      throw new Error(
-        `ASYNC LEAKAGE DETECTED IN TESTS
-         The following (${TESTS_WITH_LEAKY_ASYNC.length}) tests setup a timer that was never torn down before the test completed: \n
-         ${TESTS_WITH_LEAKY_ASYNC.join('\n')}
-        `
-      );
-    }
+    reportPendingTimers(TESTS_WITH_LEAKY_ASYNC);
   });
 }
 
