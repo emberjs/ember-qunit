@@ -34,11 +34,13 @@ export function reportIfNotSettled() {
     let leakyTests = TESTS_NOT_SETTLED.slice();
     TESTS_NOT_SETTLED.length = 0;
 
-    throw new Error(
-      `ASYNC LEAKAGE DETECTED IN TESTS
-       The following (${leakyTests.length}) tests setup a timer that was never torn down before the test completed: \n
-       ${leakyTests.join('\n')}
-      `
-    );
+    throw new Error(getMessage(leakyTests.length, leakyTests.join('\n')));
   }
+}
+
+export function getMessage(testCount, testsToReport) {
+  return `TESTS HAVE UNSETTLED ASYNC BEHAVIOR
+    The following (${testCount}) tests have one or more of pending timers, pending AJAX requests, pending test waiters, or are still in a runloop: \n
+    ${testsToReport}
+  `;
 }
