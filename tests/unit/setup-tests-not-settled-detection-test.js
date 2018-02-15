@@ -1,8 +1,8 @@
 import { run } from '@ember/runloop';
 import { module, test } from 'qunit';
-import { detectPendingTimers, reportPendingTimers } from 'ember-qunit/async-timer-leak-detection';
+import { detectIfNotSettled, reportIfNotSettled } from 'ember-qunit/tests-not-settled-detection';
 
-module('setupAsyncTimerLeakDetection', function(hooks) {
+module('setupTestsNotSettledDetection', function(hooks) {
   hooks.beforeEach(function() {
     this.cancelId = 0;
   });
@@ -11,11 +11,11 @@ module('setupAsyncTimerLeakDetection', function(hooks) {
     run.cancel(this.cancelId);
   });
 
-  test('reportPendingTimers does not throw when no pending timers exist', function(assert) {
+  test('reportIfNotSettled does not throw when no pending timers exist', function(assert) {
     assert.expect(1);
 
-    detectPendingTimers({ module: 'foo', name: 'bar' });
-    reportPendingTimers();
+    detectIfNotSettled({ module: 'foo', name: 'bar' });
+    reportIfNotSettled();
 
     assert.ok(true);
   });
@@ -25,11 +25,11 @@ module('setupAsyncTimerLeakDetection', function(hooks) {
 
     this.cancelId = run.later(() => {}, 10);
 
-    detectPendingTimers({ module: 'foo', name: 'bar' });
+    detectIfNotSettled({ module: 'foo', name: 'bar' });
 
     assert.throws(
       function() {
-        reportPendingTimers();
+        reportIfNotSettled();
       },
       Error,
       new RegExp(`ASYNC LEAKAGE DETECTED IN TESTS

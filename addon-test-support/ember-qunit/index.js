@@ -25,7 +25,7 @@ import {
   teardownApplicationContext,
   validateErrorHandler,
 } from '@ember/test-helpers';
-import { detectPendingTimers, reportPendingTimers } from './async-timer-leak-detection';
+import { detectIfNotSettled, reportIfNotSettled } from './tests-not-settled-detection';
 
 export function setResolver() {
   deprecate(
@@ -229,9 +229,9 @@ export function setupEmberOnerrorValidation() {
   });
 }
 
-export function setupAsyncTimerLeakDetection() {
-  QUnit.testDone(detectPendingTimers);
-  QUnit.done(reportPendingTimers);
+export function setupTestsNotSettledDetection() {
+  QUnit.testDone(detectIfNotSettled);
+  QUnit.done(reportIfNotSettled);
 }
 
 /**
@@ -249,8 +249,8 @@ export function setupAsyncTimerLeakDetection() {
    back to `false` after each test will.
    @param {Boolean} [options.setupEmberOnerrorValidation] If `false` validation
    of `Ember.onerror` will be disabled.
-   @param {Boolean} [options.setupAsyncTimerLeakDetection] If `false` async timer leak
-   detection will be disabled.
+   @param {Boolean} [options.setupTestsNotSettledDetection] If `false` tests not settled detection
+   will be disabled.
  */
 export function start(options = {}) {
   if (options.loadTests !== false) {
@@ -273,8 +273,8 @@ export function start(options = {}) {
     setupEmberOnerrorValidation();
   }
 
-  if (options.setupAsyncTimerLeakDetection !== false) {
-    setupAsyncTimerLeakDetection();
+  if (options.setupTestsNotSettledDetection !== false) {
+    setupTestsNotSettledDetection();
   }
 
   if (options.startTests !== false) {
