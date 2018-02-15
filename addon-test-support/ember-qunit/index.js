@@ -6,7 +6,6 @@ export { module, test, skip, only, todo } from 'qunit';
 export { loadTests } from './test-loader';
 
 import { deprecate } from '@ember/debug';
-import { run } from '@ember/runloop';
 import { loadTests } from './test-loader';
 import Ember from 'ember';
 import QUnit from 'qunit';
@@ -25,11 +24,8 @@ import {
   setupApplicationContext,
   teardownApplicationContext,
   validateErrorHandler,
-  getSettledState,
 } from '@ember/test-helpers';
 import { detectPendingTimers, reportPendingTimers } from './async-timer-leak-detection';
-
-const TESTS_WITH_LEAKY_ASYNC = [];
 
 export function setResolver() {
   deprecate(
@@ -234,15 +230,8 @@ export function setupEmberOnerrorValidation() {
 }
 
 export function setupAsyncTimerLeakDetection() {
-  QUnit.testDone(({ module, name }) => {
-    let { hasPendingTimers } = getSettledState();
-
-    detectPendingTimers(hasPendingTimers, TESTS_WITH_LEAKY_ASYNC, module, name, run.cancelTimers);
-  });
-
-  QUnit.done(() => {
-    reportPendingTimers(TESTS_WITH_LEAKY_ASYNC);
-  });
+  QUnit.testDone(detectPendingTimers);
+  QUnit.done(reportPendingTimers);
 }
 
 /**
@@ -260,6 +249,8 @@ export function setupAsyncTimerLeakDetection() {
    back to `false` after each test will.
    @param {Boolean} [options.setupEmberOnerrorValidation] If `false` validation
    of `Ember.onerror` will be disabled.
+   @param {Boolean} [options.setupAsyncTimerLeakDetection] If `false` async timer leak
+   detection will be disabled.
  */
 export function start(options = {}) {
   if (options.loadTests !== false) {
