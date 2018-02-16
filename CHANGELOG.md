@@ -1,5 +1,15 @@
 # Change Log
 
+## v3.3.2 (2018-02-16)
+
+#### :bug: Bug Fix
+* [#316](https://github.com/emberjs/ember-qunit/pull/316) Update @ember/test-helpers minimum version to 0.7.18. ([@rwjblue](https://github.com/rwjblue))
+* [#315](https://github.com/emberjs/ember-qunit/pull/315) Add assert.expect to Ember.onerror validation test. ([@nlfurniss](https://github.com/nlfurniss))
+
+#### Committers: 2
+- Nathaniel Furniss ([nlfurniss](https://github.com/nlfurniss))
+- Robert Jackson ([rwjblue](https://github.com/rwjblue))
+
 ## v3.3.1 (2018-02-11)
 
 #### :rocket: Enhancement
