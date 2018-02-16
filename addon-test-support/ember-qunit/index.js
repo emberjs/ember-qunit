@@ -219,6 +219,7 @@ export function setupEmberTesting() {
 export function setupEmberOnerrorValidation() {
   QUnit.module('ember-qunit: Ember.onerror validation', function() {
     QUnit.test('Ember.onerror is functioning properly', function(assert) {
+      assert.expect(1);
       let result = validateErrorHandler();
       assert.ok(
         result.isValid,
