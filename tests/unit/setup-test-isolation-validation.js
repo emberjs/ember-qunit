@@ -2,12 +2,12 @@ import Ember from 'ember';
 import { run } from '@ember/runloop';
 import { module, test } from 'qunit';
 import {
-  detectIfNotSettled,
-  reportIfNotSettled,
+  detectIfTestNotIsolated,
+  reportIfTestNotIsolated,
   getMessage,
-} from 'ember-qunit/tests-not-settled-detection';
+} from 'ember-qunit/test-isolation-validation';
 
-module('setupTestsNotSettledDetection', function(hooks) {
+module('setupTestIsolationValidation', function(hooks) {
   hooks.beforeEach(function() {
     this.cancelId = 0;
 
@@ -31,41 +31,41 @@ module('setupTestsNotSettledDetection', function(hooks) {
     run.cancel(this.cancelId);
   });
 
-  test('reportIfNotSettled does not throw when test has settled', function(assert) {
+  test('reportIfTestNotIsolated does not throw when test is isolated', function(assert) {
     assert.expect(1);
 
-    detectIfNotSettled({ module: 'foo', name: 'bar' });
-    reportIfNotSettled();
+    detectIfTestNotIsolated({ module: 'foo', name: 'bar' });
+    reportIfTestNotIsolated();
 
     assert.ok(true);
   });
 
-  test('reportIfNotSettled throws when test has not settled pending timers', function(assert) {
+  test('reportIfTestNotIsolated throws when test has pending timers', function(assert) {
     assert.expect(1);
 
     this.cancelId = run.later(() => {}, 10);
 
-    detectIfNotSettled({ module: 'foo', name: 'bar' });
+    detectIfTestNotIsolated({ module: 'foo', name: 'bar' });
 
     assert.throws(
       function() {
-        reportIfNotSettled();
+        reportIfTestNotIsolated();
       },
       Error,
       getMessage(1, 'foo: bar')
     );
   });
 
-  test('reportIfNotSettled throws when test has not settled test waiters', function(assert) {
+  test('reportIfTestNotIsolated throws when test has test waiters', function(assert) {
     assert.expect(1);
 
     this.isWaiterPending = true;
 
-    detectIfNotSettled({ module: 'foo', name: 'bar' });
+    detectIfTestNotIsolated({ module: 'foo', name: 'bar' });
 
     assert.throws(
       function() {
-        reportIfNotSettled();
+        reportIfTestNotIsolated();
       },
       Error,
       getMessage(1, 'foo: bar')

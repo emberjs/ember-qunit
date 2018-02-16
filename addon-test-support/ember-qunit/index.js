@@ -25,7 +25,7 @@ import {
   teardownApplicationContext,
   validateErrorHandler,
 } from '@ember/test-helpers';
-import { detectIfNotSettled, reportIfNotSettled } from './tests-not-settled-detection';
+import { detectIfTestNotIsolated, reportIfTestNotIsolated } from './test-isolation-validation';
 
 export function setResolver() {
   deprecate(
@@ -229,9 +229,9 @@ export function setupEmberOnerrorValidation() {
   });
 }
 
-export function setupTestsNotSettledDetection() {
-  QUnit.testDone(detectIfNotSettled);
-  QUnit.done(reportIfNotSettled);
+export function setupTestIsolationValidation() {
+  QUnit.testDone(detectIfTestNotIsolated);
+  QUnit.done(reportIfTestNotIsolated);
 }
 
 /**
@@ -249,7 +249,7 @@ export function setupTestsNotSettledDetection() {
    back to `false` after each test will.
    @param {Boolean} [options.setupEmberOnerrorValidation] If `false` validation
    of `Ember.onerror` will be disabled.
-   @param {Boolean} [options.setupTestsNotSettledDetection] If `false` tests not settled detection
+   @param {Boolean} [options.setupTestIsolationValidation] If `false` test isolation validation
    will be disabled.
  */
 export function start(options = {}) {
@@ -273,8 +273,8 @@ export function start(options = {}) {
     setupEmberOnerrorValidation();
   }
 
-  if (options.setupTestsNotSettledDetection !== false) {
-    setupTestsNotSettledDetection();
+  if (options.setupTestIsolationValidation !== false) {
+    setupTestIsolationValidation();
   }
 
   if (options.startTests !== false) {
