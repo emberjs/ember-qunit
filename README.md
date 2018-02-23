@@ -6,8 +6,8 @@ providing QUnit-specific wrappers around the helpers contained in
 
 ## Usage
 
-- [Component Unit Tests](#component-unit-tests)
 - [Component Integration Tests](#component-integration-tests)
+- [Component Unit Tests](#component-unit-tests)
 - [Other Tests](#other-tests)
 - [Ember Data Tests](#ember-data-tests)
 
