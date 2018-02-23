@@ -1,5 +1,7 @@
 export { default as moduleFor } from './legacy-2-x/module-for';
-export { default as moduleForComponent } from './legacy-2-x/module-for-component';
+export {
+  default as moduleForComponent,
+} from './legacy-2-x/module-for-component';
 export { default as moduleForModel } from './legacy-2-x/module-for-model';
 export { default as QUnitAdapter } from './adapter';
 export { module, test, skip, only, todo } from 'qunit';
@@ -25,6 +27,10 @@ import {
   teardownApplicationContext,
   validateErrorHandler,
 } from '@ember/test-helpers';
+import {
+  detectIfTestNotIsolated,
+  reportIfTestNotIsolated,
+} from './test-isolation-validation';
 
 export function setResolver() {
   deprecate(
@@ -164,7 +170,8 @@ export function setupTestContainer() {
   let params = QUnit.urlParams;
 
   let containerVisibility = params.nocontainer ? 'hidden' : 'visible';
-  let containerPosition = params.dockcontainer || params.devmode ? 'fixed' : 'relative';
+  let containerPosition =
+    params.dockcontainer || params.devmode ? 'fixed' : 'relative';
 
   if (params.devmode) {
     testContainer.className = ' full-screen';
@@ -175,7 +182,9 @@ export function setupTestContainer() {
 
   let qunitContainer = document.getElementById('qunit');
   if (params.dockcontainer) {
-    qunitContainer.style.marginBottom = window.getComputedStyle(testContainer).height;
+    qunitContainer.style.marginBottom = window.getComputedStyle(
+      testContainer
+    ).height;
   }
 }
 
@@ -229,6 +238,11 @@ export function setupEmberOnerrorValidation() {
   });
 }
 
+export function setupTestIsolationValidation() {
+  QUnit.testDone(detectIfTestNotIsolated);
+  QUnit.done(reportIfTestNotIsolated);
+}
+
 /**
    @method start
    @param {Object} [options] Options to be used for enabling/disabling behaviors
@@ -244,6 +258,8 @@ export function setupEmberOnerrorValidation() {
    back to `false` after each test will.
    @param {Boolean} [options.setupEmberOnerrorValidation] If `false` validation
    of `Ember.onerror` will be disabled.
+   @param {Boolean} [options.setupTestIsolationValidation] If `false` test isolation validation
+   will be disabled.
  */
 export function start(options = {}) {
   if (options.loadTests !== false) {
@@ -264,6 +280,13 @@ export function start(options = {}) {
 
   if (options.setupEmberOnerrorValidation !== false) {
     setupEmberOnerrorValidation();
+  }
+
+  if (
+    typeof options.setupTestIsolationValidation !== 'undefined' &&
+    options.setupTestIsolationValidation !== false
+  ) {
+    setupTestIsolationValidation();
   }
 
   if (options.startTests !== false) {
