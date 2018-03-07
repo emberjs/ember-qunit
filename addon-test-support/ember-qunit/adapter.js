@@ -25,7 +25,11 @@ function unhandledRejectionAssertion(current, error) {
   });
 }
 
-let Adapter = Ember.Test.Adapter.extend({
+// libraries like ember-qunit-assert-helper may try to extend the
+// QUnitAdapter in when tests are run in production enviroments so
+// lets give them something to extend even when Ember.Test is
+// undefined.
+let Adapter = (Ember.Test ? Ember.Test.Adapter : Ember.Object).extend({
   init() {
     this.doneCallbacks = [];
   },
