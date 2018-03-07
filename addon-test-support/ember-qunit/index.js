@@ -202,7 +202,11 @@ export function startTests() {
    @method setupTestAdapter
  */
 export function setupTestAdapter() {
-  Ember.Test.adapter = QUnitAdapter.create();
+  if (Ember.Test) {
+    Ember.Test.adapter = QUnitAdapter.create();
+  } else {
+    console.warn('Ember.Test was not defined and a test adapter could not be created. This is likely a result of running tests with --environment=production. If this is the case please do not call setupTestAdapter() when running tests in a production enviroment or pass {setupTestAdapter: false} when calling `ember-qunit`\'s start() function.');
+  }
 }
 
 /**
