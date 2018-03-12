@@ -30,6 +30,123 @@ with this then `ember install ember-cli-qunit`, which should work exactly
 the same.
 
 
+Usage
+------------------------------------------------------------------------------
+
+The following section describes the use of ember-qunit with the latest modern
+Ember testing APIs, as laid out in the RFCs
+[232](https://github.com/emberjs/rfcs/blob/master/text/0232-simplify-qunit-testing-api.md)
+and
+[268](https://github.com/emberjs/rfcs/blob/master/text/0268-acceptance-testing-refactor.md).
+
+For the older APIs have a look at our [Legacy Guide](docs/legacy.md).
+
+### Setting the Application
+
+Your `tests/test-helper.js` file should look similar to the following, to
+correctly setup the application required by `@ember/test-helpers`:
+
+```javascript
+import Application from '../app';
+import config from '../config/environment';
+import { setApplication } from '@ember/test-helpers';
+
+setApplication(Application.create(config.APP));
+```
+
+Also make sure that you have set `ENV.APP.autoboot = false;` for the `test`
+environment in your `config/environment.js`.
+
+### Setup Tests
+
+The `setupTest()` function can be used to setup a unit test for any kind
+of "module/unit" of your application that can be looked up in a container.
+
+It will setup your test context with:
+
+* `this.owner` to interact with Ember's [Dependency Injection](https://guides.emberjs.com/v3.0.0/applications/dependency-injection/)
+  system
+* `this.set()`, `this.setProperties()`, `this.get()`, and `this.getProperties()`
+* `this.pauseTest()` method to allow easy pausing/resuming of tests
+
+For example, the following is a unit test for the `SidebarController`:
+
+```javascript
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
+
+module('SidebarController', function(hooks) {
+  setupTest(hooks);
+
+  // Replace this with your real tests.
+  test('exists', function() {
+    let controller = this.owner.lookup('controller:sidebar');
+    assert.ok(controller);
+  });
+});
+```
+
+
+#### Setup Rendering Tests
+
+The `setupRenderingTest()` function is specifically designed for tests that
+render arbitrary templates, including components and helpers.
+
+It will setup your test context the same way as `setupTest()`, and additionally:
+
+* Initializes Ember's renderer to be used with the
+  [Rendering helpers](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#rendering-helpers),
+  specifically `render()`
+* Adds `this.element` to your test context which returns the DOM element
+  representing the wrapper around the elements that were rendered via
+  `render()`
+* sets up the [DOM Interaction Helpers](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#dom-interaction-helpers)
+  from `@ember/test-helpers` (`click()`, `fillIn()`, ...)
+
+```javascript
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
+import hbs from 'htmlbars-inline-precompile';
+
+module('GravatarImageComponent', function(hooks) {
+  setupRenderingTest(hooks);
+
+  test('renders', async function() {
+    await render(hbs`{{gravatar-image}}`);
+    assert.ok(this.element.querySelector('img'));
+  });
+});
+```
+
+### Setup Application Tests
+
+The `setupApplicationTest()` function can be used to run tests that interact
+with the whole application, so in most cases acceptance tests.
+
+On top of `setupTest()` it will:
+
+* Boot your application instance
+* Set up all the [DOM Interaction Helpers](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#dom-interaction-helpers)
+  (`click()`, `fillIn()`, ...) as well as the [Routing Helpers](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#routing-helpers)
+  (`visit()`, `currentURL()`, ...) from `@ember/test-helpers`
+
+```javascript
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
+import { visit, currentURL } from '@ember/test-helpers';
+
+module('basic acceptance test', function(hooks) {
+  setupApplicationTest(hooks);
+
+  test('can visit /', async function() {
+    await visit('/');
+    expect(currentURL()).to.equal('/');
+  });
+});
+```
+
+
 Contributing
 ------------------------------------------------------------------------------
 
