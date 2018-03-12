@@ -14,6 +14,22 @@ helpers contained in
 [ember-test-helpers](https://github.com/emberjs/ember-test-helpers).
 
 
+Installation
+------------------------------------------------------------------------------
+
+`ember-qunit` is an [Ember CLI](http://www.ember-cli.com/) addon, so install it
+as you would any other addon:
+
+```sh
+$ ember install ember-qunit
+```
+
+Some other addons are detecting the test framework based on the installed
+addon names and are expecting `ember-cli-qunit` instead. If you have issues
+with this then `ember install ember-cli-qunit`, which should work exactly
+the same.
+
+
 Contributing
 ------------------------------------------------------------------------------
 
