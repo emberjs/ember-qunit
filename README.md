@@ -87,7 +87,7 @@ module('SidebarController', function(hooks) {
 ```
 
 
-#### Setup Rendering Tests
+### Setup Rendering Tests
 
 The `setupRenderingTest()` function is specifically designed for tests that
 render arbitrary templates, including components and helpers.
