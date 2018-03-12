@@ -1,4 +1,4 @@
-# ember-qunit [![Build Status](https://travis-ci.org/emberjs/ember-qunit.svg)](https://travis-ci.org/emberjs/ember-qunit)
+# ember-qunit
 
 [![Latest NPM release][npm-badge]][npm-badge-url]
 [![TravisCI Build Status][travis-badge]][travis-badge-url]
