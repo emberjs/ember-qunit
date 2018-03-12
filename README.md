@@ -1,256 +1,170 @@
 # ember-qunit [![Build Status](https://travis-ci.org/emberjs/ember-qunit.svg)](https://travis-ci.org/emberjs/ember-qunit)
 
-Ember QUnit simplifies unit testing of Ember applications with QUnit by
-providing QUnit-specific wrappers around the helpers contained in
+[![Latest NPM release][npm-badge]][npm-badge-url]
+[![TravisCI Build Status][travis-badge]][travis-badge-url]
+
+[npm-badge]: https://img.shields.io/npm/v/ember-qunit.svg
+[npm-badge-url]: https://www.npmjs.com/package/ember-qunit
+[travis-badge]: https://img.shields.io/travis/emberjs/ember-qunit/master.svg
+[travis-badge-url]: https://travis-ci.org/emberjs/ember-qunit
+
+ember-qunit simplifies testing of Ember applications with
+[QUnit](https://qunitjs.com/) by providing QUnit-specific wrappers around the
+helpers contained in
 [ember-test-helpers](https://github.com/emberjs/ember-test-helpers).
 
-## Usage
 
-- [Component Integration Tests](#component-integration-tests)
-- [Component Unit Tests](#component-unit-tests)
-- [Other Tests](#other-tests)
-- [Ember Data Tests](#ember-data-tests)
+Installation
+------------------------------------------------------------------------------
 
-### Component Integration Tests
+`ember-qunit` is an [Ember CLI](http://www.ember-cli.com/) addon, so install it
+as you would any other addon:
 
-```js
+```sh
+$ ember install ember-qunit
+```
+
+Some other addons are detecting the test framework based on the installed
+addon names and are expecting `ember-cli-qunit` instead. If you have issues
+with this then `ember install ember-cli-qunit`, which should work exactly
+the same.
+
+
+Usage
+------------------------------------------------------------------------------
+
+The following section describes the use of ember-qunit with the latest modern
+Ember testing APIs, as laid out in the RFCs
+[232](https://github.com/emberjs/rfcs/blob/master/text/0232-simplify-qunit-testing-api.md)
+and
+[268](https://github.com/emberjs/rfcs/blob/master/text/0268-acceptance-testing-refactor.md).
+
+For the older APIs have a look at our [Legacy Guide](docs/legacy.md).
+
+### Setting the Application
+
+Your `tests/test-helper.js` file should look similar to the following, to
+correctly setup the application required by `@ember/test-helpers`:
+
+```javascript
+import Application from '../app';
+import config from '../config/environment';
+import { setApplication } from '@ember/test-helpers';
+
+setApplication(Application.create(config.APP));
+```
+
+Also make sure that you have set `ENV.APP.autoboot = false;` for the `test`
+environment in your `config/environment.js`.
+
+### Setup Tests
+
+The `setupTest()` function can be used to setup a unit test for any kind
+of "module/unit" of your application that can be looked up in a container.
+
+It will setup your test context with:
+
+* `this.owner` to interact with Ember's [Dependency Injection](https://guides.emberjs.com/v3.0.0/applications/dependency-injection/)
+  system
+* `this.set()`, `this.setProperties()`, `this.get()`, and `this.getProperties()`
+* `this.pauseTest()` method to allow easy pausing/resuming of tests
+
+For example, the following is a unit test for the `SidebarController`:
+
+```javascript
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
+
+module('SidebarController', function(hooks) {
+  setupTest(hooks);
+
+  // Replace this with your real tests.
+  test('exists', function() {
+    let controller = this.owner.lookup('controller:sidebar');
+    assert.ok(controller);
+  });
+});
+```
+
+
+#### Setup Rendering Tests
+
+The `setupRenderingTest()` function is specifically designed for tests that
+render arbitrary templates, including components and helpers.
+
+It will setup your test context the same way as `setupTest()`, and additionally:
+
+* Initializes Ember's renderer to be used with the
+  [Rendering helpers](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#rendering-helpers),
+  specifically `render()`
+* Adds `this.element` to your test context which returns the DOM element
+  representing the wrapper around the elements that were rendered via
+  `render()`
+* sets up the [DOM Interaction Helpers](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#dom-interaction-helpers)
+  from `@ember/test-helpers` (`click()`, `fillIn()`, ...)
+
+```javascript
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import { test, moduleForComponent } from 'ember-qunit';
 
-moduleForComponent('x-foo', {
-  integration: true
-});
+module('GravatarImageComponent', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
-  assert.expect(2);
-
-  // setup the outer context
-  this.set('value', 'cat');
-  this.on('action', function(result) {
-    assert.equal(result, 'bar', 'The correct result was returned');
-  });
-
-  // render the component
-  this.render(hbs`
-    {{ x-foo value=value action="result" }}
-  `);
-
-  assert.equal(this.$('div>.value').text(), 'cat', 'The component shows the correct value');
-
-  this.$('button').click();
-});
-```
-
-Component integration tests are the default mode for `moduleForComponent`. You can still explicitly activate them by passing `integration: true`.
-
-Integration tests have the advantage of testing your component as Ember would actually use them.  It's helpful to think of this mode as simply testing the inputs and outputs of the component.  These tests allow you interact with both the bound values that are passed into the component as well as its resulting actions.
-
-Component integration tests have the following features:
-- Your test context `this` acts as the outer context for the component.  As a result, you can call `this.set` and `this.on` to setup values and event listeners that you can then have interact with the component.
-- You are required to render the component as a template, e.g. ``this.render(hbs`{{ your-component-name value=value action="updated" }}`)``.  You can render other components as well as block content.
-- All of the normal Ember lifecycle hooks for a component are called (including the new ones from 1.13.x).
-- Testing the component's template is through `this.$()`.
-- You do not require dependencies through `needs:`.  Doing so will force the test into unit mode.
-- You do not have direct access to the component instance.  (`this.subject()` will raise an exception).
-
-### Component Unit Tests
-
-[Ember Guide](http://guides.emberjs.com/v1.13.0/testing/testing-components/)
-
-```js
-import { test, moduleForComponent } from 'ember-qunit';
-
-moduleForComponent('x-foo', {
-  unit: true,
-  needs: ['helper:pluralize-string']
-});
-
-// run a test
-test('it renders', function(assert) {
-  assert.expect(1);
-
-  // creates the component instance
-  var subject = this.subject();
-
-  // render the component on the page
-  this.render();
-  assert.equal(this.$('.foo').text(), 'bar');
-});
-```
-
-Unit tests used to be the default mode for component tests. To flag a test as a unit test, either specify `unit: true` or include `needs: []` in the callbacks object.
-
-Unit tests have the advantage of giving you direct access to the component instance so you can test its internals.  Unit tests have the following features:
-
-- You have access to the component instance through `this.subject()`.
-- If you want to render the component's template, call either `this.render()` or `this.$()`.
-- Testing the component's template is through `this.$()`.
-- You are required to specify any dependencies other than the component's template in the `needs: []` option.  This includes helpers, services, partials, and any other components (with their templates) that are referenced.
-- Unit tests do not call most of the Ember lifecycle hooks.  `didInsertElement` and `willDestroyElement` will be called, but the remaining hooks introduced in Ember 1.13.x will not be.
-- There is no outer context for the component so testing things such as actions will require directly stubbing the actions on the component.
-
-### Other Tests
-
-[Controllers Guide](http://guides.emberjs.com/v1.13.0/testing/testing-controllers/)
-
-[Routes Guide](http://guides.emberjs.com/v1.13.0/testing/testing-routes/)
-
-```js
-import { test, moduleFor } from 'ember-qunit';
-
-moduleFor('controller:home');
-
-test('It can calculate the result', function(assert) {
-  assert.expect(1);
-
-  var subject = this.subject();
-
-  subject.set('value', 'foo');
-  assert.equal(subject.get('result'), 'bar');
-});
-```
-
-`moduleFor` works for any object you could look up with the Ember Resolver (service, routes, controllers, etc.).
-
-Note: Controllers / Routes do not have access to rendering.  You will need to either use a component test or an acceptance test.
-
-### Ember Data Tests
-
-[Ember Guide](http://guides.emberjs.com/v1.13.0/testing/testing-models/)
-
-```js
-import { test, moduleForModel } from 'ember-qunit';
-
-moduleForModel('user', {
-  needs: ['model:child']
-});
-
-test('It can set its child', function(assert) {
-  assert.expect(1);
-  var subject = this.subject();
-
-  var child = subject.store.createRecord('child');
-  subject.get('children').pushObject(child);
-
-  assert.equal(subject.get('some-computed-value'), true);
-});
-```
-
-## Advanced Usage
-### Setting the resolver
-
-```js
-// if you don't have a custom resolver, do it like this:
-setResolver(Ember.DefaultResolver.create({ namespace: App }));
-
-// otherwise something like:
-import Resolver from './path/to/resolver';
-import { setResolver } from 'ember-qunit';
-setResolver(Resolver.create());
-```
-
-### Async Example
-
-Under the hood, if you use `Ember.RSVP.Promise`, ember-qunit will call
-QUnit's `start` and `stop` helpers to stop the test from tearing down
-and running other tests while your asynchronous code runs. ember-qunit
-also asserts that the promise gets fulfilled.
-
-In addition, you can also return promises in the test body:
-
-```js
-// If you return a promise from a test callback it becomes an asyncTest. This
-// is a key difference between ember-qunit and standard QUnit.
-test('async is awesome', function(assert) {
-  assert.expect(1);
-  var myThing = MyThing.create();
-  // myThing.exampleMethod() returns a promise
-  return myThing.exampleMethod().then(function() {
-    assert.ok(myThing.get('finished'));
+  test('renders', async function() {
+    await render(hbs`{{gravatar-image}}`);
+    assert.ok(this.element.querySelector('img'));
   });
 });
 ```
 
-If an error is thrown in your promise or a promise
-within `test` becomes rejected, ember-qunit will fail the test.
-To assert that a promise should be rejected, you can "catch"
-the error and assert that you got there:
+### Setup Application Tests
 
-```js
-test('sometimes async gets rejected', function(assert) {
-  assert.expect(1);
-  var myThing = MyThing.create()
+The `setupApplicationTest()` function can be used to run tests that interact
+with the whole application, so in most cases acceptance tests.
 
-  return myThing.exampleMethod().then(function() {
-    assert.ok(false, "promise should not be fulfilled");
-  })['catch'](function(err) {
-    assert.equal(err.message, "User not Authorized");
+On top of `setupTest()` it will:
+
+* Boot your application instance
+* Set up all the [DOM Interaction Helpers](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#dom-interaction-helpers)
+  (`click()`, `fillIn()`, ...) as well as the [Routing Helpers](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#routing-helpers)
+  (`visit()`, `currentURL()`, ...) from `@ember/test-helpers`
+
+```javascript
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
+import { visit, currentURL } from '@ember/test-helpers';
+
+module('basic acceptance test', function(hooks) {
+  setupApplicationTest(hooks);
+
+  test('can visit /', async function() {
+    await visit('/');
+    expect(currentURL()).to.equal('/');
   });
 });
 ```
 
-## Test Helpers
 
-### `moduleFor(fullName [, description [, callbacks]])`
-
-- `fullName`: (String) - The full name of the unit, ie
-  `controller:application`, `route:index`.
-
-- `description`: (String) optional - The description of the module
-
-- `callbacks`: (Object) optional
-   - QUnit callbacks (`beforeEach` and `afterEach`)
-   - ember-test-helpers callback (`subject`)
-   - `integration: true` or `unit: true` (default: `integration: true`)
-   - `needs` specify any dependencies the tested module will require.
-
-### `moduleForComponent(name, [description, callbacks])`
-
-- `name`: (String) - the short name of the component that you'd use in a
-  template, ie `x-foo`, `ic-tabs`, etc.
-
-- `description`: (String) optional - The description of the module
-
-- `callbacks`: (Object) optional
-   - QUnit callbacks (`beforeEach` and `afterEach`)
-   - ember-test-helpers callback (`subject`)
-   - `integration: true` or `unit: true` (default: `integration: true`)
-   - `needs` specify any dependencies the tested module will require.  (Including this will force your test into unit mode).
-
-### `moduleForModel(name, [description, callbacks])`
-
-- `name`: (String) - the short name of the model you'd use in `store`
-  operations ie `user`, `assignmentGroup`, etc.
-
-- `description`: (String) optional - The description of the module
-
-- `callbacks`: (Object) optional
-   - QUnit callbacks (`beforeEach` and `afterEach`)
-   - ember-test-helpers callback (`subject`)
-   - `integration: true` or `unit: true` (default: `integration: true`)
-   - `needs` specify any dependencies the tested module will require.
-
-## Contributing
+Contributing
+------------------------------------------------------------------------------
 
 ### Installation
 
-* `git clone <repository-url>` this repository
+* `git clone <repository-url>`
 * `cd ember-qunit`
 * `npm install`
 
-### Running
-
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-
-### Running Tests
+### Running tests
 
 * `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
 * `ember test`
 * `ember test --server`
 
-### Building
+### Running the dummy application
 
-* `ember build`
+* `ember serve`
+* Visit the dummy application at [http://localhost:4200](http://localhost:4200).
 
 For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
