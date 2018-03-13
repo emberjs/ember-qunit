@@ -29,6 +29,11 @@ addon names and are expecting `ember-cli-qunit` instead. If you have issues
 with this then `ember install ember-cli-qunit`, which should work exactly
 the same.
 
+Upgrading
+------------------------------------------------------------------------------
+
+For instructions how to upgrade your test suite to the latest testing APIs, 
+please read our [Migration Guide](docs/migration.md).
 
 Usage
 ------------------------------------------------------------------------------
@@ -139,9 +144,9 @@ import { visit, currentURL } from '@ember/test-helpers';
 module('basic acceptance test', function(hooks) {
   setupApplicationTest(hooks);
 
-  test('can visit /', async function() {
+  test('can visit /', async function(assert) {
     await visit('/');
-    expect(currentURL()).to.equal('/');
+    assert.equal(currentURL(), '/');
   });
 });
 ```
