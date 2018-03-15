@@ -1,4 +1,4 @@
-# ember-qunit [![Build Status](https://travis-ci.org/emberjs/ember-qunit.svg)](https://travis-ci.org/emberjs/ember-qunit)
+# ember-qunit
 
 [![Latest NPM release][npm-badge]][npm-badge-url]
 [![TravisCI Build Status][travis-badge]][travis-badge-url]
@@ -55,8 +55,11 @@ correctly setup the application required by `@ember/test-helpers`:
 import Application from '../app';
 import config from '../config/environment';
 import { setApplication } from '@ember/test-helpers';
+import { start } from 'ember-qunit';
 
 setApplication(Application.create(config.APP));
+
+start();
 ```
 
 Also make sure that you have set `ENV.APP.autoboot = false;` for the `test`
