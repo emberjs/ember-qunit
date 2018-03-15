@@ -23,7 +23,7 @@ Before:
 ```javascript
 import { test, moduleFor } from 'ember-qunit';
 
-moduleFor('controller:posts', {
+moduleFor('controller:sidebar', 'SidebarController', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });
