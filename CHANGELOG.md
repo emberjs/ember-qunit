@@ -1,5 +1,23 @@
 # Change Log
 
+## v3.4.0 (2018-03-28)
+
+#### :rocket: Enhancement
+* [#314](https://github.com/emberjs/ember-qunit/pull/314) Adding tests not settled detection support in tests. ([@scalvert](https://github.com/scalvert))
+
+#### :memo: Documentation
+* [#323](https://github.com/emberjs/ember-qunit/pull/323) Fix example in transition guide. ([@simonihmig](https://github.com/simonihmig))
+* [#321](https://github.com/emberjs/ember-qunit/pull/321) README: Fix documentation issues. ([@Turbo87](https://github.com/Turbo87))
+* [#322](https://github.com/emberjs/ember-qunit/pull/322) Add Migration Guide. ([@simonihmig](https://github.com/simonihmig))
+* [#320](https://github.com/emberjs/ember-qunit/pull/320) Update Docs. ([@Turbo87](https://github.com/Turbo87))
+* [#317](https://github.com/emberjs/ember-qunit/pull/317) Update README.md. ([@demee](https://github.com/demee))
+
+#### Committers: 4
+- Simon Ihmig ([simonihmig](https://github.com/simonihmig))
+- Slawomir Demichowicz ([demee](https://github.com/demee))
+- Steve Calvert ([scalvert](https://github.com/scalvert))
+- Tobias Bieniek ([Turbo87](https://github.com/Turbo87))
+
 ## v3.3.2 (2018-02-16)
 
 #### :bug: Bug Fix
