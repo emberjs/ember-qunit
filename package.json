@@ -31,7 +31,7 @@
     "broccoli-funnel": "^2.0.1",
     "broccoli-merge-trees": "^2.0.0",
     "common-tags": "^1.4.0",
-    "ember-cli-babel": "^6.3.0",
+    "ember-cli-babel": "^6.8.2",
     "ember-cli-test-loader": "^2.2.0",
     "qunit": "^2.5.0"
   },
