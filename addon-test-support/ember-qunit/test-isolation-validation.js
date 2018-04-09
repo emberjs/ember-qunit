@@ -7,10 +7,10 @@ const TESTS_NOT_ISOLATED = [];
  * Detects if a specific test isn't isolated. A test is considered
  * not isolated if it:
  *
- * - has no pending timers
- * - is not in a runloop
- * - has no pending AJAX requests
- * - has no pending test waiters
+ * - has pending timers
+ * - is in a runloop
+ * - has pending AJAX requests
+ * - has pending test waiters
  *
  * @function detectIfTestNotIsolated
  * @param {Object} testInfo
