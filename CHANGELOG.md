@@ -1,5 +1,20 @@
 # Change Log
 
+## v3.4.1 (2018-05-15)
+
+#### :bug: Bug Fix
+* [#328](https://github.com/emberjs/ember-qunit/pull/328) Polyfill memory leak prevention. ([@rwjblue](https://github.com/rwjblue))
+* [#324](https://github.com/emberjs/ember-qunit/pull/324) bumped version requirement of ember-cli-babel from ^6.3.0 to ^6.8.2. ([@StephenAWalsh](https://github.com/StephenAWalsh))
+
+#### :memo: Documentation
+* [#326](https://github.com/emberjs/ember-qunit/pull/326) Test isolation validation comment is incorrect. ([@scalvert](https://github.com/scalvert))
+
+#### Committers: 3
+- Robert Jackson ([rwjblue](https://github.com/rwjblue))
+- Steve Calvert ([scalvert](https://github.com/scalvert))
+- Steve Walsh ([StephenAWalsh](https://github.com/StephenAWalsh))
+
+
 ## v3.4.0 (2018-03-28)
 
 #### :rocket: Enhancement
