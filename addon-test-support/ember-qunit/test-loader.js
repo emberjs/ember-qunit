@@ -15,8 +15,19 @@ addModuleIncludeMatcher(function(moduleName) {
 let moduleLoadFailures = [];
 
 QUnit.done(function() {
-  if (moduleLoadFailures.length) {
-    throw new Error('\n' + moduleLoadFailures.join('\n'));
+  let length = moduleLoadFailures.length;
+  
+  try {
+    if (length === 0) {
+      // do nothing
+    } else if (length === 1) {
+      throw moduleLoadFailures[0];
+    } else {
+      throw new Error('\n' + moduleLoadFailures.join('\n'));
+    }
+  } finally {
+    // ensure we release previously captured errors.
+    moduleLoadFailures = [];
   }
 });
 
