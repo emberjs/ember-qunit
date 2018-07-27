@@ -2,7 +2,7 @@
 Migration Guide
 ==============================================================================
 
-This guide provides instruction for upgrading your test suite from the 
+This guide provides instruction for upgrading your test suite from the
 [Legacy APIs](legacy.md) to Ember's latest testing APIs based on RFCs
 [232](https://github.com/emberjs/rfcs/blob/master/text/0232-simplify-qunit-testing-api.md)
 and
@@ -179,3 +179,7 @@ For migrating from the global test helpers to those proved by
 `@ember/test-helpers`, you can use the
 [ember-test-helpers-codemod](https://github.com/simonihmig/ember-test-helpers-codemod)
 to assist you with that task.
+
+##### Caveats
+
+* As of ember-cli-qunit@4.1.0 / ember-qunit@3.0.0, `Ember.testing` is only set tor `true` during the test run. Previously it was always set to `true`. For more information see https://github.com/ember-cli/eslint-plugin-ember/tree/master/docs/rules/no-ember-testing-in-module-scope.md
