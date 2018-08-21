@@ -12,6 +12,7 @@ addModuleIncludeMatcher(function(moduleName) {
   return moduleName.match(/\.jshint$/);
 });
 
+let testLoaderInstance;
 let moduleLoadFailures = [];
 
 QUnit.done(function() {
@@ -57,5 +58,17 @@ export class TestLoader extends AbstractTestLoader {
    @method loadTests
  */
 export function loadTests() {
-  new TestLoader().loadModules();
+  if (!testLoaderInstance) {
+    getTestLoaderInstance();
+  }
+
+  return testLoaderInstance.loadModules();
+}
+
+// ensure TestLoader is a singleton
+export function getTestLoaderInstance() {
+  if (!testLoaderInstance) {
+    testLoaderInstance = new TestLoader();
+  }
+  return testLoaderInstance;
 }
