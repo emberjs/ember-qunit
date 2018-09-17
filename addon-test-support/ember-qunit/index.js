@@ -243,21 +243,6 @@ export function setupTestIsolationValidation() {
   QUnit.done(reportIfTestNotIsolated);
 }
 
-// This polyfills the changes from https://github.com/qunitjs/qunit/pull/1279
-// and should be removed when that change is released and included in a release
-// version of QUnit
-function polyfillMemoryLeakPrevention() {
-  QUnit.testDone(function() {
-    // release the test callback
-    QUnit.config.current.callback = undefined;
-  });
-
-  QUnit.moduleDone(function() {
-    // release the module hooks
-    QUnit.config.current.module.hooks = {};
-  });
-}
-
 /**
    @method start
    @param {Object} [options] Options to be used for enabling/disabling behaviors
@@ -275,7 +260,6 @@ function polyfillMemoryLeakPrevention() {
    of `Ember.onerror` will be disabled.
    @param {Boolean} [options.setupTestIsolationValidation] If `false` test isolation validation
    will be disabled.
-   @param {Boolean} [options._polyfillMemoryLeakPrevention] If `false` the polyfilled memory leak prevention will not be enabled.
  */
 export function start(options = {}) {
   if (options.loadTests !== false) {
@@ -303,10 +287,6 @@ export function start(options = {}) {
     options.setupTestIsolationValidation !== false
   ) {
     setupTestIsolationValidation();
-  }
-
-  if (options._polyfillMemoryLeakPrevention !== false) {
-    polyfillMemoryLeakPrevention();
   }
 
   if (options.startTests !== false) {
