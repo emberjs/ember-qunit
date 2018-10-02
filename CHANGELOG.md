@@ -1,5 +1,27 @@
 # Change Log
 
+## v3.4.2 (2018-10-02)
+
+#### :rocket: Enhancement
+* [#339](https://github.com/emberjs/ember-qunit/pull/339) Update @ember/test-helpers to v0.7.26. ([@rwjblue](https://github.com/rwjblue))
+* [#331](https://github.com/emberjs/ember-qunit/pull/331) Bump minimum required @ember/test-helpers to 0.7.25. ([@john-griffin](https://github.com/john-griffin))
+* [#330](https://github.com/emberjs/ember-qunit/pull/330) Improve ModuleLoadFailure handling. ([@stefanpenner](https://github.com/stefanpenner))
+
+#### :memo: Documentation
+* [#333](https://github.com/emberjs/ember-qunit/pull/333) Add info about Ember.testing changes. ([@tmquinn](https://github.com/tmquinn))
+
+#### :house: Internal
+* [#336](https://github.com/emberjs/ember-qunit/pull/336) Remove polyfillMemoryLeakPrevention. ([@tmquinn](https://github.com/tmquinn))
+* [#338](https://github.com/emberjs/ember-qunit/pull/338) Lock ember-data to 2.16.2. ([@rwjblue](https://github.com/rwjblue))
+* [#329](https://github.com/emberjs/ember-qunit/pull/329) npmignore: Do not publish `yarn.lock` file. ([@Turbo87](https://github.com/Turbo87))
+
+#### Committers: 5
+- John Griffin ([john-griffin](https://github.com/john-griffin))
+- Quinn Hoyer ([tmquinn](https://github.com/tmquinn))
+- Robert Jackson ([rwjblue](https://github.com/rwjblue))
+- Stefan Penner ([stefanpenner](https://github.com/stefanpenner))
+- Tobias Bieniek ([Turbo87](https://github.com/Turbo87))
+
 ## v3.4.1 (2018-05-15)
 
 #### :bug: Bug Fix
