@@ -1,5 +1,13 @@
 # Change Log
 
+## v3.5.0 (2018-10-10)
+
+#### :rocket: Enhancement
+* [#339](https://github.com/emberjs/ember-qunit/pull/351) Update `qunit` to 2.7.0. ([@turbo87](https://github.com/turbo87))
+
+#### Committers: 1
+- Tobias Bieniek ([Turbo87](https://github.com/Turbo87))
+
 ## v3.4.2 (2018-10-02)
 
 #### :rocket: Enhancement
