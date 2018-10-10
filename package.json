@@ -33,7 +33,7 @@
     "common-tags": "^1.4.0",
     "ember-cli-babel": "^6.8.2",
     "ember-cli-test-loader": "^2.2.0",
-    "qunit": "^2.6.0"
+    "qunit": "^2.7.0"
   },
   "devDependencies": {
     "ember-cli": "~2.15.1",
