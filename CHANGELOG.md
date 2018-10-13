@@ -1,5 +1,14 @@
 # Change Log
 
+## v3.5.1 (2018-10-13)
+
+#### :bug: Bug Fix
+* [#353](https://github.com/emberjs/ember-qunit/pull/353) Pin `qunit` dependency to v2.6.x for Node 4 compatibility. ([@Turbo87](https://github.com/Turbo87))
+
+#### Committers: 1
+- Tobias Bieniek ([Turbo87](https://github.com/Turbo87))
+
+
 ## v3.5.0 (2018-10-10)
 
 #### :rocket: Enhancement
