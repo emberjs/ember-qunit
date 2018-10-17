@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@ember/test-helpers@^0.7.26":
-  version "0.7.26"
-  resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-0.7.26.tgz#ae11cbde9cce2c872abbea6edcd849a31dd7bd1e"
-  integrity sha512-5HxPYmdeinI4f0lF2tKHyiNGTcNY3O5rw89AC6Z6hb9yEL3ktF8eaU7rZfvSTFEF3d3TlhR5Qidl27QzLGkUeA==
+"@ember/test-helpers@^0.7.27":
+  version "0.7.27"
+  resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-0.7.27.tgz#c622cabd0cbb95b34efc1e1b6274ab5a14edc138"
+  integrity sha512-AQESk0FTFxRY6GyZ8PharR4SC7Fju0rXqNkfNYIntAjzefZ8xEqEM4iXDj5h7gAvfx/8dA69AQ9+p7ubc+KvJg==
   dependencies:
     broccoli-funnel "^2.0.1"
     ember-assign-polyfill "~2.4.0"
