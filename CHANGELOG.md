@@ -1,5 +1,11 @@
 # Change Log
 
+## v3.5.3 (2018-10-19) and v3.5.2 (2018-10-18)
+
+`v3.5.2` was mistakenly released with a breaking change that dropped support for Node.js 4.
+To resolve this situation we have re-released `v3.5.1` as `v3.5.3`.
+
+
 ## v3.5.1 (2018-10-13)
 
 #### :bug: Bug Fix

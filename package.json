@@ -1,6 +1,6 @@
 {
   "name": "ember-qunit",
-  "version": "3.5.2",
+  "version": "3.5.3",
   "description": "QUnit helpers for testing Ember.js applications",
   "keywords": [
     "ember-addon"
