@@ -16,7 +16,7 @@ let moduleLoadFailures = [];
 
 QUnit.done(function() {
   let length = moduleLoadFailures.length;
-  
+
   try {
     if (length === 0) {
       // do nothing
