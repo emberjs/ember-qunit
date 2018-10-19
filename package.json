@@ -23,6 +23,7 @@
   "scripts": {
     "build": "ember build",
     "changelog": "lerna-changelog",
+    "lint": "eslint .",
     "start": "ember server",
     "test": "ember try:each"
   },
