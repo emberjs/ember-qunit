@@ -1,5 +1,22 @@
 # Change Log
 
+## v4.0.0 (2018-10-19)
+
+#### :boom: Breaking Change
+* [#348](https://github.com/emberjs/ember-qunit/pull/348) Bump ember-cli-babel from 6.17.2 to 7.1.2 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#354](https://github.com/emberjs/ember-qunit/pull/354) Drop support for Node.js 4 and below ([@Turbo87](https://github.com/Turbo87))
+
+#### :bug: Bug Fix
+* [#369](https://github.com/emberjs/ember-qunit/pull/369) Upgrade qunit to v2.7.1 ([@stefanpenner](https://github.com/stefanpenner))
+
+#### :house: Internal
+* [#358](https://github.com/emberjs/ember-qunit/pull/358) Remove obsolete dependency resolution overrides ([@Turbo87](https://github.com/Turbo87))
+
+#### Committers: 2
+- Stefan Penner ([@stefanpenner](https://github.com/stefanpenner))
+- Tobias Bieniek ([@Turbo87](https://github.com/Turbo87))
+
+
 ## v3.5.3 (2018-10-19) and v3.5.2 (2018-10-18)
 
 `v3.5.2` was mistakenly released with a breaking change that dropped support for Node.js 4.
