@@ -32,20 +32,16 @@ module.exports = {
   targetOptions() {
     if (!this._targetOptions) {
       // 1. check this.parent.options['ember-qunit']
-      let targetOptions =
-        this.parent.options && this.parent.options['ember-qunit'];
+      let targetOptions = this.parent.options && this.parent.options['ember-qunit'];
       // 2. check this.app.options['ember-qunit']
       targetOptions =
-        targetOptions ||
-        (this.app && this.app.options && this.app.options['ember-qunit']);
+        targetOptions || (this.app && this.app.options && this.app.options['ember-qunit']);
       // 3. check this.parent.options['ember-cli-qunit']
       targetOptions =
-        targetOptions ||
-        (this.parent.options && this.parent.options['ember-cli-qunit']);
+        targetOptions || (this.parent.options && this.parent.options['ember-cli-qunit']);
       // 4. check this.app.options['ember-cli-qunit']
       targetOptions =
-        targetOptions ||
-        (this.app && this.app.options && this.app.options['ember-cli-qunit']);
+        targetOptions || (this.app && this.app.options && this.app.options['ember-cli-qunit']);
       this._targetOptions = targetOptions || {};
     }
 
@@ -54,10 +50,7 @@ module.exports = {
 
   contentFor: function(type) {
     // Skip if insertContentForTestBody === false.
-    if (
-      type === 'test-body' &&
-      !(this.targetOptions().insertContentForTestBody === false)
-    ) {
+    if (type === 'test-body' && !(this.targetOptions().insertContentForTestBody === false)) {
       return stripIndent`
         <div id="qunit"></div>
         <div id="qunit-fixture"></div>

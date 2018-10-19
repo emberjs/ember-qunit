@@ -1,7 +1,5 @@
 export { default as moduleFor } from './legacy-2-x/module-for';
-export {
-  default as moduleForComponent,
-} from './legacy-2-x/module-for-component';
+export { default as moduleForComponent } from './legacy-2-x/module-for-component';
 export { default as moduleForModel } from './legacy-2-x/module-for-model';
 export { default as QUnitAdapter } from './adapter';
 export { module, test, skip, only, todo } from 'qunit';
@@ -27,10 +25,7 @@ import {
   teardownApplicationContext,
   validateErrorHandler,
 } from '@ember/test-helpers';
-import {
-  detectIfTestNotIsolated,
-  reportIfTestNotIsolated,
-} from './test-isolation-validation';
+import { detectIfTestNotIsolated, reportIfTestNotIsolated } from './test-isolation-validation';
 
 export function setResolver() {
   deprecate(
@@ -170,8 +165,7 @@ export function setupTestContainer() {
   let params = QUnit.urlParams;
 
   let containerVisibility = params.nocontainer ? 'hidden' : 'visible';
-  let containerPosition =
-    params.dockcontainer || params.devmode ? 'fixed' : 'relative';
+  let containerPosition = params.dockcontainer || params.devmode ? 'fixed' : 'relative';
 
   if (params.devmode) {
     testContainer.className = ' full-screen';
@@ -182,9 +176,7 @@ export function setupTestContainer() {
 
   let qunitContainer = document.getElementById('qunit');
   if (params.dockcontainer) {
-    qunitContainer.style.marginBottom = window.getComputedStyle(
-      testContainer
-    ).height;
+    qunitContainer.style.marginBottom = window.getComputedStyle(testContainer).height;
   }
 }
 
