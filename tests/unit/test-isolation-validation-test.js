@@ -4,10 +4,9 @@ import { module, test } from 'qunit';
 import {
   detectIfTestNotIsolated,
   reportIfTestNotIsolated,
-  getMessage,
 } from 'ember-qunit/test-isolation-validation';
 
-module('setupTestIsolationValidation', function(hooks) {
+module('test isolation validation', function(hooks) {
   hooks.beforeEach(function() {
     this.cancelId = 0;
 
@@ -47,13 +46,9 @@ module('setupTestIsolationValidation', function(hooks) {
 
     detectIfTestNotIsolated({ module: 'foo', name: 'bar' });
 
-    assert.throws(
-      function() {
-        reportIfTestNotIsolated();
-      },
-      Error,
-      getMessage(1, 'foo: bar')
-    );
+    assert.throws(function() {
+      reportIfTestNotIsolated();
+    });
   });
 
   test('reportIfTestNotIsolated throws when test has test waiters', function(assert) {
@@ -63,12 +58,8 @@ module('setupTestIsolationValidation', function(hooks) {
 
     detectIfTestNotIsolated({ module: 'foo', name: 'bar' });
 
-    assert.throws(
-      function() {
-        reportIfTestNotIsolated();
-      },
-      Error,
-      getMessage(1, 'foo: bar')
-    );
+    assert.throws(function() {
+      reportIfTestNotIsolated();
+    });
   });
 });

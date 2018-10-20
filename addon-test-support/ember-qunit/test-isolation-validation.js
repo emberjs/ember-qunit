@@ -1,7 +1,11 @@
 import { run } from '@ember/runloop';
-import { isSettled } from '@ember/test-helpers';
+import { isSettled, getSettledState } from '@ember/test-helpers';
+import TestDebugInfo from './-internal/test-debug-info';
+import TestDebugInfoSummary from './-internal/test-debug-info-summary';
+import getDebugInfoAvailable from './-internal/get-debug-info-available';
 
-const TESTS_NOT_ISOLATED = [];
+const nonIsolatedTests = new TestDebugInfoSummary();
+const { backburner } = run;
 
 /**
  * Detects if a specific test isn't isolated. A test is considered
@@ -19,7 +23,16 @@ const TESTS_NOT_ISOLATED = [];
  */
 export function detectIfTestNotIsolated({ module, name }) {
   if (!isSettled()) {
-    TESTS_NOT_ISOLATED.push(`${module}: ${name}`);
+    let testDebugInfo;
+    let backburnerDebugInfo;
+
+    if (getDebugInfoAvailable()) {
+      backburnerDebugInfo = backburner.getDebugInfo();
+    }
+
+    testDebugInfo = new TestDebugInfo(module, name, getSettledState(), backburnerDebugInfo);
+
+    nonIsolatedTests.add(testDebugInfo);
     run.cancelTimers();
   }
 }
@@ -32,17 +45,10 @@ export function detectIfTestNotIsolated({ module, name }) {
  * @throws Error if tests are not isolated
  */
 export function reportIfTestNotIsolated() {
-  if (TESTS_NOT_ISOLATED.length > 0) {
-    let leakyTests = TESTS_NOT_ISOLATED.slice();
-    TESTS_NOT_ISOLATED.length = 0;
+  if (nonIsolatedTests.hasDebugInfo) {
+    nonIsolatedTests.printToConsole();
+    nonIsolatedTests.reset();
 
-    throw new Error(getMessage(leakyTests.length, leakyTests.join('\n')));
+    throw new Error(nonIsolatedTests.formatForBrowser());
   }
-}
-
-export function getMessage(testCount, testsToReport) {
-  return `TESTS ARE NOT ISOLATED
-    The following (${testCount}) tests have one or more of pending timers, pending AJAX requests, pending test waiters, or are still in a runloop: \n
-    ${testsToReport}
-  `;
 }
