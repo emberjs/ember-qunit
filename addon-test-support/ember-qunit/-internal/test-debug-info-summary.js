@@ -24,7 +24,16 @@ export function getSummary(testCounts, leakCounts, testNames) {
 
 export default class TestDebugInfoSummary {
   constructor() {
-    this.reset();
+    this._testDebugInfos = [];
+    this.fullTestNames = [];
+    this.hasPendingRequests = false;
+    this.hasPendingWaiters = false;
+    this.hasRunLoop = false;
+    this.hasPendingTimers = false;
+    this.hasPendingScheduledQueueItems = false;
+    this.totalPendingRequestCount = 0;
+    this.totalPendingTimersCount = 0;
+    this.totalPendingScheduledQueueItemCount = 0;
   }
 
   add(testDebugInfo) {
@@ -56,19 +65,6 @@ export default class TestDebugInfoSummary {
 
   get hasDebugInfo() {
     return this._testDebugInfos.length > 0;
-  }
-
-  reset() {
-    this._testDebugInfos = [];
-    this.fullTestNames = [];
-    this.hasPendingRequests = false;
-    this.hasPendingWaiters = false;
-    this.hasRunLoop = false;
-    this.hasPendingTimers = false;
-    this.hasPendingScheduledQueueItems = false;
-    this.totalPendingRequestCount = 0;
-    this.totalPendingTimersCount = 0;
-    this.totalPendingScheduledQueueItemCount = 0;
   }
 
   printToConsole(_console = console) {

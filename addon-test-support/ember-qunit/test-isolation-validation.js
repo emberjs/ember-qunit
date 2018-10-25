@@ -4,8 +4,8 @@ import TestDebugInfo from './-internal/test-debug-info';
 import TestDebugInfoSummary from './-internal/test-debug-info-summary';
 import getDebugInfoAvailable from './-internal/get-debug-info-available';
 
-const nonIsolatedTests = new TestDebugInfoSummary();
 const { backburner } = run;
+let nonIsolatedTests;
 
 /**
  * Detects if a specific test isn't isolated. A test is considered
@@ -22,6 +22,8 @@ const { backburner } = run;
  * @param {string} testInfo.name The test name
  */
 export function detectIfTestNotIsolated({ module, name }) {
+  nonIsolatedTests = new TestDebugInfoSummary();
+
   if (!isSettled()) {
     let testDebugInfo;
     let backburnerDebugInfo;
@@ -47,7 +49,6 @@ export function detectIfTestNotIsolated({ module, name }) {
 export function reportIfTestNotIsolated() {
   if (nonIsolatedTests.hasDebugInfo) {
     nonIsolatedTests.printToConsole();
-    nonIsolatedTests.reset();
 
     throw new Error(nonIsolatedTests.formatForBrowser());
   }

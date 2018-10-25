@@ -15,21 +15,6 @@ module('TestDebugInfoSummary', function() {
     assert.ok(testDebugInfoSummary.hasDebugInfo);
   });
 
-  test('reset correctly resets to default values', function(assert) {
-    assert.expect(2);
-
-    let testDebugInfoSummary = new TestDebugInfoSummary();
-
-    testDebugInfoSummary.add(new TestDebugInfo('foo', 'bar', {}));
-    testDebugInfoSummary.add(new TestDebugInfo('ding', 'bat', {}));
-
-    assert.ok(testDebugInfoSummary.hasDebugInfo);
-
-    testDebugInfoSummary.reset();
-
-    assert.notOk(testDebugInfoSummary.hasDebugInfo);
-  });
-
   test('printToConsole correctly prints minimal information', function(assert) {
     assert.expect(1);
 
