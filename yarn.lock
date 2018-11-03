@@ -6967,10 +6967,10 @@ quick-temp@^0.1.2, quick-temp@^0.1.3, quick-temp@^0.1.5, quick-temp@^0.1.8:
     rimraf "^2.5.4"
     underscore.string "~3.3.4"
 
-qunit@~2.7.1:
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/qunit/-/qunit-2.7.1.tgz#ab93d322e46d8457d52fe4fa49d76da8cc476fec"
-  integrity sha512-ePeNs/CVL8coOWxnjxQAp9mCvRJybEQw3rwJe1TUClL+WrIcaZkLeW7VxHWtshn0L0ZtY0y80JqC7+po7330Ng==
+qunit@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.npmjs.org/qunit/-/qunit-2.8.0.tgz#007474727cdba323c35f9526e21c0687f8ea04b3"
+  integrity sha512-bT7vvvE4Xvk6c/uSbvP11uZXlzPJINURQyG9zj5I0EXXycW9oeDCodvAOK3GuYZ+GoXiTAMsxVSXCPGeXlTWzg==
   dependencies:
     commander "2.12.2"
     exists-stat "1.0.0"
