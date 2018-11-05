@@ -1,5 +1,13 @@
 # Change Log
 
+## v4.1.0 (2018-11-05)
+
+#### :rocket: Enhancement
+* [#380](https://github.com/emberjs/ember-qunit/pull/380) Update to QUnit to 2.8.0 ([@gabrielcsapo](https://github.com/gabrielcsapo))
+
+#### Committers: 1
+- Gabriel Csapo ([@gabrielcsapo](https://github.com/gabrielcsapo))
+
 ## v4.0.0 (2018-10-30)
 
 #### :boom: Breaking Change
