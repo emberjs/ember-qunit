@@ -1,5 +1,13 @@
 # Change Log
 
+## v4.1.1 (2018-11-06)
+
+#### :bug: Bug Fix
+* [#381](https://github.com/emberjs/ember-qunit/pull/381) Prevent errors for skipped tests when using RSVP.Promise as Promise polyfill. ([@step2yeung](https://github.com/step2yeung))
+
+#### Committers: 1
+- Stephen Yeung ([@step2yeung](https://github.com/step2yeung))
+
 ## v4.1.0 (2018-11-05)
 
 #### :rocket: Enhancement
