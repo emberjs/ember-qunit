@@ -27,3 +27,17 @@ test('asyncStart waits for equal numbers of asyncEnd to finish a test', function
     adapter.asyncEnd();
   }, 50);
 });
+
+test('asyncStart should handle skipped tests that has no assert', function(assert) {
+  let FakeQUnitWithoutAssert = {
+    config: {
+      current: {},
+    },
+  };
+
+  const adapter = QUnitAdapter.create({ qunit: FakeQUnitWithoutAssert });
+
+  adapter.asyncStart();
+  assert.equal(adapter.doneCallbacks.length, 1);
+  assert.deepEqual(adapter.doneCallbacks, [null]);
+});

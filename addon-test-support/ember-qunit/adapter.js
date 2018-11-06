@@ -28,10 +28,15 @@ function unhandledRejectionAssertion(current, error) {
 let Adapter = Ember.Test.Adapter.extend({
   init() {
     this.doneCallbacks = [];
+    this.qunit = this.qunit || QUnit;
   },
 
   asyncStart() {
-    this.doneCallbacks.push(QUnit.config.current ? QUnit.config.current.assert.async() : null);
+    this.doneCallbacks.push(
+      this.qunit.config.current && this.qunit.config.current.assert
+        ? this.qunit.config.current.assert.async()
+        : null
+    );
   },
 
   asyncEnd() {
