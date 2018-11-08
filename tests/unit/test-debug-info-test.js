@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { run } from '@ember/runloop';
-import TestDebugInfo from 'ember-qunit/-internal/test-debug-info';
+import TestDebugInfo, { getSummary } from 'ember-qunit/-internal/test-debug-info';
 import getDebugInfoAvailable from 'ember-qunit/-internal/get-debug-info-available';
 import MockStableError, { overrideError, resetError } from './utils/mock-stable-error';
 import { randomBoolean, getSettledState, debugInfo } from './utils/test-isolation-helpers';
@@ -130,4 +130,33 @@ module('TestDebugInfo', function() {
       });
     });
   }
+
+  test('toString correctly prints minimal information', function(assert) {
+    assert.expect(1);
+
+    let testDebugInfo = new TestDebugInfo('foo', 'bar', getSettledState());
+
+    assert.equal(testDebugInfo.toString(), getSummary('foo: bar', []));
+  });
+
+  test('toString correctly prints all information', function(assert) {
+    assert.expect(1);
+
+    let testDebugInfo = new TestDebugInfo(
+      'foo',
+      'bar',
+      getSettledState(true, true, true, true, 2),
+      debugInfo
+    );
+
+    assert.equal(
+      testDebugInfo.toString(),
+      getSummary('foo: bar', [
+        'Pending AJAX requests: 2',
+        'Pending test waiters: YES',
+        'Pending timers: 2',
+        'Active runloops: YES',
+      ])
+    );
+  });
 });

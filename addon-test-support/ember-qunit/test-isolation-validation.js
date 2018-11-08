@@ -1,3 +1,4 @@
+import { module, test } from 'qunit';
 import { run } from '@ember/runloop';
 import { isSettled, getSettledState } from '@ember/test-helpers';
 import TestDebugInfo from './-internal/test-debug-info';
@@ -5,7 +6,7 @@ import TestDebugInfoSummary from './-internal/test-debug-info-summary';
 import getDebugInfoAvailable from './-internal/get-debug-info-available';
 
 const { backburner } = run;
-let nonIsolatedTests;
+let nonIsolatedTests = new TestDebugInfoSummary();
 
 /**
  * Detects if a specific test isn't isolated. A test is considered
@@ -22,8 +23,6 @@ let nonIsolatedTests;
  * @param {string} testInfo.name The test name
  */
 export function detectIfTestNotIsolated({ module, name }) {
-  nonIsolatedTests = new TestDebugInfoSummary();
-
   if (!isSettled()) {
     let testDebugInfo;
     let backburnerDebugInfo;
@@ -50,6 +49,19 @@ export function reportIfTestNotIsolated() {
   if (nonIsolatedTests.hasDebugInfo) {
     nonIsolatedTests.printToConsole();
 
-    throw new Error(nonIsolatedTests.formatForBrowser());
+    module('Non-isolated test detected', function() {
+      nonIsolatedTests.forEach(testDebugInfo => {
+        test(`Module: '${testDebugInfo.module}', Test: ${testDebugInfo.name}`, function(assert) {
+          assert.expect(1);
+
+          assert.pushResult({
+            result: false,
+            message: testDebugInfo.toString(),
+          });
+        });
+      });
+    });
+
+    nonIsolatedTests = new TestDebugInfoSummary();
   }
 }
