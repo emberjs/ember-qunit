@@ -1,5 +1,14 @@
 # Change Log
 
+## v4.1.2 (2018-11-08)
+
+#### :bug: Bug Fix
+* [#385](https://github.com/emberjs/ember-qunit/pull/385) Bugfix: fixes issue with test-isolation-validation output ([@scalvert](https://github.com/scalvert))
+* [#383](https://github.com/emberjs/ember-qunit/pull/383) Bump @ember/test-helpers from 1.0.0 to 1.0.1 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 1
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
 ## v4.1.1 (2018-11-06)
 
 #### :bug: Bug Fix
