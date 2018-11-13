@@ -1,5 +1,6 @@
 import { Promise as RSVPPromise } from 'rsvp';
 import { module, test } from 'qunit';
+import patchAssert from './utils/patch-assert-helper';
 
 const HAS_NATIVE_PROMISE = typeof Promise !== 'undefined';
 const HAS_UNHANDLED_REJECTION_HANDLER = 'onunhandledrejection' in window;
@@ -12,19 +13,7 @@ module('unhandle promise rejections', function(hooks) {
     // the test frameworks own window.onerror to reset it
     WINDOW_ONERROR = window.onerror;
 
-    // this catches the native promise unhandled rejection case because QUnit
-    // dispatches these to `assert.pushResult`, so we handle the failure being
-    // pushed and convert it to a passing assertion
-    //
-    // Also, on Ember < 2.17 this is called for the RSVP unhandled rejection
-    // case (because it goes through Adapter.exception).
-    assert._originalPushResult = assert.pushResult;
-    assert.pushResult = function(resultInfo) {
-      // Inverts the result so we can test failing assertions
-      resultInfo.result = !resultInfo.result;
-      resultInfo.message = `Failed: ${resultInfo.message}`;
-      this._originalPushResult(resultInfo);
-    };
+    patchAssert(assert);
   });
 
   hooks.afterEach(function() {

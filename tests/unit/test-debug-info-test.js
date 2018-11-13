@@ -1,9 +1,13 @@
 import { module, test } from 'qunit';
 import { run } from '@ember/runloop';
-import TestDebugInfo, { getSummary } from 'ember-qunit/-internal/test-debug-info';
-import getDebugInfoAvailable from 'ember-qunit/-internal/get-debug-info-available';
+import TestDebugInfo, { getDebugInfo } from 'ember-qunit/-internal/test-debug-info';
 import MockStableError, { overrideError, resetError } from './utils/mock-stable-error';
-import { randomBoolean, getSettledState, debugInfo } from './utils/test-isolation-helpers';
+import {
+  MockConsole,
+  getRandomBoolean,
+  getMockDebugInfo,
+  getMockSettledState,
+} from './utils/test-isolation-helpers';
 
 module('TestDebugInfo', function() {
   test('fullTestName returns concatenated test name', function(assert) {
@@ -17,15 +21,15 @@ module('TestDebugInfo', function() {
   test('summary returns minimal information when debugInfo is not present', function(assert) {
     assert.expect(1);
 
-    let hasPendingTimers = randomBoolean();
-    let hasPendingWaiters = randomBoolean();
-    let hasRunLoop = randomBoolean();
+    let hasPendingTimers = getRandomBoolean();
+    let hasPendingWaiters = getRandomBoolean();
+    let hasRunLoop = getRandomBoolean();
     let pendingRequestCount = Math.floor(Math.random(10));
     let hasPendingRequests = Boolean(pendingRequestCount > 0);
     let testDebugInfo = new TestDebugInfo(
       'foo',
       'bar',
-      getSettledState(
+      getMockSettledState(
         hasPendingTimers,
         hasRunLoop,
         hasPendingWaiters,
@@ -47,9 +51,17 @@ module('TestDebugInfo', function() {
   test('summary returns full information when debugInfo is present', function(assert) {
     assert.expect(1);
 
-    let testDebugInfo = new TestDebugInfo('foo', 'bar', getSettledState(), debugInfo);
+    run.backburner.DEBUG = false;
+
+    let testDebugInfo = new TestDebugInfo(
+      'foo',
+      'bar',
+      getMockSettledState(),
+      getMockDebugInfo(false, 2, [{ name: 'one', count: 1 }, { name: 'two', count: 1 }])
+    );
 
     assert.deepEqual(testDebugInfo.summary, {
+      autorunStackTrace: undefined,
       fullTestName: 'foo: bar',
       hasPendingRequests: false,
       hasPendingTimers: false,
@@ -63,7 +75,7 @@ module('TestDebugInfo', function() {
     });
   });
 
-  if (getDebugInfoAvailable()) {
+  if (getDebugInfo()) {
     module('when using backburner', function(hooks) {
       let cancelIds;
 
@@ -86,34 +98,14 @@ module('TestDebugInfo', function() {
         run.backburner.DEBUG = true;
 
         cancelIds.push(run.later(() => {}, 5000));
-
-        let debugInfo = run.backburner.getDebugInfo();
-        let testDebugInfo = new TestDebugInfo('foo', 'bar', getSettledState(), debugInfo);
-
-        assert.deepEqual(testDebugInfo.summary, {
-          fullTestName: 'foo: bar',
-          hasPendingRequests: false,
-          hasPendingTimers: false,
-          hasPendingWaiters: false,
-          hasRunLoop: false,
-          pendingRequestCount: 0,
-          pendingScheduledQueueItemCount: 0,
-          pendingScheduledQueueItemStackTraces: [],
-          pendingTimersCount: 1,
-          pendingTimersStackTraces: ['STACK'],
-        });
-      });
-
-      test('summary returns full information when debugInfo is present', function(assert) {
-        assert.expect(1);
-
-        run.backburner.DEBUG = true;
-
-        cancelIds.push(run.later(() => {}, 5000));
         cancelIds.push(run.later(() => {}, 10000));
 
-        let debugInfo = run.backburner.getDebugInfo();
-        let testDebugInfo = new TestDebugInfo('foo', 'bar', getSettledState(), debugInfo);
+        let testDebugInfo = new TestDebugInfo(
+          'foo',
+          'bar',
+          getMockSettledState(),
+          run.backburner.getDebugInfo()
+        );
 
         assert.deepEqual(testDebugInfo.summary, {
           fullTestName: 'foo: bar',
@@ -131,32 +123,121 @@ module('TestDebugInfo', function() {
     });
   }
 
-  test('toString correctly prints minimal information', function(assert) {
+  test('toConsole correctly prints minimal information', function(assert) {
     assert.expect(1);
 
-    let testDebugInfo = new TestDebugInfo('foo', 'bar', getSettledState());
+    let mockConsole = new MockConsole();
 
-    assert.equal(testDebugInfo.toString(), getSummary('foo: bar', []));
+    let testDebugInfo = new TestDebugInfo('foo', 'bar', getMockSettledState());
+
+    testDebugInfo.toConsole(mockConsole);
+
+    assert.deepEqual(mockConsole.toString(), 'foo: bar');
   });
 
-  test('toString correctly prints all information', function(assert) {
+  test('toConsole correctly prints Scheduled autorun information', function(assert) {
     assert.expect(1);
+
+    let mockConsole = new MockConsole();
 
     let testDebugInfo = new TestDebugInfo(
       'foo',
       'bar',
-      getSettledState(true, true, true, true, 2),
-      debugInfo
+      getMockSettledState(false, true, false, false, 0),
+      getMockDebugInfo(new MockStableError('STACK'), 0, null)
     );
 
-    assert.equal(
-      testDebugInfo.toString(),
-      getSummary('foo: bar', [
-        'Pending AJAX requests: 2',
-        'Pending test waiters: YES',
-        'Pending timers: 2',
-        'Active runloops: YES',
-      ])
+    testDebugInfo.toConsole(mockConsole);
+
+    assert.deepEqual(
+      mockConsole.toString(),
+      `foo: bar
+Scheduled autorun
+STACK`
+    );
+  });
+
+  test('toConsole correctly prints AJAX information', function(assert) {
+    assert.expect(1);
+
+    let mockConsole = new MockConsole();
+
+    let testDebugInfo = new TestDebugInfo(
+      'foo',
+      'bar',
+      getMockSettledState(false, false, false, true, 2)
+    );
+
+    testDebugInfo.toConsole(mockConsole);
+
+    assert.deepEqual(
+      mockConsole.toString(),
+      `foo: bar
+Pending AJAX requests`
+    );
+  });
+
+  test('toConsole correctly prints pending test waiter information', function(assert) {
+    assert.expect(1);
+
+    let mockConsole = new MockConsole();
+
+    let testDebugInfo = new TestDebugInfo('foo', 'bar', getMockSettledState(false, false, true));
+
+    testDebugInfo.toConsole(mockConsole);
+
+    assert.deepEqual(
+      mockConsole.toString(),
+      `foo: bar
+Pending test waiters`
+    );
+  });
+
+  test('toConsole correctly prints scheduled async information', function(assert) {
+    assert.expect(1);
+
+    let mockConsole = new MockConsole();
+
+    let testDebugInfo = new TestDebugInfo(
+      'foo',
+      'bar',
+      getMockSettledState(true, true),
+      getMockDebugInfo(false, 2, [{ name: 'one', count: 1 }, { name: 'two', count: 1 }])
+    );
+
+    testDebugInfo.toConsole(mockConsole);
+
+    assert.deepEqual(
+      mockConsole.toString(),
+      `foo: bar
+Scheduled async
+STACK
+STACK
+STACK
+STACK`
+    );
+  });
+
+  test('toConsole correctly prints scheduled async information with only scheduled queue items', function(assert) {
+    assert.expect(1);
+
+    let mockConsole = new MockConsole();
+
+    let testDebugInfo = new TestDebugInfo(
+      'foo',
+      'bar',
+      getMockSettledState(),
+      getMockDebugInfo(false, 0, [{ name: 'one', count: 1 }, { name: 'two', count: 1 }])
+    );
+
+    testDebugInfo.toConsole(mockConsole);
+
+    assert.deepEqual(
+      mockConsole.toString(),
+      `foo: bar
+Scheduled async
+STACK
+STACK`
     );
   });
 });

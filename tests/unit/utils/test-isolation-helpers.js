@@ -1,28 +1,4 @@
 const STACK = 'STACK';
-export const debugInfo = {
-  timers: [
-    {
-      stack: STACK,
-    },
-    {
-      stack: STACK,
-    },
-  ],
-  instanceStack: [
-    {
-      one: [
-        {
-          stack: STACK,
-        },
-      ],
-      two: [
-        {
-          stack: STACK,
-        },
-      ],
-    },
-  ],
-};
 
 export class MockConsole {
   constructor() {
@@ -44,11 +20,32 @@ export class MockConsole {
   }
 }
 
-export function randomBoolean() {
+export function getRandomBoolean() {
   return Math.random() >= 0.5;
 }
 
-export function getSettledState(
+export function getMockDebugInfo(autorun = null, timersCount = 0, queues) {
+  let debugInfo = {};
+  let queueItem = { stack: STACK };
+
+  if (autorun) {
+    debugInfo.autorun = autorun;
+  }
+
+  debugInfo.timers = Array(timersCount).fill(queueItem, 0, timersCount);
+
+  let instanceStack = {};
+  debugInfo.instanceStack = [instanceStack];
+
+  queues &&
+    queues.forEach(queue => {
+      instanceStack[queue.name] = Array(queue.count).fill(queueItem, 0, queue.count);
+    });
+
+  return debugInfo;
+}
+
+export function getMockSettledState(
   hasPendingTimers = false,
   hasRunLoop = false,
   hasPendingWaiters = false,

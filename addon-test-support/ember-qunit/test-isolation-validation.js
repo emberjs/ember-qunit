@@ -1,12 +1,7 @@
-import { module, test } from 'qunit';
+import QUnit from 'qunit';
 import { run } from '@ember/runloop';
-import { isSettled, getSettledState } from '@ember/test-helpers';
-import TestDebugInfo from './-internal/test-debug-info';
-import TestDebugInfoSummary from './-internal/test-debug-info-summary';
-import getDebugInfoAvailable from './-internal/get-debug-info-available';
-
-const { backburner } = run;
-let nonIsolatedTests = new TestDebugInfoSummary();
+import { waitUntil, isSettled, getSettledState } from '@ember/test-helpers';
+import TestDebugInfo, { getDebugInfo } from './-internal/test-debug-info';
 
 /**
  * Detects if a specific test isn't isolated. A test is considered
@@ -22,46 +17,75 @@ let nonIsolatedTests = new TestDebugInfoSummary();
  * @param {string} testInfo.module The name of the test module
  * @param {string} testInfo.name The test name
  */
-export function detectIfTestNotIsolated({ module, name }) {
+export function detectIfTestNotIsolated(test) {
   if (!isSettled()) {
     let testDebugInfo;
-    let backburnerDebugInfo;
 
-    if (getDebugInfoAvailable()) {
-      backburnerDebugInfo = backburner.getDebugInfo();
-    }
+    testDebugInfo = new TestDebugInfo(test.module.name, test.testName, getSettledState());
 
-    testDebugInfo = new TestDebugInfo(module, name, getSettledState(), backburnerDebugInfo);
+    testDebugInfo.toConsole();
 
-    nonIsolatedTests.add(testDebugInfo);
-    run.cancelTimers();
+    test.expected++;
+    test.assert.pushResult({
+      result: false,
+      message: testDebugInfo.message,
+    });
   }
 }
 
 /**
- * Reports if a test isn't isolated. Please see above for what
- * constitutes a test being isolated.
+ * Installs a hook to detect if a specific test isn't isolated.
+ * This hook is installed by patching into the `test.finish` method,
+ * which allows us to be very precise as to when the detection occurs.
  *
- * @function reportIfTestNotIsolated
- * @throws Error if tests are not isolated
+ * @function installTestNotIsolatedHook
  */
-export function reportIfTestNotIsolated() {
-  if (nonIsolatedTests.hasDebugInfo) {
-    nonIsolatedTests.printToConsole();
-
-    module('Non-isolated test detected', function() {
-      nonIsolatedTests.forEach(testDebugInfo => {
-        test(`Module: '${testDebugInfo.module}', Test: ${testDebugInfo.name}`, function(assert) {
-          assert.expect(1);
-
-          assert.pushResult({
-            result: false,
-            message: testDebugInfo.toString(),
-          });
-        });
-      });
-    });
-
-    nonIsolatedTests = new TestDebugInfoSummary();
+export function installTestNotIsolatedHook() {
+  if (!getDebugInfo()) {
+    return;
   }
+
+  let test = QUnit.config.current;
+  let finish = test.finish;
+
+  // We're hooking into `test.finish`, which utilizes internal ordering of
+  // when a test's hooks are invoked. We do this mainly becuase we need
+  // greater precision as to when to detect and subsequently report if the
+  // test is isolated.
+  //
+  // We looked at using:
+  // - `afterEach`
+  //    - the ordering of when the `afterEach` is called is not easy to guarantee
+  //      (ancestor `afterEach`es have to be accounted for too)
+  // - `QUnit.on('testEnd')`
+  //    - is executed too late; the test is already considered done so
+  //      we're unable to push a new assert to fail the current test
+  // - 'QUnit.done'
+  //    - it detatches the failure from the actual test that failed, making it
+  //      more confusing to the end user.
+  test.finish = function() {
+    let doFinish = () => finish.apply(this, arguments);
+
+    detectIfTestNotIsolated(this);
+
+    if (isSettled()) {
+      return doFinish();
+    } else {
+      return waitUntil(isSettled, { timeout: 100 })
+        .catch(() => {
+          // we consider that when waitUntil times out, you're in a state of
+          // test isolation violation. The nature of the error is irrelevant
+          // in this case, and we want to allow the error to fall through
+          // to the finally, where cleanup occurs.
+        })
+        .finally(() => {
+          // canceling timers here isn't perfect, but is as good as we can do
+          // to attempt to prevent future tests from failing due to this test's
+          // leakage
+          run.cancelTimers();
+
+          return doFinish();
+        });
+    }
+  };
 }

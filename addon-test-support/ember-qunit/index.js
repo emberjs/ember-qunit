@@ -5,6 +5,7 @@ export { default as QUnitAdapter } from './adapter';
 export { module, test, skip, only, todo } from 'qunit';
 export { loadTests } from './test-loader';
 
+import { run } from '@ember/runloop';
 import { loadTests } from './test-loader';
 import Ember from 'ember';
 import QUnit from 'qunit';
@@ -18,7 +19,7 @@ import {
   teardownApplicationContext,
   validateErrorHandler,
 } from '@ember/test-helpers';
-import { detectIfTestNotIsolated, reportIfTestNotIsolated } from './test-isolation-validation';
+import { installTestNotIsolatedHook } from './test-isolation-validation';
 
 export function setupTest(hooks, options) {
   hooks.beforeEach(function(assert) {
@@ -146,8 +147,8 @@ export function setupEmberOnerrorValidation() {
 }
 
 export function setupTestIsolationValidation() {
-  QUnit.testDone(detectIfTestNotIsolated);
-  QUnit.done(reportIfTestNotIsolated);
+  run.backburner.DEBUG = true;
+  QUnit.on('testStart', installTestNotIsolatedHook);
 }
 
 /**

@@ -1,24 +1,16 @@
-import formatCount from './format-count';
+import { run } from '@ember/runloop';
+import { assign } from '@ember/polyfills';
 
-const PENDING_REQUESTS = 'Pending AJAX requests';
-const PENDING_TEST_WAITERS = 'Pending test waiters: YES';
-const PENDING_TIMERS = 'Pending timers';
-const PENDING_SCHEDULED_ITEMS = 'Pending scheduled items';
-const ACTIVE_RUNLOOPS = 'Active runloops: YES';
+const PENDING_AJAX_REQUESTS = 'Pending AJAX requests';
+const PENDING_TEST_WAITERS = 'Pending test waiters';
+const SCHEDULED_ASYNC = 'Scheduled async';
+const SCHEDULED_AUTORUN = 'Scheduled autorun';
 
-export function getSummary(testName, leakCounts) {
-  let leakInfo =
-    leakCounts.length > 0
-      ? `We found the following information that may help you identify code that violated test isolation:
- ${leakCounts.map(count => `- ${count}`).join('\n')}\n`
-      : '\n';
-  let summary = `'${testName}' is not isolated.\n
- This test has one or more issues that are resulting in non-isolation (async execution is extending beyond the duration of the test).\n
- ${leakInfo}
- More information has been printed to the console. Please use that information to help in debugging.\n
-`;
+export function getDebugInfo() {
+  let debugEnabled = run.backburner.DEBUG === true;
+  let getDebugInfoAvailable = typeof run.backburner.getDebugInfo === 'function';
 
-  return summary;
+  return debugEnabled && getDebugInfoAvailable ? run.backburner.getDebugInfo() : null;
 }
 
 /**
@@ -34,7 +26,7 @@ export function getSummary(testName, leakCounts) {
  * - info provided by backburner's getDebugInfo method (timers, schedules, and stack trace info)
  */
 export default class TestDebugInfo {
-  constructor(module, name, settledState, debugInfo) {
+  constructor(module, name, settledState, debugInfo = getDebugInfo()) {
     this.module = module;
     this.name = name;
     this.settledState = settledState;
@@ -47,13 +39,23 @@ export default class TestDebugInfo {
 
   get summary() {
     if (!this._summaryInfo) {
-      this._summaryInfo = Object.assign({ fullTestName: this.fullTestName }, this.settledState);
+      this._summaryInfo = assign(
+        {
+          fullTestName: this.fullTestName,
+        },
+        this.settledState
+      );
 
       if (this.debugInfo) {
+        this._summaryInfo.autorunStackTrace =
+          this.debugInfo.autorun && this.debugInfo.autorun.stack;
         this._summaryInfo.pendingTimersCount = this.debugInfo.timers.length;
+        this._summaryInfo.hasPendingTimers =
+          this._summaryInfo.hasPendingTimers && this._summaryInfo.pendingTimersCount > 0;
         this._summaryInfo.pendingTimersStackTraces = this.debugInfo.timers.map(
           timer => timer.stack
         );
+
         this._summaryInfo.pendingScheduledQueueItemCount = this.debugInfo.instanceStack
           .filter(q => q)
           .reduce((total, item) => {
@@ -79,31 +81,54 @@ export default class TestDebugInfo {
     return this._summaryInfo;
   }
 
-  toString() {
-    let leakCounts = [];
+  get message() {
+    return `Test is not isolated (async execution is extending beyond the duration of the test).\n
+    More information has been printed to the console. Please use that information to help in debugging.\n\n`;
+  }
 
-    if (this.summary.hasPendingRequests) {
-      leakCounts.push(formatCount(PENDING_REQUESTS, this.summary.pendingRequestCount));
+  toConsole(_console = console) {
+    let summary = this.summary;
+
+    _console.group(summary.fullTestName);
+
+    if (summary.hasPendingRequests) {
+      _console.log(PENDING_AJAX_REQUESTS);
     }
 
-    if (this.summary.hasPendingWaiters) {
-      leakCounts.push(PENDING_TEST_WAITERS);
+    if (summary.hasPendingWaiters) {
+      _console.log(PENDING_TEST_WAITERS);
     }
 
-    if (this.summary.hasPendingTimers) {
-      leakCounts.push(formatCount(PENDING_TIMERS, this.summary.pendingTimersCount));
+    if (summary.hasPendingTimers || summary.pendingScheduledQueueItemCount > 0) {
+      _console.group(SCHEDULED_ASYNC);
+
+      summary.pendingTimersStackTraces.forEach(timerStack => {
+        _console.log(timerStack);
+      });
+
+      summary.pendingScheduledQueueItemStackTraces.forEach(scheduleQueueItemStack => {
+        _console.log(scheduleQueueItemStack);
+      });
+
+      _console.groupEnd();
     }
 
-    if (this.summary.hasPendingScheduledQueueItems) {
-      leakCounts.push(
-        formatCount(PENDING_SCHEDULED_ITEMS, this.summary.pendingScheduledQueueItemCount)
-      );
+    if (
+      summary.hasRunLoop &&
+      summary.pendingTimersCount === 0 &&
+      summary.pendingScheduledQueueItemCount === 0
+    ) {
+      _console.log(SCHEDULED_AUTORUN);
+
+      if (summary.autorunStackTrace) {
+        _console.log(summary.autorunStackTrace);
+      }
     }
 
-    if (this.summary.hasRunLoop) {
-      leakCounts.push(ACTIVE_RUNLOOPS);
-    }
+    _console.groupEnd();
+  }
 
-    return getSummary(this.fullTestName, leakCounts);
+  _formatCount(title, count) {
+    return `${title}: ${count}`;
   }
 }
