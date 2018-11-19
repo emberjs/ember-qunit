@@ -5,18 +5,11 @@ export { default as QUnitAdapter } from './adapter';
 export { module, test, skip, only, todo } from 'qunit';
 export { loadTests } from './test-loader';
 
-import { deprecate } from '@ember/debug';
 import { loadTests } from './test-loader';
 import Ember from 'ember';
 import QUnit from 'qunit';
 import QUnitAdapter from './adapter';
 import {
-  setResolver as upstreamSetResolver,
-  render as upstreamRender,
-  clearRender as upstreamClearRender,
-  settled as upstreamSettled,
-  pauseTest as upstreamPauseTest,
-  resumeTest as upstreamResumeTest,
   setupContext,
   teardownContext,
   setupRenderingContext,
@@ -26,84 +19,6 @@ import {
   validateErrorHandler,
 } from '@ember/test-helpers';
 import { detectIfTestNotIsolated, reportIfTestNotIsolated } from './test-isolation-validation';
-
-export function setResolver() {
-  deprecate(
-    '`setResolver` should be imported from `@ember/test-helpers`, but was imported from `ember-qunit`',
-    false,
-    {
-      id: 'ember-qunit.deprecated-reexports.setResolver',
-      until: '4.0.0',
-    }
-  );
-
-  return upstreamSetResolver(...arguments);
-}
-
-export function render() {
-  deprecate(
-    '`render` should be imported from `@ember/test-helpers`, but was imported from `ember-qunit`',
-    false,
-    {
-      id: 'ember-qunit.deprecated-reexports.render',
-      until: '4.0.0',
-    }
-  );
-
-  return upstreamRender(...arguments);
-}
-
-export function clearRender() {
-  deprecate(
-    '`clearRender` should be imported from `@ember/test-helpers`, but was imported from `ember-qunit`',
-    false,
-    {
-      id: 'ember-qunit.deprecated-reexports.clearRender',
-      until: '4.0.0',
-    }
-  );
-
-  return upstreamClearRender(...arguments);
-}
-
-export function settled() {
-  deprecate(
-    '`settled` should be imported from `@ember/test-helpers`, but was imported from `ember-qunit`',
-    false,
-    {
-      id: 'ember-qunit.deprecated-reexports.settled',
-      until: '4.0.0',
-    }
-  );
-
-  return upstreamSettled(...arguments);
-}
-
-export function pauseTest() {
-  deprecate(
-    '`pauseTest` should be imported from `@ember/test-helpers`, but was imported from `ember-qunit`',
-    false,
-    {
-      id: 'ember-qunit.deprecated-reexports.pauseTest',
-      until: '4.0.0',
-    }
-  );
-
-  return upstreamPauseTest(...arguments);
-}
-
-export function resumeTest() {
-  deprecate(
-    '`resumeTest` should be imported from `@ember/test-helpers`, but was imported from `ember-qunit`',
-    false,
-    {
-      id: 'ember-qunit.deprecated-reexports.resumeTest',
-      until: '4.0.0',
-    }
-  );
-
-  return upstreamResumeTest(...arguments);
-}
 
 export function setupTest(hooks, options) {
   hooks.beforeEach(function(assert) {
