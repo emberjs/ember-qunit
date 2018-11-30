@@ -2918,7 +2918,7 @@ ember-assign-polyfill@^2.5.0:
     ember-cli-babel "^6.6.0"
     ember-cli-version-checker "^2.0.0"
 
-ember-cli-babel@^6.16.0, ember-cli-babel@^6.6.0, ember-cli-babel@^6.8.1:
+ember-cli-babel@^6.16.0, ember-cli-babel@^6.17.2, ember-cli-babel@^6.6.0, ember-cli-babel@^6.8.1:
   version "6.17.2"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-6.17.2.tgz#f0d53d2fb95e70c15d8db84760d045f88f458f69"
   integrity sha512-9KcCvF1PcelEFTSiJ/Ld20tfuW9acMkwHC/xINLsmwqJVDbm3oEqWtiFDZ5ebaC278O5I0GqNJWJLYNoWMNZ8g==
@@ -3204,10 +3204,10 @@ ember-compatibility-helpers@^1.1.1:
     ember-cli-version-checker "^2.1.1"
     semver "^5.4.1"
 
-ember-data@3.5.1:
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/ember-data/-/ember-data-3.5.1.tgz#cc8fc5cc5bc4f5e151fec772b13679a10cce0abc"
-  integrity sha512-2kZdLywrRhIspCUGODkriwHIX+vR697r1dsV7U7bSZWm1ODiTgT5zzNK2UesOlvortruTvkeR2giltDKrliocg==
+ember-data@3.5.2:
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/ember-data/-/ember-data-3.5.2.tgz#6ec84ba85e28d7e1da6039202f65c38f8b1e43ad"
+  integrity sha512-0aloRoOp9zgLCFJ0qfgNDD++Ai9d1xB5jHL1OI+uNjXhX8r4dG1PiCdvtwVW0OlrZOu9VBodv3kYoRG1SLZU7g==
   dependencies:
     "@ember/ordered-set" "^2.0.0"
     babel-plugin-feature-flags "^0.3.1"
@@ -3222,7 +3222,7 @@ ember-data@3.5.1:
     broccoli-rollup "^2.1.1"
     calculate-cache-key-for-tree "^1.1.0"
     chalk "^2.4.1"
-    ember-cli-babel "^6.16.0"
+    ember-cli-babel "^6.17.2"
     ember-cli-path-utils "^1.0.0"
     ember-cli-string-utils "^1.1.0"
     ember-cli-test-info "^1.0.0"
