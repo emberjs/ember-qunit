@@ -1,17 +1,16 @@
 import Ember from 'ember';
 import { run } from '@ember/runloop';
 import { module, test } from 'qunit';
-import {
-  detectIfTestNotIsolated,
-  reportIfTestNotIsolated,
-} from 'ember-qunit/test-isolation-validation';
+import { installTestNotIsolatedHook } from 'ember-qunit/test-isolation-validation';
+import { getDebugInfo } from 'ember-qunit/-internal/test-debug-info';
 
-module('test isolation validation', function(hooks) {
-  hooks.beforeEach(function() {
-    this.cancelId = 0;
+import patchAssert from './utils/patch-assert-helper';
 
-    this._waiter = () => {
-      return !this.isWaiterPending;
+if (getDebugInfo()) {
+  module('test isolation validation', function(hooks) {
+    let isWaiterPending = false;
+    let waiter = () => {
+      return !isWaiterPending;
     };
 
     // In Ember < 2.8 `registerWaiter` expected to be bound to
@@ -21,45 +20,37 @@ module('test isolation validation', function(hooks) {
     // use:
     //
     // import { registerWaiter } from '@ember/test';
-    Ember.Test.registerWaiter(this._waiter);
-  });
+    Ember.Test.registerWaiter(waiter);
 
-  hooks.afterEach(function() {
-    Ember.Test.unregisterWaiter(this._waiter);
+    QUnit.on('testEnd', function() {
+      Ember.Test.unregisterWaiter(this._waiter);
+    });
 
-    run.cancel(this.cancelId);
-  });
+    hooks.beforeEach(function() {
+      run.backburner.DEBUG = true;
+      this.cancelId = 0;
 
-  test('reportIfTestNotIsolated does not throw when test is isolated', function(assert) {
-    assert.expect(1);
+      installTestNotIsolatedHook();
+    });
 
-    detectIfTestNotIsolated({ module: 'foo', name: 'bar' });
-    reportIfTestNotIsolated();
+    test('detectIfTestNotIsolated does not add failing assertion when test is isolated', function(assert) {
+      assert.expect(1);
 
-    assert.ok(true);
-  });
+      assert.ok(true);
+    });
 
-  test('reportIfTestNotIsolated throws when test has pending timers', function(assert) {
-    assert.expect(1);
+    test('detectIfTestNotIsolated adds failing assertion when test has pending timers', function(assert) {
+      assert.expect(1);
+      patchAssert(assert);
 
-    this.cancelId = run.later(() => {}, 10);
+      this.cancelId = run.later(() => {}, 1000);
+    });
 
-    detectIfTestNotIsolated({ module: 'foo', name: 'bar' });
+    test('detectIfTestNotIsolated adds failing assertion when test has test waiters', function(assert) {
+      assert.expect(1);
+      patchAssert(assert);
 
-    assert.throws(function() {
-      reportIfTestNotIsolated();
+      isWaiterPending = true;
     });
   });
-
-  test('reportIfTestNotIsolated throws when test has test waiters', function(assert) {
-    assert.expect(1);
-
-    this.isWaiterPending = true;
-
-    detectIfTestNotIsolated({ module: 'foo', name: 'bar' });
-
-    assert.throws(function() {
-      reportIfTestNotIsolated();
-    });
-  });
-});
+}
