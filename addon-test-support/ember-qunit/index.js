@@ -6,6 +6,7 @@ export { module, test, skip, only, todo } from 'qunit';
 export { loadTests } from './test-loader';
 
 import { run } from '@ember/runloop';
+import { assign } from '@ember/polyfills';
 import { loadTests } from './test-loader';
 import Ember from 'ember';
 import QUnit from 'qunit';
@@ -21,7 +22,11 @@ import {
 } from '@ember/test-helpers';
 import { installTestNotIsolatedHook } from './test-isolation-validation';
 
-export function setupTest(hooks, options) {
+let waitForSettled = true;
+
+export function setupTest(hooks, _options) {
+  let options = _options === undefined ? { waitForSettled } : assign({ waitForSettled }, _options);
+
   hooks.beforeEach(function(assert) {
     return setupContext(this, options).then(() => {
       let originalPauseTest = this.pauseTest;
@@ -34,11 +39,13 @@ export function setupTest(hooks, options) {
   });
 
   hooks.afterEach(function() {
-    return teardownContext(this);
+    return teardownContext(this, options);
   });
 }
 
-export function setupRenderingTest(hooks, options) {
+export function setupRenderingTest(hooks, _options) {
+  let options = _options === undefined ? { waitForSettled } : assign({ waitForSettled }, _options);
+
   setupTest(hooks, options);
 
   hooks.beforeEach(function() {
@@ -46,11 +53,13 @@ export function setupRenderingTest(hooks, options) {
   });
 
   hooks.afterEach(function() {
-    return teardownRenderingContext(this);
+    return teardownRenderingContext(this, options);
   });
 }
 
-export function setupApplicationTest(hooks, options) {
+export function setupApplicationTest(hooks, _options) {
+  let options = _options === undefined ? { waitForSettled } : assign({ waitForSettled }, _options);
+
   setupTest(hooks, options);
 
   hooks.beforeEach(function() {
@@ -58,7 +67,7 @@ export function setupApplicationTest(hooks, options) {
   });
 
   hooks.afterEach(function() {
-    return teardownApplicationContext(this);
+    return teardownApplicationContext(this, options);
   });
 }
 
@@ -147,6 +156,7 @@ export function setupEmberOnerrorValidation() {
 }
 
 export function setupTestIsolationValidation() {
+  waitForSettled = false;
   run.backburner.DEBUG = true;
   QUnit.on('testStart', installTestNotIsolatedHook);
 }
