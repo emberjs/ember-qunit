@@ -12,4 +12,13 @@ export default function patchAssert(assert) {
     resultInfo.message = `Failed: ${resultInfo.message}`;
     this._originalPushResult(resultInfo);
   };
+
+  assert.test.pushFailure = function(message, source, actual) {
+    this.pushResult({
+      result: true,
+      message: message || 'error',
+      actual: actual || null,
+      source,
+    });
+  };
 }

@@ -1,7 +1,12 @@
 /* global setTimeout */
 
 import { module, test } from 'qunit';
-import { QUnitAdapter } from 'ember-qunit';
+import { QUnitAdapter, nonTestDoneCallback } from 'ember-qunit';
+import patchAssert from './utils/patch-assert-helper';
+
+const NATIVE_PROMISE = Promise;
+
+import { Promise } from 'rsvp';
 
 module('QUnitAdapter');
 
@@ -39,5 +44,50 @@ test('asyncStart should handle skipped tests that has no assert', function(asser
 
   adapter.asyncStart();
   assert.equal(adapter.doneCallbacks.length, 1);
-  assert.deepEqual(adapter.doneCallbacks, [null]);
+  assert.deepEqual(adapter.doneCallbacks, [
+    {
+      test: FakeQUnitWithoutAssert.config.current,
+      done: nonTestDoneCallback,
+    },
+  ]);
+});
+
+module('QUnitAdapter - Balanced async with native Promise', function() {
+  const adapter = QUnitAdapter.create();
+
+  test('asyncStart invoked', function(assert) {
+    adapter.asyncStart();
+
+    assert.ok(true);
+
+    patchAssert(assert);
+    return NATIVE_PROMISE.reject('trolol');
+  });
+
+  test('asyncEnd invoked', function(assert) {
+    assert.ok(true, 'fired!');
+    setTimeout(() => {
+      adapter.asyncEnd();
+    });
+  });
+});
+
+module('QUnitAdapter - Balanced async with RSVP.Promise', function() {
+  const adapter = QUnitAdapter.create();
+
+  test('asyncStart invoked', function(assert) {
+    adapter.asyncStart();
+
+    assert.ok(true);
+
+    patchAssert(assert);
+    return Promise.reject('trolol');
+  });
+
+  test('asyncEnd invoked', function(assert) {
+    assert.ok(true, 'fired!');
+    setTimeout(() => {
+      adapter.asyncEnd();
+    });
+  });
 });
