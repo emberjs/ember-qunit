@@ -1,5 +1,24 @@
 # Change Log
 
+## v4.2.0 (2018-12-13)
+
+#### :rocket: Enhancement
+* [#408](https://github.com/emberjs/ember-qunit/pull/408) Avoid `await settled()` in teardown when using async leak detection. ([@rwjblue](https://github.com/rwjblue))
+* [#389](https://github.com/emberjs/ember-qunit/pull/389) Refactor `setupTestIsolationValidation` workflow. ([@scalvert](https://github.com/scalvert))
+
+#### :bug: Bug Fix
+* [#404](https://github.com/emberjs/ember-qunit/pull/404) Avoid subsequent test failures when prior test returns rejected RSVP.Promise. ([@scalvert](https://github.com/scalvert))
+
+#### :house: Internal
+* [#398](https://github.com/emberjs/ember-qunit/pull/398) TravisCI: Remove deprecated `sudo: false` option ([@Turbo87](https://github.com/Turbo87))
+* [#402](https://github.com/emberjs/ember-qunit/pull/402) Update @ember/test-helpers to ^1.1.0. ([@rwjblue](https://github.com/rwjblue))
+
+#### Committers: 4
+- Jan Bobisud ([@bobisjan](https://github.com/bobisjan))
+- Robert Jackson ([@rwjblue](https://github.com/rwjblue))
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+- Tobias Bieniek ([@Turbo87](https://github.com/Turbo87))
+
 ## v4.1.2 (2018-11-08)
 
 #### :bug: Bug Fix
