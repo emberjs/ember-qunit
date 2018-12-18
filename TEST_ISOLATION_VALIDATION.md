@@ -50,7 +50,7 @@ As you can see, the following information is provided for each test that fails i
   - Scheduled autorun
 - The stack trace of the code that caused the isolation failure (Scheduled async or Scheduled autoruns only)
 
-In the case of pending **AJAX requests** and **test waiters**, we simply see those categorizations of the failures. In the case of **scheduled async** or **scheduled autoruns**, we get a bit more information - stack traces that point to the code that scheduled the async call.
+In the case of pending **AJAX requests** and **test waiters**, we see those categorizations of the failures. In the case of **scheduled async** or **scheduled autoruns**, we get a bit more information - stack traces that point to the code that scheduled the async call.
 
 By viewing this information output to the console, we can traverse the stack from top to bottom, clicking the associated file/line number to get a more detailed view of the callee.
 
