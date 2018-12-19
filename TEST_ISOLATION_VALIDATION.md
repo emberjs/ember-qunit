@@ -2,7 +2,7 @@
 
 ## Overview
 
-The new `ember-qunit` test isolation validation feature allows you to opt-in to enabling automatic detection of async execution that extends beyond when the test is considered complete. This can be a particularly difficult problem to detect in your tests, and can contribute to non-deterministic test execution.
+The `ember-qunit` test isolation validation feature allows you to opt-in to enabling automatic detection of async execution that extends beyond when the test is considered complete. This can be a particularly difficult problem to detect in your tests, and can contribute to non-deterministic test execution.
 
 ## Installation
 
