@@ -37,7 +37,7 @@
     "qunit": "^2.9.1"
   },
   "devDependencies": {
-    "ember-cli": "~3.6.1",
+    "ember-cli": "~3.7.0",
     "ember-cli-dependency-checker": "^3.1.0",
     "ember-cli-htmlbars": "^3.0.1",
     "ember-cli-htmlbars-inline-precompile": "^2.1.0",
