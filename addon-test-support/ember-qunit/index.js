@@ -157,7 +157,7 @@ export function setupEmberOnerrorValidation() {
 }
 
 export function setupResetOnerror() {
-  QUnit.on('testDone', resetOnerror);
+  QUnit.testDone(resetOnerror);
 }
 
 export function setupTestIsolationValidation() {
