@@ -7,6 +7,7 @@ export { loadTests } from './test-loader';
 
 import { run } from '@ember/runloop';
 import { assign } from '@ember/polyfills';
+import { resetOnerror } from '@ember/test-helpers';
 import { loadTests } from './test-loader';
 import Ember from 'ember';
 import QUnit from 'qunit';
@@ -155,6 +156,10 @@ export function setupEmberOnerrorValidation() {
   });
 }
 
+export function setupResetOnerror() {
+  QUnit.on('testDone', resetOnerror);
+}
+
 export function setupTestIsolationValidation() {
   waitForSettled = false;
   run.backburner.DEBUG = true;
@@ -210,4 +215,6 @@ export function start(options = {}) {
   if (options.startTests !== false) {
     startTests();
   }
+
+  setupResetOnerror();
 }
