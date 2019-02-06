@@ -1,5 +1,13 @@
 # Change Log
 
+## v4.3.0 (2019-02-06)
+
+#### :rocket: Enhancement
+* [#437](https://github.com/emberjs/ember-qunit/pull/437) Ensure Ember.onerror is reset after each test ([@scalvert](https://github.com/scalvert))
+
+#### Committers: 1
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
 ## v4.2.0 (2018-12-13)
 
 #### :rocket: Enhancement
