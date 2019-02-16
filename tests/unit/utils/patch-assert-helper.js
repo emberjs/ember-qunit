@@ -13,7 +13,3 @@ export default function patchAssert(assert) {
     this._originalPushResult(resultInfo);
   };
 }
-
-export function resetAssert(assert) {
-  assert.test.pushResult = assert.test._originalPushResult;
-}

@@ -4,7 +4,7 @@ import { module, test } from 'qunit';
 import { installTestNotIsolatedHook } from 'ember-qunit/test-isolation-validation';
 import { getDebugInfo } from 'ember-qunit/-internal/test-debug-info';
 
-import patchAssert, { resetAssert } from './utils/patch-assert-helper';
+import patchAssert from './utils/patch-assert-helper';
 
 run.backburner.DEBUG = true;
 
