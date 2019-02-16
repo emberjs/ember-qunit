@@ -4,7 +4,9 @@ import { module, test } from 'qunit';
 import { installTestNotIsolatedHook } from 'ember-qunit/test-isolation-validation';
 import { getDebugInfo } from 'ember-qunit/-internal/test-debug-info';
 
-import patchAssert from './utils/patch-assert-helper';
+import patchAssert, { resetAssert } from './utils/patch-assert-helper';
+
+run.backburner.DEBUG = true;
 
 if (getDebugInfo()) {
   module('test isolation validation', function(hooks) {
@@ -27,8 +29,8 @@ if (getDebugInfo()) {
     });
 
     hooks.beforeEach(function() {
-      run.backburner.DEBUG = true;
       this.cancelId = 0;
+      run.backburner.DEBUG = true;
 
       installTestNotIsolatedHook();
     });
@@ -51,6 +53,30 @@ if (getDebugInfo()) {
       patchAssert(assert);
 
       isWaiterPending = true;
+    });
+
+    module('timeouts', function(hooks) {
+      hooks.afterEach(function(assert) {
+        assert.test._originalPushResult({
+          result:
+            assert.test.assertions[0].message.indexOf('Failed: Test took longer than 50ms') === 0,
+        });
+      });
+
+      test('detectIfTestNotIsolated outputs debug info on test timeout', function(assert) {
+        assert.expect(1);
+        assert.timeout(50);
+
+        assert.async();
+
+        let testPushFailure = assert.test.pushFailure;
+
+        patchAssert(assert);
+
+        assert.test.pushFailure = testPushFailure;
+
+        run.later(() => {}, 100);
+      });
     });
   });
 }

@@ -9,7 +9,11 @@ import {
   getMockSettledState,
 } from './utils/test-isolation-helpers';
 
-module('TestDebugInfo', function() {
+module('TestDebugInfo', function(hooks) {
+  hooks.beforeEach(function() {
+    run.backburner.DEBUG = false;
+  });
+
   test('fullTestName returns concatenated test name', function(assert) {
     assert.expect(1);
 

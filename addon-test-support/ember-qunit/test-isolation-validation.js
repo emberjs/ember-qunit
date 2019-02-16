@@ -17,7 +17,7 @@ import TestDebugInfo, { getDebugInfo } from './-internal/test-debug-info';
  * @param {string} testInfo.module The name of the test module
  * @param {string} testInfo.name The test name
  */
-export function detectIfTestNotIsolated(test) {
+export function detectIfTestNotIsolated(test, message = '') {
   if (!isSettled()) {
     let testDebugInfo;
 
@@ -28,7 +28,7 @@ export function detectIfTestNotIsolated(test) {
     test.expected++;
     test.assert.pushResult({
       result: false,
-      message: testDebugInfo.message,
+      message: `${message} ${testDebugInfo.message}`,
     });
   }
 }
@@ -47,6 +47,15 @@ export function installTestNotIsolatedHook() {
 
   let test = QUnit.config.current;
   let finish = test.finish;
+  let pushFailure = test.pushFailure;
+
+  test.pushFailure = function(message) {
+    if (message.indexOf('Test took longer than') === 0) {
+      detectIfTestNotIsolated(this, message);
+    } else {
+      return pushFailure.apply(this, arguments);
+    }
+  };
 
   // We're hooking into `test.finish`, which utilizes internal ordering of
   // when a test's hooks are invoked. We do this mainly becuase we need
@@ -66,7 +75,10 @@ export function installTestNotIsolatedHook() {
   test.finish = function() {
     let doFinish = () => finish.apply(this, arguments);
 
-    detectIfTestNotIsolated(this);
+    detectIfTestNotIsolated(
+      this,
+      'Test is not isolated (async execution is extending beyond the duration of the test).'
+    );
 
     if (isSettled()) {
       return doFinish();
