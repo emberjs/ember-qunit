@@ -24,7 +24,7 @@ module('unhandle promise rejections', function(hooks) {
     let done = assert.async();
 
     window.onerror = message => {
-      assert._originalPushResult({
+      assert.test._originalPushResult({
         result: /whoops!/.test(message),
         actual: message,
         expected: 'to include `whoops!`',

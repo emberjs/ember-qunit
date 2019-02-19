@@ -82,8 +82,7 @@ export default class TestDebugInfo {
   }
 
   get message() {
-    return `Test is not isolated (async execution is extending beyond the duration of the test).\n
-    More information has been printed to the console. Please use that information to help in debugging.\n\n`;
+    return `\nMore information has been printed to the console. Please use that information to help in debugging.\n\n`;
   }
 
   toConsole(_console = console) {
