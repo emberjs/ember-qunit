@@ -1,5 +1,13 @@
 # Change Log
 
+## v4.4.0 (2019-02-19)
+
+#### :rocket: Enhancement
+* [#445](https://github.com/emberjs/ember-qunit/pull/445) Extending test isolation validation to include QUnit timeouts ([@scalvert](https://github.com/scalvert))
+
+#### Committers: 1
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
 ## v4.3.0 (2019-02-06)
 
 #### :rocket: Enhancement
