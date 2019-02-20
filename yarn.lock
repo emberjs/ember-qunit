@@ -625,15 +625,15 @@
     ember-cli-babel "^6.16.0"
     ember-compatibility-helpers "^1.1.1"
 
-"@ember/test-helpers@^1.3.2":
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-1.3.2.tgz#6f032b4c54a3ee43d2fba904d08533981718e2e2"
-  integrity sha512-YjazkOebNX7D8CywfbzecMNhXeNOLSRe81gtzZNRJ4SbFYWDVvZ2A17OaZS6SsW3zgPB/X2QkuGJZjadzL5kPg==
+"@ember/test-helpers@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-1.4.0.tgz#46082b6ad1a628a846ad18827bd87026fa478f2d"
+  integrity sha512-wuIDCGfw/UyC7RhthTqDNvJFrLmiuYggCuL+/pUe5SlIp/PYFf+SwcyUBc+rQiiNGrH98G3Ak1OotUkZFOpC5A==
   dependencies:
     broccoli-debug "^0.6.5"
-    broccoli-funnel "^2.0.1"
+    broccoli-funnel "^2.0.2"
     ember-assign-polyfill "^2.6.0"
-    ember-cli-babel "^7.4.1"
+    ember-cli-babel "^7.4.2"
     ember-cli-htmlbars-inline-precompile "^2.1.0"
 
 "@glimmer/di@^0.2.0":
@@ -2896,7 +2896,7 @@ ember-cli-babel@^6.16.0, ember-cli-babel@^6.6.0, ember-cli-babel@^6.8.1:
     ember-cli-version-checker "^2.1.2"
     semver "^5.5.0"
 
-ember-cli-babel@^7.0.0, ember-cli-babel@^7.1.2, ember-cli-babel@^7.2.0, ember-cli-babel@^7.4.1, ember-cli-babel@^7.4.2:
+ember-cli-babel@^7.0.0, ember-cli-babel@^7.1.2, ember-cli-babel@^7.2.0, ember-cli-babel@^7.4.2:
   version "7.4.2"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-7.4.2.tgz#9d7daa165b509e41f6dc3bb443ae32072f766aa2"
   integrity sha512-5PJOkQ3B3Cvef2nQVPuZSPA6ckwiED3qF4cqzu7jcKhZ0Fy2TwPqABVbiPBJ46NujAsMZrjverVRST74Q25GqQ==
