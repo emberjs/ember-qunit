@@ -1,7 +1,8 @@
+/* eslint-disable no-console */
 import QUnit from 'qunit';
 import { run } from '@ember/runloop';
 import { waitUntil, isSettled, getSettledState } from '@ember/test-helpers';
-import TestDebugInfo, { getDebugInfo } from './-internal/test-debug-info';
+import { getDebugInfo } from '@ember/test-helpers/-internal/debug-info';
 
 /**
  * Detects if a specific test isn't isolated. A test is considered
@@ -19,16 +20,16 @@ import TestDebugInfo, { getDebugInfo } from './-internal/test-debug-info';
  */
 export function detectIfTestNotIsolated(test, message = '') {
   if (!isSettled()) {
-    let testDebugInfo;
+    let { debugInfo } = getSettledState();
 
-    testDebugInfo = new TestDebugInfo(test.module.name, test.testName, getSettledState());
-
-    testDebugInfo.toConsole();
+    console.group(`${test.module.name}: ${test.testName}`);
+    debugInfo.toConsole();
+    console.groupEnd();
 
     test.expected++;
     test.assert.pushResult({
       result: false,
-      message: `${message} ${testDebugInfo.message}`,
+      message: `${message} ${debugInfo.message}`,
     });
   }
 }
