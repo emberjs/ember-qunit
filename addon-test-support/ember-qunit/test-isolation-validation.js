@@ -2,7 +2,7 @@
 import QUnit from 'qunit';
 import { run } from '@ember/runloop';
 import { waitUntil, isSettled, getSettledState } from '@ember/test-helpers';
-import { getDebugInfo } from '@ember/test-helpers/-internal/debug-info';
+import { getDebugInfo } from '@ember/test-helpers';
 
 /**
  * Detects if a specific test isn't isolated. A test is considered
