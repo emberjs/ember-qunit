@@ -1,5 +1,16 @@
 # Change Log
 
+## v4.4.1 (2019-02-25)
+
+#### :bug: Bug Fix
+* [#454](https://github.com/emberjs/ember-qunit/pull/454) Bump QUnit from 2.9.1 to 2.9.2 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### :house: Internal
+* [#453](https://github.com/emberjs/ember-qunit/pull/453) Converting ember-qunit to use test isolation primatives from @ember/test-helpers ([@scalvert](https://github.com/scalvert))
+
+#### Committers: 1
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
 ## v4.4.0 (2019-02-19)
 
 #### :rocket: Enhancement
