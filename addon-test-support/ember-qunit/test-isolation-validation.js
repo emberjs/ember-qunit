@@ -3,6 +3,23 @@ import QUnit from 'qunit';
 import { run } from '@ember/runloop';
 import { waitUntil, isSettled, getSettledState } from '@ember/test-helpers';
 import { getDebugInfo } from '@ember/test-helpers';
+import { Promise } from 'rsvp';
+
+function pushTestNotIsolatedMessage(test, message = '') {
+  if (!isSettled()) {
+    let { debugInfo } = getSettledState();
+
+    console.group(`${test.module.name}: ${test.testName}`);
+    debugInfo.toConsole();
+    console.groupEnd();
+
+    test.expected++;
+    test.assert.pushResult({
+      result: false,
+      message: `${message} ${debugInfo.message}`,
+    });
+  }
+}
 
 /**
  * Detects if a specific test isn't isolated. A test is considered
@@ -19,19 +36,17 @@ import { getDebugInfo } from '@ember/test-helpers';
  * @param {string} testInfo.name The test name
  */
 export function detectIfTestNotIsolated(test, message = '') {
-  if (!isSettled()) {
-    let { debugInfo } = getSettledState();
-
-    console.group(`${test.module.name}: ${test.testName}`);
-    debugInfo.toConsole();
-    console.groupEnd();
-
-    test.expected++;
-    test.assert.pushResult({
-      result: false,
-      message: `${message} ${debugInfo.message}`,
+  return new Promise((resolve, reject) => {
+    // escape the current autorun
+    setTimeout(() => {
+      if (!isSettled()) {
+        pushTestNotIsolatedMessage(test, message);
+        reject();
+      } else {
+        resolve();
+      }
     });
-  }
+  });
 }
 
 /**
@@ -52,7 +67,9 @@ export function installTestNotIsolatedHook() {
 
   test.pushFailure = function(message) {
     if (message.indexOf('Test took longer than') === 0) {
-      detectIfTestNotIsolated(this, message);
+      if (!isSettled()) {
+        pushTestNotIsolatedMessage(this, message);
+      }
     } else {
       return pushFailure.apply(this, arguments);
     }
@@ -76,29 +93,29 @@ export function installTestNotIsolatedHook() {
   test.finish = function() {
     let doFinish = () => finish.apply(this, arguments);
 
-    detectIfTestNotIsolated(
-      this,
-      'Test is not isolated (async execution is extending beyond the duration of the test).'
-    );
-
     if (isSettled()) {
       return doFinish();
     } else {
-      return waitUntil(isSettled, { timeout: 100 })
-        .catch(() => {
-          // we consider that when waitUntil times out, you're in a state of
-          // test isolation violation. The nature of the error is irrelevant
-          // in this case, and we want to allow the error to fall through
-          // to the finally, where cleanup occurs.
-        })
-        .finally(() => {
-          // canceling timers here isn't perfect, but is as good as we can do
-          // to attempt to prevent future tests from failing due to this test's
-          // leakage
-          run.cancelTimers();
+      return detectIfTestNotIsolated(
+        this,
+        'Test is not isolated (async execution is extending beyond the duration of the test).'
+      ).then(() => {
+        return waitUntil(isSettled, { timeout: 100 })
+          .catch(() => {
+            // we consider that when waitUntil times out, you're in a state of
+            // test isolation violation. The nature of the error is irrelevant
+            // in this case, and we want to allow the error to fall through
+            // to the finally, where cleanup occurs.
+          })
+          .finally(() => {
+            // canceling timers here isn't perfect, but is as good as we can do
+            // to attempt to prevent future tests from failing due to this test's
+            // leakage
+            run.cancelTimers();
 
-          return doFinish();
-        });
+            return doFinish();
+          });
+      });
     }
   };
 }
