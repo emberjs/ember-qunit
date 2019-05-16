@@ -34,6 +34,11 @@ export function setupTest(hooks, _options) {
       this.pauseTest = function QUnit_pauseTest() {
         assert.timeout(-1); // prevent the test from timing out
 
+        // This is a temporary work around for
+        // https://github.com/emberjs/ember-qunit/issues/496 this clears the
+        // timeout that would fail the test when it hits the global testTimeout
+        // value.
+        clearTimeout(QUnit.config.timeout);
         return originalPauseTest.call(this);
       };
     });
