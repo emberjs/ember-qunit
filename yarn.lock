@@ -755,16 +755,17 @@
     ember-cli-babel "^6.16.0"
     ember-compatibility-helpers "^1.1.1"
 
-"@ember/test-helpers@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-1.5.0.tgz#a480181c412778294e317c256d04ca52e63c813a"
-  integrity sha512-RrS0O3VlDASMsI6v9nxUgO0k8EJGy1nzz/1HgiScbu8LbCpPj4Mp8S82yT/olXA3TShu7c/RfLZHjlN/iRW2OA==
+"@ember/test-helpers@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-1.6.0.tgz#e928c0190a19c312bf40dc8a6f4159735af48a7f"
+  integrity sha512-t6K15t4p/iW1D7rUAfGZZwIWqLV8HoVm9Dxn44L9PwMFjw3GAJf4bHdwCbdr3jpsgjG14HH+5XzF9IBIvmOZ4A==
   dependencies:
     broccoli-debug "^0.6.5"
     broccoli-funnel "^2.0.2"
     ember-assign-polyfill "^2.6.0"
-    ember-cli-babel "^7.4.3"
+    ember-cli-babel "^7.7.3"
     ember-cli-htmlbars-inline-precompile "^2.1.0"
+    ember-test-waiters "^1.0.0"
 
 "@glimmer/di@^0.2.0":
   version "0.2.1"
@@ -3020,7 +3021,7 @@ ember-cli-babel@^6.16.0, ember-cli-babel@^6.6.0, ember-cli-babel@^6.8.1:
     ember-cli-version-checker "^2.1.2"
     semver "^5.5.0"
 
-ember-cli-babel@^7.0.0, ember-cli-babel@^7.1.2, ember-cli-babel@^7.4.2, ember-cli-babel@^7.4.3, ember-cli-babel@^7.7.3:
+ember-cli-babel@^7.0.0, ember-cli-babel@^7.1.2, ember-cli-babel@^7.4.2, ember-cli-babel@^7.7.3:
   version "7.7.3"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-7.7.3.tgz#f94709f6727583d18685ca6773a995877b87b8a0"
   integrity sha512-/LWwyKIoSlZQ7k52P+6agC7AhcOBqPJ5C2u27qXHVVxKvCtg6ahNuRk/KmfZmV4zkuw4EjTZxfJE1PzpFyHkXg==
@@ -3399,6 +3400,13 @@ ember-source@~3.9.1:
     inflection "^1.12.0"
     jquery "^3.3.1"
     resolve "^1.10.0"
+
+ember-test-waiters@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ember-test-waiters/-/ember-test-waiters-1.0.0.tgz#6990daed15a31e4593dc153a33a20668f76abe5c"
+  integrity sha512-0VP7oTTur/wm2///9EuMwg1/6KP6yRAamyP7DaiYfrY1js1vHtZU2fDPgjwuL0QL4FG1chyUiL/Gi3+dIaqQmA==
+  dependencies:
+    ember-cli-babel "^7.1.2"
 
 ember-try-config@^3.0.0:
   version "3.0.0"
