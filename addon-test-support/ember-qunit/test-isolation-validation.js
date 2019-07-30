@@ -29,7 +29,7 @@ export function detectIfTestNotIsolated(test, message = '') {
     test.expected++;
     test.assert.pushResult({
       result: false,
-      message: `${message} ${debugInfo.message}`,
+      message: `${message} \nMore information has been printed to the console. Please use that information to help in debugging.\n\n`,
     });
   }
 }
