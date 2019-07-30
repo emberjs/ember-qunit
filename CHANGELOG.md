@@ -1,5 +1,25 @@
 # Change Log
 
+## v4.5.0 (2019-07-30)
+
+#### :rocket: Enhancement
+* [#507](https://github.com/emberjs/ember-qunit/pull/507) Upgrade @ember/test-helpers to 1.6.0. ([@rwjblue](https://github.com/rwjblue))
+* [#483](https://github.com/emberjs/ember-qunit/pull/483) Deprecate legacy test APIs ([@chadhietala](https://github.com/chadhietala))
+
+#### :bug: Bug Fix
+* [#526](https://github.com/emberjs/ember-qunit/pull/526) Fix error message for test isolation validation ([@scalvert](https://github.com/scalvert))
+* [#497](https://github.com/emberjs/ember-qunit/pull/497) Work around issue with pauseTest() timing out. ([@rwjblue](https://github.com/rwjblue))
+
+#### :house: Internal
+* [#490](https://github.com/emberjs/ember-qunit/pull/490) package.json: Use regular version constraints ([@Turbo87](https://github.com/Turbo87))
+
+#### Committers: 5
+- Chad Hietala ([@chadhietala](https://github.com/chadhietala))
+- Robert Jackson ([@rwjblue](https://github.com/rwjblue))
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+- Tobias Bieniek ([@Turbo87](https://github.com/Turbo87))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
 ## v4.4.1 (2019-02-25)
 
 #### :bug: Bug Fix
