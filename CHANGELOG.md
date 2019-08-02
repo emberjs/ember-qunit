@@ -1,4 +1,11 @@
-# Change Log
+## v4.5.1 (2019-08-02)
+
+#### :bug: Bug Fix
+* [#528](https://github.com/emberjs/ember-qunit/pull/528) Add a small configurable delay to test isolation validation assertion. ([@rwjblue](https://github.com/rwjblue))
+
+#### Committers: 2
+- Robert Jackson ([@rwjblue](https://github.com/rwjblue))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
 
 ## v4.5.0 (2019-07-30)
 
