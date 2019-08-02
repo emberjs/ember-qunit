@@ -55,6 +55,13 @@ if (getDebugInfo()) {
       isWaiterPending = true;
     });
 
+    test('detectIfTestNotIsolated allows for a small window (e.g. an autorun to flush)', function(assert) {
+      assert.expect(0);
+
+      isWaiterPending = true;
+      setTimeout(() => (isWaiterPending = false), 0);
+    });
+
     module('timeouts', function(hooks) {
       hooks.afterEach(function(assert) {
         assert.test._originalPushResult({

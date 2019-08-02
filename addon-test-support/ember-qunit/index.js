@@ -165,10 +165,10 @@ export function setupResetOnerror() {
   QUnit.testDone(resetOnerror);
 }
 
-export function setupTestIsolationValidation() {
+export function setupTestIsolationValidation(delay) {
   waitForSettled = false;
   run.backburner.DEBUG = true;
-  QUnit.on('testStart', installTestNotIsolatedHook);
+  QUnit.on('testStart', () => installTestNotIsolatedHook(delay));
 }
 
 /**
@@ -188,6 +188,10 @@ export function setupTestIsolationValidation() {
    of `Ember.onerror` will be disabled.
    @param {Boolean} [options.setupTestIsolationValidation] If `false` test isolation validation
    will be disabled.
+   @param {Number} [options.testIsolationValidationDelay] When using
+   setupTestIsolationValidation this number represents the maximum amount of
+   time in milliseconds that is allowed _after_ the test is completed for all
+   async to have been completed. The default value is 50.
  */
 export function start(options = {}) {
   if (options.loadTests !== false) {
@@ -214,7 +218,7 @@ export function start(options = {}) {
     typeof options.setupTestIsolationValidation !== 'undefined' &&
     options.setupTestIsolationValidation !== false
   ) {
-    setupTestIsolationValidation();
+    setupTestIsolationValidation(options.testIsolationValidationDelay);
   }
 
   if (options.startTests !== false) {

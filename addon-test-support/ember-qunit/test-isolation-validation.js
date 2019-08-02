@@ -40,8 +40,9 @@ export function detectIfTestNotIsolated(test, message = '') {
  * which allows us to be very precise as to when the detection occurs.
  *
  * @function installTestNotIsolatedHook
+ * @param {number} delay the delay delay to use when checking for isolation validation
  */
-export function installTestNotIsolatedHook() {
+export function installTestNotIsolatedHook(delay = 50) {
   if (!getDebugInfo()) {
     return;
   }
@@ -76,15 +77,10 @@ export function installTestNotIsolatedHook() {
   test.finish = function() {
     let doFinish = () => finish.apply(this, arguments);
 
-    detectIfTestNotIsolated(
-      this,
-      'Test is not isolated (async execution is extending beyond the duration of the test).'
-    );
-
     if (isSettled()) {
       return doFinish();
     } else {
-      return waitUntil(isSettled, { timeout: 100 })
+      return waitUntil(isSettled, { timeout: delay })
         .catch(() => {
           // we consider that when waitUntil times out, you're in a state of
           // test isolation violation. The nature of the error is irrelevant
@@ -92,6 +88,11 @@ export function installTestNotIsolatedHook() {
           // to the finally, where cleanup occurs.
         })
         .finally(() => {
+          detectIfTestNotIsolated(
+            this,
+            'Test is not isolated (async execution is extending beyond the duration of the test).'
+          );
+
           // canceling timers here isn't perfect, but is as good as we can do
           // to attempt to prevent future tests from failing due to this test's
           // leakage
