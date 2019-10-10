@@ -47,7 +47,7 @@
     "ember-disable-prototype-extensions": "^1.1.2",
     "ember-load-initializers": "^2.1.0",
     "ember-resolver": "^5.2.1",
-    "ember-source": "~3.11.1",
+    "ember-source": "~3.13.3",
     "ember-source-channel-url": "^1.0.1",
     "ember-try": "^1.2.1",
     "eslint": "^5.16.0",
