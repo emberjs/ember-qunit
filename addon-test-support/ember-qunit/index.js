@@ -7,7 +7,7 @@ export { loadTests } from './test-loader';
 
 import { run } from '@ember/runloop';
 import { assign } from '@ember/polyfills';
-import { resetOnerror } from '@ember/test-helpers';
+import { resetOnerror, getTestMetadata } from '@ember/test-helpers';
 import { loadTests } from './test-loader';
 import Ember from 'ember';
 import QUnit from 'qunit';
@@ -29,6 +29,9 @@ export function setupTest(hooks, _options) {
   let options = _options === undefined ? { waitForSettled } : assign({ waitForSettled }, _options);
 
   hooks.beforeEach(function(assert) {
+    let testMetadata = getTestMetadata(this);
+    testMetadata.framework = 'qunit';
+
     return setupContext(this, options).then(() => {
       let originalPauseTest = this.pauseTest;
       this.pauseTest = function QUnit_pauseTest() {
