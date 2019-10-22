@@ -58,6 +58,9 @@
     "loader.js": "^4.2.3",
     "prettier": "1.18.2"
   },
+  "resolutions": {
+    "**/engine.io": "~3.3.0"
+  },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
   },
