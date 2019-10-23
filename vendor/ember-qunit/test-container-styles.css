@@ -9,6 +9,9 @@
   z-index: 98;
   border: 1px solid #ccc;
   margin: 0 auto;
+
+  /* Prevent leaking position fixed elements outside the testing container */
+  transform: translateZ(0);
 }
 
 #ember-testing-container.full-screen {
