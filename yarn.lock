@@ -853,10 +853,10 @@
     ember-cli-babel "^6.16.0"
     ember-compatibility-helpers "^1.1.1"
 
-"@ember/test-helpers@^1.7.0":
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-1.7.0.tgz#c05af19d786e7e141aa1a1e5e9d45cf56f28ccf4"
-  integrity sha512-TbVILhMMA57ssR16gb0jJZnTNxQ9XFVIAwbn8wBY/x7Cb5F8s9EX4QbyzaSxs79cngNCOUklvCIoXrsMA6LEGA==
+"@ember/test-helpers@^1.7.1":
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-1.7.1.tgz#cc22a954b3b46856518f034bd492a74e0482389f"
+  integrity sha512-+ioumnanSRJzZ0ZH30FIkB0r41UhVyuWQ9R9Yp1phDWJQDLumxg+25WDr40relwcH6z0Cn6LIEzeTVujO/0Rww==
   dependencies:
     broccoli-debug "^0.6.5"
     broccoli-funnel "^2.0.2"
