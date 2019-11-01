@@ -5,6 +5,10 @@
   "keywords": [
     "ember-addon"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/emberjs/ember-qunit.git"
+  },
   "license": "MIT",
   "contributors": [
     "Stefan Penner",
@@ -15,10 +19,6 @@
   "directories": {
     "doc": "doc",
     "test": "tests"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/emberjs/ember-qunit.git"
   },
   "scripts": {
     "build": "ember build",
@@ -56,13 +56,18 @@
     "eslint-plugin-prettier": "^3.1.1",
     "lerna-changelog": "^0.8.2",
     "loader.js": "^4.2.3",
-    "prettier": "1.18.2"
+    "prettier": "1.18.2",
+    "release-it": "^12.2.1",
+    "release-it-lerna-changelog": "^1.0.3"
   },
   "resolutions": {
     "**/engine.io": "~3.3.0"
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   },
   "changelog": {
     "repo": "emberjs/ember-qunit",
@@ -76,5 +81,18 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
+  },
+  "release-it": {
+    "plugins": {
+      "release-it-lerna-changelog": {
+        "infile": "CHANGELOG.md"
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true
+    }
   }
 }
