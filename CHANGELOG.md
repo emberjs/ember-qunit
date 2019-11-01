@@ -1,3 +1,23 @@
+## v4.6.0 (2019-11-01)
+
+#### :rocket: Enhancement
+* [#584](https://github.com/emberjs/ember-qunit/pull/584) task(test metadata): Adding framework specific metadata ([@scalvert](https://github.com/scalvert))
+
+#### :bug: Bug Fix
+* [#571](https://github.com/emberjs/ember-qunit/pull/571) Prevent leakage of position fixed elements from the testing container ([@nickschot](https://github.com/nickschot))
+
+#### :house: Internal
+* [#581](https://github.com/emberjs/ember-qunit/pull/581) Bump @ember/test-helpers from 1.7.0 to 1.7.1 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#578](https://github.com/emberjs/ember-qunit/pull/578) Bump qunit from 2.9.2 to 2.9.3 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#579](https://github.com/emberjs/ember-qunit/pull/579) Bump @ember/test-helpers from 1.6.1 to 1.7.0 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#575](https://github.com/emberjs/ember-qunit/pull/575) Pin engine.io subdependency to avoid local test issues on Node 6 ([@scalvert](https://github.com/scalvert))
+* [#547](https://github.com/emberjs/ember-qunit/pull/547) Bump @ember/test-helpers from 1.6.0 to 1.6.1 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
+#### Committers: 3
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
 ## v4.5.1 (2019-08-02)
 
 #### :bug: Bug Fix
