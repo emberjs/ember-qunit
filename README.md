@@ -18,6 +18,7 @@ Requirements
 ------------------------------------------------------------------------------
 
 - Node.js 6 or above
+- Ember 3.8 or above
 - Ember CLI 2.13 or above
 
 If you need support for Node 4 or older Ember CLI versions please use v3.x
