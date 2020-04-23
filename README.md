@@ -17,7 +17,7 @@ helpers contained in
 Requirements
 ------------------------------------------------------------------------------
 
-- Node.js 6 or above
+- Node.js 10 or above
 - Ember 3.8 or above
 - Ember CLI 3.8 or above
 
