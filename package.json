@@ -58,7 +58,7 @@
     "loader.js": "^4.2.3",
     "prettier": "1.18.2",
     "release-it": "^13.5.5",
-    "release-it-lerna-changelog": "^2.2.0"
+    "release-it-lerna-changelog": "^2.3.0"
   },
   "engines": {
     "node": "10.* || >= 12.*"
