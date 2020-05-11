@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@ember/test-helpers": "^1.7.1",
-    "broccoli-funnel": "^3.0.2",
+    "broccoli-funnel": "^3.0.3",
     "broccoli-merge-trees": "^3.0.2",
     "common-tags": "^1.4.0",
     "ember-cli-babel": "^7.19.0",
