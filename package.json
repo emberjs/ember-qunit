@@ -57,7 +57,7 @@
     "lerna-changelog": "^1.0.1",
     "loader.js": "^4.2.3",
     "prettier": "1.18.2",
-    "release-it": "^13.5.8",
+    "release-it": "^13.6.0",
     "release-it-lerna-changelog": "^2.3.0"
   },
   "engines": {
