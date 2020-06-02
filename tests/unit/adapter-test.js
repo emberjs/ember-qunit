@@ -1,5 +1,3 @@
-/* global setTimeout */
-
 import { module, test } from 'qunit';
 import { QUnitAdapter, nonTestDoneCallback } from 'ember-qunit';
 import patchAssert from './utils/patch-assert-helper';

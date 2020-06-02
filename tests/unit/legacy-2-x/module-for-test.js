@@ -1,5 +1,3 @@
-/* global setTimeout */
-
 import Ember from 'ember';
 import { module, moduleFor, test } from 'ember-qunit';
 import { setResolverRegistry } from '../../helpers/resolver';

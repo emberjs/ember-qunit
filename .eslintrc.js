@@ -21,7 +21,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['./index.js'],
+      files: ['./index.js', './.eslintrc.js'],
       parserOptions: {
         sourceType: 'script',
       },
