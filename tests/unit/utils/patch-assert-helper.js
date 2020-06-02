@@ -6,7 +6,7 @@ export default function patchAssert(assert) {
   // Also, on Ember < 2.17 this is called for the RSVP unhandled rejection
   // case (because it goes through Adapter.exception).
   assert.test._originalPushResult = assert.test.pushResult;
-  assert.test.pushResult = function(resultInfo) {
+  assert.test.pushResult = function (resultInfo) {
     // Inverts the result so we can test failing assertions
     resultInfo.result = !resultInfo.result;
     resultInfo.message = `Failed: ${resultInfo.message}`;

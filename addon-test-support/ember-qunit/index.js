@@ -28,7 +28,7 @@ let waitForSettled = true;
 export function setupTest(hooks, _options) {
   let options = _options === undefined ? { waitForSettled } : assign({ waitForSettled }, _options);
 
-  hooks.beforeEach(function(assert) {
+  hooks.beforeEach(function (assert) {
     let testMetadata = getTestMetadata(this);
     testMetadata.framework = 'qunit';
 
@@ -47,7 +47,7 @@ export function setupTest(hooks, _options) {
     });
   });
 
-  hooks.afterEach(function() {
+  hooks.afterEach(function () {
     return teardownContext(this, options);
   });
 }
@@ -57,11 +57,11 @@ export function setupRenderingTest(hooks, _options) {
 
   setupTest(hooks, options);
 
-  hooks.beforeEach(function() {
+  hooks.beforeEach(function () {
     return setupRenderingContext(this);
   });
 
-  hooks.afterEach(function() {
+  hooks.afterEach(function () {
     return teardownRenderingContext(this, options);
   });
 }
@@ -71,11 +71,11 @@ export function setupApplicationTest(hooks, _options) {
 
   setupTest(hooks, options);
 
-  hooks.beforeEach(function() {
+  hooks.beforeEach(function () {
     return setupApplicationContext(this);
   });
 
-  hooks.afterEach(function() {
+  hooks.afterEach(function () {
     return teardownApplicationContext(this, options);
   });
 }
@@ -152,8 +152,8 @@ export function setupEmberTesting() {
   errors that occur while `Ember.testing` is `true`.
 */
 export function setupEmberOnerrorValidation() {
-  QUnit.module('ember-qunit: Ember.onerror validation', function() {
-    QUnit.test('Ember.onerror is functioning properly', function(assert) {
+  QUnit.module('ember-qunit: Ember.onerror validation', function () {
+    QUnit.test('Ember.onerror is functioning properly', function (assert) {
       assert.expect(1);
       let result = validateErrorHandler();
       assert.ok(

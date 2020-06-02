@@ -5,18 +5,18 @@ import { setupTest } from 'ember-qunit';
 import hasEmberVersion from 'ember-test-helpers/has-ember-version';
 import { setResolverRegistry } from '../helpers/resolver';
 
-module('setupTest tests', function(hooks) {
+module('setupTest tests', function (hooks) {
   if (!hasEmberVersion(2, 4)) {
     return;
   }
 
-  hooks.beforeEach(function() {
+  hooks.beforeEach(function () {
     setResolverRegistry({});
   });
 
   setupTest(hooks);
 
-  test('can be used for unit style testing', function(assert) {
+  test('can be used for unit style testing', function (assert) {
     this.owner.register(
       'service:foo',
       Service.extend({
@@ -31,7 +31,7 @@ module('setupTest tests', function(hooks) {
     assert.equal(subject.someMethod(), 'hello thar!');
   });
 
-  test('can access a shared service instance', function(assert) {
+  test('can access a shared service instance', function (assert) {
     this.owner.register('service:bar', Service.extend());
     this.owner.register(
       'service:foo',
@@ -53,7 +53,7 @@ module('setupTest tests', function(hooks) {
     assert.equal(bar.get('someProp'), 'derp', 'property updated');
   });
 
-  test('can create a component instance for direct testing without a template', function(assert) {
+  test('can create a component instance for direct testing without a template', function (assert) {
     this.owner.register(
       'component:foo-bar',
       Component.extend({

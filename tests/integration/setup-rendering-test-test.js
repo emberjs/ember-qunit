@@ -7,31 +7,31 @@ import { render } from '@ember/test-helpers';
 import { setResolverRegistry } from '../helpers/resolver';
 import hasEmberVersion from 'ember-test-helpers/has-ember-version';
 
-module('setupRenderingTest tests', function(hooks) {
+module('setupRenderingTest tests', function (hooks) {
   if (!hasEmberVersion(2, 4)) {
     return;
   }
 
-  hooks.beforeEach(function() {
+  hooks.beforeEach(function () {
     setResolverRegistry({});
   });
 
   setupRenderingTest(hooks);
 
-  test('can render a simple template', async function(assert) {
+  test('can render a simple template', async function (assert) {
     await render(hbs`<p>Hello!</p>`);
 
     assert.equal(this.element.textContent, 'Hello!');
   });
 
-  test('can invoke template only components', async function(assert) {
+  test('can invoke template only components', async function (assert) {
     this.owner.register('template:components/template-only', hbs`template-only component here`);
     await render(hbs`{{template-only}}`);
 
     assert.equal(this.element.textContent, 'template-only component here');
   });
 
-  test('can invoke JS only components', async function(assert) {
+  test('can invoke JS only components', async function (assert) {
     this.owner.register(
       'component:js-only',
       Component.extend({
@@ -44,8 +44,11 @@ module('setupRenderingTest tests', function(hooks) {
     assert.ok(this.element.querySelector('.js-only'), 'element found for js-only component');
   });
 
-  test('can invoke helper', async function(assert) {
-    this.owner.register('helper:jax', helper(([name]) => `${name}-jax`));
+  test('can invoke helper', async function (assert) {
+    this.owner.register(
+      'helper:jax',
+      helper(([name]) => `${name}-jax`)
+    );
 
     await render(hbs`{{jax "max"}}`);
 

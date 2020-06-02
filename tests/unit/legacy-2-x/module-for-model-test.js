@@ -20,28 +20,28 @@ function setupRegistry() {
 ///////////////////////////////////////////////////////////////////////////////
 
 moduleForModel('whazzit', 'model:whazzit without adapter', {
-  beforeSetup: function() {
+  beforeSetup: function () {
     setupRegistry();
   },
 
-  beforeEach: function() {
+  beforeEach: function () {
     Whazzit.FIXTURES = [];
   },
 });
 
-test('store exists', function(assert) {
+test('store exists', function (assert) {
   var store = this.store();
   assert.ok(store instanceof DS.Store);
 });
 
-test('model exists as subject', function(assert) {
+test('model exists as subject', function (assert) {
   var model = this.subject();
   assert.ok(model);
   assert.ok(model instanceof DS.Model);
   assert.ok(model instanceof Whazzit);
 });
 
-test('FixtureAdapter is registered for model', function(assert) {
+test('FixtureAdapter is registered for model', function (assert) {
   var model = this.subject(),
     store = this.store();
 
@@ -53,16 +53,16 @@ test('FixtureAdapter is registered for model', function(assert) {
 moduleForModel('whazzit', 'model:whazzit with custom adapter', {
   needs: ['adapter:whazzit'],
 
-  beforeSetup: function() {
+  beforeSetup: function () {
     setupRegistry();
   },
 
-  setup: function() {
+  setup: function () {
     Whazzit.FIXTURES = [];
   },
 });
 
-test('WhazzitAdapter is registered for model', function(assert) {
+test('WhazzitAdapter is registered for model', function (assert) {
   var model = this.subject(),
     store = this.store();
 
@@ -74,16 +74,16 @@ test('WhazzitAdapter is registered for model', function(assert) {
 moduleForModel('whazzit', 'model:whazzit with application adapter', {
   needs: ['adapter:application'],
 
-  beforeSetup: function() {
+  beforeSetup: function () {
     setupRegistry();
   },
 
-  setup: function() {
+  setup: function () {
     Whazzit.FIXTURES = [];
   },
 });
 
-test('ApplicationAdapter is registered for model', function(assert) {
+test('ApplicationAdapter is registered for model', function (assert) {
   var model = this.subject(),
     store = this.store();
 

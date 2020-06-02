@@ -9,7 +9,7 @@ import patchAssert from './utils/patch-assert-helper';
 run.backburner.DEBUG = true;
 
 if (getDebugInfo()) {
-  module('test isolation validation', function(hooks) {
+  module('test isolation validation', function (hooks) {
     let isWaiterPending = false;
     let waiter = () => {
       return !isWaiterPending;
@@ -24,53 +24,53 @@ if (getDebugInfo()) {
     // import { registerWaiter } from '@ember/test';
     Ember.Test.registerWaiter(waiter);
 
-    QUnit.on('testEnd', function() {
+    QUnit.on('testEnd', function () {
       Ember.Test.unregisterWaiter(this._waiter);
     });
 
-    hooks.beforeEach(function() {
+    hooks.beforeEach(function () {
       this.cancelId = 0;
       run.backburner.DEBUG = true;
 
       installTestNotIsolatedHook();
     });
 
-    test('detectIfTestNotIsolated does not add failing assertion when test is isolated', function(assert) {
+    test('detectIfTestNotIsolated does not add failing assertion when test is isolated', function (assert) {
       assert.expect(1);
 
       assert.ok(true);
     });
 
-    test('detectIfTestNotIsolated adds failing assertion when test has pending timers', function(assert) {
+    test('detectIfTestNotIsolated adds failing assertion when test has pending timers', function (assert) {
       assert.expect(1);
       patchAssert(assert);
 
       this.cancelId = run.later(() => {}, 1000);
     });
 
-    test('detectIfTestNotIsolated adds failing assertion when test has test waiters', function(assert) {
+    test('detectIfTestNotIsolated adds failing assertion when test has test waiters', function (assert) {
       assert.expect(1);
       patchAssert(assert);
 
       isWaiterPending = true;
     });
 
-    test('detectIfTestNotIsolated allows for a small window (e.g. an autorun to flush)', function(assert) {
+    test('detectIfTestNotIsolated allows for a small window (e.g. an autorun to flush)', function (assert) {
       assert.expect(0);
 
       isWaiterPending = true;
       setTimeout(() => (isWaiterPending = false), 0);
     });
 
-    module('timeouts', function(hooks) {
-      hooks.afterEach(function(assert) {
+    module('timeouts', function (hooks) {
+      hooks.afterEach(function (assert) {
         assert.test._originalPushResult({
           result:
             assert.test.assertions[0].message.indexOf('Failed: Test took longer than 50ms') === 0,
         });
       });
 
-      test('detectIfTestNotIsolated outputs debug info on test timeout', function(assert) {
+      test('detectIfTestNotIsolated outputs debug info on test timeout', function (assert) {
         assert.expect(1);
         assert.timeout(50);
 

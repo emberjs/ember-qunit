@@ -7,20 +7,20 @@ import { visit, currentRouteName, currentURL, click } from '@ember/test-helpers'
 import { setResolverRegistry } from '../helpers/resolver';
 import hasEmberVersion from 'ember-test-helpers/has-ember-version';
 
-module('setupApplicationTest tests', function(hooks) {
+module('setupApplicationTest tests', function (hooks) {
   if (!hasEmberVersion(2, 4)) {
     return;
   }
 
   const Router = EmberRouter.extend({ location: 'none' });
-  Router.map(function() {
+  Router.map(function () {
     this.route('widgets');
-    this.route('posts', function() {
+    this.route('posts', function () {
       this.route('post', { path: ':post_id' });
     });
   });
 
-  hooks.beforeEach(function() {
+  hooks.beforeEach(function () {
     setResolverRegistry({
       'router:main': Router,
       'template:application': hbs`
@@ -40,7 +40,7 @@ module('setupApplicationTest tests', function(hooks) {
 
   setupApplicationTest(hooks);
 
-  test('can render', async function(assert) {
+  test('can render', async function (assert) {
     await visit('/');
 
     assert.equal(currentRouteName(), 'index');
@@ -50,7 +50,7 @@ module('setupApplicationTest tests', function(hooks) {
     assert.equal(this.element.querySelector('h1').textContent, 'Hello World!');
   });
 
-  test('can perform a basic template rendering for nested route', async function(assert) {
+  test('can perform a basic template rendering for nested route', async function (assert) {
     await visit('/posts/1');
 
     assert.equal(currentRouteName(), 'posts.post');
@@ -60,7 +60,7 @@ module('setupApplicationTest tests', function(hooks) {
     assert.equal(this.element.querySelector('.post-id').textContent, '1');
   });
 
-  test('can visit multiple times', async function(assert) {
+  test('can visit multiple times', async function (assert) {
     await visit('/posts/1');
 
     assert.equal(currentRouteName(), 'posts.post');
@@ -86,7 +86,7 @@ module('setupApplicationTest tests', function(hooks) {
     assert.equal(this.element.querySelector('.post-id').textContent, '2');
   });
 
-  test('can navigate amongst routes', async function(assert) {
+  test('can navigate amongst routes', async function (assert) {
     await visit('/');
 
     assert.equal(currentRouteName(), 'index');

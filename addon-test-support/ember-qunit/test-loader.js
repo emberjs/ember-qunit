@@ -4,17 +4,17 @@ import AbstractTestLoader, {
   addModuleIncludeMatcher,
 } from 'ember-cli-test-loader/test-support/index';
 
-addModuleExcludeMatcher(function(moduleName) {
+addModuleExcludeMatcher(function (moduleName) {
   return QUnit.urlParams.nolint && moduleName.match(/\.(jshint|lint-test)$/);
 });
 
-addModuleIncludeMatcher(function(moduleName) {
+addModuleIncludeMatcher(function (moduleName) {
   return moduleName.match(/\.jshint$/);
 });
 
 let moduleLoadFailures = [];
 
-QUnit.done(function() {
+QUnit.done(function () {
   let length = moduleLoadFailures.length;
 
   try {
@@ -36,7 +36,7 @@ export class TestLoader extends AbstractTestLoader {
     moduleLoadFailures.push(error);
 
     QUnit.module('TestLoader Failures');
-    QUnit.test(moduleName + ': could not be loaded', function() {
+    QUnit.test(moduleName + ': could not be loaded', function () {
       throw error;
     });
   }

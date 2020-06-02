@@ -7,7 +7,7 @@ const {
   RSVP: { resolve },
 } = Ember;
 
-export default function(name, options = {}) {
+export default function (name, options = {}) {
   module(name, {
     beforeEach() {
       this.application = startApp();

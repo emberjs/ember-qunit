@@ -51,7 +51,7 @@ export function installTestNotIsolatedHook(delay = 50) {
   let finish = test.finish;
   let pushFailure = test.pushFailure;
 
-  test.pushFailure = function(message) {
+  test.pushFailure = function (message) {
     if (message.indexOf('Test took longer than') === 0) {
       detectIfTestNotIsolated(this, message);
     } else {
@@ -74,7 +74,7 @@ export function installTestNotIsolatedHook(delay = 50) {
   // - 'QUnit.done'
   //    - it detatches the failure from the actual test that failed, making it
   //      more confusing to the end user.
-  test.finish = function() {
+  test.finish = function () {
     let doFinish = () => finish.apply(this, arguments);
 
     if (isSettled()) {

@@ -48,7 +48,7 @@ module.exports = {
     return this._targetOptions;
   },
 
-  contentFor: function(type) {
+  contentFor: function (type) {
     // Skip if insertContentForTestBody === false.
     if (type === 'test-body' && !(this.targetOptions().insertContentForTestBody === false)) {
       return stripIndent`
@@ -62,7 +62,7 @@ module.exports = {
     }
   },
 
-  treeForVendor: function(tree) {
+  treeForVendor: function (tree) {
     const MergeTrees = require('broccoli-merge-trees');
     const Funnel = require('broccoli-funnel');
     let qunitPath = path.dirname(require.resolve('qunit'));
@@ -85,11 +85,11 @@ module.exports = {
     });
   },
 
-  setTestGenerator: function() {
-    this.project.generateTestFile = function(moduleName, tests) {
+  setTestGenerator: function () {
+    this.project.generateTestFile = function (moduleName, tests) {
       let output = `QUnit.module('${moduleName}');\n`;
 
-      tests.forEach(function(test) {
+      tests.forEach(function (test) {
         output += stripIndent`
           QUnit.test('${test.name}', function(assert) {
             assert.expect(1);
