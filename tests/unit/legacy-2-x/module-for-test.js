@@ -8,7 +8,11 @@ function setupRegistry() {
   });
 }
 
-var callbackOrder, setupContext, teardownContext, beforeSetupContext, afterTeardownContext;
+var callbackOrder,
+  setupContext,
+  teardownContext,
+  beforeSetupContext,
+  afterTeardownContext;
 
 moduleFor('component:x-foo', 'TestModule callbacks', {
   beforeSetup: function () {
@@ -47,7 +51,12 @@ moduleFor('component:x-foo', 'TestModule callbacks', {
     afterTeardownContext = this;
     callbackOrder.push('afterTeardown');
 
-    assert.deepEqual(callbackOrder, ['beforeSetup', 'setup', 'teardown', 'afterTeardown']);
+    assert.deepEqual(callbackOrder, [
+      'beforeSetup',
+      'setup',
+      'teardown',
+      'afterTeardown',
+    ]);
     assert.equal(afterTeardownContext, beforeSetupContext);
     assert.ok(afterTeardownContext !== teardownContext);
   },
@@ -85,7 +94,13 @@ moduleFor('component:x-foo', 'beforeEach/afterEach callbacks', {
 
   after: function (assert) {
     callbackOrder.push('after');
-    assert.deepEqual(callbackOrder, ['before', 'beforeSetup', 'beforeEach', 'afterEach', 'after']);
+    assert.deepEqual(callbackOrder, [
+      'before',
+      'beforeSetup',
+      'beforeEach',
+      'afterEach',
+      'after',
+    ]);
   },
 });
 

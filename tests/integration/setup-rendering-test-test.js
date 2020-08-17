@@ -25,7 +25,10 @@ module('setupRenderingTest tests', function (hooks) {
   });
 
   test('can invoke template only components', async function (assert) {
-    this.owner.register('template:components/template-only', hbs`template-only component here`);
+    this.owner.register(
+      'template:components/template-only',
+      hbs`template-only component here`
+    );
     await render(hbs`{{template-only}}`);
 
     assert.equal(this.element.textContent, 'template-only component here');
@@ -41,7 +44,10 @@ module('setupRenderingTest tests', function (hooks) {
 
     await render(hbs`{{js-only}}`);
 
-    assert.ok(this.element.querySelector('.js-only'), 'element found for js-only component');
+    assert.ok(
+      this.element.querySelector('.js-only'),
+      'element found for js-only component'
+    );
   });
 
   test('can invoke helper', async function (assert) {

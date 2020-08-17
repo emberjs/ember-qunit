@@ -35,7 +35,10 @@ let Adapter = Ember.Test.Adapter.extend({
 
   asyncStart() {
     let currentTest = this.qunit.config.current;
-    let done = currentTest && currentTest.assert ? currentTest.assert.async() : nonTestDoneCallback;
+    let done =
+      currentTest && currentTest.assert
+        ? currentTest.assert.async()
+        : nonTestDoneCallback;
     this.doneCallbacks.push({ test: currentTest, done });
   },
 

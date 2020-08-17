@@ -66,7 +66,9 @@ if (getDebugInfo()) {
       hooks.afterEach(function (assert) {
         assert.test._originalPushResult({
           result:
-            assert.test.assertions[0].message.indexOf('Failed: Test took longer than 50ms') === 0,
+            assert.test.assertions[0].message.indexOf(
+              'Failed: Test took longer than 50ms'
+            ) === 0,
         });
       });
 

@@ -1,12 +1,12 @@
 # ember-qunit
 
 [![Latest NPM release][npm-badge]][npm-badge-url]
-[![TravisCI Build Status][travis-badge]][travis-badge-url]
+[![CI Build Status][ci-badge]][ci-badge-url]
 
 [npm-badge]: https://img.shields.io/npm/v/ember-qunit.svg
 [npm-badge-url]: https://www.npmjs.com/package/ember-qunit
-[travis-badge]: https://img.shields.io/travis/emberjs/ember-qunit/master.svg
-[travis-badge-url]: https://travis-ci.org/emberjs/ember-qunit
+[ci-badge]: https://github.com/emberjs/ember-qunit/workflows/CI/badge.svg
+[ci-badge-url]: https://github.com/emberjs/ember-qunit/actions?query=workflow%3ACI
 
 ember-qunit simplifies testing of Ember applications with
 [QUnit](https://qunitjs.com/) by providing QUnit-specific wrappers around the
