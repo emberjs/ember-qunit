@@ -1,5 +1,4 @@
 export { default as QUnitAdapter, nonTestDoneCallback } from './adapter';
-export { module, test, skip, only, todo } from 'qunit';
 export { loadTests } from './test-loader';
 
 import { run } from '@ember/runloop';
