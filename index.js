@@ -85,9 +85,11 @@ module.exports = {
     // so that can have our `import`'s be
     // import { ... } from 'ember-qunit';
 
-    return this.preprocessJs(tree, '/', this.name, {
-      registry: this.registry,
-    });
+    const Funnel = require('broccoli-funnel');
+
+    let babel = this.addons.find((a) => a.name === 'ember-cli-babel');
+
+    return babel.transpileTree(new Funnel(tree, { destDir: 'ember-qunit' }));
   },
 
   setTestGenerator: function () {
