@@ -2,7 +2,6 @@ export { default as moduleFor } from './legacy-2-x/module-for';
 export { default as moduleForComponent } from './legacy-2-x/module-for-component';
 export { default as moduleForModel } from './legacy-2-x/module-for-model';
 export { default as QUnitAdapter, nonTestDoneCallback } from './adapter';
-export { module, test, skip, only, todo } from 'qunit';
 export { loadTests } from './test-loader';
 
 import { run } from '@ember/runloop';
