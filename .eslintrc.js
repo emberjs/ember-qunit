@@ -1,6 +1,8 @@
+'use strict';
+
 module.exports = {
   root: true,
-  extends: ['eslint:recommended', 'prettier'],
+  extends: ['eslint:recommended', 'plugin:prettier/recommended'],
   plugins: ['prettier'],
   parserOptions: {
     ecmaVersion: 2017,
@@ -9,19 +11,15 @@ module.exports = {
   env: {
     browser: true,
   },
-  rules: {
-    'prettier/prettier': [
-      'error',
-      {
-        singleQuote: true,
-        trailingComma: 'es5',
-        printWidth: 100,
-      },
-    ],
-  },
+  rules: {},
   overrides: [
     {
-      files: ['./index.js', './.eslintrc.js', './config/ember-try.js'],
+      files: [
+        './index.js',
+        './.eslintrc.js',
+        './.prettierrc.js',
+        './config/ember-try.js',
+      ],
       parserOptions: {
         sourceType: 'script',
       },
