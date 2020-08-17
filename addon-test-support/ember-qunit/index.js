@@ -26,7 +26,10 @@ import { installTestNotIsolatedHook } from './test-isolation-validation';
 let waitForSettled = true;
 
 export function setupTest(hooks, _options) {
-  let options = _options === undefined ? { waitForSettled } : assign({ waitForSettled }, _options);
+  let options =
+    _options === undefined
+      ? { waitForSettled }
+      : assign({ waitForSettled }, _options);
 
   hooks.beforeEach(function (assert) {
     let testMetadata = getTestMetadata(this);
@@ -53,7 +56,10 @@ export function setupTest(hooks, _options) {
 }
 
 export function setupRenderingTest(hooks, _options) {
-  let options = _options === undefined ? { waitForSettled } : assign({ waitForSettled }, _options);
+  let options =
+    _options === undefined
+      ? { waitForSettled }
+      : assign({ waitForSettled }, _options);
 
   setupTest(hooks, options);
 
@@ -67,7 +73,10 @@ export function setupRenderingTest(hooks, _options) {
 }
 
 export function setupApplicationTest(hooks, _options) {
-  let options = _options === undefined ? { waitForSettled } : assign({ waitForSettled }, _options);
+  let options =
+    _options === undefined
+      ? { waitForSettled }
+      : assign({ waitForSettled }, _options);
 
   setupTest(hooks, options);
 
@@ -99,7 +108,8 @@ export function setupTestContainer() {
   let params = QUnit.urlParams;
 
   let containerVisibility = params.nocontainer ? 'hidden' : 'visible';
-  let containerPosition = params.dockcontainer || params.devmode ? 'fixed' : 'relative';
+  let containerPosition =
+    params.dockcontainer || params.devmode ? 'fixed' : 'relative';
 
   if (params.devmode) {
     testContainer.className = ' full-screen';
@@ -110,7 +120,9 @@ export function setupTestContainer() {
 
   let qunitContainer = document.getElementById('qunit');
   if (params.dockcontainer) {
-    qunitContainer.style.marginBottom = window.getComputedStyle(testContainer).height;
+    qunitContainer.style.marginBottom = window.getComputedStyle(
+      testContainer
+    ).height;
   }
 }
 

@@ -10,7 +10,8 @@ export default function moduleForComponent(name, description, callbacks) {
     {
       id: 'ember-qunit.deprecate-legacy-apis',
       until: '5.0.0',
-      url: 'https://github.com/emberjs/ember-qunit/blob/master/docs/migration.md',
+      url:
+        'https://github.com/emberjs/ember-qunit/blob/master/docs/migration.md',
     }
   );
 }

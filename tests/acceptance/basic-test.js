@@ -3,7 +3,12 @@ import EmberRouter from '@ember/routing/router';
 import Route from '@ember/routing/route';
 import hbs from 'htmlbars-inline-precompile';
 import { setupApplicationTest } from 'ember-qunit';
-import { visit, currentRouteName, currentURL, click } from '@ember/test-helpers';
+import {
+  visit,
+  currentRouteName,
+  currentURL,
+  click,
+} from '@ember/test-helpers';
 import { setResolverRegistry } from '../helpers/resolver';
 import hasEmberVersion from 'ember-test-helpers/has-ember-version';
 
@@ -46,7 +51,10 @@ module('setupApplicationTest tests', function (hooks) {
     assert.equal(currentRouteName(), 'index');
     assert.equal(currentURL(), '/');
 
-    assert.equal(this.element.querySelector('.nav').textContent, 'posts | widgets');
+    assert.equal(
+      this.element.querySelector('.nav').textContent,
+      'posts | widgets'
+    );
     assert.equal(this.element.querySelector('h1').textContent, 'Hello World!');
   });
 
@@ -56,7 +64,10 @@ module('setupApplicationTest tests', function (hooks) {
     assert.equal(currentRouteName(), 'posts.post');
     assert.equal(currentURL(), '/posts/1');
 
-    assert.equal(this.element.querySelector('.nav').textContent, 'posts | widgets');
+    assert.equal(
+      this.element.querySelector('.nav').textContent,
+      'posts | widgets'
+    );
     assert.equal(this.element.querySelector('.post-id').textContent, '1');
   });
 
@@ -66,7 +77,10 @@ module('setupApplicationTest tests', function (hooks) {
     assert.equal(currentRouteName(), 'posts.post');
     assert.equal(currentURL(), '/posts/1');
 
-    assert.equal(this.element.querySelector('.nav').textContent, 'posts | widgets');
+    assert.equal(
+      this.element.querySelector('.nav').textContent,
+      'posts | widgets'
+    );
     assert.equal(this.element.querySelector('.post-id').textContent, '1');
 
     await visit('/');
@@ -74,7 +88,10 @@ module('setupApplicationTest tests', function (hooks) {
     assert.equal(currentRouteName(), 'index');
     assert.equal(currentURL(), '/');
 
-    assert.equal(this.element.querySelector('.nav').textContent, 'posts | widgets');
+    assert.equal(
+      this.element.querySelector('.nav').textContent,
+      'posts | widgets'
+    );
     assert.equal(this.element.querySelector('h1').textContent, 'Hello World!');
 
     await visit('/posts/2');
@@ -82,7 +99,10 @@ module('setupApplicationTest tests', function (hooks) {
     assert.equal(currentRouteName(), 'posts.post');
     assert.equal(currentURL(), '/posts/2');
 
-    assert.equal(this.element.querySelector('.nav').textContent, 'posts | widgets');
+    assert.equal(
+      this.element.querySelector('.nav').textContent,
+      'posts | widgets'
+    );
     assert.equal(this.element.querySelector('.post-id').textContent, '2');
   });
 

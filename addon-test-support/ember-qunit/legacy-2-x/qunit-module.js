@@ -54,7 +54,9 @@ export function createModule(Constructor, name, description, callbacks) {
 
     afterEach() {
       let result = afterEach.apply(this, arguments);
-      return Ember.RSVP.resolve(result).then(() => module.teardown(...arguments));
+      return Ember.RSVP.resolve(result).then(() =>
+        module.teardown(...arguments)
+      );
     },
 
     after() {

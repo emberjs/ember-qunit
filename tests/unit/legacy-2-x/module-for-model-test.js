@@ -66,7 +66,9 @@ test('WhazzitAdapter is registered for model', function (assert) {
   var model = this.subject(),
     store = this.store();
 
-  assert.ok(store.adapterFor(model.constructor.modelName) instanceof WhazzitAdapter);
+  assert.ok(
+    store.adapterFor(model.constructor.modelName) instanceof WhazzitAdapter
+  );
 });
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -87,6 +89,10 @@ test('ApplicationAdapter is registered for model', function (assert) {
   var model = this.subject(),
     store = this.store();
 
-  assert.ok(store.adapterFor(model.constructor.modelName) instanceof ApplicationAdapter);
-  assert.notOk(store.adapterFor(model.constructor.modelName) instanceof WhazzitAdapter);
+  assert.ok(
+    store.adapterFor(model.constructor.modelName) instanceof ApplicationAdapter
+  );
+  assert.notOk(
+    store.adapterFor(model.constructor.modelName) instanceof WhazzitAdapter
+  );
 });
