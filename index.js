@@ -66,23 +66,6 @@ module.exports = {
     return this._targetOptions;
   },
 
-  contentFor: function (type) {
-    // Skip if insertContentForTestBody === false.
-    if (
-      type === 'test-body' &&
-      !(this.targetOptions().insertContentForTestBody === false)
-    ) {
-      return stripIndent`
-        <div id="qunit"></div>
-        <div id="qunit-fixture"></div>
-
-        <div id="ember-testing-container">
-          <div id="ember-testing"></div>
-        </div>
-      `;
-    }
-  },
-
   treeForVendor: function (tree) {
     const MergeTrees = require('broccoli-merge-trees');
     const Funnel = require('broccoli-funnel');
