@@ -21,7 +21,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['./index.js', './.eslintrc.js'],
+      files: ['./index.js', './.eslintrc.js', './config/ember-try.js'],
       parserOptions: {
         sourceType: 'script',
       },
@@ -37,7 +37,7 @@ module.exports = {
       },
     },
     {
-      files: ['./index.js', 'addon-test-support/**/*.js', 'config/**/*.js'],
+      files: ['./index.js', 'addon-test-support/**/*.js'],
       plugins: ['disable-features'],
       rules: {
         'disable-features/disable-async-await': 'error',
