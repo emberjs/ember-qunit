@@ -2,6 +2,8 @@
 'use strict';
 
 const path = require('path');
+const VersionChecker = require('ember-cli-version-checker');
+const SilentError = require('silent-error');
 const stripIndent = require('common-tags').stripIndent;
 
 module.exports = {
@@ -16,6 +18,25 @@ module.exports = {
   included() {
     this._super.included.apply(this, arguments);
 
+    let peerDependencies = require('./package').peerDependencies;
+    let checker = VersionChecker.forProject(this.project);
+
+    if (!checker.check(peerDependencies)) {
+      let packageNames = Object.keys(peerDependencies).map(
+        (name) => peerDependencies[name]
+      );
+      let hasYarnLock = this.project.has('yarn.lock');
+
+      let installMessage = hasYarnLock
+        ? `yarn add --dev ${packageNames.join(' ')}`
+        : `npm install --dev ${packageNames.join(' ')}`;
+
+      throw new SilentError(
+        `ember-qunit now requires that \`qunit\` and \`@ember/test-helpers\` are \`devDependencies\` of the project. Please run:\n\t${installMessage}`
+      );
+    }
+
+    // TODO: remove these `this.import` statements when the app is using using Embroider or ember-auto-import
     this.import('vendor/qunit/qunit.js', { type: 'test' });
     this.import('vendor/qunit/qunit.css', { type: 'test' });
     this.import('vendor/ember-qunit/qunit-configuration.js', { type: 'test' });
