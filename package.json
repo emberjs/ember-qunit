@@ -28,15 +28,16 @@
     "test": "ember try:each"
   },
   "dependencies": {
-    "@ember/test-helpers": "^1.7.1",
     "broccoli-funnel": "^3.0.3",
     "broccoli-merge-trees": "^3.0.2",
     "common-tags": "^1.4.0",
     "ember-cli-babel": "^7.22.1",
     "ember-cli-test-loader": "^3.0.0",
-    "qunit": "^2.10.1"
+    "ember-cli-version-checker": "^5.1.1",
+    "silent-error": "^1.1.1"
   },
   "devDependencies": {
+    "@ember/test-helpers": "^1.7.1",
     "ember-cli": "~3.20.0",
     "ember-cli-dependency-checker": "^3.2.0",
     "ember-cli-htmlbars": "^5.2.0",
@@ -57,8 +58,13 @@
     "lerna-changelog": "^1.0.1",
     "loader.js": "^4.2.3",
     "prettier": "2.0.5",
+    "qunit": "^2.10.1",
     "release-it": "^13.6.6",
     "release-it-lerna-changelog": "^2.3.0"
+  },
+  "peerDependencies": {
+    "@ember/test-helpers": "^1.7.1",
+    "qunit": "^2.10.1"
   },
   "engines": {
     "node": "10.* || 12.* || >= 14.*"
