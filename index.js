@@ -39,6 +39,7 @@ module.exports = {
     // TODO: remove these `this.import` statements when the app is using using Embroider or ember-auto-import
     this.import('vendor/qunit/qunit.js', { type: 'test' });
     this.import('vendor/qunit/qunit.css', { type: 'test' });
+    this.import('vendor/ember-qunit/qunit-module.js', { type: 'test' });
     this.import('vendor/ember-qunit/qunit-configuration.js', { type: 'test' });
 
     let addonOptions = this.targetOptions();
@@ -84,9 +85,11 @@ module.exports = {
     // so that can have our `import`'s be
     // import { ... } from 'ember-qunit';
 
-    return this.preprocessJs(tree, '/', this.name, {
-      registry: this.registry,
-    });
+    const Funnel = require('broccoli-funnel');
+
+    let babel = this.addons.find((a) => a.name === 'ember-cli-babel');
+
+    return babel.transpileTree(new Funnel(tree, { destDir: 'ember-qunit' }));
   },
 
   setTestGenerator: function () {

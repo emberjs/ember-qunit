@@ -1,6 +1,8 @@
 /* globals QUnit */
 
 (function () {
+  'use strict';
+
   QUnit.config.autostart = false;
   QUnit.config.urlConfig.push({ id: 'nocontainer', label: 'Hide container' });
   QUnit.config.urlConfig.push({ id: 'nolint', label: 'Disable Linting' });
