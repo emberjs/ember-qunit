@@ -40,7 +40,7 @@
     "silent-error": "^1.1.1"
   },
   "devDependencies": {
-    "@ember/test-helpers": "^1.7.1",
+    "@ember/test-helpers": "^2.0.0-beta.4",
     "babel-eslint": "^10.1.0",
     "ember-cli": "~3.20.0",
     "ember-cli-dependency-checker": "^3.2.0",
@@ -65,7 +65,7 @@
     "release-it-lerna-changelog": "^2.3.0"
   },
   "peerDependencies": {
-    "@ember/test-helpers": "^1.7.1",
+    "@ember/test-helpers": "^2.0.0-beta.4",
     "qunit": "^2.11.0"
   },
   "engines": {

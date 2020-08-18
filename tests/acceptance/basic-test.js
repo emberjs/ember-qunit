@@ -10,7 +10,7 @@ import {
   click,
 } from '@ember/test-helpers';
 import { setResolverRegistry } from '../helpers/resolver';
-import hasEmberVersion from 'ember-test-helpers/has-ember-version';
+import hasEmberVersion from '@ember/test-helpers/has-ember-version';
 
 module('setupApplicationTest tests', function (hooks) {
   if (!hasEmberVersion(2, 4)) {
