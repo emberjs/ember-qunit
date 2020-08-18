@@ -1,7 +1,7 @@
 import App from '../../app';
 import { setRegistry } from '../../resolver';
 import config from '../../config/environment';
-import { setResolver } from 'ember-test-helpers';
+import { setResolver } from '@ember/test-helpers';
 
 export const application = App.create(config.APP);
 export const resolver = application.Resolver.create({

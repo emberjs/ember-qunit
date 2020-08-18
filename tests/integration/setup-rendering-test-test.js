@@ -5,7 +5,7 @@ import hbs from 'htmlbars-inline-precompile';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { setResolverRegistry } from '../helpers/resolver';
-import hasEmberVersion from 'ember-test-helpers/has-ember-version';
+import hasEmberVersion from '@ember/test-helpers/has-ember-version';
 
 module('setupRenderingTest tests', function (hooks) {
   if (!hasEmberVersion(2, 4)) {
