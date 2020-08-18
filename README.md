@@ -43,8 +43,8 @@ the same.
 Upgrading
 ------------------------------------------------------------------------------
 
-For instructions how to upgrade your test suite to the latest testing APIs, 
-please read our [Migration Guide](docs/migration.md).
+For instructions how to upgrade to the latest version, please read our
+[Migration Guide](docs/migration.md).
 
 Usage
 ------------------------------------------------------------------------------
