@@ -2,21 +2,74 @@
 Migration Guide
 ==============================================================================
 
-This guide provides instruction for upgrading your test suite from the
+Upgrading from v4.x to v5.0.0
+------------------------------------------------------------------------------
+
+`ember-qunit` had a few major changes that affects apps when migrating from v4.x to v5:
+
+* Require the application to have a `qunit` and `@ember/test-helpers` dependency of some sort
+* Require the QUnit and `@ember/test-helpers` DOM fixtures to be added to the applications `tests/index.html`
+* Dropped support for usage of `ember-test-helpers` imports
+* Dropped support for `moduleFor*` APIs
+* Drop support for older Node versions (8, 9, 11, 13)
+* Remove re-exports of QUnit functions from `ember-qunit`
+* Drop support for usage with Ember older than 3.8
+
+### `qunit` and `@ember/test-helpers` dependencies
+
+Older versions of `ember-qunit` directly depended on `qunit` and
+`@ember/test-helpers`, in v5 this relationship was changed and now
+`ember-qunit` has `qunit` and `@ember/test-helpers` as peer dependencies.
+
+In order to accomodate this change in your application you can run:
+
+```sh
+# npm users
+npm install --dev qunit "@ember/test-helpers@^2.0.0-beta.4"
+
+# yarn users
+yarn add --dev qunit "@ember/test-helpers@^2.0.0-beta.4"
+```
+
+### DOM fixtures
+
+In v5 `ember-qunit` moved from automatically providing the testing DOM fixtures to requiring that
+the host application provide them itself.
+
+In order to accomodate this change in your application add the following
+snippet to your `tests/index.html` just after your `{{content-for
+"test-body"}}` entry:
+
+```html
+<div id="qunit"></div>
+<div id="qunit-fixture">
+  <div id="ember-testing-container">
+    <div id="ember-testing"></div>
+  </div>
+</div>
+```
+
+### Remove `ember-test-helpers` modules
+
+For a long time `@ember/test-helpers` re-exported all of its modules under the `ember-test-helpers` namespace,
+in v5 of `ember-qunit` (which requires `@ember/test-helpers@2.0.0`) those re-exports are removed.
+
+For the most part, you can migrate any `ember-test-helpers` imports to `@ember/test-helpers`.
+
+### Migrating from `moduleFor*` APIs
+
+This section provides instruction for upgrading your test suite from the
 [Legacy APIs](legacy.md) to Ember's latest testing APIs based on RFCs
 [232](https://github.com/emberjs/rfcs/blob/master/text/0232-simplify-qunit-testing-api.md)
 and
 [268](https://github.com/emberjs/rfcs/blob/master/text/0268-acceptance-testing-refactor.md).
 
-Upgrading to the new testing APIs
-------------------------------------------------------------------------------
-
 For the complete introduction to the new testing APIs, please read the
-latest [Ember Guides](https://guides.emberjs.com/v3.0.0/testing/). The
+latest [Ember Guides](https://guides.emberjs.com/release/testing/). The
 following examples will give you an overview how to migrate your existing Ember
 QUnit based test suite.
 
-### Unit tests
+#### Unit tests
 
 Before:
 
@@ -52,7 +105,7 @@ module('SidebarController', function(hooks) {
 });
 ```
 
-#### Migration steps
+##### Migration steps
 
 * Use `module` and `test` imported from `qunit` directly
 * Use `setupTest()` instead of `moduleFor()`
@@ -62,7 +115,7 @@ You can use the
 [ember-qunit-codemod](https://github.com/rwjblue/ember-qunit-codemod)
 to update your test code automatically.
 
-### Component tests
+#### Component tests
 
 Before:
 
@@ -98,7 +151,7 @@ module('GravatarImageComponent', function(hooks) {
 });
 ```
 
-#### Migration steps
+##### Migration steps
 
 * Use `module` and `test` imported from `qunit` directly
 * Use `setupRenderingTest()` instead of `moduleForComponent()`
@@ -119,7 +172,7 @@ For migrating to the DOM interaction helpers, you can use the
 [ember-test-helpers-codemod](https://github.com/simonihmig/ember-test-helpers-codemod)
 to automatically convert all or most of it.
 
-### Acceptance tests
+#### Acceptance tests
 
 Before:
 
@@ -157,7 +210,7 @@ module('basic acceptance test', function(hooks) {
 });
 ```
 
-#### Migration steps
+##### Migration steps
 
 * Use `module` and `test` imported from `qunit` directly
 * Use `setupApplicationTest()` instead of `moduleForAcceptance()` or `beforeEach`/`afterEach` hooks for setting up the
@@ -180,6 +233,6 @@ For migrating from the global test helpers to those proved by
 [ember-test-helpers-codemod](https://github.com/simonihmig/ember-test-helpers-codemod)
 to assist you with that task.
 
-##### Caveats
+###### Caveats
 
 * As of ember-cli-qunit@4.1.0 / ember-qunit@3.0.0, `Ember.testing` is only set tor `true` during the test run. Previously it was always set to `true`. For more information see https://github.com/ember-cli/eslint-plugin-ember/tree/master/docs/rules/no-ember-testing-in-module-scope.md
