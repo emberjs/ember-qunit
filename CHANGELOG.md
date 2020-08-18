@@ -1,3 +1,35 @@
+## v5.0.0-beta.1 (2020-08-18)
+
+#### :boom: Breaking Change
+* [#745](https://github.com/emberjs/ember-qunit/pull/745) Update to @ember/test-helpers@2.0.0. ([@rwjblue](https://github.com/rwjblue))
+* [#741](https://github.com/emberjs/ember-qunit/pull/741) Require host to provide testing fixture DOM elements. ([@rwjblue](https://github.com/rwjblue))
+* [#740](https://github.com/emberjs/ember-qunit/pull/740) Drop support for configuring via `options['ember-cli-qunit']`. ([@rwjblue](https://github.com/rwjblue))
+* [#738](https://github.com/emberjs/ember-qunit/pull/738) Require project to provide `@ember/test-helpers` and `qunit`. ([@rwjblue](https://github.com/rwjblue))
+* [#739](https://github.com/emberjs/ember-qunit/pull/739) Drop support for Node 13. ([@rwjblue](https://github.com/rwjblue))
+* [#737](https://github.com/emberjs/ember-qunit/pull/737) Remove re-exports from `qunit`. ([@rwjblue](https://github.com/rwjblue))
+* [#736](https://github.com/emberjs/ember-qunit/pull/736) Remove moduleFor* methods. ([@rwjblue](https://github.com/rwjblue))
+* [#687](https://github.com/emberjs/ember-qunit/pull/687) Drop ember-cli < 3.8 support ([@rwjblue](https://github.com/rwjblue))
+* [#681](https://github.com/emberjs/ember-qunit/pull/681) Drop Support for Ember 3.7 and below ([@Turbo87](https://github.com/Turbo87))
+* [#609](https://github.com/emberjs/ember-qunit/pull/609) Bump broccoli-funnel from 2.0.2 to 3.0.1 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#616](https://github.com/emberjs/ember-qunit/pull/616) Drop support for Node 6 and 8 ([@Turbo87](https://github.com/Turbo87))
+
+#### :rocket: Enhancement
+* [#613](https://github.com/emberjs/ember-qunit/pull/613) Use checkerboard pattern for testing container background ([@Turbo87](https://github.com/Turbo87))
+
+#### :house: Internal
+* [#744](https://github.com/emberjs/ember-qunit/pull/744) Move customized `qunit` module into `vendor/`. ([@rwjblue](https://github.com/rwjblue))
+* [#747](https://github.com/emberjs/ember-qunit/pull/747) Add `@scalvert` to contributors. ([@rwjblue](https://github.com/rwjblue))
+* [#746](https://github.com/emberjs/ember-qunit/pull/746) Update to ember-cli@3.20 blueprint. ([@rwjblue](https://github.com/rwjblue))
+* [#743](https://github.com/emberjs/ember-qunit/pull/743) Re-roll yarn.lock. ([@rwjblue](https://github.com/rwjblue))
+* [#742](https://github.com/emberjs/ember-qunit/pull/742) Remove unused `devDependencies`. ([@rwjblue](https://github.com/rwjblue))
+* [#734](https://github.com/emberjs/ember-qunit/pull/734) Migrate to GitHub Actions. ([@rwjblue](https://github.com/rwjblue))
+* [#679](https://github.com/emberjs/ember-qunit/pull/679) CI: Add test scenarios for Ember 3.4, 3.8, 3.12 and 3.16 ([@Turbo87](https://github.com/Turbo87))
+
+#### Committers: 3
+- Robert Jackson ([@rwjblue](https://github.com/rwjblue))
+- Tobias Bieniek ([@Turbo87](https://github.com/Turbo87))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
 ## v4.6.0 (2019-11-01)
 
 #### :rocket: Enhancement
