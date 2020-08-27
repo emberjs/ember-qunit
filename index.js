@@ -2,9 +2,38 @@
 'use strict';
 
 const path = require('path');
-const VersionChecker = require('ember-cli-version-checker');
+const semver = require('semver');
 const SilentError = require('silent-error');
 const stripIndent = require('common-tags').stripIndent;
+
+// avoid checking multiple times from the same location
+let HAS_PEER_DEPS_INSTALLED = null;
+function hasPeerDependenciesInstalled() {
+  if (HAS_PEER_DEPS_INSTALLED !== null) {
+    return HAS_PEER_DEPS_INSTALLED;
+  }
+
+  let peerDependencies = require('./package').peerDependencies;
+
+  for (let packageName in peerDependencies) {
+    let minimumVersion = peerDependencies[packageName].substring(1);
+
+    try {
+      let packageVersion = require(`${packageName}/package`).version;
+      if (semver.lt(packageVersion, minimumVersion)) {
+        return (HAS_PEER_DEPS_INSTALLED = false);
+      }
+    } catch (error) {
+      if (error.code !== 'MODULE_NOT_FOUND') {
+        throw error;
+      }
+
+      return (HAS_PEER_DEPS_INSTALLED = false);
+    }
+  }
+
+  return (HAS_PEER_DEPS_INSTALLED = true);
+}
 
 module.exports = {
   name: 'ember-qunit',
@@ -18,18 +47,16 @@ module.exports = {
   included() {
     this._super.included.apply(this, arguments);
 
-    let peerDependencies = require('./package').peerDependencies;
-    let checker = VersionChecker.forProject(this.project);
-
-    if (!checker.check(peerDependencies)) {
-      let packageNames = Object.keys(peerDependencies).map(
-        (name) => peerDependencies[name]
+    if (!hasPeerDependenciesInstalled()) {
+      let peerDependencies = require('./package').peerDependencies;
+      let packages = Object.keys(peerDependencies).map(
+        (name) => `"${name}@${peerDependencies[name]}"`
       );
       let hasYarnLock = this.project.has('yarn.lock');
 
-      let installMessage = hasYarnLock
-        ? `yarn add --dev ${packageNames.join(' ')}`
-        : `npm install --dev ${packageNames.join(' ')}`;
+      let installMessage = `${
+        hasYarnLock ? 'yarn add' : 'npm install'
+      } --dev ${packages.join(' ')}`;
 
       throw new SilentError(
         `ember-qunit now requires that \`qunit\` and \`@ember/test-helpers\` are \`devDependencies\` of the project. Please run:\n\t${installMessage}`
