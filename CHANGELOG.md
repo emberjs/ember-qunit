@@ -1,3 +1,17 @@
+## v5.0.0-beta.2 (2020-08-27)
+
+#### :bug: Bug Fix
+* [#749](https://github.com/emberjs/ember-qunit/pull/749) Refactor peerDependencies validation check. ([@rwjblue](https://github.com/rwjblue))
+
+#### :memo: Documentation
+* [#748](https://github.com/emberjs/ember-qunit/pull/748) Update migration guide to cover v4 -> v5. ([@rwjblue](https://github.com/rwjblue))
+
+#### :house: Internal
+* [#750](https://github.com/emberjs/ember-qunit/pull/750) Update to `@ember/test-helpers@2.0.0-beta.6` minimum version. ([@rwjblue](https://github.com/rwjblue))
+
+#### Committers: 1
+- Robert Jackson ([@rwjblue](https://github.com/rwjblue))
+
 ## v5.0.0-beta.1 (2020-08-18)
 
 #### :boom: Breaking Change
