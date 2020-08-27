@@ -12,9 +12,7 @@ import {
   setupContext,
   teardownContext,
   setupRenderingContext,
-  teardownRenderingContext,
   setupApplicationContext,
-  teardownApplicationContext,
   validateErrorHandler,
 } from '@ember/test-helpers';
 import { installTestNotIsolatedHook } from './test-isolation-validation';
@@ -62,10 +60,6 @@ export function setupRenderingTest(hooks, _options) {
   hooks.beforeEach(function () {
     return setupRenderingContext(this);
   });
-
-  hooks.afterEach(function () {
-    return teardownRenderingContext(this, options);
-  });
 }
 
 export function setupApplicationTest(hooks, _options) {
@@ -78,10 +72,6 @@ export function setupApplicationTest(hooks, _options) {
 
   hooks.beforeEach(function () {
     return setupApplicationContext(this);
-  });
-
-  hooks.afterEach(function () {
-    return teardownApplicationContext(this, options);
   });
 }
 
