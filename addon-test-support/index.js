@@ -1,6 +1,8 @@
 export { default as QUnitAdapter, nonTestDoneCallback } from './adapter';
 export { loadTests } from './test-loader';
 
+import './qunit-configuration';
+
 import { run } from '@ember/runloop';
 import { assign } from '@ember/polyfills';
 import { resetOnerror, getTestMetadata } from '@ember/test-helpers';

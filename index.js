@@ -42,6 +42,21 @@ module.exports = {
     this._super.init && this._super.init.apply(this, arguments);
 
     this.setTestGenerator();
+
+    let isProjectDependency = this.project === this.parent;
+
+    // consider deps and devDeps of the project
+    let projectHasAutoImport =
+      'ember-auto-import' in this.project.dependencies();
+
+    // consider only dependencies from the parent (for use when we are not a project dependency)
+    let parentHasAutoImport =
+      this.parent.pkg.dependencies &&
+      'ember-auto-import' in this.parent.pkg.dependencies;
+
+    this._shouldImportQUnit = isProjectDependency
+      ? !projectHasAutoImport
+      : !parentHasAutoImport;
   },
 
   included() {
@@ -63,11 +78,14 @@ module.exports = {
       );
     }
 
-    // TODO: remove these `this.import` statements when the app is using using Embroider or ember-auto-import
-    this.import('vendor/qunit/qunit.js', { type: 'test' });
+    if (this._shouldImportQUnit) {
+      this.import('vendor/qunit/qunit.js', { type: 'test' });
+      this.import('vendor/ember-qunit/qunit-module.js', { type: 'test' });
+    }
+
+    // TODO: figure out how to make this not needed, AFAICT ember-auto-import
+    // does not provide any ability to import styles
     this.import('vendor/qunit/qunit.css', { type: 'test' });
-    this.import('vendor/ember-qunit/qunit-module.js', { type: 'test' });
-    this.import('vendor/ember-qunit/qunit-configuration.js', { type: 'test' });
 
     let addonOptions = this.targetOptions();
     let explicitlyDisabledStyles = addonOptions.disableContainerStyles === true;
