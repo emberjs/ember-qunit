@@ -2,15 +2,16 @@
 'use strict';
 
 const path = require('path');
+const resolvePackagePath = require('resolve-package-path');
 const semver = require('semver');
 const SilentError = require('silent-error');
 const stripIndent = require('common-tags').stripIndent;
 
 // avoid checking multiple times from the same location
-let HAS_PEER_DEPS_INSTALLED = null;
-function hasPeerDependenciesInstalled() {
-  if (HAS_PEER_DEPS_INSTALLED !== null) {
-    return HAS_PEER_DEPS_INSTALLED;
+let HAS_PEER_DEPS_INSTALLED = new Map();
+function hasPeerDependenciesInstalled(parentRoot) {
+  if (HAS_PEER_DEPS_INSTALLED.has(parentRoot)) {
+    return HAS_PEER_DEPS_INSTALLED.get(parentRoot);
   }
 
   let peerDependencies = require('./package').peerDependencies;
@@ -18,21 +19,21 @@ function hasPeerDependenciesInstalled() {
   for (let packageName in peerDependencies) {
     let minimumVersion = peerDependencies[packageName].substring(1);
 
-    try {
-      let packageVersion = require(`${packageName}/package`).version;
-      if (semver.lt(packageVersion, minimumVersion)) {
-        return (HAS_PEER_DEPS_INSTALLED = false);
-      }
-    } catch (error) {
-      if (error.code !== 'MODULE_NOT_FOUND') {
-        throw error;
-      }
+    let packagePath = resolvePackagePath(packageName, parentRoot);
+    if (packagePath === null) {
+      HAS_PEER_DEPS_INSTALLED.set(parentRoot, false);
+      return false;
+    }
 
-      return (HAS_PEER_DEPS_INSTALLED = false);
+    let packageVersion = require(packagePath).version;
+    if (semver.lt(packageVersion, minimumVersion)) {
+      HAS_PEER_DEPS_INSTALLED.set(parentRoot, false);
+      return false;
     }
   }
 
-  return (HAS_PEER_DEPS_INSTALLED = true);
+  HAS_PEER_DEPS_INSTALLED.set(parentRoot, true);
+  return true;
 }
 
 module.exports = {
@@ -47,7 +48,7 @@ module.exports = {
   included() {
     this._super.included.apply(this, arguments);
 
-    if (!hasPeerDependenciesInstalled()) {
+    if (!hasPeerDependenciesInstalled(this.parent.root)) {
       let peerDependencies = require('./package').peerDependencies;
       let packages = Object.keys(peerDependencies).map(
         (name) => `"${name}@${peerDependencies[name]}"`
@@ -95,7 +96,9 @@ module.exports = {
   treeForVendor: function (tree) {
     const MergeTrees = require('broccoli-merge-trees');
     const Funnel = require('broccoli-funnel');
-    let qunitPath = path.dirname(require.resolve('qunit'));
+
+    let qunitPackagePath = resolvePackagePath('qunit', this.parent.root);
+    let qunitPath = path.join(path.dirname(qunitPackagePath), 'qunit');
 
     let qunitTree = new Funnel(this.treeGenerator(qunitPath), {
       destDir: 'qunit',
