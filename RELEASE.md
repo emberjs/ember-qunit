@@ -1,9 +1,8 @@
-# Release
+# Release Process
 
 Releases are mostly automated using
 [release-it](https://github.com/release-it/release-it/) and
 [lerna-changelog](https://github.com/lerna/lerna-changelog/).
-
 
 ## Preparation
 
@@ -14,7 +13,7 @@ have been merged since the last release have been labeled with the appropriate
 represent something that would make sense to our users. Some great information
 on why this is important can be found at
 [keepachangelog.com](https://keepachangelog.com/en/1.0.0/), but the overall
-guiding principles here is that changelogs are for humans, not machines.
+guiding principle here is that changelogs are for humans, not machines.
 
 When reviewing merged PR's the labels to be used are:
 
@@ -25,41 +24,37 @@ When reviewing merged PR's the labels to be used are:
 * internal - Used for internal changes that still require a mention in the
   changelog/release notes.
 
-
 ## Release
 
 Once the prep work is completed, the actual release is straight forward:
 
-* First ensure that you have `release-it` installed globally, generally done by
-  using one of the following commands:
+* First, ensure that you have installed your projects dependencies:
 
-```
-# using https://volta.sh
-volta install release-it
-
-# using Yarn
-yarn global add release-it
-
-# using npm
-npm install --global release-it
-```
-
-* Second, ensure that you have installed your projects dependencies:
-
-```
-# using yarn
+```sh
 yarn install
-
-# using npm
-npm install
 ```
 
-* And last (but not least 😁) do your release:
+* Second, ensure that you have obtained a
+  [GitHub personal access token][generate-token] with the `repo` scope (no
+  other permissions are needed). Make sure the token is available as the
+  `GITHUB_AUTH` environment variable.
 
-```
-release-it
+  For instance:
+
+  ```bash
+  export GITHUB_AUTH=abc123def456
+  ```
+
+[generate-token]: https://github.com/settings/tokens/new?scopes=repo&description=GITHUB_AUTH+env+variable
+
+* And last (but not least 😁) do your release.
+
+```sh
+npx release-it
 ```
 
 [release-it](https://github.com/release-it/release-it/) manages the actual
-release process. It will prompt you through the process of choosing the version
-number, tagging, pushing the tag and commits, etc.
+release process. It will prompt you to to choose the version number after which
+you will have the chance to hand tweak the changelog to be used (for the
+`CHANGELOG.md` and GitHub release), then `release-it` continues on to tagging,
+pushing the tag and commits, etc.
