@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import QUnit from 'qunit';
+import * as QUnit from 'qunit';
 import { run } from '@ember/runloop';
 import { waitUntil, isSettled, getSettledState } from '@ember/test-helpers';
 import { getDebugInfo } from '@ember/test-helpers';

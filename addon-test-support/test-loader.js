@@ -1,4 +1,4 @@
-import QUnit from 'qunit';
+import * as QUnit from 'qunit';
 import AbstractTestLoader, {
   addModuleExcludeMatcher,
   addModuleIncludeMatcher,

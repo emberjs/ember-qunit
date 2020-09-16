@@ -1,4 +1,4 @@
-import QUnit from 'qunit';
+import * as QUnit from 'qunit';
 
 QUnit.config.autostart = false;
 QUnit.config.urlConfig.push({ id: 'nocontainer', label: 'Hide container' });
