@@ -1,3 +1,17 @@
+## v5.0.0-beta.3 (2020-09-16)
+
+#### :bug: Bug Fix
+* [#754](https://github.com/emberjs/ember-qunit/pull/754) Ensure peer dependency validation is performed from the parent's root. ([@rwjblue](https://github.com/rwjblue))
+* [#752](https://github.com/emberjs/ember-qunit/pull/752) Fix issues with peerDependencies when ember-auto-import present. ([@rwjblue](https://github.com/rwjblue))
+
+#### :house: Internal
+* [#755](https://github.com/emberjs/ember-qunit/pull/755) Update automated release process. ([@rwjblue](https://github.com/rwjblue))
+
+#### Committers: 2
+- Robert Jackson ([@rwjblue](https://github.com/rwjblue))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
+
 ## v5.0.0-beta.2 (2020-08-27)
 
 #### :bug: Bug Fix
