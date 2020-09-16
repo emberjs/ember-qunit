@@ -14,7 +14,7 @@ import { assign } from '@ember/polyfills';
 import { resetOnerror, getTestMetadata } from '@ember/test-helpers';
 import { loadTests } from './test-loader';
 import Ember from 'ember';
-import QUnit from 'qunit';
+import * as QUnit from 'qunit';
 import QUnitAdapter from './adapter';
 import {
   setupContext,
