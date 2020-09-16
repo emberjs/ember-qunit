@@ -1,5 +1,13 @@
+/* globals Testem */
+
 export { default as QUnitAdapter, nonTestDoneCallback } from './adapter';
 export { loadTests } from './test-loader';
+
+import './qunit-configuration';
+
+if (typeof Testem !== 'undefined') {
+  Testem.hookIntoTestFramework();
+}
 
 import { run } from '@ember/runloop';
 import { assign } from '@ember/polyfills';
