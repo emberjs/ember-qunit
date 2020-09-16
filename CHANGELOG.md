@@ -1,3 +1,13 @@
+## v5.0.0-beta.4 (2020-09-16)
+
+#### :bug: Bug Fix
+* [#758](https://github.com/emberjs/ember-qunit/pull/758) Fix usage within applications that do not have ember-auto-import. ([@rwjblue](https://github.com/rwjblue))
+* [#757](https://github.com/emberjs/ember-qunit/pull/757) Correct invalid QUnit imports. ([@rwjblue](https://github.com/rwjblue))
+
+#### Committers: 1
+- Robert Jackson ([@rwjblue](https://github.com/rwjblue))
+
+
 ## v5.0.0-beta.3 (2020-09-16)
 
 #### :bug: Bug Fix
