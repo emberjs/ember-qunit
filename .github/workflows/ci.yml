@@ -51,6 +51,7 @@ jobs:
           - ember-canary
           - ember-classic
           - ember-default-with-jquery
+          - ember-default-with-embroider
 
     steps:
       - uses: actions/checkout@v2
