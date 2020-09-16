@@ -118,7 +118,7 @@ module.exports = {
     let scopedInputTree = new Funnel(tree, { destDir: 'ember-qunit' });
 
     return this.preprocessJs(scopedInputTree, '/', this.name, {
-      annotation: `processedAddonJsFiles(${this.name})`,
+      annotation: `ember-qunit - treeForAddonTestSupport`,
       registry: this.registry,
     });
   },
