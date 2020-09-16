@@ -103,14 +103,6 @@ module.exports = async function () {
           devDependencies: {},
         },
       },
-      {
-        name: 'ember-default-with-ember-auto-import',
-        npm: {
-          devDependencies: {
-            'ember-auto-import': '^1.6.0',
-          },
-        },
-      },
     ],
   };
 };
