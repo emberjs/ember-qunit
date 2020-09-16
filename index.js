@@ -115,9 +115,12 @@ module.exports = {
 
     const Funnel = require('broccoli-funnel');
 
-    let babel = this.addons.find((a) => a.name === 'ember-cli-babel');
+    let scopedInputTree = new Funnel(tree, { destDir: 'ember-qunit' });
 
-    return babel.transpileTree(new Funnel(tree, { destDir: 'ember-qunit' }));
+    return this.preprocessJs(scopedInputTree, '/', this.name, {
+      annotation: `processedAddonJsFiles(${this.name})`,
+      registry: this.registry,
+    });
   },
 
   setTestGenerator: function () {
