@@ -25,7 +25,7 @@ In order to accomodate this change in your application you can run:
 
 ```sh
 # npm users
-npm install --dev qunit "@ember/test-helpers@^2.0.0-beta.4"
+npm install --save-dev qunit "@ember/test-helpers@^2.0.0-beta.4"
 
 # yarn users
 yarn add --dev qunit "@ember/test-helpers@^2.0.0-beta.4"
