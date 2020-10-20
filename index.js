@@ -3,38 +3,9 @@
 
 const path = require('path');
 const resolvePackagePath = require('resolve-package-path');
-const semver = require('semver');
-const SilentError = require('silent-error');
 const stripIndent = require('common-tags').stripIndent;
 
-// avoid checking multiple times from the same location
-let HAS_PEER_DEPS_INSTALLED = new Map();
-function hasPeerDependenciesInstalled(parentRoot) {
-  if (HAS_PEER_DEPS_INSTALLED.has(parentRoot)) {
-    return HAS_PEER_DEPS_INSTALLED.get(parentRoot);
-  }
-
-  let peerDependencies = require('./package').peerDependencies;
-
-  for (let packageName in peerDependencies) {
-    let minimumVersion = peerDependencies[packageName].substring(1);
-
-    let packagePath = resolvePackagePath(packageName, parentRoot);
-    if (packagePath === null) {
-      HAS_PEER_DEPS_INSTALLED.set(parentRoot, false);
-      return false;
-    }
-
-    let packageVersion = require(packagePath).version;
-    if (semver.lt(packageVersion, minimumVersion)) {
-      HAS_PEER_DEPS_INSTALLED.set(parentRoot, false);
-      return false;
-    }
-  }
-
-  HAS_PEER_DEPS_INSTALLED.set(parentRoot, true);
-  return true;
-}
+const validatePeerDependencies = require('validate-peer-dependencies');
 
 module.exports = {
   name: 'ember-qunit',
@@ -48,21 +19,9 @@ module.exports = {
   included() {
     this._super.included.apply(this, arguments);
 
-    if (!hasPeerDependenciesInstalled(this.parent.root)) {
-      let peerDependencies = require('./package').peerDependencies;
-      let packages = Object.keys(peerDependencies).map(
-        (name) => `"${name}@${peerDependencies[name]}"`
-      );
-      let hasYarnLock = this.project.has('yarn.lock');
-
-      let installMessage = `${
-        hasYarnLock ? 'yarn add' : 'npm install'
-      } --dev ${packages.join(' ')}`;
-
-      throw new SilentError(
-        `ember-qunit now requires that \`qunit\` and \`@ember/test-helpers\` are \`devDependencies\` of the project. Please run:\n\t${installMessage}`
-      );
-    }
+    validatePeerDependencies(__dirname, {
+      resolvePackagePathFrom: this.parent.root,
+    });
 
     // TODO: figure out how to make this not needed, AFAICT ember-auto-import
     // does not provide any ability to import styles
