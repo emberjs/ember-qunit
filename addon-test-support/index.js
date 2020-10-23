@@ -87,9 +87,10 @@ export function setupApplicationTest(hooks, _options) {
    Uses current URL configuration to setup the test container.
 
    * If `?nocontainer` is set, the test container will be hidden.
-   * If `?dockcontainer` or `?devmode` are set the test container will be
-     absolutely positioned.
-   * If `?devmode` is set, the test container will be made full screen.
+   * If `?dockcontainer`, `?fullscreencontainer` or `?devmode` are set the test
+     container will be absolutely positioned.
+   * If `?devmode` or `?fullscreencontainer` is set, the test container will be
+     made full screen.
 
    @method setupTestContainer
  */
@@ -103,9 +104,11 @@ export function setupTestContainer() {
 
   let containerVisibility = params.nocontainer ? 'hidden' : 'visible';
   let containerPosition =
-    params.dockcontainer || params.devmode ? 'fixed' : 'relative';
+    params.dockcontainer || params.devmode || params.fullscreencontainer
+      ? 'fixed'
+      : 'relative';
 
-  if (params.devmode) {
+  if (params.devmode || params.fullscreencontainer) {
     testContainer.className = ' full-screen';
   }
 
