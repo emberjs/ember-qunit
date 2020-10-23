@@ -60,7 +60,7 @@ export function installTestNotIsolatedHook(delay = 50) {
   };
 
   // We're hooking into `test.finish`, which utilizes internal ordering of
-  // when a test's hooks are invoked. We do this mainly becuase we need
+  // when a test's hooks are invoked. We do this mainly because we need
   // greater precision as to when to detect and subsequently report if the
   // test is isolated.
   //
@@ -72,7 +72,7 @@ export function installTestNotIsolatedHook(delay = 50) {
   //    - is executed too late; the test is already considered done so
   //      we're unable to push a new assert to fail the current test
   // - 'QUnit.done'
-  //    - it detatches the failure from the actual test that failed, making it
+  //    - it detaches the failure from the actual test that failed, making it
   //      more confusing to the end user.
   test.finish = function () {
     let doFinish = () => finish.apply(this, arguments);
