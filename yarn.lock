@@ -11460,10 +11460,10 @@ validate-npm-package-name@^3.0.0:
   dependencies:
     builtins "^1.0.3"
 
-validate-peer-dependencies@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/validate-peer-dependencies/-/validate-peer-dependencies-1.0.0.tgz#d82f1c2020eef96d331723c2cef15de94063adf3"
-  integrity sha512-9T1pR9gopOuQYDMT0ApUPiRt1MOsSCJUm56mr55Hy7RDx7dyFHa6SnEXVP5wJuFyJ8pWyZoYxfFo4raEspRbUg==
+validate-peer-dependencies@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/validate-peer-dependencies/-/validate-peer-dependencies-1.1.0.tgz#8240a115df121ea35b0bb082255b38b5c591d7e1"
+  integrity sha512-eHHxI3fNMqu8bzWPRWWgV72kBJkWwRCeEua7yC7UI6dsqC55orhxKAC3uyQfCjjToOyAZ8mpNrbQH+NMoYBn1w==
   dependencies:
     resolve-package-path "^3.1.0"
     semver "^7.3.2"
