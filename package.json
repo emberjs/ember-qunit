@@ -64,7 +64,7 @@
     "prettier": "2.0.5",
     "qunit": "^2.11.3",
     "release-it": "^14.2.1",
-    "release-it-lerna-changelog": "^2.4.0"
+    "release-it-lerna-changelog": "^3.1.0"
   },
   "peerDependencies": {
     "@ember/test-helpers": "^2.0.1",
