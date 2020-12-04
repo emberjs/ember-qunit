@@ -1,3 +1,27 @@
+## v5.0.0-beta.5 (2020-12-04)
+
+#### :rocket: Enhancement
+* [#763](https://github.com/emberjs/ember-qunit/pull/763) Add `fullscreencontainer` query param (similar to `devmode` but does not modify test timeout) ([@rohitpaulk](https://github.com/rohitpaulk))
+* [#761](https://github.com/emberjs/ember-qunit/pull/761) Migrate to validate-peer-dependencies. ([@rwjblue](https://github.com/rwjblue))
+* [#756](https://github.com/emberjs/ember-qunit/pull/756) Add Embroider test scenario. ([@rwjblue](https://github.com/rwjblue))
+
+#### :bug: Bug Fix
+* [#776](https://github.com/emberjs/ember-qunit/pull/776) Override #qunit-fixture styling, place inside viewport ([@rohitpaulk](https://github.com/rohitpaulk))
+* [#759](https://github.com/emberjs/ember-qunit/pull/759) Tweak the annotation for `treeForAddonTestSupport` ([@rwjblue](https://github.com/rwjblue))
+
+#### :memo: Documentation
+* [#762](https://github.com/emberjs/ember-qunit/pull/762) Fix typos in comments ([@rohitpaulk](https://github.com/rohitpaulk))
+
+#### :house: Internal
+* [#760](https://github.com/emberjs/ember-qunit/pull/760) Remove QUnit shim ([@bobisjan](https://github.com/bobisjan))
+
+#### Committers: 4
+- Jan Bobisud ([@bobisjan](https://github.com/bobisjan))
+- Paul Kuruvilla ([@rohitpaulk](https://github.com/rohitpaulk))
+- Robert Jackson ([@rwjblue](https://github.com/rwjblue))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
+
 ## v5.0.0-beta.4 (2020-09-16)
 
 #### :bug: Bug Fix
