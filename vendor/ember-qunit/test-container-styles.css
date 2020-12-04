@@ -1,3 +1,12 @@
+/* Override QUnit's default styles that place #qunit-fixture outside the viewport */
+#qunit-fixture {
+  position: relative;
+  left: auto;
+  top: auto;
+  width: auto;
+  height: auto;
+}
+
 #ember-testing-container {
   position: relative;
 
