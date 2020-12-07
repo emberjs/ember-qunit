@@ -14,7 +14,6 @@
 * [#616](https://github.com/emberjs/ember-qunit/pull/616) Drop support for Node 6 and 8 ([@Turbo87](https://github.com/Turbo87))
 
 #### :rocket: Enhancement
-* [#786](https://github.com/emberjs/ember-qunit/pull/786) Improve testing container visuals (prevent scrolling during tests, keep testing container in a fixed location) ([@BryanCrotaz](https://github.com/bryancrotaz))
 * [#763](https://github.com/emberjs/ember-qunit/pull/763) Add `fullscreencontainer` query param (similar to `devmode` but does not modify test timeout) ([@rohitpaulk](https://github.com/rohitpaulk))
 * [#756](https://github.com/emberjs/ember-qunit/pull/756) Add Embroider test scenario. ([@rwjblue](https://github.com/rwjblue))
 * [#613](https://github.com/emberjs/ember-qunit/pull/613) Use checkerboard pattern for testing container background ([@Turbo87](https://github.com/Turbo87))
@@ -42,7 +41,6 @@
 - Tobias Bieniek ([@Turbo87](https://github.com/Turbo87))
 - Jan Bobisud ([@bobisjan](https://github.com/bobisjan))
 - Paul Kuruvilla ([@rohitpaulk](https://github.com/rohitpaulk))
-- Bryan Crotaz ([@BryanCrotaz](https://github.com/bryancrotaz))
 
 
 ## v5.0.0-beta.5 (2020-12-04)
