@@ -1,3 +1,12 @@
+## v5.1.0 (2020-12-07)
+
+#### :rocket: Enhancement
+* [#786](https://github.com/emberjs/ember-qunit/pull/786) Improve testing container visuals (prevent scrolling during tests, keep testing container in a fixed location) ([@BryanCrotaz](https://github.com/bryancrotaz))
+
+#### Committers: 1
+- Bryan ([@BryanCrotaz](https://github.com/BryanCrotaz))
+
+
 ## v5.0.0 (2020-12-04)
 
 #### :boom: Breaking Change
