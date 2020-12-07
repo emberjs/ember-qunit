@@ -49,6 +49,28 @@ snippet to your `tests/index.html` just after your `{{content-for
 </div>
 ```
 
+### QUnit DOM
+
+If you use QUnit DOM, you may encounter the error message `assert.dom is not a function` when you run tests.
+
+To address this issue, import and run QUnit DOM's `setup` function in your `test-helper.js` file:
+
+```javascript
+// tests/test-helper.js
+import * as QUnit from 'qunit';
+import { setup } from 'qunit-dom';
+
+//...
+
+setup(QUnit.assert);
+
+setApplication(Application.create(config.APP));
+
+start();
+
+//...
+```
+
 ### Remove `ember-test-helpers` modules
 
 For a long time `@ember/test-helpers` re-exported all of its modules under the `ember-test-helpers` namespace,
