@@ -18,17 +18,17 @@ Upgrading from v4.x to v5.0.0
 ### `qunit` and `@ember/test-helpers` dependencies
 
 Older versions of `ember-qunit` directly depended on `qunit` and
-`@ember/test-helpers`, in v5 this relationship was changed and now
-`ember-qunit` has `qunit` and `@ember/test-helpers` as peer dependencies.
+`@ember/test-helpers`. In v5, this relationship was changed and now
+`ember-qunit` has `qunit` and `@ember/test-helpers` (v2) as peer dependencies.
 
-In order to accomodate this change in your application you can run:
+In order to accomodate this change, in your application, you can run:
 
 ```sh
 # npm users
-npm install --save-dev qunit "@ember/test-helpers@^2.0.0-beta.4"
+npm install --save-dev qunit "@ember/test-helpers"
 
 # yarn users
-yarn add --dev qunit "@ember/test-helpers@^2.0.0-beta.4"
+yarn add --dev qunit "@ember/test-helpers"
 ```
 
 ### DOM fixtures
@@ -47,6 +47,28 @@ snippet to your `tests/index.html` just after your `{{content-for
     <div id="ember-testing"></div>
   </div>
 </div>
+```
+
+### QUnit DOM
+
+If you use QUnit DOM, you may encounter the error message `assert.dom is not a function` when you run tests.
+
+To address this issue, import and run QUnit DOM's `setup` function in your `test-helper.js` file:
+
+```javascript
+// tests/test-helper.js
+import * as QUnit from 'qunit';
+import { setup } from 'qunit-dom';
+
+//...
+
+setup(QUnit.assert);
+
+setApplication(Application.create(config.APP));
+
+start();
+
+//...
 ```
 
 ### Remove `ember-test-helpers` modules
