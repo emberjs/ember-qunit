@@ -79,6 +79,7 @@ module.exports = {
     return this.preprocessJs(scopedInputTree, '/', this.name, {
       annotation: `ember-qunit - treeForAddonTestSupport`,
       registry: this.registry,
+      treeType: 'addon-test-support',
     });
   },
 
