@@ -1,3 +1,18 @@
+## v5.1.1 (2020-12-16)
+
+#### :bug: Bug Fix
+* [#790](https://github.com/emberjs/ember-qunit/pull/790) Update to ember-auto-import@1.10.0 at a minimum. ([@rwjblue](https://github.com/rwjblue))
+* [#789](https://github.com/emberjs/ember-qunit/pull/789) Add treeType annotation to hint test-support to ember-auto-import. ([@rwjblue](https://github.com/rwjblue))
+
+#### :memo: Documentation
+* [#787](https://github.com/emberjs/ember-qunit/pull/787) Clarified migration guide to v5.x when a project includes QUnit DOM ([@ijlee2](https://github.com/ijlee2))
+
+#### Committers: 3
+- Isaac Lee ([@ijlee2](https://github.com/ijlee2))
+- Robert Jackson ([@rwjblue](https://github.com/rwjblue))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
+
 ## v5.1.0 (2020-12-07)
 
 #### :rocket: Enhancement
