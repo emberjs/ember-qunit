@@ -915,22 +915,24 @@
   resolved "https://registry.yarnpkg.com/@ember/edition-utils/-/edition-utils-1.2.0.tgz#a039f542dc14c8e8299c81cd5abba95e2459cfa6"
   integrity sha512-VmVq/8saCaPdesQmftPqbFtxJWrzxNGSQ+e8x8LLe3Hjm36pJ04Q8LeORGZkAeOhldoUX9seLGmSaHeXkIqoog==
 
-"@ember/test-helpers@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-2.1.0.tgz#6009b2db465ea56a1776589a332b062458972d91"
-  integrity sha512-5S7Os0zErRV3WQAGqMI1zEDaQIpPwC51r84aukW/3HQVTYTN3TMAfQsKaSN3cvxPCCzDBuQyDm6BNNps/aHUvw==
+"@ember/test-helpers@^2.1.4":
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-2.1.4.tgz#18cc78f3f9230a66955eb4307541129b53ebd487"
+  integrity sha512-CcDAWfzYE4r1YApufPPINm0IZL223yv/JiG61rjZr0KPyGBCOWjA9b//bY+jdAwZIEsmoMDfMbSS3p1u3c6i5w==
   dependencies:
-    "@ember/test-waiters" "^2.3.0"
+    "@ember/test-waiters" "^2.3.2"
     broccoli-debug "^0.6.5"
     broccoli-funnel "^3.0.3"
+    ember-auto-import "^1.10.0"
     ember-cli-babel "^7.22.1"
     ember-cli-htmlbars "^5.2.0"
     ember-destroyable-polyfill "^2.0.2"
+    es6-promise "^4.2.8"
 
-"@ember/test-waiters@^2.3.0":
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/@ember/test-waiters/-/test-waiters-2.3.1.tgz#b3f3e82081fa7fa90dbfec9b5bd8d59ee701e34b"
-  integrity sha512-abpI2ms3UjsUWVs4Jxvo/6+1/zwzk6Akj9JSfUVzrXTribQwcTozVfrTCRprq5ue5moCryGUlmceAqhfvYesbw==
+"@ember/test-waiters@^2.3.2":
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/@ember/test-waiters/-/test-waiters-2.3.2.tgz#5d416d25209b25b16116df0a01a856437362b7eb"
+  integrity sha512-4zDQd14br6VzvBf0PD/dm6Vg9nG33WUW14UGI26k+iOGG9iY++pHL5+PnrvCxxrZ9867EPTULy8K2oneenAtSw==
   dependencies:
     calculate-cache-key-for-tree "^2.0.0"
     ember-cli-babel "^7.21.0"
@@ -4716,7 +4718,7 @@ es-to-primitive@^1.2.1:
     is-date-object "^1.0.1"
     is-symbol "^1.0.2"
 
-es6-promise@^4.0.3:
+es6-promise@^4.0.3, es6-promise@^4.2.8:
   version "4.2.8"
   resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-4.2.8.tgz#4eb21594c972bc40553d276e510539143db53e0a"
   integrity sha512-HJDGx5daxeIvxdBxvG2cb9g4tEvwIk3i8+nhX0yGrYmZUzbkdg8QbDevheDB8gd0//uPj4c1EQua8Q+MViT0/w==
