@@ -1,3 +1,21 @@
+## v5.1.2 (2021-02-01)
+
+#### :bug: Bug Fix
+* [#804](https://github.com/emberjs/ember-qunit/pull/804) fix: ensure "Development Mode" is full screen ([@alexlafroscia](https://github.com/alexlafroscia))
+
+#### :memo: Documentation
+* [#805](https://github.com/emberjs/ember-qunit/pull/805) Add V5 migration guide link to CHANGELOG ([@bmish](https://github.com/bmish))
+
+#### :house: Internal
+* [#813](https://github.com/emberjs/ember-qunit/pull/813) Re-roll yarn.lock. ([@rwjblue](https://github.com/rwjblue))
+
+#### Committers: 4
+- Alex LaFroscia ([@alexlafroscia](https://github.com/alexlafroscia))
+- Bryan Mishkin ([@bmish](https://github.com/bmish))
+- Robert Jackson ([@rwjblue](https://github.com/rwjblue))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
+
 ## v5.1.1 (2020-12-16)
 
 #### :bug: Bug Fix
