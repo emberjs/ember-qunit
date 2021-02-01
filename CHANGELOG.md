@@ -24,6 +24,8 @@
 
 ## v5.0.0 (2020-12-04)
 
+Also see the [V4 to V5 migration guide](https://github.com/emberjs/ember-qunit/blob/master/docs/migration.md#upgrading-from-v4x-to-v500).
+
 #### :boom: Breaking Change
 * [#745](https://github.com/emberjs/ember-qunit/pull/745) Update to @ember/test-helpers@2.0.0. ([@rwjblue](https://github.com/rwjblue))
 * [#741](https://github.com/emberjs/ember-qunit/pull/741) Require host to provide testing fixture DOM elements. ([@rwjblue](https://github.com/rwjblue))
