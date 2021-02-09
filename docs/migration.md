@@ -71,6 +71,8 @@ start();
 //...
 ```
 
+**Note**: Only make this change when you've updated your version of `ember-qunit` to a `5.x.x` version.  Doing so pre-emptively will result in errors trying to import `setup`.
+
 ### Remove `ember-test-helpers` modules
 
 For a long time `@ember/test-helpers` re-exported all of its modules under the `ember-test-helpers` namespace,
