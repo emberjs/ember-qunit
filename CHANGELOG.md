@@ -1,3 +1,18 @@
+## v5.1.3 (2021-02-18)
+
+#### :bug: Bug Fix
+* [#817](https://github.com/emberjs/ember-qunit/pull/817) Fixes testing container layout issues for QUnit 2.14 ([@drewlee](https://github.com/drewlee))
+
+#### :memo: Documentation
+* [#815](https://github.com/emberjs/ember-qunit/pull/815) Update migration.md ([@hjdivad](https://github.com/hjdivad))
+
+#### Committers: 4
+- Alex LaFroscia ([@alexlafroscia](https://github.com/alexlafroscia))
+- Andrew A Lee ([@drewlee](https://github.com/drewlee))
+- David J. Hamilton ([@hjdivad](https://github.com/hjdivad))
+- Travis Hoover ([@thoov](https://github.com/thoov))
+
+
 ## v5.1.2 (2021-02-01)
 
 #### :bug: Bug Fix
