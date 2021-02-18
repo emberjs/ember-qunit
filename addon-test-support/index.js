@@ -87,8 +87,6 @@ export function setupApplicationTest(hooks, _options) {
    Uses current URL configuration to setup the test container.
 
    * If `?nocontainer` is set, the test container will be hidden.
-   * If `?dockcontainer`, `?fullscreencontainer` or `?devmode` are set the test
-     container will be absolutely positioned.
    * If `?devmode` or `?fullscreencontainer` is set, the test container will be
      made full screen.
 
@@ -101,26 +99,13 @@ export function setupTestContainer() {
   }
 
   let params = QUnit.urlParams;
-
   let containerVisibility = params.nocontainer ? 'hidden' : 'visible';
-  let containerPosition =
-    params.dockcontainer || params.devmode || params.fullscreencontainer
-      ? 'fixed'
-      : 'relative';
 
   if (params.devmode || params.fullscreencontainer) {
     testContainer.className = ' full-screen';
   }
 
   testContainer.style.visibility = containerVisibility;
-  testContainer.style.position = containerPosition;
-
-  let qunitContainer = document.getElementById('qunit');
-  if (params.dockcontainer) {
-    qunitContainer.style.marginBottom = window.getComputedStyle(
-      testContainer
-    ).height;
-  }
 }
 
 /**
