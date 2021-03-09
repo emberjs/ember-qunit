@@ -68,8 +68,8 @@
     "release-it-lerna-changelog": "^3.1.0"
   },
   "peerDependencies": {
-    "@ember/test-helpers": "^2.2.3",
-    "qunit": "^2.14.0"
+    "@ember/test-helpers": "^2.1.0",
+    "qunit": "^2.13.0"
   },
   "engines": {
     "node": "10.* || 12.* || >= 14.*"
