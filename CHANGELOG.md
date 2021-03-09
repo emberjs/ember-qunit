@@ -1,3 +1,12 @@
+## v5.1.4 (2021-03-09)
+
+#### :bug: Bug Fix
+* [#827](https://github.com/emberjs/ember-qunit/pull/827) Relax peer dependency minimums to ember-qunit@5.0.0 versions ([@rwjblue](https://github.com/rwjblue))
+
+#### Committers: 2
+- Robert Jackson ([@rwjblue](https://github.com/rwjblue))
+
+
 ## v5.1.3 (2021-02-18)
 
 #### :bug: Bug Fix
