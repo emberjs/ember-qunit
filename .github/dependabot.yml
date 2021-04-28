@@ -1,0 +1,21 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: monthly
+  open-pull-requests-limit: 10
+  versioning-strategy: increase
+  ignore:
+  - dependency-name: broccoli-merge-trees
+    versions:
+    - ">= 4.a, < 5"
+  - dependency-name: eslint-config-prettier
+    versions:
+    - 7.1.0
+  - dependency-name: ember-source
+    versions:
+    - 3.24.0
+  - dependency-name: ember-cli
+    versions:
+    - 3.23.0
