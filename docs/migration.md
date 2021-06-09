@@ -9,6 +9,7 @@ Upgrading from v4.x to v5.0.0
 
 * Require the application to have a `qunit` and `@ember/test-helpers` dependency of some sort
 * Require the QUnit and `@ember/test-helpers` DOM fixtures to be added to the applications `tests/index.html`
+* Require the application to have `ember-auto-import`
 * Dropped support for usage of `ember-test-helpers` imports
 * Dropped support for `moduleFor*` APIs
 * Drop support for older Node versions (8, 9, 11, 13)
