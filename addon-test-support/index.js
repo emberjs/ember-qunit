@@ -26,6 +26,24 @@ import { installTestNotIsolatedHook } from './test-isolation-validation';
 
 let waitForSettled = true;
 
+import deprecationsInclude from './assertions/deprecations-include';
+import deprecations from './assertions/deprecations';
+import expectNoDeprecation from './assertions/expect-no-deprecation';
+import expectDeprecation from './assertions/expect-deprecation';
+import expectNoRunloop from './assertions/expect-no-runloop';
+// import expectWarning from './assertions/expect-warning';
+//
+export function setupAsserts(assert) {
+  // TODO: decide which of these we should keep, which depreacte and which drop.
+  assert.deprecationsInclude = deprecationsInclude;
+  assert.deprecations = deprecations;
+  assert.expectNoDeprecation = expectNoDeprecation;
+  assert.expectDeprecation = expectDeprecation; // compat
+  assert.expectNoRunloop = expectNoRunloop; // compat but fixed name
+  // around for compat
+  assert.exepectNoRunLoop = expectNoRunloop; // compat but wrong camelization
+}
+
 export function setupTest(hooks, _options) {
   let options = { waitForSettled, ..._options };
 
@@ -211,6 +229,10 @@ export function start(options = {}) {
 
   if (options.startTests !== false) {
     startTests();
+  }
+
+  if (options.setupAssertAdditions !== false) {
+    setupAsserts(QUnit.assert);
   }
 
   setupResetOnerror();
