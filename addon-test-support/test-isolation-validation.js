@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import * as QUnit from 'qunit';
-import { run } from '@ember/runloop';
+import { _cancelTimers as cancelTimers } from '@ember/runloop';
 import { waitUntil, isSettled, getSettledState } from '@ember/test-helpers';
 import { getDebugInfo } from '@ember/test-helpers';
 
@@ -96,7 +96,7 @@ export function installTestNotIsolatedHook(delay = 50) {
           // canceling timers here isn't perfect, but is as good as we can do
           // to attempt to prevent future tests from failing due to this test's
           // leakage
-          run.cancelTimers();
+          cancelTimers();
 
           return doFinish();
         });

@@ -1,12 +1,11 @@
 import Ember from 'ember';
-import { run } from '@ember/runloop';
+import { later, _backburner as backburner } from '@ember/runloop';
 import { module, test } from 'qunit';
 import { installTestNotIsolatedHook } from 'ember-qunit/test-isolation-validation';
 import { getDebugInfo } from '@ember/test-helpers';
-
 import patchAssert from './utils/patch-assert-helper';
 
-run.backburner.DEBUG = true;
+backburner.DEBUG = true;
 
 if (getDebugInfo()) {
   module('test isolation validation', function (hooks) {
@@ -30,7 +29,7 @@ if (getDebugInfo()) {
 
     hooks.beforeEach(function () {
       this.cancelId = 0;
-      run.backburner.DEBUG = true;
+      backburner.DEBUG = true;
 
       installTestNotIsolatedHook();
     });
@@ -45,7 +44,7 @@ if (getDebugInfo()) {
       assert.expect(1);
       patchAssert(assert);
 
-      this.cancelId = run.later(() => {}, 1000);
+      this.cancelId = later(() => {}, 1000);
     });
 
     test('detectIfTestNotIsolated adds failing assertion when test has test waiters', function (assert) {
@@ -84,7 +83,7 @@ if (getDebugInfo()) {
 
         assert.test.pushFailure = testPushFailure;
 
-        run.later(() => {}, 100);
+        later(() => {}, 100);
       });
     });
   });
