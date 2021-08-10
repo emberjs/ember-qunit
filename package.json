@@ -42,7 +42,7 @@
     "validate-peer-dependencies": "^1.2.0"
   },
   "devDependencies": {
-    "@ember/test-helpers": "^2.2.6",
+    "@ember/test-helpers": "^2.4.0",
     "@embroider/test-setup": "^0.36.0",
     "babel-eslint": "^10.1.0",
     "ember-cli": "~3.27.0",
