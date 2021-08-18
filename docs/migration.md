@@ -123,7 +123,7 @@ module('SidebarController', function(hooks) {
   setupTest(hooks);
 
   // Replace this with your real tests.
-  test('exists', function() {
+  test('exists', function(assert) {
     let controller = this.owner.lookup('controller:sidebar');
     assert.ok(controller);
   });
@@ -169,7 +169,7 @@ import hbs from 'htmlbars-inline-precompile';
 module('GravatarImageComponent', function(hooks) {
   setupRenderingTest(hooks);
 
-  test('renders', async function() {
+  test('renders', async function(assert) {
     await render(hbs`{{gravatar-image}}`);
     assert.ok(this.element.querySelector('img'));
   });
