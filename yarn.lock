@@ -1234,10 +1234,10 @@
   resolved "https://registry.yarnpkg.com/@ember/edition-utils/-/edition-utils-1.2.0.tgz#a039f542dc14c8e8299c81cd5abba95e2459cfa6"
   integrity sha512-VmVq/8saCaPdesQmftPqbFtxJWrzxNGSQ+e8x8LLe3Hjm36pJ04Q8LeORGZkAeOhldoUX9seLGmSaHeXkIqoog==
 
-"@ember/test-helpers@^2.4.1":
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-2.4.1.tgz#4ec8605ab1243b2cd8028b63f2bf4c0ea51eb779"
-  integrity sha512-CojE+K6agL8MGnoL1c6SWvBW9LOmBiBtms1m5LqHsYZQXmZXbvT2taf1ouOkT3nFh9tLEhKea8DopitD062TEA==
+"@ember/test-helpers@^2.4.2":
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-2.4.2.tgz#e5be97e316dc502d7da933461135fbcb9254726e"
+  integrity sha512-++k/dXZ0IeOQLSm0Yu5QuCRe9UoptuckMhaXHY37VLb1varLHRuP8908kigVNt9c5waiocaK4jPjDBkKYRLlfA==
   dependencies:
     "@ember/test-waiters" "^3.0.0"
     broccoli-debug "^0.6.5"
