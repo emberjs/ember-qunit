@@ -54,10 +54,7 @@ export function setupTest(hooks, _options) {
 }
 
 export function setupRenderingTest(hooks, _options) {
-  let options =
-    _options === undefined
-      ? { waitForSettled }
-      : assign({ waitForSettled }, _options);
+  let options = { waitForSettled, ..._options };
 
   setupTest(hooks, options);
 
@@ -67,10 +64,7 @@ export function setupRenderingTest(hooks, _options) {
 }
 
 export function setupApplicationTest(hooks, _options) {
-  let options =
-    _options === undefined
-      ? { waitForSettled }
-      : assign({ waitForSettled }, _options);
+  let options = { waitForSettled, ..._options };
 
   setupTest(hooks, options);
 
