@@ -10,7 +10,6 @@ if (typeof Testem !== 'undefined') {
 }
 
 import { run } from '@ember/runloop';
-import { assign } from '@ember/polyfills';
 import { resetOnerror, getTestMetadata } from '@ember/test-helpers';
 import { loadTests } from './test-loader';
 import Ember from 'ember';
@@ -28,10 +27,7 @@ import { installTestNotIsolatedHook } from './test-isolation-validation';
 let waitForSettled = true;
 
 export function setupTest(hooks, _options) {
-  let options =
-    _options === undefined
-      ? { waitForSettled }
-      : assign({ waitForSettled }, _options);
+  let options = { waitForSettled, ..._options };
 
   hooks.beforeEach(function (assert) {
     let testMetadata = getTestMetadata(this);
