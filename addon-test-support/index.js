@@ -9,8 +9,7 @@ if (typeof Testem !== 'undefined') {
   Testem.hookIntoTestFramework();
 }
 
-import { run } from '@ember/runloop';
-import { assign } from '@ember/polyfills';
+import { _backburner } from '@ember/runloop';
 import { resetOnerror, getTestMetadata } from '@ember/test-helpers';
 import { loadTests } from './test-loader';
 import Ember from 'ember';
@@ -28,10 +27,7 @@ import { installTestNotIsolatedHook } from './test-isolation-validation';
 let waitForSettled = true;
 
 export function setupTest(hooks, _options) {
-  let options =
-    _options === undefined
-      ? { waitForSettled }
-      : assign({ waitForSettled }, _options);
+  let options = { waitForSettled, ..._options };
 
   hooks.beforeEach(function (assert) {
     let testMetadata = getTestMetadata(this);
@@ -58,10 +54,7 @@ export function setupTest(hooks, _options) {
 }
 
 export function setupRenderingTest(hooks, _options) {
-  let options =
-    _options === undefined
-      ? { waitForSettled }
-      : assign({ waitForSettled }, _options);
+  let options = { waitForSettled, ..._options };
 
   setupTest(hooks, options);
 
@@ -71,10 +64,7 @@ export function setupRenderingTest(hooks, _options) {
 }
 
 export function setupApplicationTest(hooks, _options) {
-  let options =
-    _options === undefined
-      ? { waitForSettled }
-      : assign({ waitForSettled }, _options);
+  let options = { waitForSettled, ..._options };
 
   setupTest(hooks, options);
 
@@ -164,7 +154,7 @@ export function setupResetOnerror() {
 
 export function setupTestIsolationValidation(delay) {
   waitForSettled = false;
-  run.backburner.DEBUG = true;
+  _backburner.DEBUG = true;
   QUnit.on('testStart', () => installTestNotIsolatedHook(delay));
 }
 
