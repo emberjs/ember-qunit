@@ -1,3 +1,24 @@
+
+## v5.1.5 (2021-10-06)
+
+#### :bug: Bug Fix
+* [#900](https://github.com/emberjs/ember-qunit/pull/900) Remove usage of APIs removed in Ember >= 4 ([@chancancode](https://github.com/chancancode))
+
+#### :memo: Documentation
+* [#883](https://github.com/emberjs/ember-qunit/pull/883) Update migration documentation to add arguments to the example migrated functions ([@Oluwadamilareolusakin](https://github.com/Oluwadamilareolusakin))
+* [#856](https://github.com/emberjs/ember-qunit/pull/856) Add ember-auto-import mention to migration docs ([@rwjblue](https://github.com/rwjblue))
+
+#### :house: Internal
+* [#901](https://github.com/emberjs/ember-qunit/pull/901) Use ember-auto-import@2 to test ember-source >= 4 ([@rwjblue](https://github.com/rwjblue))
+
+#### Committers: 5
+- Godfrey Chan ([@chancancode](https://github.com/chancancode))
+- Robert Jackson ([@rwjblue](https://github.com/rwjblue))
+- Stefan Penner ([@stefanpenner](https://github.com/stefanpenner))
+- Tolulope Oluwadamilare Olusakin ([@Oluwadamilareolusakin](https://github.com/Oluwadamilareolusakin))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
+
 ## v5.1.4 (2021-03-09)
 
 #### :bug: Bug Fix
