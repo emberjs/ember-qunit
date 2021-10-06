@@ -10,9 +10,6 @@ const embroider = {
         '@embroider/core': EMBROIDER_VERSION,
         '@embroider/webpack': EMBROIDER_VERSION,
         '@embroider/compat': EMBROIDER_VERSION,
-
-        // Webpack is a peer dependency of `@embroider/webpack`
-        webpack: '^5.0.0',
       },
     },
     env: {
@@ -27,9 +24,6 @@ const embroider = {
         '@embroider/core': EMBROIDER_VERSION,
         '@embroider/webpack': EMBROIDER_VERSION,
         '@embroider/compat': EMBROIDER_VERSION,
-
-        // Webpack is a peer dependency of `@embroider/webpack`
-        webpack: '^5.0.0',
       },
     },
     env: {
@@ -83,6 +77,9 @@ module.exports = async function () {
       {
         name: 'ember-release',
         npm: {
+          dependencies: {
+            'ember-auto-import': '^2.2.0',
+          },
           devDependencies: {
             'ember-source': await getChannelURL('release'),
           },
@@ -91,6 +88,9 @@ module.exports = async function () {
       {
         name: 'ember-beta',
         npm: {
+          dependencies: {
+            'ember-auto-import': '^2.2.0',
+          },
           devDependencies: {
             'ember-source': await getChannelURL('beta'),
           },
@@ -99,6 +99,9 @@ module.exports = async function () {
       {
         name: 'ember-canary',
         npm: {
+          dependencies: {
+            'ember-auto-import': '^2.2.0',
+          },
           devDependencies: {
             'ember-source': await getChannelURL('canary'),
           },
@@ -128,6 +131,9 @@ module.exports = async function () {
           }),
         },
         npm: {
+          devDependencies: {
+            'ember-source': '~3.28.0',
+          },
           ember: {
             edition: 'classic',
           },
