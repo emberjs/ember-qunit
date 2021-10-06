@@ -9,7 +9,7 @@ if (typeof Testem !== 'undefined') {
   Testem.hookIntoTestFramework();
 }
 
-import { run } from '@ember/runloop';
+import { _backburner } from '@ember/runloop';
 import { resetOnerror, getTestMetadata } from '@ember/test-helpers';
 import { loadTests } from './test-loader';
 import Ember from 'ember';
@@ -160,7 +160,7 @@ export function setupResetOnerror() {
 
 export function setupTestIsolationValidation(delay) {
   waitForSettled = false;
-  run.backburner.DEBUG = true;
+  _backburner.DEBUG = true;
   QUnit.on('testStart', () => installTestNotIsolatedHook(delay));
 }
 
