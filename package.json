@@ -65,7 +65,7 @@
     "qunit": "^2.16.0",
     "release-it": "^14.11.5",
     "release-it-lerna-changelog": "^3.1.0",
-    "webpack": "^5.57.1"
+    "webpack": "^5.61.0"
   },
   "peerDependencies": {
     "@ember/test-helpers": "^2.4.0",
