@@ -39,7 +39,6 @@ import {
   expectDeprecation,
   expectNoDeprecation,
 } from './assertions/deprecations';
-import expectNoRunloop from './assertions/expect-no-runloop';
 
 // import expectWarning from './assertions/expect-warning';
 //
@@ -49,9 +48,6 @@ export function setupAsserts(assert) {
   assert.deprecations = expectDeprecations;
   assert.expectNoDeprecation = expectNoDeprecation;
   assert.expectDeprecation = expectDeprecation; // compat
-  assert.expectNoRunloop = expectNoRunloop; // compat but fixed name
-  // around for compat
-  assert.exepectNoRunLoop = expectNoRunloop; // compat but wrong camelization
 }
 
 export function setupTest(hooks, _options) {
