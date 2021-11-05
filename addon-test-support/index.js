@@ -26,17 +26,27 @@ import { installTestNotIsolatedHook } from './test-isolation-validation';
 
 let waitForSettled = true;
 
-import deprecationsInclude from './assertions/deprecations-include';
-import deprecations from './assertions/deprecations';
-import expectNoDeprecation from './assertions/expect-no-deprecation';
-import expectDeprecation from './assertions/expect-deprecation';
+export {
+  expectDeprecations,
+  deprecationsInclude,
+  expectDeprecation,
+  expectNoDeprecation,
+} from './assertions/deprecations';
+
+import {
+  expectDeprecations,
+  deprecationsInclude,
+  expectDeprecation,
+  expectNoDeprecation,
+} from './assertions/deprecations';
 import expectNoRunloop from './assertions/expect-no-runloop';
+
 // import expectWarning from './assertions/expect-warning';
 //
 export function setupAsserts(assert) {
   // TODO: decide which of these we should keep, which depreacte and which drop.
   assert.deprecationsInclude = deprecationsInclude;
-  assert.deprecations = deprecations;
+  assert.deprecations = expectDeprecations;
   assert.expectNoDeprecation = expectNoDeprecation;
   assert.expectDeprecation = expectDeprecation; // compat
   assert.expectNoRunloop = expectNoRunloop; // compat but fixed name

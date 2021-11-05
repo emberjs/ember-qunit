@@ -1,6 +1,5 @@
 import { module, test } from 'qunit';
-import expectDeprecation from 'ember-qunit/assertions/expect-deprecation';
-import expectNoDeprecation from 'ember-qunit/assertions/expect-no-deprecation';
+import { expectDeprecation, expectNoDeprecation } from 'ember-qunit';
 import { deprecate } from '@ember/debug';
 import { setupTest } from 'ember-qunit';
 // ............................................................
