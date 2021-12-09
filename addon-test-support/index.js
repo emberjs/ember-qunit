@@ -89,13 +89,14 @@ export function setupTestContainer() {
   }
 
   let params = QUnit.urlParams;
-  let containerVisibility = params.nocontainer ? 'hidden' : 'visible';
 
   if (params.devmode || params.fullscreencontainer) {
-    testContainer.className = ' full-screen';
+    testContainer.classList.add('ember-testing-container-full-screen');
   }
 
-  testContainer.style.visibility = containerVisibility;
+  if (params.nocontainer) {
+    testContainer.classList.add('ember-testing-container-hidden');
+  }
 }
 
 /**
