@@ -29,12 +29,12 @@ module('setupApplicationTest tests', function (hooks) {
     setResolverRegistry({
       'router:main': Router,
       'template:application': hbs`
-        <div class="nav">{{link-to 'posts' 'posts'}} | {{link-to 'widgets' 'widgets'}}</div>
+        <div class="nav"><LinkTo @route="posts">posts</LinkTo> | <LinkTo @route="widgets">widgets</LinkTo></div>
         {{outlet}}
       `,
       'template:index': hbs`<h1>Hello World!</h1>`,
       'template:posts': hbs`<h1>Posts Page</h1>{{outlet}}`,
-      'template:posts/post': hbs`<div class="post-id">{{model.post_id}}</div>`,
+      'template:posts/post': hbs`<div class="post-id">{{this.model.post_id}}</div>`,
       'route:posts/post': Route.extend({
         model(params) {
           return params;

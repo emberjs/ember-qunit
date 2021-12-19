@@ -42,8 +42,10 @@
     "validate-peer-dependencies": "^1.2.0"
   },
   "devDependencies": {
+    "@ember/optional-features": "^2.0.0",
     "@ember/test-helpers": "^2.4.2",
     "babel-eslint": "^10.1.0",
+    "ember-angle-bracket-invocation-polyfill": "^3.0.1",
     "ember-cli": "~3.27.0",
     "ember-cli-dependency-checker": "^3.2.0",
     "ember-cli-htmlbars": "^5.7.1",
@@ -86,6 +88,9 @@
       "documentation": ":memo: Documentation",
       "internal": ":house: Internal"
     }
+  },
+  "ember": {
+    "edition": "octane"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
