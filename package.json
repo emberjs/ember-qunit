@@ -34,7 +34,7 @@
     "broccoli-funnel": "^3.0.8",
     "broccoli-merge-trees": "^3.0.2",
     "common-tags": "^1.8.0",
-    "ember-auto-import": "^1.11.3",
+    "ember-auto-import": "^2.2.4",
     "ember-cli-babel": "^7.26.6",
     "ember-cli-test-loader": "^3.0.0",
     "resolve-package-path": "^3.1.0",
