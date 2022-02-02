@@ -52,6 +52,7 @@ jobs:
           - ember-classic
           - ember-default-with-jquery
           - embroider-safe
+          - embroider-optimized
 
     steps:
       - uses: actions/checkout@v2

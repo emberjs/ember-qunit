@@ -1,36 +1,7 @@
 'use strict';
 
 const getChannelURL = require('ember-source-channel-url');
-const EMBROIDER_VERSION = '^0.43.4';
-const embroider = {
-  safe: {
-    name: 'embroider-safe',
-    npm: {
-      devDependencies: {
-        '@embroider/core': EMBROIDER_VERSION,
-        '@embroider/webpack': EMBROIDER_VERSION,
-        '@embroider/compat': EMBROIDER_VERSION,
-      },
-    },
-    env: {
-      EMBROIDER_TEST_SETUP_OPTIONS: 'safe',
-    },
-  },
-
-  optimized: {
-    name: 'embroider-optimized',
-    npm: {
-      devDependencies: {
-        '@embroider/core': EMBROIDER_VERSION,
-        '@embroider/webpack': EMBROIDER_VERSION,
-        '@embroider/compat': EMBROIDER_VERSION,
-      },
-    },
-    env: {
-      EMBROIDER_TEST_SETUP_OPTIONS: 'optimized',
-    },
-  },
-};
+const { embroiderSafe, embroiderOptimized } = require('@embroider/test-setup');
 
 module.exports = async function () {
   return {
@@ -145,21 +116,8 @@ module.exports = async function () {
           devDependencies: {},
         },
       },
-      embroider.safe,
-      // disable embroider optimized test scenarios, as the dynamism these
-      // tests use is not compatible with embroider we are still exploring
-      // appropriate paths forward.
-      //
-      // Steps to re-enable:
-      //
-      // 1. have a strategy to make this work
-      // 2. uncomment the next line
-      // embroider.optimized,
-      //
-      // 3. add "embroider-optimized" to .github/workflows/ci-build.yml's
-      //    ember-try-scenario list.
-      //
-      // embroiderOptimized(), disabled because of: https://github.com/embroider-build/embroider/issues/522
+      embroiderSafe(),
+      embroiderOptimized(),
     ],
   };
 };
