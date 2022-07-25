@@ -10,16 +10,24 @@ module.exports = function (defaults) {
     },
   });
 
-  try {
-    const { maybeEmbroider } = require('@embroider/test-setup'); // eslint-disable-line node/no-missing-require
-    return maybeEmbroider(app);
-  } catch (e) {
-    // This exists, so that we can continue to support node 10 for some of our
-    // test scenarios. Specifically those not scenario testing embroider. As
-    // @embroider/test-setup and @embroider in no longer supports node 10
-    if (e !== null && typeof e === 'object' && e.code === 'MODULE_NOT_FOUND') {
-      return app.toTree();
-    }
-    throw e;
-  }
+  const { maybeEmbroider } = require('@embroider/test-setup');
+  return maybeEmbroider(app, {
+    packageRules: [
+      {
+        // See: https://github.com/embroider-build/embroider/issues/522
+        package: 'dummy',
+        components: {
+          '{{template-only}}': {
+            safeToIgnore: true,
+          },
+          '{{js-only}}': {
+            safeToIgnore: true,
+          },
+          '{{jax}}': {
+            safeToIgnore: true,
+          },
+        },
+      },
+    ],
+  });
 };

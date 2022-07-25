@@ -34,7 +34,7 @@
     "broccoli-funnel": "^3.0.8",
     "broccoli-merge-trees": "^3.0.2",
     "common-tags": "^1.8.0",
-    "ember-auto-import": "^1.11.3",
+    "ember-auto-import": "^2.4.0",
     "ember-cli-babel": "^7.26.6",
     "ember-cli-test-loader": "^3.0.0",
     "resolve-package-path": "^3.1.0",
@@ -44,6 +44,7 @@
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
     "@ember/test-helpers": "^2.4.2",
+    "@embroider/test-setup": "^1.0.0",
     "babel-eslint": "^10.1.0",
     "ember-angle-bracket-invocation-polyfill": "^3.0.1",
     "ember-cli": "~3.27.0",
