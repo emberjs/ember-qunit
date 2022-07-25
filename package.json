@@ -74,7 +74,7 @@
     "qunit": "^2.13.0"
   },
   "engines": {
-    "node": "10.* || 12.* || >= 14.*"
+    "node": "14.* || 16.* || >= 17"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
@@ -111,7 +111,7 @@
     }
   },
   "volta": {
-    "node": "10.22.0",
-    "yarn": "1.22.4"
+    "node": "14.19.1",
+    "yarn": "1.22.18"
   }
 }
