@@ -44,7 +44,7 @@
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
     "@ember/test-helpers": "^2.8.1",
-    "@embroider/test-setup": "^1.0.0",
+    "@embroider/test-setup": "^1.8.3",
     "babel-eslint": "^10.1.0",
     "ember-angle-bracket-invocation-polyfill": "^3.0.1",
     "ember-cli": "~4.7.0",
