@@ -10612,15 +10612,7 @@ validate-npm-package-name@^4.0.0:
   dependencies:
     builtins "^5.0.0"
 
-validate-peer-dependencies@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/validate-peer-dependencies/-/validate-peer-dependencies-1.2.0.tgz#22aab93c514f4fda457d36c80685e8b1160d2036"
-  integrity sha512-nd2HUpKc6RWblPZQ2GDuI65sxJ2n/UqZwSBVtj64xlWjMx0m7ZB2m9b2JS3v1f+n9VWH/dd1CMhkHfP6pIdckA==
-  dependencies:
-    resolve-package-path "^3.1.0"
-    semver "^7.3.2"
-
-validate-peer-dependencies@^2.0.0:
+validate-peer-dependencies@^2.0.0, validate-peer-dependencies@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/validate-peer-dependencies/-/validate-peer-dependencies-2.1.0.tgz#1ad8218b1b168aeb500165f9de2a3f53269ece56"
   integrity sha512-x+M+mp16g4N+jDQJO6a+AKnMHAViov9mRzYfgMYR6Bq+UTwewf8aTQsP+e1QH0oZrADqP7fuI/bEbl3CzRFhOQ==
