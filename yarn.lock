@@ -4009,10 +4009,10 @@ electron-to-chromium@^1.4.251:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.270.tgz#2c6ea409b45cdb5c3e0cb2c08cf6c0ba7e0f2c26"
   integrity sha512-KNhIzgLiJmDDC444dj9vEOpZEgsV96ult9Iff98Vanumn+ShJHd5se8aX6KeVxdc0YQeqdrezBZv89rleDbvSg==
 
-ember-angle-bracket-invocation-polyfill@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/ember-angle-bracket-invocation-polyfill/-/ember-angle-bracket-invocation-polyfill-3.0.1.tgz#d346692bd75489e49af95e6727b2817d839f7f22"
-  integrity sha512-zxG6yazA7X9+itp3rir+aK6h+NDRJ/COgFmMWgY+Ol8z81MVj5+tgB4ZXDz7e8cCM0S6cUwv82rC6Bb/P7K0ow==
+ember-angle-bracket-invocation-polyfill@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/ember-angle-bracket-invocation-polyfill/-/ember-angle-bracket-invocation-polyfill-3.0.2.tgz#c398b1b8dc59b2a06557623f09aea54fcafbccb4"
+  integrity sha512-4WjD+Y1kE5S7YigSnn+Yq/FmTxoZ+7L5hc+YEWDj++iuoAGEQ4xyic+7urtfxHieP8SzDNEcKzqUrAIQnQtSPQ==
   dependencies:
     ember-cli-babel "^7.0.0"
     ember-cli-version-checker "^2.1.2"
