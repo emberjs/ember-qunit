@@ -1,4 +1,26 @@
 
+
+## v6.0.0 (2022-10-07)
+
+#### :boom: Breaking Change
+* [#972](https://github.com/emberjs/ember-qunit/pull/972) Add support for Ember v4, drop support for < Ember 3.24 and deprecated features ([@chriskrycho](https://github.com/chriskrycho))
+* [#921](https://github.com/emberjs/ember-qunit/pull/921) Update ember-auto-import to 2.x ([@mydea](https://github.com/mydea))
+* [#931](https://github.com/emberjs/ember-qunit/pull/931) Drop support for Node < 14 ([@mydea](https://github.com/mydea))
+
+#### :rocket: Enhancement
+* [#972](https://github.com/emberjs/ember-qunit/pull/972) Add support for Ember v4, drop support for < Ember 3.24 and deprecated features ([@chriskrycho](https://github.com/chriskrycho))
+
+#### :bug: Bug Fix
+* [#912](https://github.com/emberjs/ember-qunit/pull/912) Make sure focus related tests don't fail when the test container is hidden ([@bertdeblock](https://github.com/bertdeblock))
+
+#### :house: Internal
+* [#914](https://github.com/emberjs/ember-qunit/pull/914) Fix CI ([@bertdeblock](https://github.com/bertdeblock))
+
+#### Committers: 3
+- Bert De Block ([@bertdeblock](https://github.com/bertdeblock))
+- Chris Krycho ([@chriskrycho](https://github.com/chriskrycho))
+- Francesco Novy ([@mydea](https://github.com/mydea))
+
 ## v5.1.5 (2021-10-06)
 
 #### :bug: Bug Fix
