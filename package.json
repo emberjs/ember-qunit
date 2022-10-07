@@ -48,7 +48,7 @@
     "babel-eslint": "^10.1.0",
     "ember-angle-bracket-invocation-polyfill": "^3.0.1",
     "ember-cli": "~4.7.0",
-    "ember-cli-dependency-checker": "^3.2.0",
+    "ember-cli-dependency-checker": "^3.3.1",
     "ember-cli-htmlbars": "^5.7.1",
     "ember-cli-inject-live-reload": "^2.1.0",
     "ember-disable-prototype-extensions": "^1.1.3",
