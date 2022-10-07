@@ -22,7 +22,7 @@ jobs:
       - run: yarn test:ember
 
   floating-dependencies:
-    name: "Floating Dependencies"
+    name: 'Floating Dependencies'
     runs-on: ubuntu-latest
 
     steps:
@@ -32,7 +32,7 @@ jobs:
       - run: yarn test:ember
 
   try-scenarios:
-    name: "Try: ${{ matrix.ember-try-scenario }}"
+    name: 'Try: ${{ matrix.ember-try-scenario }}'
 
     runs-on: ubuntu-latest
 
@@ -42,15 +42,12 @@ jobs:
       fail-fast: true
       matrix:
         ember-try-scenario:
-          - ember-lts-3.8
-          - ember-lts-3.12
-          - ember-lts-3.16
-          - ember-lts-3.20
+          - ember-lts-3.24
+          - ember-lts-3.28
+          - ember-lts-4.4
           - ember-release
           - ember-beta
           - ember-canary
-          - ember-classic
-          - ember-default-with-jquery
           - embroider-safe
           - embroider-optimized
 
