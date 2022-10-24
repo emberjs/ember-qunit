@@ -1,7 +1,22 @@
 import checkMatcher from './utils/check-matcher';
-import { getWarningsDuringCallback, getWarnings } from '@ember/test-helpers';
 
-export default function expectWarning(callback, matcher) {
+import { getWarnings, getWarningsDuringCallback } from '@ember/test-helpers';
+
+export function expectNoWarning(callback) {
+  const warnings =
+    typeof callback === 'function'
+      ? getWarningsDuringCallback(callback)
+      : getWarnings();
+
+  this.pushResult({
+    result: warnings.length === 0,
+    actual: warnings,
+    expected: [],
+    message: 'Expected no warnings during test, but warnings were found.',
+  });
+}
+
+export function expectWarning(callback, matcher) {
   let warnings;
   if (typeof callback === 'function') {
     warnings = getWarningsDuringCallback(callback);

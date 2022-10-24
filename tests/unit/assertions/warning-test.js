@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
-import expectWarning from 'ember-qunit/assertions/expect-warning';
-import expectNoWarning from 'ember-qunit/assertions/expect-no-warning';
+import { expectWarning } from 'ember-qunit';
+import { expectNoWarning } from 'ember-qunit';
 import { warn } from '@ember/debug';
 
 import { setupTest } from 'ember-qunit';

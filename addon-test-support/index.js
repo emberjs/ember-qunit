@@ -3,6 +3,19 @@
 export { default as QUnitAdapter, nonTestDoneCallback } from './adapter';
 export { loadTests } from './test-loader';
 
+export {
+  expectDeprecations,
+  deprecationsInclude,
+  expectDeprecation,
+  expectNoDeprecation,
+} from './assertions/deprecations';
+
+export {
+  expectWarning,
+  expectNoWarning,
+} from './assertions/warnings';
+
+
 import './qunit-configuration';
 
 if (typeof Testem !== 'undefined') {
@@ -26,13 +39,6 @@ import { installTestNotIsolatedHook } from './test-isolation-validation';
 
 let waitForSettled = true;
 
-export {
-  expectDeprecations,
-  deprecationsInclude,
-  expectDeprecation,
-  expectNoDeprecation,
-} from './assertions/deprecations';
-
 import {
   expectDeprecations,
   deprecationsInclude,
@@ -40,14 +46,19 @@ import {
   expectNoDeprecation,
 } from './assertions/deprecations';
 
-// import expectWarning from './assertions/expect-warning';
-//
+import {
+  expectWarning,
+  expectNoWarning,
+} from './assertions/warnings';
+
 export function setupAsserts(assert) {
   // TODO: decide which of these we should keep, which depreacte and which drop.
   assert.deprecationsInclude = deprecationsInclude;
   assert.deprecations = expectDeprecations;
   assert.expectNoDeprecation = expectNoDeprecation;
   assert.expectDeprecation = expectDeprecation; // compat
+  assert.expectWarning = expectWarning;
+  assert.expectNoWarning = expectNoWarning;
 }
 
 export function setupTest(hooks, _options) {
