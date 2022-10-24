@@ -15,8 +15,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: volta-cli/action@v1
+      - uses: actions/checkout@v3
+      - uses: volta-cli/action@v4
       - run: yarn install --frozen-lockfile
       - run: yarn lint
       - run: yarn test:ember
@@ -26,8 +26,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: volta-cli/action@v1
+      - uses: actions/checkout@v3
+      - uses: volta-cli/action@v4
       - run: yarn install --no-lockfile
       - run: yarn test:ember
 
@@ -52,8 +52,8 @@ jobs:
           - embroider-optimized
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: volta-cli/action@v1
+      - uses: actions/checkout@v3
+      - uses: volta-cli/action@v4
       - name: install dependencies
         run: yarn install --frozen-lockfile
       - name: test
