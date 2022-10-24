@@ -7,6 +7,11 @@ import { setupTest } from 'ember-qunit';
 deprecate('Deprecation outside of a test', false, {
   id: 'deprecation-test',
   until: '3.0.0',
+  for: 'ember-qunit-tests',
+  since: {
+    available: '6.1.0',
+    enabled: '6.1.0',
+  },
 });
 // ............................................................
 
@@ -28,6 +33,11 @@ module('expectDeprecation', function (hooks) {
     deprecate('Something deprecated', false, {
       id: 'deprecation-test',
       until: '3.0.0',
+      for: 'ember-qunit-tests',
+      since: {
+        available: '6.1.0',
+        enabled: '6.1.0',
+      },
     });
 
     mockAssert.expectDeprecation();
@@ -39,6 +49,11 @@ module('expectDeprecation', function (hooks) {
           options: {
             id: 'deprecation-test',
             until: '3.0.0',
+            for: 'ember-qunit-tests',
+            since: {
+              available: '6.1.0',
+              enabled: '6.1.0',
+            },
           },
         },
       ],
@@ -66,6 +81,11 @@ module('expectDeprecation', function (hooks) {
       deprecate('Something deprecated', false, {
         id: 'deprecation-test',
         until: '3.0.0',
+        for: 'ember-qunit-tests',
+        since: {
+          available: '6.1.0',
+          enabled: '6.1.0',
+        },
       });
     });
 
@@ -76,6 +96,11 @@ module('expectDeprecation', function (hooks) {
           options: {
             id: 'deprecation-test',
             until: '3.0.0',
+            for: 'ember-qunit-tests',
+            since: {
+              available: '6.1.0',
+              enabled: '6.1.0',
+            },
           },
         },
       ],
@@ -103,6 +128,11 @@ module('expectDeprecation', function (hooks) {
       deprecate('Something deprecated', false, {
         id: 'deprecation-test',
         until: '3.0.0',
+        for: 'ember-qunit-tests',
+        since: {
+          available: '6.1.0',
+          enabled: '6.1.0',
+        },
       });
     });
 
@@ -115,6 +145,11 @@ module('expectDeprecation', function (hooks) {
           options: {
             id: 'deprecation-test',
             until: '3.0.0',
+            for: 'ember-qunit-tests',
+            since: {
+              available: '6.1.0',
+              enabled: '6.1.0',
+            },
           },
         },
       ],
@@ -132,6 +167,11 @@ module('expectDeprecation', function (hooks) {
           options: {
             id: 'deprecation-test',
             until: '3.0.0',
+            for: 'ember-qunit-tests',
+            since: {
+              available: '6.1.0',
+              enabled: '6.1.0',
+            },
           },
         },
       ],
@@ -146,6 +186,11 @@ module('expectDeprecation', function (hooks) {
     deprecate('Something deprecated', false, {
       id: 'deprecation-test',
       until: '3.0.0',
+      for: 'ember-qunit-tests',
+      since: {
+        available: '6.1.0',
+        enabled: '6.1.0',
+      },
     });
 
     mockAssert.expectDeprecation(/Something deprecated/);
@@ -157,6 +202,11 @@ module('expectDeprecation', function (hooks) {
           options: {
             id: 'deprecation-test',
             until: '3.0.0',
+            for: 'ember-qunit-tests',
+            since: {
+              available: '6.1.0',
+              enabled: '6.1.0',
+            },
           },
         },
       ],
@@ -171,6 +221,11 @@ module('expectDeprecation', function (hooks) {
     deprecate('Something deprecated', false, {
       id: 'deprecation-test',
       until: '3.0.0',
+      for: 'ember-qunit-tests',
+      since: {
+        available: '6.1.0',
+        enabled: '6.1.0',
+      },
     });
 
     mockAssert.expectDeprecation(/different deprecation/);
@@ -188,6 +243,11 @@ module('expectDeprecation', function (hooks) {
       deprecate('Something deprecated', false, {
         id: 'deprecation-test',
         until: '3.0.0',
+        for: 'ember-qunit-tests',
+        since: {
+          available: '6.1.0',
+          enabled: '6.1.0',
+        },
       });
     }, /Something deprecated/);
 
@@ -198,6 +258,11 @@ module('expectDeprecation', function (hooks) {
           options: {
             id: 'deprecation-test',
             until: '3.0.0',
+            for: 'ember-qunit-tests',
+            since: {
+              available: '6.1.0',
+              enabled: '6.1.0',
+            },
           },
         },
       ],
@@ -213,6 +278,11 @@ module('expectDeprecation', function (hooks) {
       deprecate('Something deprecated', false, {
         id: 'deprecation-test',
         until: '3.0.0',
+        for: 'ember-qunit-tests',
+        since: {
+          available: '6.1.0',
+          enabled: '6.1.0',
+        },
       });
     }, /different deprecation/);
 
@@ -230,12 +300,22 @@ module('expectDeprecation', function (hooks) {
       deprecate('Something deprecated', false, {
         id: 'deprecation-test',
         until: '3.0.0',
+        for: 'ember-qunit-tests',
+        since: {
+          available: '6.1.0',
+          enabled: '6.1.0',
+        },
       });
     }, /Somethi[a-z ]*ecated/);
     mockAssert.expectDeprecation(() => {
       deprecate('/Something* deprecated/', false, {
         id: 'deprecation-test',
         until: '3.0.0',
+        for: 'ember-qunit-tests',
+        since: {
+          available: '6.1.0',
+          enabled: '6.1.0',
+        },
       });
     }, /Something* deprecated/);
 
@@ -254,6 +334,11 @@ module('expectDeprecation', function (hooks) {
       deprecate('Something deprecated', false, {
         id: 'deprecation-test',
         until: '3.0.0',
+        for: 'ember-qunit-tests',
+        since: {
+          available: '6.1.0',
+          enabled: '6.1.0',
+        },
       });
     }, 'Something');
 
@@ -261,6 +346,11 @@ module('expectDeprecation', function (hooks) {
       deprecate('Something deprecated', false, {
         id: 'deprecation-test',
         until: '3.0.0',
+        for: 'ember-qunit-tests',
+        since: {
+          available: '6.1.0',
+          enabled: '6.1.0',
+        },
       });
     }, 'Something.*');
 
@@ -306,6 +396,11 @@ module('expectNoDeprecation', function (hooks) {
     deprecate('Something deprecated', false, {
       id: 'deprecation-test',
       until: '3.0.0',
+      for: 'ember-qunit-tests',
+      since: {
+        available: '6.1.0',
+        enabled: '6.1.0',
+      },
     });
 
     mockAssert.expectNoDeprecation();
@@ -316,6 +411,11 @@ module('expectNoDeprecation', function (hooks) {
           options: {
             id: 'deprecation-test',
             until: '3.0.0',
+            for: 'ember-qunit-tests',
+            since: {
+              available: '6.1.0',
+              enabled: '6.1.0',
+            },
           },
         },
       ],
@@ -331,6 +431,11 @@ module('expectNoDeprecation', function (hooks) {
       deprecate('Something deprecated', false, {
         id: 'deprecation-test',
         until: '3.0.0',
+        for: 'ember-qunit-tests',
+        since: {
+          available: '6.1.0',
+          enabled: '6.1.0',
+        },
       });
     });
 
@@ -341,6 +446,11 @@ module('expectNoDeprecation', function (hooks) {
           options: {
             id: 'deprecation-test',
             until: '3.0.0',
+            for: 'ember-qunit-tests',
+            since: {
+              available: '6.1.0',
+              enabled: '6.1.0',
+            },
           },
         },
       ],
@@ -368,6 +478,11 @@ module('expectNoDeprecation', function (hooks) {
       deprecate('Something deprecated', false, {
         id: 'deprecation-test',
         until: '3.0.0',
+        for: 'ember-qunit-tests',
+        since: {
+          available: '6.1.0',
+          enabled: '6.1.0',
+        },
       });
     });
 
@@ -378,6 +493,11 @@ module('expectNoDeprecation', function (hooks) {
           options: {
             id: 'deprecation-test',
             until: '3.0.0',
+            for: 'ember-qunit-tests',
+            since: {
+              available: '6.1.0',
+              enabled: '6.1.0',
+            },
           },
         },
       ],
@@ -397,6 +517,11 @@ module('expectNoDeprecation', function (hooks) {
           options: {
             id: 'deprecation-test',
             until: '3.0.0',
+            for: 'ember-qunit-tests',
+            since: {
+              available: '6.1.0',
+              enabled: '6.1.0',
+            },
           },
         },
       ],
