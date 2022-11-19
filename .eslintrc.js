@@ -4,10 +4,11 @@ module.exports = {
   root: true,
   extends: ['eslint:recommended', 'plugin:prettier/recommended'],
   plugins: ['prettier'],
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaVersion: 2017,
     sourceType: 'module',
+    requireConfigFile: false, // allow @babel/eslint-parser to run on files that do not have a Babel configuration associated with them
   },
   env: {
     browser: true,
