@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import * as QUnit from 'qunit';
-import hasEmberVersion from '@ember/test-helpers/has-ember-version';
+import { hasEmberVersion } from '@ember/test-helpers';
 
 function unhandledRejectionAssertion(current, error) {
   let message, source;
