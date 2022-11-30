@@ -2,4 +2,5 @@
 
 module.exports = {
   singleQuote: true,
+  extends: 'recommended',
 };

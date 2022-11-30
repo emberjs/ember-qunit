@@ -4,7 +4,7 @@
 const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function (defaults) {
-  let app = new EmberAddon(defaults, {
+  const app = new EmberAddon(defaults, {
     eslint: {
       testGenerator: 'qunit',
     },
@@ -27,6 +27,11 @@ module.exports = function (defaults) {
             safeToIgnore: true,
           },
         },
+      },
+    ],
+    skipBabel: [
+      {
+        package: 'qunit',
       },
     ],
   });

@@ -17,9 +17,9 @@ helpers contained in
 Requirements
 ------------------------------------------------------------------------------
 
-- Node.js 14 or above
-- Ember 3.24 or above
-- Ember CLI 3.8 or above
+* Ember.js v3.28 or above
+* Ember CLI v3.28 or above
+* Node.js v14 or above
 
 If you need support for Node 13 or older Ember CLI versions please use v4.x
 of this addon.
