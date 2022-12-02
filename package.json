@@ -31,7 +31,9 @@
     "start": "ember serve",
     "test": "npm-run-all --print-name \"lint\" \"test:*\"",
     "test:ember": "ember test",
-    "test:ember-compatibility": "ember try:each"
+    "test:ember-compatibility": "ember try:each",
+    "prepack": "ember ts:precompile",
+    "postpack": "ember ts:clean"
   },
   "dependencies": {
     "broccoli-funnel": "^3.0.8",
@@ -40,6 +42,7 @@
     "ember-auto-import": "^2.4.3",
     "ember-cli-babel": "^7.26.11",
     "ember-cli-test-loader": "^3.0.0",
+    "ember-cli-typescript": "^5.2.1",
     "resolve-package-path": "^4.0.3",
     "silent-error": "^1.1.1",
     "validate-peer-dependencies": "^2.1.0"
@@ -48,10 +51,10 @@
     "@babel/core": "^7.20.2",
     "@babel/eslint-parser": "^7.19.1",
     "@ember/optional-features": "^2.0.0",
-    "@ember/test-helpers": "file:../ember-test-helpers",
+    "@ember/test-helpers": "file:.yalc/@ember/test-helpers",
     "@embroider/test-setup": "^1.8.3",
     "@glimmer/component": "^1.1.2",
-    "@tsconfig/ember": "^1.0.1",
+    "@tsconfig/ember": "^1.1.0",
     "@types/qunit": "^2.19.3",
     "@types/rsvp": "^4.0.4",
     "ember-angle-bracket-invocation-polyfill": "^3.0.2",
@@ -77,6 +80,7 @@
     "qunit": "^2.19.2",
     "release-it": "^15.5.0",
     "release-it-lerna-changelog": "^5.0.0",
+    "typescript": "^4.9.3",
     "webpack": "^5.74.0"
   },
   "peerDependencies": {
