@@ -1,3 +1,5 @@
+// @ts-nocheck FIXME: Remove
+
 /* eslint-disable no-console */
 import * as QUnit from 'qunit';
 import { _cancelTimers as cancelTimers } from '@ember/runloop';

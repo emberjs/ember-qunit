@@ -38,5 +38,8 @@
     "types/**/*",
     "test-support/**/*",
     "addon-test-support/**/*"
-  ]
+  ],
+
+  // FIXME: Remove
+  "noEmitOnError": false,
 }

@@ -1,3 +1,5 @@
+// @ts-nocheck FIXME: Remove
+
 import Ember from 'ember';
 import * as QUnit from 'qunit';
 import { hasEmberVersion } from '@ember/test-helpers';

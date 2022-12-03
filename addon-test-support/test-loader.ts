@@ -1,3 +1,5 @@
+// @ts-nocheck FIXME: Remove
+
 import * as QUnit from 'qunit';
 import AbstractTestLoader, {
   addModuleExcludeMatcher,

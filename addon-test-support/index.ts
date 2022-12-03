@@ -1,3 +1,5 @@
+// @ts-nocheck FIXME: Remove
+
 /* globals Testem */
 
 export { default as QUnitAdapter, nonTestDoneCallback } from './adapter';
