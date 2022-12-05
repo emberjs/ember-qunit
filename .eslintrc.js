@@ -45,6 +45,35 @@ module.exports = {
       extends: ['plugin:node/recommended'],
     },
 
+    // ts files
+    {
+      files: ['**/*.ts'],
+      extends: [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:@typescript-eslint/recommended-requiring-type-checking',
+        'plugin:@typescript-eslint/strict',
+      ],
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        tsconfigRootDir: __dirname,
+        project: ['./tsconfig.json'],
+      },
+      plugins: ['@typescript-eslint'],
+      rules: {
+        '@typescript-eslint/consistent-type-exports': 'error',
+        '@typescript-eslint/consistent-type-imports': 'error',
+        '@typescript-eslint/explicit-function-return-type': 'error',
+        '@typescript-eslint/method-signature-style': 'error',
+        '@typescript-eslint/no-confusing-void-expression': 'error',
+        '@typescript-eslint/no-redundant-type-constituents': 'error',
+        '@typescript-eslint/prefer-enum-initializers': 'error',
+        '@typescript-eslint/prefer-readonly': 'error',
+        '@typescript-eslint/prefer-readonly-parameter-types': 'error',
+        '@typescript-eslint/promise-function-async': 'error',
+      },
+    },
+
     // test files
     {
       files: ['tests/**/*.js'],

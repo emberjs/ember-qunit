@@ -59,6 +59,8 @@
     "@tsconfig/ember": "^2.0.0",
     "@types/qunit": "^2.19.4",
     "@types/rsvp": "^4.0.4",
+    "@typescript-eslint/eslint-plugin": "^5.45.1",
+    "@typescript-eslint/parser": "^5.45.1",
     "ember-angle-bracket-invocation-polyfill": "^3.0.2",
     "ember-cli": "~4.10.0",
     "ember-cli-dependency-checker": "^3.3.1",
@@ -131,5 +133,12 @@
   "volta": {
     "node": "14.19.1",
     "yarn": "1.22.18"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "test-support/*"
+      ]
+    }
   }
 }
