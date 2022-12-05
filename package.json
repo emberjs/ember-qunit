@@ -28,6 +28,7 @@
     "lint:fix": "npm-run-all --print-name --aggregate-output --continue-on-error --parallel \"lint:*:fix\"",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
+    "lint:ts": "tsc --noEmit",
     "start": "ember serve",
     "test": "npm-run-all --print-name \"lint\" \"test:*\"",
     "test:types": "tsc --noEmit --project types",
