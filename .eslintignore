@@ -15,6 +15,8 @@
 !.*
 .*/
 .eslintcache
+/.yalc*
+/yalc.lock
 
 # ember-try
 /.node_modules.ember-try/
