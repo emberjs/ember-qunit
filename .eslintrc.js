@@ -61,6 +61,7 @@ module.exports = {
       },
       plugins: ['@typescript-eslint'],
       rules: {
+        '@typescript-eslint/array-type': ['error', { default: 'array-simple' }],
         '@typescript-eslint/consistent-type-exports': 'error',
         '@typescript-eslint/consistent-type-imports': 'error',
         '@typescript-eslint/explicit-function-return-type': 'error',
@@ -69,7 +70,6 @@ module.exports = {
         '@typescript-eslint/no-redundant-type-constituents': 'error',
         '@typescript-eslint/prefer-enum-initializers': 'error',
         '@typescript-eslint/prefer-readonly': 'error',
-        '@typescript-eslint/prefer-readonly-parameter-types': 'error',
         '@typescript-eslint/promise-function-async': 'error',
       },
     },

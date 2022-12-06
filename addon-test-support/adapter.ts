@@ -1,61 +1,84 @@
-import Ember from 'ember';
-import * as QUnit from 'qunit';
+// FIXME: Remove
+import 'ember-source/types';
+import 'ember-source/types/preview';
+
 import hasEmberVersion from '@ember/test-helpers/has-ember-version';
+import Ember from 'ember';
+import { isRecord, isTest } from 'ember-qunit/test-support/types/util';
+import * as QUnit from 'qunit';
 
-function unhandledRejectionAssertion(current, error) {
-  let message, source;
+function unhandledRejectionAssertion(current: unknown, error: unknown): void {
+  let message: string;
+  let source: string | undefined;
 
-  if (typeof error === 'object' && error !== null) {
-    message = error.message;
-    source = error.stack;
+  if (
+    isRecord(error) &&
+    'message' in error &&
+    typeof error['message'] === 'string'
+  ) {
+    message = error['message'];
+    source = typeof error['stack'] === 'string' ? error['stack'] : undefined;
   } else if (typeof error === 'string') {
     message = error;
     source = 'unknown source';
   } else {
-    message = 'unhandledRejection occured, but it had no message';
+    message = 'unhandledRejection occurred, but it had no message';
     source = 'unknown source';
   }
 
-  current.assert.pushResult({
-    result: false,
-    actual: false,
-    expected: true,
-    message: message,
-    source: source,
-  });
+  if (isTest(current)) {
+    current.assert?.pushResult({
+      result: false,
+      actual: false,
+      expected: true,
+      message: message,
+      // @ts-expect-error FIXME: Update qunit type https://github.com/qunitjs/qunit/blob/fc278e8c0d7e90ec42e47b47eee1cc85c9a9efaf/docs/callbacks/QUnit.log.md?plain=1#L32
+      source,
+    });
+  }
 }
 
-export function nonTestDoneCallback() {}
+export function nonTestDoneCallback(): void {
+  // no-op
+}
 
+// FIXME: What is Ember.Test.QUnitAdapter?
+interface QUnitAdapter {
+  doneCallbacks: Array<{ test: unknown; done: () => void }>;
+  qunit: QUnit;
+}
+
+// @ts-expect-error FIXME `extend` does not exist on Adapter
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 let Adapter = Ember.Test.Adapter.extend({
-  init() {
+  init(this: QUnitAdapter) {
     this.doneCallbacks = [];
-    this.qunit = this.qunit || QUnit;
+    this.qunit ??= QUnit;
   },
 
-  asyncStart() {
-    let currentTest = this.qunit.config.current;
-    let done =
-      currentTest && currentTest.assert
+  asyncStart(this: QUnitAdapter) {
+    const currentTest: unknown = this.qunit.config.current;
+    const done =
+      isTest(currentTest) && currentTest.assert
         ? currentTest.assert.async()
         : nonTestDoneCallback;
     this.doneCallbacks.push({ test: currentTest, done });
   },
 
-  asyncEnd() {
-    let currentTest = this.qunit.config.current;
+  asyncEnd(this: QUnitAdapter) {
+    const currentCallback = this.doneCallbacks.pop();
 
-    if (this.doneCallbacks.length === 0) {
+    if (!currentCallback) {
       throw new Error(
         'Adapter asyncEnd called when no async was expected. Please create an issue in ember-qunit.'
       );
     }
 
-    let { test, done } = this.doneCallbacks.pop();
+    const { test, done } = currentCallback;
 
     // In future, we should explore fixing this at a different level, specifically
     // addressing the pairing of asyncStart/asyncEnd behavior in a more consistent way.
-    if (test === currentTest) {
+    if (test === this.qunit.config.current) {
       done();
     }
   },
@@ -63,18 +86,20 @@ let Adapter = Ember.Test.Adapter.extend({
   // clobber default implementation of `exception` will be added back for Ember
   // < 2.17 just below...
   exception: null,
-});
+}) as QUnitAdapter;
 
 // Ember 2.17 and higher do not require the test adapter to have an `exception`
 // method When `exception` is not present, the unhandled rejection is
 // automatically re-thrown and will therefore hit QUnit's own global error
 // handler (therefore appropriately causing test failure)
 if (!hasEmberVersion(2, 17)) {
+  // @ts-expect-error FIXME `extend` does not exist on Adapter
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   Adapter = Adapter.extend({
-    exception(error) {
-      unhandledRejectionAssertion(QUnit.config.current, error);
+    exception(error: unknown) {
+      unhandledRejectionAssertion(QUnit.config.current as unknown, error);
     },
-  });
+  }) as QUnitAdapter;
 }
 
 export default Adapter;
