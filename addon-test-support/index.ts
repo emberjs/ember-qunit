@@ -26,7 +26,7 @@ import { installTestNotIsolatedHook } from './test-isolation-validation';
 
 let waitForSettled = true;
 
-export function setupTest(hooks, _options) {
+export function setupTest(hooks: NestedHooks, _options) {
   let options = { waitForSettled, ..._options };
 
   hooks.beforeEach(function (assert) {

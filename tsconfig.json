@@ -1,0 +1,14 @@
+{
+  "extends": "@tsconfig/ember/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "ember-qunit": [
+        "./addon-test-support"
+      ],
+      "*": [
+        "types/*"
+      ]
+    }
+  }
+}

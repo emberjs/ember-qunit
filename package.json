@@ -45,6 +45,10 @@
     "@ember/optional-features": "^2.0.0",
     "@ember/test-helpers": "^2.8.1",
     "@embroider/test-setup": "^1.8.3",
+    "@tsconfig/ember": "^1.0.1",
+    "@types/ember__runloop": "^4.0.1",
+    "@types/ember__test-helpers": "^2.8.1",
+    "@types/qunit": "^2.19.3",
     "babel-eslint": "^10.1.0",
     "ember-angle-bracket-invocation-polyfill": "^3.0.2",
     "ember-cli": "~4.7.0",
@@ -68,6 +72,7 @@
     "qunit": "^2.19.1",
     "release-it": "^15.5.0",
     "release-it-lerna-changelog": "^5.0.0",
+    "typescript": "^4.8.4",
     "webpack": "^5.74.0"
   },
   "peerDependencies": {
