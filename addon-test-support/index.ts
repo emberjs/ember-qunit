@@ -5,71 +5,97 @@ export { loadTests } from './test-loader';
 
 import './qunit-configuration';
 
+// @ts-expect-error FIXME
 if (typeof Testem !== 'undefined') {
+  // @ts-expect-error FIXME
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
   Testem.hookIntoTestFramework();
 }
 
 import { _backburner } from '@ember/runloop';
-import { resetOnerror, getTestMetadata } from '@ember/test-helpers';
-import { loadTests } from './test-loader';
-import Ember from 'ember';
-import * as QUnit from 'qunit';
-import QUnitAdapter from './adapter';
+import type { BaseContext, TestContext } from '@ember/test-helpers';
 import {
-  setupContext,
-  teardownContext,
-  setupRenderingContext,
+  getTestMetadata,
+  resetOnerror,
   setupApplicationContext,
+  setupContext,
+  setupRenderingContext,
+  teardownContext,
   validateErrorHandler,
 } from '@ember/test-helpers';
+import Ember from 'ember';
+
+import * as QUnit from 'qunit';
+
+import QUnitAdapter from './adapter';
 import { installTestNotIsolatedHook } from './test-isolation-validation';
+import { loadTests } from './test-loader';
 
 let waitForSettled = true;
 
-export function setupTest(hooks, _options) {
-  let options = { waitForSettled, ..._options };
+export type SetupOptions = Parameters<typeof setupContext>[1];
 
-  hooks.beforeEach(function (assert) {
-    let testMetadata = getTestMetadata(this);
-    testMetadata.framework = 'qunit';
+type PrivateSetupOptions = SetupOptions & {
+  waitForSettled?: boolean;
+};
 
-    return setupContext(this, options).then(() => {
-      let originalPauseTest = this.pauseTest;
-      this.pauseTest = function QUnit_pauseTest() {
+export function setupTest(hooks: GlobalHooks, _options: SetupOptions): void {
+  const options: PrivateSetupOptions = { waitForSettled, ..._options };
+
+  hooks.beforeEach(async function (
+    this: BaseContext,
+    assert: Assert
+  ): Promise<void> {
+    const testMetadata = getTestMetadata(this);
+    testMetadata['framework'] = 'qunit';
+
+    await setupContext(this, options);
+
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    const originalPauseTest = (this as TestContext).pauseTest;
+    (this as TestContext).pauseTest =
+      async function QUnit_pauseTest(): Promise<void> {
         assert.timeout(-1); // prevent the test from timing out
 
         // This is a temporary work around for
         // https://github.com/emberjs/ember-qunit/issues/496 this clears the
         // timeout that would fail the test when it hits the global testTimeout
         // value.
+        // @ts-expect-error FIXME
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         clearTimeout(QUnit.config.timeout);
-        return originalPauseTest.call(this);
+        await originalPauseTest.call(this);
       };
-    });
   });
 
-  hooks.afterEach(function () {
-    return teardownContext(this, options);
-  });
-}
-
-export function setupRenderingTest(hooks, _options) {
-  let options = { waitForSettled, ..._options };
-
-  setupTest(hooks, options);
-
-  hooks.beforeEach(function () {
-    return setupRenderingContext(this);
+  hooks.afterEach(async function (this: TestContext): Promise<void> {
+    await teardownContext(this, options);
   });
 }
 
-export function setupApplicationTest(hooks, _options) {
-  let options = { waitForSettled, ..._options };
+export function setupRenderingTest(
+  hooks: GlobalHooks,
+  _options: SetupOptions
+): void {
+  const options: PrivateSetupOptions = { waitForSettled, ..._options };
 
   setupTest(hooks, options);
 
-  hooks.beforeEach(function () {
-    return setupApplicationContext(this);
+  hooks.beforeEach(async function (this: TestContext) {
+    await setupRenderingContext(this);
+  });
+}
+
+export function setupApplicationTest(
+  hooks: GlobalHooks,
+  _options: SetupOptions
+): void {
+  const options: PrivateSetupOptions = { waitForSettled, ..._options };
+
+  setupTest(hooks, options);
+
+  hooks.beforeEach(async function (this: TestContext) {
+    await setupApplicationContext(this);
   });
 }
 
@@ -82,19 +108,21 @@ export function setupApplicationTest(hooks, _options) {
 
    @method setupTestContainer
  */
-export function setupTestContainer() {
-  let testContainer = document.getElementById('ember-testing-container');
+export function setupTestContainer(): void {
+  const testContainer = document.getElementById('ember-testing-container');
   if (!testContainer) {
     return;
   }
 
-  let params = QUnit.urlParams;
+  // @ts-expect-error FIXME
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const params: Record<string, unknown> = QUnit.urlParams;
 
-  if (params.devmode || params.fullscreencontainer) {
+  if (params['devmode'] || params['fullscreencontainer']) {
     testContainer.classList.add('ember-testing-container-full-screen');
   }
 
-  if (params.nocontainer) {
+  if (params['nocontainer']) {
     testContainer.classList.add('ember-testing-container-hidden');
   }
 }
@@ -103,7 +131,7 @@ export function setupTestContainer() {
    Instruct QUnit to start the tests.
    @method startTests
  */
-export function startTests() {
+export function startTests(): void {
   QUnit.start();
 }
 
@@ -112,8 +140,10 @@ export function startTests() {
 
    @method setupTestAdapter
  */
-export function setupTestAdapter() {
-  Ember.Test.adapter = QUnitAdapter.create();
+export function setupTestAdapter(): void {
+  // @ts-expect-error FIXME
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  Ember.Test.adapter = QUnitAdapter.create() as typeof QUnitAdapter;
 }
 
 /**
@@ -122,12 +152,14 @@ export function setupTestAdapter() {
   completed. This is done via `QUnit.testStart` and `QUnit.testDone`.
 
  */
-export function setupEmberTesting() {
+export function setupEmberTesting(): void {
   QUnit.testStart(() => {
+    // @ts-expect-error FIXME
     Ember.testing = true;
   });
 
   QUnit.testDone(() => {
+    // @ts-expect-error FIXME
     Ember.testing = false;
   });
 }
@@ -136,11 +168,11 @@ export function setupEmberTesting() {
   Ensures that `Ember.onerror` (if present) is properly configured to re-throw
   errors that occur while `Ember.testing` is `true`.
 */
-export function setupEmberOnerrorValidation() {
+export function setupEmberOnerrorValidation(): void {
   QUnit.module('ember-qunit: Ember.onerror validation', function () {
     QUnit.test('Ember.onerror is functioning properly', function (assert) {
       assert.expect(1);
-      let result = validateErrorHandler();
+      const result = validateErrorHandler();
       assert.ok(
         result.isValid,
         `Ember.onerror handler with invalid testing behavior detected. An Ember.onerror handler _must_ rethrow exceptions when \`Ember.testing\` is \`true\` or the test suite is unreliable. See https://git.io/vbine for more details.`
@@ -149,14 +181,29 @@ export function setupEmberOnerrorValidation() {
   });
 }
 
-export function setupResetOnerror() {
+export function setupResetOnerror(): void {
   QUnit.testDone(resetOnerror);
 }
 
-export function setupTestIsolationValidation(delay) {
+export function setupTestIsolationValidation(delay?: number | undefined): void {
   waitForSettled = false;
   _backburner.DEBUG = true;
-  QUnit.on('testStart', () => installTestNotIsolatedHook(delay));
+  // @ts-expect-error FIXME
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  QUnit.on('testStart', () => {
+    installTestNotIsolatedHook(delay);
+  });
+}
+
+export interface StartOptions {
+  loadTests?: boolean;
+  setupTestContainer?: boolean;
+  startTests?: boolean;
+  setupTestAdapter?: boolean;
+  setupEmberTesting?: boolean;
+  setupEmberOnerrorValidation?: boolean;
+  setupTestIsolationValidation?: boolean;
+  testIsolationValidationDelay?: number;
 }
 
 /**
@@ -181,7 +228,7 @@ export function setupTestIsolationValidation(delay) {
    time in milliseconds that is allowed _after_ the test is completed for all
    async to have been completed. The default value is 50.
  */
-export function start(options = {}) {
+export function start(options: StartOptions = {}): void {
   if (options.loadTests !== false) {
     loadTests();
   }
@@ -203,7 +250,7 @@ export function start(options = {}) {
   }
 
   if (
-    typeof options.setupTestIsolationValidation !== 'undefined' &&
+    typeof options.testIsolationValidationDelay !== 'undefined' &&
     options.setupTestIsolationValidation !== false
   ) {
     setupTestIsolationValidation(options.testIsolationValidationDelay);
