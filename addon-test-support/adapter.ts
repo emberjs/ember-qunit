@@ -2,10 +2,13 @@
 import 'ember-source/types';
 import 'ember-source/types/preview';
 
+import { assert } from '@ember/debug';
 import hasEmberVersion from '@ember/test-helpers/has-ember-version';
 import Ember from 'ember';
-import { isRecord, isTest } from 'ember-qunit/test-support/types/util';
+
 import * as QUnit from 'qunit';
+
+import { isRecord, isTest } from 'ember-qunit/test-support/types/util';
 
 function unhandledRejectionAssertion(current: unknown, error: unknown): void {
   let message: string;
@@ -26,16 +29,18 @@ function unhandledRejectionAssertion(current: unknown, error: unknown): void {
     source = 'unknown source';
   }
 
-  if (isTest(current)) {
-    current.assert?.pushResult({
-      result: false,
-      actual: false,
-      expected: true,
-      message: message,
-      // @ts-expect-error FIXME: Update qunit type https://github.com/qunitjs/qunit/blob/fc278e8c0d7e90ec42e47b47eee1cc85c9a9efaf/docs/callbacks/QUnit.log.md?plain=1#L32
-      source,
-    });
-  }
+  assert(
+    'expected current test to have an assert',
+    isTest(current) && 'assert' in current
+  );
+  current.assert.pushResult({
+    result: false,
+    actual: false,
+    expected: true,
+    message: message,
+    // @ts-expect-error FIXME: Update qunit type https://github.com/qunitjs/qunit/blob/fc278e8c0d7e90ec42e47b47eee1cc85c9a9efaf/docs/callbacks/QUnit.log.md?plain=1#L32
+    source,
+  });
 }
 
 export function nonTestDoneCallback(): void {
@@ -59,7 +64,7 @@ let Adapter = Ember.Test.Adapter.extend({
   asyncStart(this: QUnitAdapter) {
     const currentTest: unknown = this.qunit.config.current;
     const done =
-      isTest(currentTest) && currentTest.assert
+      isTest(currentTest) && 'assert' in currentTest
         ? currentTest.assert.async()
         : nonTestDoneCallback;
     this.doneCallbacks.push({ test: currentTest, done });
@@ -97,7 +102,8 @@ if (!hasEmberVersion(2, 17)) {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   Adapter = Adapter.extend({
     exception(error: unknown) {
-      unhandledRejectionAssertion(QUnit.config.current as unknown, error);
+      const currentTest: unknown = QUnit.config.current;
+      unhandledRejectionAssertion(currentTest, error);
     },
   }) as QUnitAdapter;
 }
