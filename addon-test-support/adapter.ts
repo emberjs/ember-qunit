@@ -1,7 +1,3 @@
-// FIXME: Remove
-import 'ember-source/types';
-import 'ember-source/types/preview';
-
 import { assert } from '@ember/debug';
 import hasEmberVersion from '@ember/test-helpers/has-ember-version';
 import Ember from 'ember';
