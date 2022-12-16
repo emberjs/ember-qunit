@@ -1,0 +1,11 @@
+{
+  "extends": "@tsconfig/ember",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "ember-qunit": [
+        "./index.d.ts"
+      ],
+    }
+  }
+}

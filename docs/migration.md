@@ -2,6 +2,52 @@
 Migration Guide
 ==============================================================================
 
+Migrating to native TypeScript support in v6.1.0
+------------------------------------------------------------------------------
+
+The types for the QUnit `TestContext` provided by the `ember-qunit` and `@ember/test-helpers` types on DefinitelyTyped made a choice to prioritize convenience over robustness when it came to what methods and values were available on `this` in any given test: they made *all* methods availabe regardless of what your setup actually involved. For example, this totally invalid code would have passed the type checker:
+
+```ts
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
+import { hbs } from 'ember-cli-htmlbars';
+
+module('bad times', function (hooks) {
+  setupTest(hooks);
+
+  test('this will not *run* correctly', async function (assert) {
+    await this.render(hbs`<p>whoopsie</p>`);
+  });
+})
+```
+
+To resolve this, you need to explicitly specify what `this` is for different kinds of tests:
+
+```ts
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
+import type { RenderingTextContext } from '@ember/test-helpers';
+import { hbs } from 'ember-cli-htmlbars';
+
+module('better times', function (hooks) {
+  setupTest(hooks);
+
+  test(
+    'this will not *run* correctly',
+    async function (this: RenderingTextContext, assert) {
+      await this.render(hbs`<p>whoopsie</p>`);
+    }
+  );
+})
+```
+
+While annoying, this is accurate and prevents the annoying mismatch. Combined with support for using local scope with `<template>` (see [Ember RFC 0785][rfc-0785]), available since v2.8 of `@ember/test-helpers`, the need to specify the `this` will go away entirely over time.
+
+[rfc-0785]: https://rfcs.emberjs.com/id/0785-remove-set-get-in-tests
+
+To use these public types, you also will need to add `@glimmer/interfaces` and `@glimmer/reference` to your `devDependencies`, since of `@ember/test-helpers` uses them (indirectly) in its public APIs, and `ember-qunit` uses `@ember/test-helpers` in turn.
+
+
 Upgrading from v4.x to v5.0.0
 ------------------------------------------------------------------------------
 
