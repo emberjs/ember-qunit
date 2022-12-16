@@ -1,4 +1,21 @@
+## v6.1.0 (2022-12-16)
 
+#### :rocket: Enhancement
+* [#995](https://github.com/emberjs/ember-qunit/pull/995) Feature: introduce native (ambient) TS types ([@chriskrycho](https://github.com/chriskrycho))
+
+#### :house: Internal
+* [#979](https://github.com/emberjs/ember-qunit/pull/979) Re-roll `yarn.lock` ([@rwjblue](https://github.com/rwjblue))
+* [#978](https://github.com/emberjs/ember-qunit/pull/978) Update `lint` related scripts (add `lint:fix`) ([@rwjblue](https://github.com/rwjblue))
+* [#977](https://github.com/emberjs/ember-qunit/pull/977) Ensure CI jobs timeout after 10 minutes ([@rwjblue](https://github.com/rwjblue))
+* [#976](https://github.com/emberjs/ember-qunit/pull/976) Add Ember 4.8 to CI matrix ([@rwjblue](https://github.com/rwjblue))
+* [#975](https://github.com/emberjs/ember-qunit/pull/975) Cancel prior CI jobs for same PR ([@rwjblue](https://github.com/rwjblue))
+* [#973](https://github.com/emberjs/ember-qunit/pull/973) Bump github actions ([@ctjhoa](https://github.com/ctjhoa))
+
+#### Committers: 4
+- Camille TJHOA ([@ctjhoa](https://github.com/ctjhoa))
+- Chris Krycho ([@chriskrycho](https://github.com/chriskrycho))
+- Krystan HuffMenne ([@gitKrystan](https://github.com/gitKrystan))
+- Robert Jackson ([@rwjblue](https://github.com/rwjblue))
 
 ## v6.0.0 (2022-10-07)
 
