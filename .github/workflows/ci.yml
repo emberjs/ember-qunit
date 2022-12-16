@@ -86,4 +86,4 @@ jobs:
       - name: install TS version
         run: yarn install --dev typescript@${{matrix.ts-version}}
       - name: test types
-        run: yarn test:ts
+        run: yarn test:types
