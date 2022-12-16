@@ -64,3 +64,26 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: test
         run: node_modules/.bin/ember try:one ${{ matrix.ember-try-scenario }} --skip-cleanup
+
+  types:
+    runs-on: ubuntu-latest
+
+    needs: test
+
+    strategy:
+      fail-fast: false
+      matrix:
+        ts-version:
+          - 4.8
+          - 4.9
+          - next
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: volta-cli/action@v4
+      - name: install dependencies
+        run: yarn install --frozen-lockfile
+      - name: install TS version
+        run: yarn install --dev typescript@${{matrix.ts-version}}
+      - name: test types
+        run: yarn test:types

@@ -20,6 +20,9 @@ Requirements
 * Ember.js v3.28 or above
 * Ember CLI v3.28 or above
 * Node.js v14 or above
+- TypeScript 4.8 and 4.9
+  - SemVer policy: [simple majors](https://www.semver-ts.org/#simple-majors)
+  - The public API is defined by the [Usage][#usage] section below.
 
 If you need support for Node 13 or older Ember CLI versions please use v4.x
 of this addon.
