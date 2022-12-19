@@ -55,6 +55,7 @@
     "@glimmer/interfaces": "^0.84.2",
     "@glimmer/reference": "^0.84.2",
     "@tsconfig/ember": "^1.1.0",
+    "@types/ember-resolver": "^5.0.13",
     "@types/qunit": "^2.19.3",
     "@types/rsvp": "^4.0.4",
     "ember-angle-bracket-invocation-polyfill": "^3.0.2",
@@ -85,35 +86,8 @@
     "webpack": "^5.75.0"
   },
   "peerDependencies": {
-    "@ember/test-helpers": "^2.4.0",
-    "@glimmer/interfaces": "^0.84.2",
-    "@glimmer/reference": "^0.84.2",
-    "@types/ember-resolver": "^5.0.13",
-    "@types/ember__test": "^4.0.1",
-    "@types/ember__test-helpers": "^2.8.2",
-    "@types/rsvp": "^4.0.4",
     "ember-source": "^3.28 || ^4.0",
     "qunit": "^2.13.0"
-  },
-  "peerDependenciesMeta": {
-    "@types/ember__test": {
-      "optional": true
-    },
-    "@types/ember-resolver": {
-      "optional": true
-    },
-    "@types/ember__test-helpers": {
-      "optional": true
-    },
-    "@types/rsvp": {
-      "optional": true
-    },
-    "@glimmer/interfaces": {
-      "optional": true
-    },
-    "@glimmer/reference": {
-      "optional": true
-    }
   },
   "engines": {
     "node": "14.* || 16.* || >= 18"
