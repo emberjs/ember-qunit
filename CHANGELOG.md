@@ -1,3 +1,13 @@
+
+## v6.1.1 (2022-12-19)
+
+#### :bug: Bug Fix
+* [#999](https://github.com/emberjs/ember-qunit/pull/999) Use native types from `ember-resolver` ([@chriskrycho](https://github.com/chriskrycho))
+* [#998](https://github.com/emberjs/ember-qunit/pull/998) Revert explicit `peerDependencies` contracts ([@chriskrycho](https://github.com/chriskrycho))
+
+#### Committers: 1
+- Chris Krycho ([@chriskrycho](https://github.com/chriskrycho))
+
 ## v6.1.0 (2022-12-16)
 
 #### :rocket: Enhancement
