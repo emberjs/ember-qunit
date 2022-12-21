@@ -41,8 +41,6 @@ module('rendering', function (hooks) {
     this.render();
     // @ts-expect-error
     this.render('{{ x-foo value=value action="result" }}');
-    // @ts-expect-error
-    this.render(['{{ x-foo value=value action="result" }}']);
 
     const el = this.element.querySelector('div');
     assert.equal(el?.innerText, 'cat', 'The component shows the correct value');

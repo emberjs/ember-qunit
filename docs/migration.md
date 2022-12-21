@@ -4,49 +4,65 @@ Migration Guide
 
 Migrating to native TypeScript support in v6.1.0
 ------------------------------------------------------------------------------
+The types for the QUnit `TestContext` provided by the `ember-qunit` and `@ember/test-helpers` types on DefinitelyTyped made a choice to prioritize convenience over robustness when it came to what methods and values were available on `this` in any given test: they made _all_ methods availabe regardless of what your setup actually involved.
 
-The types for the QUnit `TestContext` provided by the `ember-qunit` and `@ember/test-helpers` types on DefinitelyTyped made a choice to prioritize convenience over robustness when it came to what methods and values were available on `this` in any given test: they made *all* methods availabe regardless of what your setup actually involved. For example, this totally invalid code would have passed the type checker:
+If your tests rely on properties of `this` that aren't actually available in all test contexts, like `this.render` or `this.element`, those tests will now produce type errors.
+
+For example, with the 6.1 native types, this test would produce a type error on the line where `this.element` is referenced:
 
 ```ts
 import { module, test } from 'qunit';
-import { setupTest } from 'ember-qunit';
+import { setupRenderingTest } from 'ember-qunit';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('bad times', function (hooks) {
-  setupTest(hooks);
+module('<Greeting />', function (hooks) {
+  setupRenderingTest(hooks);
 
-  test('this will not *run* correctly', async function (assert) {
-    await this.render(hbs`<p>whoopsie</p>`);
+  test('greets', async function (assert) {
+    await render(hbs`<Greeting />`);
+    assert.equal(this.element.textContent?.trim(), 'Hello!');
   });
-})
+});
 ```
 
-To resolve this, you need to explicitly specify what `this` is for different kinds of tests:
+To resolve this, you can explicitly specify what `this` is for different kinds of tests:
 
 ```ts
 import { module, test } from 'qunit';
-import { setupTest } from 'ember-qunit';
-import type { RenderingTextContext } from '@ember/test-helpers';
+import { setupRenderingTest } from 'ember-qunit';
 import { hbs } from 'ember-cli-htmlbars';
+import type { RenderingTextContext } from '@ember/test-helpers';
 
-module('better times', function (hooks) {
-  setupTest(hooks);
+module('<Greeting />', function (hooks) {
+  setupRenderingTest(hooks);
 
-  test(
-    'this will not *run* correctly',
-    async function (this: RenderingTextContext, assert) {
-      await this.render(hbs`<p>whoopsie</p>`);
-    }
-  );
-})
+  test('greets', async function (this: RenderingTestContext, assert) {
+    await render(hbs`<Greeting />`);
+    assert.equal(this.element.textContent?.trim(), 'Hello!');
+  });
+});
 ```
 
-While annoying, this is accurate and prevents the annoying mismatch. Combined with support for using local scope with `<template>` (see [Ember RFC 0785][rfc-0785]), available since v2.8 of `@ember/test-helpers`, the need to specify the `this` will go away entirely over time.
+In many cases this should not be necessary, though. For instance, if the test above were written using [`qunit-dom`][qunit-dom] instead, no `this` annotation would be needed:
 
-[rfc-0785]: https://rfcs.emberjs.com/id/0785-remove-set-get-in-tests
+```ts
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { hbs } from 'ember-cli-htmlbars';
 
-To use these public types, you also will need to add `@glimmer/interfaces` and `@glimmer/reference` to your `devDependencies`, since of `@ember/test-helpers` uses them (indirectly) in its public APIs, and `ember-qunit` uses `@ember/test-helpers` in turn.
+module('<Greeting />', function (hooks) {
+  setupRenderingTest(hooks);
 
+  test('greets', async function (assert) {
+    await render(hbs`<Greeting />`);
+    assert.dom().hasText('Hello!');
+  });
+});
+```
+
+[qunit-dom]: https://github.com/mainmatter/qunit-dom
+
+While annoying, the tighter default type for `this` in tests is accurate and prevents TypeScript from presenting invalid options while authoring tests. Combined with support for using local scope with `<template>` (see [Ember RFC 0785][rfc-0785]), available since v2.8 of `@ember/test-helpers`, the need to specify the `this` will go away entirely over time.
 
 Upgrading from v4.x to v5.0.0
 ------------------------------------------------------------------------------
