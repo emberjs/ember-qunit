@@ -8,18 +8,15 @@ import {
   skip,
   only,
   todo,
-  setResolver,
   setupRenderingTest,
   setupTest,
   SetupTestOptions,
   setupApplicationTest,
 } from 'ember-qunit';
-import { render, RenderingTestContext, TestContext } from '@ember/test-helpers';
+import type { RenderingTestContext, TestContext } from '@ember/test-helpers';
+import { render } from '@ember/test-helpers';
 import EmberResolver from 'ember-resolver';
-import EmberObject from '@ember/object';
-
-// if you don't have a custom resolver, do it like this:
-setResolver(EmberResolver.create());
+import type EmberObject from '@ember/object';
 
 // (modified) tests ported from ember-test-helpers
 module('rendering', function (hooks) {

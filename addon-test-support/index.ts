@@ -12,6 +12,7 @@ if (typeof Testem !== 'undefined') {
   Testem.hookIntoTestFramework();
 }
 
+import type { Resolver } from '@ember/owner';
 import { _backburner } from '@ember/runloop';
 import type { BaseContext, TestContext } from '@ember/test-helpers';
 import {
@@ -31,16 +32,44 @@ import QUnitAdapter from './adapter';
 import { installTestNotIsolatedHook } from './test-isolation-validation';
 import { loadTests } from './test-loader';
 
+// FIXME: What is this about?
 let waitForSettled = true;
 
-export type SetupOptions = Parameters<typeof setupContext>[1];
+/**
+ * Options for configuring the test runner. Normally, you will not need to
+ * customize this. It is exported primarily so that end user app code can name
+ * it when passing it back to the framework.
+ */
+export interface SetupTestOptions {
+  /**
+   * The resolver to use when instantiating container-managed entities in the test.
+   */
+  resolver?: Resolver | undefined;
+}
 
-type PrivateSetupOptions = SetupOptions & {
+type PrivateSetupOptions = SetupTestOptions & {
+  // FIXME: What is this about?
   waitForSettled?: boolean;
 };
 
-export function setupTest(hooks: GlobalHooks, _options: SetupOptions): void {
-  const options: PrivateSetupOptions = { waitForSettled, ..._options };
+/**
+ * Sets up tests that do not need to render snippets of templates.
+ *
+ * The `setupTest` method is used for all types of tests except for those
+ * that need to render snippets of templates. It is invoked in the callback
+ * scope of a QUnit module (aka "nested module").
+ *
+ * Once invoked, all subsequent hooks.beforeEach and test invocations will
+ * have access to the following:
+ * * this.owner - This exposes the standard "owner API" for the test environment.
+ * * this.set / this.setProperties - Allows setting values on the test context.
+ * * this.get / this.getProperties - Retrieves values from the test context.
+ */
+export function setupTest(
+  hooks: NestedHooks,
+  options?: SetupTestOptions
+): void {
+  const allOptions: PrivateSetupOptions = { waitForSettled, ...options };
 
   hooks.beforeEach(async function (
     this: BaseContext,
@@ -49,7 +78,7 @@ export function setupTest(hooks: GlobalHooks, _options: SetupOptions): void {
     const testMetadata = getTestMetadata(this);
     testMetadata['framework'] = 'qunit';
 
-    await setupContext(this, options);
+    await setupContext(this, allOptions);
 
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const originalPauseTest = (this as TestContext).pauseTest;
@@ -69,30 +98,61 @@ export function setupTest(hooks: GlobalHooks, _options: SetupOptions): void {
   });
 
   hooks.afterEach(async function (this: TestContext): Promise<void> {
-    await teardownContext(this, options);
+    await teardownContext(this, allOptions);
   });
 }
 
+/**
+ * Sets up tests that need to render snippets of templates.
+ *
+ * The setupRenderingTest method is used for tests that need to render
+ * snippets of templates. It is also invoked in the callback scope of a
+ * QUnit module (aka "nested module").
+ *
+ * Once invoked, all subsequent hooks.beforeEach and test invocations will
+ * have access to the following:
+ * * All of the methods / properties listed for `setupTest`
+ * * this.render(...) - Renders the provided template snippet returning a
+ * promise that resolves once rendering has completed
+ * * An importable render function that de-sugars into this.render will be
+ * the default output of blueprints
+ * * this.element - Returns the native DOM element representing the element
+ * that was rendered via this.render
+ * * this.$(...) - When jQuery is present, executes a jQuery selector with
+ * the current this.element as its root
+ */
 export function setupRenderingTest(
-  hooks: GlobalHooks,
-  _options: SetupOptions
+  hooks: NestedHooks,
+  options?: SetupTestOptions
 ): void {
-  const options: PrivateSetupOptions = { waitForSettled, ..._options };
+  const allOptions: PrivateSetupOptions = { waitForSettled, ...options };
 
-  setupTest(hooks, options);
+  setupTest(hooks, allOptions);
 
   hooks.beforeEach(async function (this: TestContext) {
     await setupRenderingContext(this);
   });
 }
 
+/**
+ * Sets up acceptance tests.
+ *
+ * The `setupApplicationTest` function is used for all acceptance tests. It
+ * is invoked in the callback scope of a QUnit module (aka "nested module").
+ *
+ * Once invoked, all subsequent hooks.beforeEach and test invocations will
+ * have access to the following:
+ * * `this.owner` - the owner object that been set on the test context.
+ * * `this.pauseTest` and `this.resumeTest` - allow easy pausing/resuming of tests.
+ * * `this.element` which returns the DOM element representing the application's root element.
+ */
 export function setupApplicationTest(
-  hooks: GlobalHooks,
-  _options: SetupOptions
+  hooks: NestedHooks,
+  options?: SetupTestOptions
 ): void {
-  const options: PrivateSetupOptions = { waitForSettled, ..._options };
+  const allOptions: PrivateSetupOptions = { waitForSettled, ...options };
 
-  setupTest(hooks, options);
+  setupTest(hooks, allOptions);
 
   hooks.beforeEach(async function (this: TestContext) {
     await setupApplicationContext(this);
@@ -195,40 +255,55 @@ export function setupTestIsolationValidation(delay?: number | undefined): void {
   });
 }
 
-export interface StartOptions {
-  loadTests?: boolean;
-  setupTestContainer?: boolean;
-  startTests?: boolean;
-  setupTestAdapter?: boolean;
-  setupEmberTesting?: boolean;
-  setupEmberOnerrorValidation?: boolean;
-  setupTestIsolationValidation?: boolean;
-  testIsolationValidationDelay?: number;
+/** Options to be used for enabling/disabling behaviors */
+export interface QUnitStartOptions {
+  /**
+   * If `false` tests will not be loaded automatically.
+   */
+  loadTests?: boolean | undefined;
+
+  /**
+   * If `false` the test container will not be setup based on `devmode`,
+   * `dockcontainer`, or `nocontainer` URL params.
+   */
+  setupTestContainer?: boolean | undefined;
+
+  /**
+   * If `false` tests will not be automatically started (you must run
+   * `QUnit.start()` to kick them off).
+   */
+  startTests?: boolean | undefined;
+
+  /**
+   * If `false` the default Ember.Test adapter will not be updated.
+   */
+  setupTestAdapter?: boolean | undefined;
+
+  /**
+   * `false` opts out of the default behavior of setting `Ember.testing`
+   * to `true` before all tests and back to `false` after each test will.
+   */
+  setupEmberTesting?: boolean | undefined;
+
+  /**
+   * If `false` validation of `Ember.onerror` will be disabled.
+   */
+  setupEmberOnerrorValidation?: boolean | undefined;
+
+  /**
+   * If `false` test isolation validation will be disabled.
+   */
+  setupTestIsolationValidation?: boolean | undefined;
+
+  /**
+   * When using setupTestIsolationValidation this number represents the maximum
+   * amount of time in milliseconds that is allowed _after_ the test is
+   * completed for all async to have been completed. The default value is 50.
+   */
+  testIsolationValidationDelay?: number | undefined;
 }
 
-/**
-   @method start
-   @param {Object} [options] Options to be used for enabling/disabling behaviors
-   @param {Boolean} [options.loadTests] If `false` tests will not be loaded automatically.
-   @param {Boolean} [options.setupTestContainer] If `false` the test container will not
-   be setup based on `devmode`, `dockcontainer`, or `nocontainer` URL params.
-   @param {Boolean} [options.startTests] If `false` tests will not be automatically started
-   (you must run `QUnit.start()` to kick them off).
-   @param {Boolean} [options.setupTestAdapter] If `false` the default Ember.Test adapter will
-   not be updated.
-   @param {Boolean} [options.setupEmberTesting] `false` opts out of the
-   default behavior of setting `Ember.testing` to `true` before all tests and
-   back to `false` after each test will.
-   @param {Boolean} [options.setupEmberOnerrorValidation] If `false` validation
-   of `Ember.onerror` will be disabled.
-   @param {Boolean} [options.setupTestIsolationValidation] If `false` test isolation validation
-   will be disabled.
-   @param {Number} [options.testIsolationValidationDelay] When using
-   setupTestIsolationValidation this number represents the maximum amount of
-   time in milliseconds that is allowed _after_ the test is completed for all
-   async to have been completed. The default value is 50.
- */
-export function start(options: StartOptions = {}): void {
+export function start(options: QUnitStartOptions = {}): void {
   if (options.loadTests !== false) {
     loadTests();
   }
@@ -262,3 +337,151 @@ export function start(options: StartOptions = {}): void {
 
   setupResetOnerror();
 }
+
+// SAFETY: all of the `TC extends TestContext` generics below are just wildly,
+// impossibly unsafe. QUnit cannot -- ever! -- guarantee that the test context
+// is properly set up in a type-safe way to match this. However, it is the only
+// way to handle setting state in a TS-visible way prior to Ember RFC 0785,
+// which is slooooowly rolling out across the ecosystem in conjunction with the
+// `<template>` feature.
+
+// We need this style to avoid "Subsequent property declarations must have the
+// same type" errors
+/* eslint-disable @typescript-eslint/method-signature-style */
+
+declare global {
+  // NOTE: disables `no-unnecessary-generics` inline because, unfortunately,
+  // the design of Ember's test tooling (and indeed *QUnit's* test system)
+  // requires that we allow users to update the type of the context of the
+  // test. This is indeed strictly *wrong*! However, changing it will require
+  // changing how Ember handles testing. See [the PR][pr] for further details.
+  //
+  // [pr]: https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56494
+
+  interface NestedHooks {
+    /**
+     * Runs after the last test. If additional tests are defined after the
+     * module's queue has emptied, it will not run this hook again.
+     */
+    after<TC extends TestContext>(
+      fn: (this: TC, assert: Assert) => void | Promise<void>
+    ): void;
+
+    /**
+     * Runs after each test.
+     */
+    afterEach<TC extends TestContext>(
+      fn: (this: TC, assert: Assert) => void | Promise<void>
+    ): void;
+
+    /**
+     * Runs before the first test.
+     */
+    // SAFETY: this is just wildly, impossibly unsafe. QUnit cannot -- ever! --
+    before<TC extends TestContext>(
+      fn: (this: TC, assert: Assert) => void | Promise<void>
+    ): void;
+
+    /**
+     * Runs before each test.
+     */
+    // SAFETY: this is just wildly, impossibly unsafe. QUnit cannot -- ever! --
+    beforeEach<TC extends TestContext>(
+      fn: (this: TC, assert: Assert) => void | Promise<void>
+    ): void;
+  }
+
+  interface QUnit {
+    /**
+     * Add a test to run.
+     *
+     * Add a test to run using `QUnit.test()`.
+     *
+     * The `assert` argument to the callback contains all of QUnit's assertion
+     * methods. Use this argument to call your test assertions.
+     *
+     * `QUnit.test()` can automatically handle the asynchronous resolution of a
+     * Promise on your behalf if you return a thenable Promise as the result of
+     * your callback function.
+     *
+     * @param name Title of unit being tested
+     * @param callback Function to close over assertions
+     */
+    // SAFETY: this is just wildly, impossibly unsafe. QUnit cannot -- ever! --
+    // provide this guarantee. However, it's also the only way to support TS
+    // in tests in Ember until we move the community over entirely to using
+    // `<template>` and local scope.
+    test<TC extends TestContext>(
+      name: string,
+      callback: (this: TC, assert: Assert) => void | Promise<unknown>
+    ): void;
+
+    /**
+     * Adds a test to exclusively run, preventing all other tests from running.
+     *
+     * Use this method to focus your test suite on a specific test. QUnit.only
+     * will cause any other tests in your suite to be ignored.
+     *
+     * Note, that if more than one QUnit.only is present only the first instance
+     * will run.
+     *
+     * This is an alternative to filtering tests to run in the HTML reporter. It
+     * is especially useful when you use a console reporter or in a codebase
+     * with a large set of long running tests.
+     *
+     * @param name Title of unit being tested
+     * @param callback Function to close over assertions
+     */
+    // SAFETY: this is just wildly, impossibly unsafe. QUnit cannot -- ever! --
+    // provide this guarantee. However, it's also the only way to support TS
+    // in tests in Ember until we move the community over entirely to using
+    // `<template>` and local scope.
+    only<TC extends TestContext>(
+      name: string,
+      callback: (this: TC, assert: Assert) => void | Promise<unknown>
+    ): void;
+
+    /**
+     * Use this method to test a unit of code which is still under development (in a “todo” state).
+     * The test will pass as long as one failing assertion is present.
+     *
+     * If all assertions pass, then the test will fail signaling that `QUnit.todo` should
+     * be replaced by `QUnit.test`.
+     *
+     * @param name Title of unit being tested
+     * @param callback Function to close over assertions
+     */
+    // SAFETY: this is just wildly, impossibly unsafe. QUnit cannot -- ever! --
+    // provide this guarantee. However, it's also the only way to support TS
+    // in tests in Ember until we move the community over entirely to using
+    // `<template>` and local scope.
+    todo<TC extends TestContext>(
+      name: string,
+      callback: (this: TC, assert: Assert) => void | Promise<unknown>
+    ): void;
+
+    /**
+     * Adds a test like object to be skipped.
+     *
+     * Use this method to replace QUnit.test() instead of commenting out entire
+     * tests.
+     *
+     * This test's prototype will be listed on the suite as a skipped test,
+     * ignoring the callback argument and the respective global and module's
+     * hooks.
+     *
+     * @param name Title of unit being tested
+     * @param callback Function to close over assertions
+     */
+    // SAFETY: this is just wildly, impossibly unsafe. QUnit cannot -- ever! --
+    // provide this guarantee. However, it's also the only way to support TS
+    // in tests in Ember until we move the community over entirely to using
+    // `<template>` and local scope.
+    skip<TC extends TestContext>(
+      name: string,
+      callback?: (this: TC, assert: Assert) => void | Promise<unknown>
+    ): void;
+  }
+}
+
+/* eslint-enable @typescript-eslint/method-signature-style */

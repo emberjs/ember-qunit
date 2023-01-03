@@ -21,7 +21,6 @@
     "doc": "doc",
     "test": "tests"
   },
-  "types": "types/index.d.ts",
   "scripts": {
     "build": "ember build --environment=production",
     "lint": "npm-run-all --print-name --aggregate-output --continue-on-error --parallel \"lint:!(fix)\"",
@@ -31,7 +30,7 @@
     "lint:ts": "tsc --noEmit",
     "start": "ember serve",
     "test": "npm-run-all --print-name \"lint\" \"test:*\"",
-    "test:types": "tsc --noEmit --project types",
+    "test:types": "tsc --noEmit --project type-tests",
     "test:ember": "ember test",
     "test:ember-compatibility": "ember try:each",
     "prepack": "ember ts:precompile",

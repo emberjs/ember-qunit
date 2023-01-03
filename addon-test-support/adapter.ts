@@ -1,4 +1,5 @@
 import { assert } from '@ember/debug';
+import type EmberTestAdapter from '@ember/test/adapter';
 import hasEmberVersion from '@ember/test-helpers/has-ember-version';
 import Ember from 'ember';
 
@@ -43,8 +44,7 @@ export function nonTestDoneCallback(): void {
   // no-op
 }
 
-// FIXME: What is Ember.Test.QUnitAdapter?
-interface QUnitAdapter {
+interface QUnitAdapter extends EmberTestAdapter {
   doneCallbacks: Array<{ test: unknown; done: () => void }>;
   qunit: QUnit;
 }
