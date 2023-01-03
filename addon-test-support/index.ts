@@ -12,9 +12,13 @@ if (typeof Testem !== 'undefined') {
   Testem.hookIntoTestFramework();
 }
 
-import type { Resolver } from '@ember/owner';
 import { _backburner } from '@ember/runloop';
-import type { BaseContext, TestContext } from '@ember/test-helpers';
+import type {
+  BaseContext,
+  SetupContextOptions,
+  TeardownContextOptions,
+  TestContext,
+} from '@ember/test-helpers';
 import {
   getTestMetadata,
   resetOnerror,
@@ -39,16 +43,9 @@ let waitForSettled = true;
  * customize this. It is exported primarily so that end user app code can name
  * it when passing it back to the framework.
  */
-export interface SetupTestOptions {
-  /**
-   * The resolver to use when instantiating container-managed entities in the test.
-   */
-  resolver?: Resolver | undefined;
-}
+export type SetupTestOptions = SetupContextOptions;
 
-type PrivateSetupOptions = SetupTestOptions & {
-  waitForSettled: boolean;
-};
+type PrivateSetupOptions = SetupContextOptions & TeardownContextOptions;
 
 /**
  * Sets up tests that do not need to render snippets of templates.
