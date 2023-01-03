@@ -136,7 +136,7 @@
   "typesVersions": {
     "*": {
       "*": [
-        "test-support/*"
+        "addon-test-support/*"
       ]
     }
   }
