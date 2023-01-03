@@ -8,10 +8,8 @@
     "paths": {
       "dummy/tests/*": ["tests/*"],
       "dummy/*": ["tests/dummy/app/*", "app/*"],
-      "ember-qunit": ["addon"],
-      "ember-qunit/*": ["addon/*"],
-      "ember-qunit/test-support": ["addon-test-support"],
-      "ember-qunit/test-support/*": ["addon-test-support/*"],
+      "ember-qunit": ["addon-test-support"],
+      "ember-qunit/*": ["addon-test-support/*"],
       "*": ["types/*"]
     }
   },

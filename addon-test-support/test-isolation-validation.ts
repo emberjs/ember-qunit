@@ -12,8 +12,8 @@ import {
 
 import * as QUnit from 'qunit';
 
-import type { Test } from 'ember-qunit/test-support/types/util';
-import { isTest } from 'ember-qunit/test-support/types/util';
+import type { Test } from './types/util';
+import { isTest } from './types/util';
 
 /**
  * Detects if a specific test isn't isolated. A test is considered
@@ -34,7 +34,7 @@ export function detectIfTestNotIsolated(test: Test, message = ''): void {
     const { debugInfo } = getSettledState();
 
     console.group(`${test.module.name}: ${test.testName}`);
-    debugInfo?.toConsole();
+    debugInfo.toConsole();
     console.groupEnd();
 
     assert('detectIfTestNotIsolated called on skipped test', !test.skip);

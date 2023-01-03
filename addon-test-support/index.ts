@@ -112,14 +112,9 @@ export function setupTest(
  * Once invoked, all subsequent hooks.beforeEach and test invocations will
  * have access to the following:
  * * All of the methods / properties listed for `setupTest`
- * * this.render(...) - Renders the provided template snippet returning a
- * promise that resolves once rendering has completed
- * * An importable render function that de-sugars into this.render will be
- * the default output of blueprints
+ * * An importable render function
  * * this.element - Returns the native DOM element representing the element
  * that was rendered via this.render
- * * this.$(...) - When jQuery is present, executes a jQuery selector with
- * the current this.element as its root
  */
 export function setupRenderingTest(
   hooks: NestedHooks,
@@ -364,14 +359,18 @@ declare global {
      * module's queue has emptied, it will not run this hook again.
      */
     after<TC extends TestContext>(
-      fn: (this: TC, assert: Assert) => void | Promise<void>
+      fn:
+        | ((this: TC, assert: Assert) => void)
+        | ((this: TC, assert: Assert) => Promise<void>)
     ): void;
 
     /**
      * Runs after each test.
      */
     afterEach<TC extends TestContext>(
-      fn: (this: TC, assert: Assert) => void | Promise<void>
+      fn:
+        | ((this: TC, assert: Assert) => void)
+        | ((this: TC, assert: Assert) => Promise<void>)
     ): void;
 
     /**
@@ -379,7 +378,9 @@ declare global {
      */
     // SAFETY: this is just wildly, impossibly unsafe. QUnit cannot -- ever! --
     before<TC extends TestContext>(
-      fn: (this: TC, assert: Assert) => void | Promise<void>
+      fn:
+        | ((this: TC, assert: Assert) => void)
+        | ((this: TC, assert: Assert) => Promise<void>)
     ): void;
 
     /**
@@ -387,7 +388,9 @@ declare global {
      */
     // SAFETY: this is just wildly, impossibly unsafe. QUnit cannot -- ever! --
     beforeEach<TC extends TestContext>(
-      fn: (this: TC, assert: Assert) => void | Promise<void>
+      fn:
+        | ((this: TC, assert: Assert) => void)
+        | ((this: TC, assert: Assert) => Promise<void>)
     ): void;
   }
 
@@ -413,7 +416,9 @@ declare global {
     // `<template>` and local scope.
     test<TC extends TestContext>(
       name: string,
-      callback: (this: TC, assert: Assert) => void | Promise<unknown>
+      callback:
+        | ((this: TC, assert: Assert) => void)
+        | ((this: TC, assert: Assert) => Promise<void>)
     ): void;
 
     /**
@@ -438,7 +443,9 @@ declare global {
     // `<template>` and local scope.
     only<TC extends TestContext>(
       name: string,
-      callback: (this: TC, assert: Assert) => void | Promise<unknown>
+      callback:
+        | ((this: TC, assert: Assert) => void)
+        | ((this: TC, assert: Assert) => Promise<void>)
     ): void;
 
     /**
@@ -457,7 +464,9 @@ declare global {
     // `<template>` and local scope.
     todo<TC extends TestContext>(
       name: string,
-      callback: (this: TC, assert: Assert) => void | Promise<unknown>
+      callback:
+        | ((this: TC, assert: Assert) => void)
+        | ((this: TC, assert: Assert) => Promise<void>)
     ): void;
 
     /**
@@ -479,7 +488,9 @@ declare global {
     // `<template>` and local scope.
     skip<TC extends TestContext>(
       name: string,
-      callback?: (this: TC, assert: Assert) => void | Promise<unknown>
+      callback?:
+        | ((this: TC, assert: Assert) => void)
+        | ((this: TC, assert: Assert) => Promise<void>)
     ): void;
   }
 }

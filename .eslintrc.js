@@ -1,5 +1,28 @@
 'use strict';
 
+const sharedTSOptions = {
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:@typescript-eslint/strict',
+  ],
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint'],
+  rules: {
+    '@typescript-eslint/array-type': ['error', { default: 'array-simple' }],
+    '@typescript-eslint/consistent-type-exports': 'error',
+    '@typescript-eslint/consistent-type-imports': 'error',
+    '@typescript-eslint/explicit-function-return-type': 'error',
+    '@typescript-eslint/method-signature-style': 'error',
+    '@typescript-eslint/no-confusing-void-expression': 'error',
+    '@typescript-eslint/no-redundant-type-constituents': 'error',
+    '@typescript-eslint/prefer-enum-initializers': 'error',
+    '@typescript-eslint/prefer-readonly': 'error',
+    '@typescript-eslint/promise-function-async': 'error',
+  },
+};
+
 module.exports = {
   root: true,
   extends: ['eslint:recommended', 'plugin:prettier/recommended'],
@@ -48,29 +71,24 @@ module.exports = {
     // ts files
     {
       files: ['**/*.ts'],
-      extends: [
-        'eslint:recommended',
-        'plugin:@typescript-eslint/recommended',
-        'plugin:@typescript-eslint/recommended-requiring-type-checking',
-        'plugin:@typescript-eslint/strict',
-      ],
-      parser: '@typescript-eslint/parser',
       parserOptions: {
         tsconfigRootDir: __dirname,
         project: ['./tsconfig.json'],
       },
-      plugins: ['@typescript-eslint'],
+      ...sharedTSOptions,
+    },
+
+    // ts-tests files
+    {
+      files: ['type-tests/**/*.ts'],
+      parserOptions: {
+        tsconfigRootDir: __dirname,
+        project: ['./type-tests/tsconfig.json'],
+      },
+      ...sharedTSOptions,
       rules: {
-        '@typescript-eslint/array-type': ['error', { default: 'array-simple' }],
-        '@typescript-eslint/consistent-type-exports': 'error',
-        '@typescript-eslint/consistent-type-imports': 'error',
-        '@typescript-eslint/explicit-function-return-type': 'error',
-        '@typescript-eslint/method-signature-style': 'error',
-        '@typescript-eslint/no-confusing-void-expression': 'error',
-        '@typescript-eslint/no-redundant-type-constituents': 'error',
-        '@typescript-eslint/prefer-enum-initializers': 'error',
-        '@typescript-eslint/prefer-readonly': 'error',
-        '@typescript-eslint/promise-function-async': 'error',
+        '@typescript-eslint/no-empty-function': 'off',
+        '@typescript-eslint/no-unused-vars': 'off',
       },
     },
 

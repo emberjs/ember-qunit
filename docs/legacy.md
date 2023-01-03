@@ -143,8 +143,6 @@ test('It can set its child', function(assert) {
 ## Advanced Usage
 ### Setting the resolver
 
-<!-- FIXME: setResolver is not actually exported from ember-qunit. It comes from @ember/test-helpers -->
-
 ```js
 // if you don't have a custom resolver, do it like this:
 setResolver(Ember.DefaultResolver.create({ namespace: App }));

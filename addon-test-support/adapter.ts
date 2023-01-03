@@ -5,7 +5,7 @@ import Ember from 'ember';
 
 import * as QUnit from 'qunit';
 
-import { isRecord, isTest } from 'ember-qunit/test-support/types/util';
+import { isRecord, isTest } from './types/util';
 
 function unhandledRejectionAssertion(current: unknown, error: unknown): void {
   let message: string;

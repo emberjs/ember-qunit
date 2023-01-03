@@ -1,11 +1,12 @@
 {
   "extends": "@tsconfig/ember",
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "..",
     "paths": {
-      "ember-qunit": [
-        "./index.d.ts"
-      ],
+      "ember-qunit": ["addon-test-support"],
+      "ember-qunit/*": ["addon-test-support/*"],
+      "*": ["types/*"]
     }
-  }
+  },
+  "include": ["api.ts", "../types/**/*"]
 }
