@@ -1,3 +1,4 @@
+// FIXME: Upstream
 declare module 'ember-cli-test-loader/test-support/index' {
   export default class TestLoader {
     static load(): void;
