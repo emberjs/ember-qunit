@@ -32,7 +32,6 @@ import QUnitAdapter from './adapter';
 import { installTestNotIsolatedHook } from './test-isolation-validation';
 import { loadTests } from './test-loader';
 
-// FIXME: What is this about?
 let waitForSettled = true;
 
 /**
@@ -48,8 +47,7 @@ export interface SetupTestOptions {
 }
 
 type PrivateSetupOptions = SetupTestOptions & {
-  // FIXME: What is this about?
-  waitForSettled?: boolean;
+  waitForSettled: boolean;
 };
 
 /**
