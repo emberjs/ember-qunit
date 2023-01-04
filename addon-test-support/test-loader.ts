@@ -14,7 +14,7 @@ addModuleIncludeMatcher(function (moduleName) {
   return moduleName.endsWith('.jshint');
 });
 
-let moduleLoadFailures: Array<{ stack: unknown }> = [];
+let moduleLoadFailures: unknown[] = [];
 
 QUnit.done(function () {
   const length = moduleLoadFailures.length;
@@ -35,7 +35,7 @@ QUnit.done(function () {
 });
 
 export class TestLoader extends AbstractTestLoader {
-  moduleLoadFailure(moduleName: string, error: { stack: unknown }): void {
+  moduleLoadFailure(moduleName: string, error: unknown): void {
     moduleLoadFailures.push(error);
 
     QUnit.module('TestLoader Failures');
@@ -61,5 +61,5 @@ export class TestLoader extends AbstractTestLoader {
    @method loadTests
  */
 export function loadTests(): void {
-  new TestLoader().loadModules();
+  TestLoader.load();
 }

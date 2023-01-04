@@ -42,7 +42,7 @@
     "common-tags": "^1.8.0",
     "ember-auto-import": "^2.6.0",
     "ember-cli-babel": "^7.26.11",
-    "ember-cli-test-loader": "^3.0.0",
+    "ember-cli-test-loader": "file:.yalc/ember-cli-test-loader",
     "ember-cli-typescript": "^5.2.1",
     "resolve-package-path": "^4.0.3",
     "silent-error": "^1.1.1",
