@@ -81,12 +81,17 @@ export function setupTest(
       async function QUnit_pauseTest(): Promise<void> {
         assert.timeout(-1); // prevent the test from timing out
 
-        const timeout = QUnit.config.timeout;
-
         // This is a temporary work around for
         // https://github.com/emberjs/ember-qunit/issues/496 this clears the
         // timeout that would fail the test when it hits the global testTimeout
         // value.
+        // https://github.com/DefinitelyTyped/DefinitelyTyped/pull/63805#issuecomment-1372408802
+        const timeout = (
+          QUnit.config as unknown as {
+            // https://github.com/qunitjs/qunit/blob/fc278e8c0d7e90ec42e47b47eee1cc85c9a9efaf/src/test.js#L752
+            timeout: ReturnType<typeof setTimeout> | null | undefined;
+          }
+        ).timeout;
         if (timeout !== null && timeout !== undefined) {
           clearTimeout(timeout);
         }
