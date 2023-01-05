@@ -35,7 +35,7 @@ QUnit.done(function () {
 });
 
 export class TestLoader extends AbstractTestLoader {
-  moduleLoadFailure(moduleName: string, error: unknown): void {
+  override moduleLoadFailure(moduleName: string, error: unknown): void {
     moduleLoadFailures.push(error);
 
     QUnit.module('TestLoader Failures');
