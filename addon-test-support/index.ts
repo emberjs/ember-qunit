@@ -81,13 +81,15 @@ export function setupTest(
       async function QUnit_pauseTest(): Promise<void> {
         assert.timeout(-1); // prevent the test from timing out
 
+        const timeout = QUnit.config.timeout;
+
         // This is a temporary work around for
         // https://github.com/emberjs/ember-qunit/issues/496 this clears the
         // timeout that would fail the test when it hits the global testTimeout
         // value.
-        // @ts-expect-error FIXME
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        clearTimeout(QUnit.config.timeout);
+        if (timeout !== null && timeout !== undefined) {
+          clearTimeout(timeout);
+        }
         await originalPauseTest.call(this);
       };
   });
@@ -164,9 +166,7 @@ export function setupTestContainer(): void {
     return;
   }
 
-  // @ts-expect-error FIXME
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const params: Record<string, unknown> = QUnit.urlParams;
+  const params = QUnit.urlParams;
 
   if (params['devmode'] || params['fullscreencontainer']) {
     testContainer.classList.add('ember-testing-container-full-screen');
@@ -238,9 +238,7 @@ export function setupResetOnerror(): void {
 export function setupTestIsolationValidation(delay?: number | undefined): void {
   waitForSettled = false;
   _backburner.DEBUG = true;
-  // @ts-expect-error FIXME
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-  QUnit.on('testStart', () => {
+  QUnit.testStart(() => {
     installTestNotIsolatedHook(delay);
   });
 }

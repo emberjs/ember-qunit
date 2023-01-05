@@ -5,9 +5,9 @@ import AbstractTestLoader, {
 import * as QUnit from 'qunit';
 
 addModuleExcludeMatcher(function (moduleName) {
-  // @ts-expect-error FIXME Qunit types argh
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
-  return QUnit.urlParams.nolint && /\.(jshint|lint-test)$/.test(moduleName);
+  return (
+    !!QUnit.urlParams['nolint'] && /\.(jshint|lint-test)$/.test(moduleName)
+  );
 });
 
 addModuleIncludeMatcher(function (moduleName) {

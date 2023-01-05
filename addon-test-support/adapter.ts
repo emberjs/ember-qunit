@@ -35,7 +35,6 @@ function unhandledRejectionAssertion(current: unknown, error: unknown): void {
     actual: false,
     expected: true,
     message: message,
-    // @ts-expect-error FIXME: Update qunit type https://github.com/qunitjs/qunit/blob/fc278e8c0d7e90ec42e47b47eee1cc85c9a9efaf/docs/callbacks/QUnit.log.md?plain=1#L32
     source,
   });
 }

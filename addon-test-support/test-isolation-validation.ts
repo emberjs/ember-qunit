@@ -12,7 +12,6 @@ import {
 
 import * as QUnit from 'qunit';
 
-import type { Test } from './types/util';
 import { isTest } from './types/util';
 
 /**
@@ -29,7 +28,7 @@ import { isTest } from './types/util';
  * @param {string} testInfo.module The name of the test module
  * @param {string} testInfo.name The test name
  */
-export function detectIfTestNotIsolated(test: Test, message = ''): void {
+export function detectIfTestNotIsolated(test: QUnit.Test, message = ''): void {
   if (!isSettled()) {
     const { debugInfo } = getSettledState();
 
