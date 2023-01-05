@@ -196,7 +196,7 @@ export function startTests(): void {
    @method setupTestAdapter
  */
 export function setupTestAdapter(): void {
-  // @ts-expect-error FIXME
+  // @ts-expect-error Adapter doesn't have `create`
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   Ember.Test.adapter = QUnitAdapter.create() as typeof QUnitAdapter;
 }

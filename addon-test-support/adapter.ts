@@ -48,7 +48,7 @@ interface QUnitAdapter extends EmberTestAdapter {
   qunit: QUnit;
 }
 
-// @ts-expect-error FIXME `extend` does not exist on Adapter
+// @ts-expect-error `extend` does not exist on Adapter
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 let Adapter = Ember.Test.Adapter.extend({
   init(this: QUnitAdapter) {
@@ -93,7 +93,7 @@ let Adapter = Ember.Test.Adapter.extend({
 // automatically re-thrown and will therefore hit QUnit's own global error
 // handler (therefore appropriately causing test failure)
 if (!hasEmberVersion(2, 17)) {
-  // @ts-expect-error FIXME `extend` does not exist on Adapter
+  // @ts-expect-error `extend` does not exist on Adapter
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   Adapter = Adapter.extend({
     exception(error: unknown) {
