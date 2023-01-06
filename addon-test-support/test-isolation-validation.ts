@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 
 import { assert } from '@ember/debug';
-// @ts-expect-error FIXME
+// @ts-expect-error _cancelTimers is private
 import { _cancelTimers as cancelTimers } from '@ember/runloop';
 import {
   getDebugInfo,
@@ -121,7 +121,6 @@ export function installTestNotIsolatedHook(delay = 50): void {
           // canceling timers here isn't perfect, but is as good as we can do
           // to attempt to prevent future tests from failing due to this test's
           // leakage
-          // FIXME
           // eslint-disable-next-line @typescript-eslint/no-unsafe-call
           cancelTimers();
 

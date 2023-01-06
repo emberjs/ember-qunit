@@ -5,9 +5,9 @@ export { loadTests } from './test-loader';
 
 import './qunit-configuration';
 
-// @ts-expect-error FIXME
+// @ts-expect-error Testem has no types
 if (typeof Testem !== 'undefined') {
-  // @ts-expect-error FIXME
+  // @ts-expect-error Testem has no types
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
   Testem.hookIntoTestFramework();
 }
@@ -209,12 +209,12 @@ export function setupTestAdapter(): void {
  */
 export function setupEmberTesting(): void {
   QUnit.testStart(() => {
-    // @ts-expect-error FIXME
+    // @ts-expect-error Ember.testing type is readonly
     Ember.testing = true;
   });
 
   QUnit.testDone(() => {
-    // @ts-expect-error FIXME
+    // @ts-expect-error Ember.testing type is readonly
     Ember.testing = false;
   });
 }
