@@ -83,6 +83,7 @@
     "webpack": "^5.75.0"
   },
   "peerDependencies": {
+    "@ember/test-helpers": "^2.9.3",
     "ember-source": "^3.28 || ^4.0",
     "qunit": "^2.13.0"
   },
