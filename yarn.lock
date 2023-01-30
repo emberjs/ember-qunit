@@ -4241,10 +4241,12 @@ ember-cli-terser@^4.0.2:
   dependencies:
     broccoli-terser-sourcemap "^4.1.0"
 
-"ember-cli-test-loader@file:.yalc/ember-cli-test-loader":
+ember-cli-test-loader@^3.0.0:
   version "3.0.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-test-loader/-/ember-cli-test-loader-3.0.0.tgz#1c036fc48de36155355fcda3266af63f977826f1"
+  integrity sha512-wfFRBrfO9gaKScYcdQxTfklx9yp1lWK6zv1rZRpkas9z2SHyJojF7NOQRWQgSB3ypm7vfpiF8VsFFVVr7VBzAQ==
   dependencies:
-    ember-cli-babel "^7.23.0"
+    ember-cli-babel "^7.13.2"
 
 ember-cli-typescript-blueprint-polyfill@^0.1.0:
   version "0.1.0"

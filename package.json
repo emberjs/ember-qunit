@@ -65,7 +65,7 @@
     "ember-cli-htmlbars": "^6.2.0",
     "ember-cli-inject-live-reload": "^2.1.0",
     "ember-cli-terser": "^4.0.2",
-    "ember-cli-test-loader": "file:.yalc/ember-cli-test-loader",
+    "ember-cli-test-loader": "^3.0.0",
     "ember-disable-prototype-extensions": "^1.1.3",
     "ember-load-initializers": "^2.1.2",
     "ember-resolver": "^9.0.1",
