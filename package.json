@@ -52,7 +52,7 @@
     "@ember/test-helpers": "^2.9.3",
     "@embroider/test-setup": "^2.0.2",
     "@glimmer/component": "^1.1.2",
-    "@tsconfig/ember": "^1.1.0",
+    "@tsconfig/ember": "^2.0.0",
     "@types/qunit": "^2.19.3",
     "@types/rsvp": "^4.0.4",
     "ember-angle-bracket-invocation-polyfill": "^3.0.2",
