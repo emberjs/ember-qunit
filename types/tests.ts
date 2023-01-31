@@ -1,6 +1,6 @@
 // These tests were ported directly from DefinitelyTyped and are unlikely to be
 // 100% desireable for the future.
-import hbs from 'htmlbars-inline-precompile';
+import { hbs } from 'ember-cli-htmlbars';
 import { module } from 'qunit';
 import {
   start,

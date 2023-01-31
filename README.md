@@ -129,7 +129,7 @@ It will setup your test context the same way as `setupTest()`, and additionally:
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
+import { hbs } from 'ember-cli-htmlbars';
 
 module('GravatarImageComponent', function(hooks) {
   setupRenderingTest(hooks);

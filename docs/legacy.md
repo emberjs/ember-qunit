@@ -4,8 +4,8 @@ Legacy Guide
 
 This document describes the use of `ember-qunit` with Ember's legacy testing
 APIs, which have been superseded by the newer testing system based on the RFCs
-[232](https://github.com/emberjs/rfcs/blob/master/text/0232-simplify-qunit-testing-api.md) 
-and 
+[232](https://github.com/emberjs/rfcs/blob/master/text/0232-simplify-qunit-testing-api.md)
+and
 [268](https://github.com/emberjs/rfcs/blob/master/text/0268-acceptance-testing-refactor.md).
 
 ## Usage
@@ -18,7 +18,7 @@ and
 ### Component Integration Tests
 
 ```js
-import hbs from 'htmlbars-inline-precompile';
+import { hbs } from 'ember-cli-htmlbars';
 import { test, moduleForComponent } from 'ember-qunit';
 
 moduleForComponent('x-foo', {

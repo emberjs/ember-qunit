@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import Component from '@ember/component';
 import { helper } from '@ember/component/helper';
-import hbs from 'htmlbars-inline-precompile';
+import { hbs } from 'ember-cli-htmlbars';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { setResolverRegistry } from '../helpers/resolver';
