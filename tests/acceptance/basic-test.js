@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import EmberRouter from '@ember/routing/router';
 import Route from '@ember/routing/route';
-import hbs from 'htmlbars-inline-precompile';
+import { hbs } from 'ember-cli-htmlbars';
 import { setupApplicationTest } from 'ember-qunit';
 import {
   visit,
