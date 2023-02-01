@@ -50,7 +50,7 @@
     "@babel/eslint-parser": "^7.19.1",
     "@ember/optional-features": "^2.0.0",
     "@ember/test-helpers": "^2.9.3",
-    "@embroider/test-setup": "^2.0.2",
+    "@embroider/test-setup": "^2.1.1",
     "@glimmer/component": "^1.1.2",
     "@tsconfig/ember": "^2.0.0",
     "@types/qunit": "^2.19.3",
