@@ -31,7 +31,7 @@ To resolve this, you can explicitly specify what `this` is for different kinds o
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { hbs } from 'ember-cli-htmlbars';
-import type { RenderingTextContext } from '@ember/test-helpers';
+import type { RenderingTestContext } from '@ember/test-helpers';
 
 module('<Greeting />', function (hooks) {
   setupRenderingTest(hooks);
