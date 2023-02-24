@@ -84,7 +84,7 @@
   },
   "peerDependencies": {
     "@ember/test-helpers": "^2.9.3",
-    "ember-source": "^3.28 || ^4.0",
+    "ember-source": ">=3.28",
     "qunit": "^2.13.0"
   },
   "engines": {
