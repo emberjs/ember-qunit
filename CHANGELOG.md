@@ -1,4 +1,28 @@
 
+
+## v6.2.0 (2023-02-25)
+
+#### :rocket: Enhancement
+* [#1027](https://github.com/emberjs/ember-qunit/pull/1027) support Ember v5 ([@jelhan](https://github.com/jelhan))
+
+#### :bug: Bug Fix
+* [#1012](https://github.com/emberjs/ember-qunit/pull/1012) Add missing peer dependency on `@ember/test-helpers` ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :memo: Documentation
+* [#1024](https://github.com/emberjs/ember-qunit/pull/1024) fix typo in docs ([@laynegt](https://github.com/laynegt))
+* [#1001](https://github.com/emberjs/ember-qunit/pull/1001) Update migration docs for adopting native types in 6.1 ([@dfreeman](https://github.com/dfreeman))
+
+#### :house: Internal
+* [#1017](https://github.com/emberjs/ember-qunit/pull/1017) Migrate from htmlbars-inline-precompile to ember-cli-htmlbars ([@gitKrystan](https://github.com/gitKrystan))
+
+#### Committers: 6
+- Chris Krycho ([@chriskrycho](https://github.com/chriskrycho))
+- Dan Freeman ([@dfreeman](https://github.com/dfreeman))
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Krystan HuffMenne ([@gitKrystan](https://github.com/gitKrystan))
+- Layne Tcheng ([@laynegt](https://github.com/laynegt))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## v6.1.1 (2022-12-19)
 
 #### :bug: Bug Fix
