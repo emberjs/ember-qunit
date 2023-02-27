@@ -52,7 +52,7 @@
     "@babel/core": "^7.20.5",
     "@babel/eslint-parser": "^7.19.1",
     "@ember/optional-features": "^2.0.0",
-    "@ember/test-helpers": "file:.yalc/@ember/test-helpers",
+    "@ember/test-helpers": "emberjs/ember-test-helpers#master",
     "@embroider/test-setup": "^2.1.1",
     "@glimmer/component": "^1.1.2",
     "@tsconfig/ember": "^2.0.0",
@@ -93,7 +93,7 @@
     "qunit": "^2.13.0"
   },
   "engines": {
-    "node": "14.* || 16.* || >= 18"
+    "node": "16.* || >= 18"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
@@ -130,7 +130,7 @@
     }
   },
   "volta": {
-    "node": "14.19.1",
+    "node": "16.19.1",
     "yarn": "1.22.18"
   }
 }
