@@ -1,46 +1,36 @@
-// These tests were ported directly from DefinitelyTyped and are unlikely to be
-// 100% desireable for the future.
 import { hbs } from 'ember-cli-htmlbars';
-import { module } from 'qunit';
+import { module, test, skip, only, todo } from 'qunit';
 import {
   start,
-  test,
-  skip,
-  only,
-  todo,
-  setResolver,
   setupRenderingTest,
   setupTest,
   SetupTestOptions,
   setupApplicationTest,
 } from 'ember-qunit';
-import { render, RenderingTestContext, TestContext } from '@ember/test-helpers';
+import type { RenderingTestContext, TestContext } from '@ember/test-helpers';
+import { render } from '@ember/test-helpers';
 import EmberResolver from 'ember-resolver';
-import EmberObject from '@ember/object';
-
-// if you don't have a custom resolver, do it like this:
-setResolver(EmberResolver.create());
+import type EmberObject from '@ember/object';
 
 // (modified) tests ported from ember-test-helpers
 module('rendering', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', function (this: RenderingTestContext, assert) {
+  test('it renders', async function (this: RenderingTestContext, assert) {
     assert.expect(2);
 
     // setup the outer context
     this.set('value', 'cat');
 
     // render the component
-    this.render(hbs`
-            {{ x-foo value=value action="result" }}
-        `);
+    await render(hbs`
+      {{ x-foo value=value action="result" }}
+    `);
 
-    // has to be a template
-    // @ts-expect-error
-    this.render();
-    // @ts-expect-error
-    this.render('{{ x-foo value=value action="result" }}');
+    // @ts-expect-error has to be a template
+    await render();
+    // @ts-expect-error has to be a template
+    await render('{{ x-foo value=value action="result" }}');
 
     const el = this.element.querySelector('div');
     assert.equal(el?.innerText, 'cat', 'The component shows the correct value');
@@ -70,12 +60,13 @@ module('rendering', function (hooks) {
     const inputFormat2 = this.get('inputFormat');
 
     // render the component on the page
-    this.render(hbs`<div>bar</div>`);
+    await render(hbs`<div>bar</div>`);
     assert.equal(this.element.querySelector('div')?.innerText, 'bar');
   });
 });
 
 module('misc and async', function (hooks) {
+  // eslint-disable-next-line @typescript-eslint/require-await
   hooks.beforeEach(async function (assert) {
     assert.ok(true, 'hooks can be async');
   });
@@ -94,13 +85,10 @@ module('misc and async', function (hooks) {
     assert.equal(subject.get('result'), 'bar');
   });
 
-  // This test is intended to ensure the appropriate behavior for @typescript-eslint/no-misused-promises.
-  // However, we don't actually use typescript-eslint in this project and tslint has no equivalent,
-  // so we can't properly test it.
   test('it can be async', async function (this: RenderingTestContext, assert) {
     assert.expect(1);
 
-    await this.render(hbs`<p>Hello</p>`);
+    await render(hbs`<p>Hello</p>`);
 
     assert.ok(true, 'rendered');
   });
@@ -115,34 +103,28 @@ module('misc and async', function (hooks) {
   skip('it can skip async', async function (this: RenderingTestContext, assert) {
     assert.expect(1);
 
-    await this.render(hbs`<p>Hello</p>`);
+    await render(hbs`<p>Hello</p>`);
 
     assert.ok(true, 'rendered');
   });
 
-  // This test is intended to ensure the appropriate behavior for @typescript-eslint/no-misused-promises.
-  // However, we don't actually use typescript-eslint in this project and tslint has no equivalent,
-  // so we can't properly test it.
   only(
     'it can only run async',
     async function (this: RenderingTestContext, assert) {
       assert.expect(1);
 
-      await this.render(hbs`<p>Hello</p>`);
+      await render(hbs`<p>Hello</p>`);
 
       assert.ok(true, 'rendered');
     }
   );
 
-  // This test is intended to ensure the appropriate behavior for @typescript-eslint/no-misused-promises.
-  // However, we don't actually use typescript-eslint in this project and tslint has no equivalent,
-  // so we can't properly test it.
   todo(
     'it can have an async todo',
     async function (this: RenderingTestContext, assert) {
       assert.expect(1);
 
-      await this.render(hbs`<p>Hello</p>`);
+      await render(hbs`<p>Hello</p>`);
 
       assert.ok(true, 'rendered');
     }
@@ -151,11 +133,11 @@ module('misc and async', function (hooks) {
 // end tests ported from ember-test-helpers
 
 module('returning a promise', function () {
-  test('it can return Promise<void>', function (this: TestContext, assert) {
+  test('it can return Promise<void>', async function (this: TestContext, assert) {
     return Promise.resolve();
   });
 
-  test('it can return a non-empty Promise', function (this: TestContext, assert) {
+  test('it can return a non-empty Promise', async function (this: TestContext, assert) {
     return Promise.resolve('foo');
   });
 });
@@ -324,7 +306,7 @@ start();
 
 module('with setup options', function (hooks) {
   // $ExpectType SetupTestOptions | undefined
-  type SetupTestOptions = Parameters<typeof setupTest>[1];
+  type _SetupTestOptions = Parameters<typeof setupTest>[1];
   // $ExpectType SetupTestOptions | undefined
   type SetupRenderingTestOptions = Parameters<typeof setupRenderingTest>[1];
   // $ExpectType SetupTestOptions | undefined

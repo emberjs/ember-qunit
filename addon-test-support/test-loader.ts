@@ -1,26 +1,29 @@
-import * as QUnit from 'qunit';
 import AbstractTestLoader, {
   addModuleExcludeMatcher,
   addModuleIncludeMatcher,
 } from 'ember-cli-test-loader/test-support/index';
+import * as QUnit from 'qunit';
 
 addModuleExcludeMatcher(function (moduleName) {
-  return QUnit.urlParams.nolint && moduleName.match(/\.(jshint|lint-test)$/);
+  return (
+    !!QUnit.urlParams['nolint'] && /\.(jshint|lint-test)$/.test(moduleName)
+  );
 });
 
 addModuleIncludeMatcher(function (moduleName) {
-  return moduleName.match(/\.jshint$/);
+  return moduleName.endsWith('.jshint');
 });
 
-let moduleLoadFailures = [];
+let moduleLoadFailures: unknown[] = [];
 
 QUnit.done(function () {
-  let length = moduleLoadFailures.length;
+  const length = moduleLoadFailures.length;
 
   try {
     if (length === 0) {
       // do nothing
     } else if (length === 1) {
+      // eslint-disable-next-line @typescript-eslint/no-throw-literal
       throw moduleLoadFailures[0];
     } else {
       throw new Error('\n' + moduleLoadFailures.join('\n'));
@@ -31,12 +34,13 @@ QUnit.done(function () {
   }
 });
 
-export class TestLoader extends AbstractTestLoader {
-  moduleLoadFailure(moduleName, error) {
+class TestLoader extends AbstractTestLoader {
+  override moduleLoadFailure(moduleName: string, error: unknown): void {
     moduleLoadFailures.push(error);
 
     QUnit.module('TestLoader Failures');
     QUnit.test(moduleName + ': could not be loaded', function () {
+      // eslint-disable-next-line @typescript-eslint/no-throw-literal
       throw error;
     });
   }
@@ -56,6 +60,6 @@ export class TestLoader extends AbstractTestLoader {
 
    @method loadTests
  */
-export function loadTests() {
-  new TestLoader().loadModules();
+export function loadTests(): void {
+  TestLoader.load();
 }

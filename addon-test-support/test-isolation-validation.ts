@@ -1,8 +1,18 @@
 /* eslint-disable no-console */
-import * as QUnit from 'qunit';
+
+import { assert } from '@ember/debug';
+// @ts-expect-error _cancelTimers is private
 import { _cancelTimers as cancelTimers } from '@ember/runloop';
-import { waitUntil, isSettled, getSettledState } from '@ember/test-helpers';
-import { getDebugInfo } from '@ember/test-helpers';
+import {
+  getDebugInfo,
+  getSettledState,
+  isSettled,
+  waitUntil,
+} from '@ember/test-helpers';
+
+import * as QUnit from 'qunit';
+
+import { isTest } from './types/util';
 
 /**
  * Detects if a specific test isn't isolated. A test is considered
@@ -18,18 +28,22 @@ import { getDebugInfo } from '@ember/test-helpers';
  * @param {string} testInfo.module The name of the test module
  * @param {string} testInfo.name The test name
  */
-export function detectIfTestNotIsolated(test, message = '') {
+export function detectIfTestNotIsolated(test: QUnit.Test, message = ''): void {
   if (!isSettled()) {
-    let { debugInfo } = getSettledState();
+    const { debugInfo } = getSettledState();
 
     console.group(`${test.module.name}: ${test.testName}`);
     debugInfo.toConsole();
     console.groupEnd();
 
-    test.expected++;
+    assert('detectIfTestNotIsolated called on skipped test', !test.skip);
+
+    test.expected = (test.expected ?? 0) + 1;
     test.assert.pushResult({
       result: false,
       message: `${message} \nMore information has been printed to the console. Please use that information to help in debugging.\n\n`,
+      actual: null,
+      expected: null,
     });
   }
 }
@@ -42,20 +56,29 @@ export function detectIfTestNotIsolated(test, message = '') {
  * @function installTestNotIsolatedHook
  * @param {number} delay the delay delay to use when checking for isolation validation
  */
-export function installTestNotIsolatedHook(delay = 50) {
+export function installTestNotIsolatedHook(delay = 50): void {
   if (!getDebugInfo()) {
     return;
   }
 
-  let test = QUnit.config.current;
-  let finish = test.finish;
-  let pushFailure = test.pushFailure;
+  const test: unknown = QUnit.config.current;
 
-  test.pushFailure = function (message) {
-    if (message.indexOf('Test took longer than') === 0) {
+  assert(
+    'installTestNotIsolatedHook called with no current test',
+    isTest(test)
+  );
+
+  const finish = test.finish;
+  const pushFailure = test.pushFailure;
+
+  test.pushFailure = function (
+    ...args: Parameters<typeof pushFailure>
+  ): ReturnType<typeof pushFailure> {
+    const [message] = args;
+    if (message.startsWith('Test took longer than')) {
       detectIfTestNotIsolated(this, message);
     } else {
-      return pushFailure.apply(this, arguments);
+      pushFailure.apply(this, args);
     }
   };
 
@@ -74,8 +97,10 @@ export function installTestNotIsolatedHook(delay = 50) {
   // - 'QUnit.done'
   //    - it detaches the failure from the actual test that failed, making it
   //      more confusing to the end user.
-  test.finish = function () {
-    let doFinish = () => finish.apply(this, arguments);
+  test.finish = function (
+    ...args: Parameters<typeof finish>
+  ): ReturnType<typeof finish> {
+    const doFinish = (): ReturnType<typeof finish> => finish.apply(this, args);
 
     if (isSettled()) {
       return doFinish();
@@ -96,6 +121,7 @@ export function installTestNotIsolatedHook(delay = 50) {
           // canceling timers here isn't perfect, but is as good as we can do
           // to attempt to prevent future tests from failing due to this test's
           // leakage
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
           cancelTimers();
 
           return doFinish();
