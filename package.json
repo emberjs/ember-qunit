@@ -5,12 +5,13 @@
   "license": "MIT",
   "repository": "https://github.com/emberjs/ember-qunit",
   "scripts": {
-    "lint": "pnpm --filter '*' lint",
-    "lint:fix": "pnpm --filter '*' lint:fix",
-    "test": "pnpm --filter '*' test"
+    "prepare": "pnpm --filter ember-qunit build",
+    "lint": "pnpm --filter '*' run lint",
+    "lint:fix": "pnpm --filter '*' run lint:fix",
+    "test": "pnpm --filter '*' run test"
   },
   "volta": {
     "node": "18.16.0",
-    "pnpm": "8.6.1"
+    "pnpm": "8.6.2"
   }
 }
