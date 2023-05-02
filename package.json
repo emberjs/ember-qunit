@@ -1,0 +1,19 @@
+{
+  "name": "root",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "repository": "https://github.com/emberjs/ember-qunit",
+  "scripts": {
+    "lint": "yarn workspaces run lint",
+    "lint:fix": "yarn workspaces run lint:fix",
+    "test": "yarn workspaces run test"
+  },
+  "workspaces": [
+    "addon"
+  ],
+  "volta": {
+    "node": "16.20.0",
+    "yarn": "1.22.19"
+  }
+}
