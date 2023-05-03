@@ -1,13 +1,11 @@
 /* eslint-env node */
 'use strict';
 
-const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
+const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function (defaults) {
-  const app = new EmberAddon(defaults, {
-    eslint: {
-      testGenerator: 'qunit',
-    },
+  const app = new EmberApp(defaults, {
+    name: 'test-app',
   });
 
   const { maybeEmbroider } = require('@embroider/test-setup');
@@ -15,7 +13,7 @@ module.exports = function (defaults) {
     packageRules: [
       {
         // See: https://github.com/embroider-build/embroider/issues/522
-        package: 'dummy',
+        package: 'test-app',
         components: {
           '{{template-only}}': {
             safeToIgnore: true,

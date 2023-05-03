@@ -2,14 +2,20 @@
 
 module.exports = {
   root: true,
-  extends: ['eslint:recommended', 'plugin:prettier/recommended'],
-  plugins: ['prettier'],
-  parser: '@babel/eslint-parser',
+  parser: 'babel-eslint',
   parserOptions: {
-    ecmaVersion: 2017,
+    ecmaVersion: 2018,
     sourceType: 'module',
-    requireConfigFile: false, // allow @babel/eslint-parser to run on files that do not have a Babel configuration associated with them
+    ecmaFeatures: {
+      legacyDecorators: true,
+    },
   },
+  plugins: ['ember'],
+  extends: [
+    'eslint:recommended',
+    'plugin:ember/recommended',
+    'plugin:prettier/recommended',
+  ],
   env: {
     browser: true,
   },
@@ -18,21 +24,15 @@ module.exports = {
     // node files
     {
       files: [
-        '.eslintrc.js',
-        '.prettierrc.js',
-        '.template-lintrc.js',
-        'ember-cli-build.js',
-        'index.js',
-        'testem.js',
-        'blueprints/*/index.js',
-        'config/**/*.js',
-        'tests/dummy/config/**/*.js',
-      ],
-      excludedFiles: [
-        'addon/**',
-        'addon-test-support/**',
-        'tests/dummy/app/**',
-        'vendor/**',
+        './.eslintrc.js',
+        './.prettierrc.js',
+        './.template-lintrc.js',
+        './ember-cli-build.js',
+        './testem.js',
+        './blueprints/*/index.js',
+        './config/**/*.js',
+        './lib/*/index.js',
+        './server/**/*.js',
       ],
       parserOptions: {
         sourceType: 'script',
@@ -41,26 +41,12 @@ module.exports = {
         browser: false,
         node: true,
       },
-      plugins: ['node'],
-      extends: ['plugin:node/recommended'],
+      extends: ['plugin:n/recommended'],
     },
-
-    // test files
     {
-      files: ['tests/**/*.js'],
-      env: {
-        qunit: true,
-      },
-    },
-
-    // ensure we do not accidentally land async/await in shipped addon-test-support
-    {
-      files: ['addon-test-support/**/*.js'],
-      plugins: ['disable-features'],
-      rules: {
-        'disable-features/disable-async-await': 'error',
-        'disable-features/disable-generator-functions': 'error',
-      },
+      // test files
+      files: ['tests/**/*-test.{js,ts}'],
+      extends: ['plugin:qunit/recommended'],
     },
   ],
 };
