@@ -1,3 +1,4 @@
+/* eslint-disable ember/no-classic-components */
 import { module, test } from 'qunit';
 import Component from '@ember/component';
 import { helper } from '@ember/component/helper';
@@ -16,7 +17,7 @@ module('setupRenderingTest tests', function (hooks) {
   test('can render a simple template', async function (assert) {
     await render(hbs`<p>Hello!</p>`);
 
-    assert.equal(this.element.textContent, 'Hello!');
+    assert.strictEqual(this.element.textContent, 'Hello!');
   });
 
   test('can invoke template only components', async function (assert) {
@@ -26,12 +27,16 @@ module('setupRenderingTest tests', function (hooks) {
     );
     await render(hbs`<TemplateOnly />`);
 
-    assert.equal(this.element.textContent, 'template-only component here');
+    assert.strictEqual(
+      this.element.textContent,
+      'template-only component here'
+    );
   });
 
   test('can invoke JS only components', async function (assert) {
     this.owner.register(
       'component:js-only',
+      // eslint-disable-next-line ember/no-classic-classes
       Component.extend({
         classNames: ['js-only'],
       })
@@ -53,6 +58,6 @@ module('setupRenderingTest tests', function (hooks) {
 
     await render(hbs`{{jax "max"}}`);
 
-    assert.equal(this.element.textContent, 'max-jax');
+    assert.strictEqual(this.element.textContent, 'max-jax');
   });
 });

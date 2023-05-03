@@ -9,6 +9,7 @@ import { Promise } from 'rsvp';
 module('QUnitAdapter');
 
 test('asyncStart waits for asyncEnd to finish a test', function (assert) {
+  assert.expect(1);
   const adapter = QUnitAdapter.create();
 
   adapter.asyncStart();
@@ -19,6 +20,7 @@ test('asyncStart waits for asyncEnd to finish a test', function (assert) {
 });
 
 test('asyncStart waits for equal numbers of asyncEnd to finish a test', function (assert) {
+  assert.expect(1);
   const adapter = QUnitAdapter.create();
 
   adapter.asyncStart();
@@ -32,6 +34,7 @@ test('asyncStart waits for equal numbers of asyncEnd to finish a test', function
 });
 
 test('asyncStart should handle skipped tests that has no assert', function (assert) {
+  assert.expect(2);
   let FakeQUnitWithoutAssert = {
     config: {
       current: {},
@@ -41,7 +44,7 @@ test('asyncStart should handle skipped tests that has no assert', function (asse
   const adapter = QUnitAdapter.create({ qunit: FakeQUnitWithoutAssert });
 
   adapter.asyncStart();
-  assert.equal(adapter.doneCallbacks.length, 1);
+  assert.strictEqual(adapter.doneCallbacks.length, 1);
   assert.deepEqual(adapter.doneCallbacks, [
     {
       test: FakeQUnitWithoutAssert.config.current,
@@ -54,6 +57,7 @@ module('QUnitAdapter - Balanced async with native Promise', function () {
   const adapter = QUnitAdapter.create();
 
   test('asyncStart invoked', function (assert) {
+    assert.expect(1);
     adapter.asyncStart();
 
     assert.ok(true);
@@ -74,6 +78,7 @@ module('QUnitAdapter - Balanced async with RSVP.Promise', function () {
   const adapter = QUnitAdapter.create();
 
   test('asyncStart invoked', function (assert) {
+    assert.expect(1);
     adapter.asyncStart();
 
     assert.ok(true);

@@ -1,6 +1,5 @@
 import { module, test } from 'qunit';
 import Service, { inject as injectService } from '@ember/service';
-import Component from '@ember/component';
 import { setupTest } from 'ember-qunit';
 import hasEmberVersion from '@ember/test-helpers/has-ember-version';
 
@@ -14,28 +13,29 @@ module('setupTest tests', function (hooks) {
   test('can be used for unit style testing', function (assert) {
     this.owner.register(
       'service:foo',
-      Service.extend({
+      class extends Service {
         someMethod() {
           return 'hello thar!';
-        },
-      })
+        }
+      }
     );
 
     let subject = this.owner.lookup('service:foo');
 
-    assert.equal(subject.someMethod(), 'hello thar!');
+    assert.strictEqual(subject.someMethod(), 'hello thar!');
   });
 
   test('can access a shared service instance', function (assert) {
-    this.owner.register('service:bar', Service.extend());
+    this.owner.register('service:bar', class extends Service {});
     this.owner.register(
       'service:foo',
-      Service.extend({
-        bar: injectService(),
+      class extends Service {
+        @injectService bar;
+
         someMethod() {
           this.set('bar.someProp', 'derp');
-        },
-      })
+        }
+      }
     );
 
     let subject = this.owner.lookup('service:foo');
@@ -45,26 +45,6 @@ module('setupTest tests', function (hooks) {
 
     subject.someMethod();
 
-    assert.equal(bar.get('someProp'), 'derp', 'property updated');
-  });
-
-  test('can create a component instance for direct testing without a template', function (assert) {
-    this.owner.register(
-      'component:foo-bar',
-      Component.extend({
-        someMethod() {
-          return 'hello thar!';
-        },
-      })
-    );
-
-    let subject;
-    if (hasEmberVersion(2, 12)) {
-      subject = this.owner.lookup('component:foo-bar');
-    } else {
-      subject = this.owner._lookupFactory('component:foo-bar').create();
-    }
-
-    assert.equal(subject.someMethod(), 'hello thar!');
+    assert.strictEqual(bar.get('someProp'), 'derp', 'property updated');
   });
 });

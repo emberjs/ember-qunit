@@ -1,6 +1,6 @@
-import Ember from 'ember';
 import { later, _backburner as backburner } from '@ember/runloop';
-import { module, test } from 'qunit';
+import { registerWaiter, unregisterWaiter } from '@ember/test';
+import QUnit, { module, test } from 'qunit';
 import { installTestNotIsolatedHook } from 'ember-qunit/test-isolation-validation';
 import { getDebugInfo } from '@ember/test-helpers';
 import patchAssert from './utils/patch-assert-helper';
@@ -14,17 +14,12 @@ if (getDebugInfo()) {
       return !isWaiterPending;
     };
 
-    // In Ember < 2.8 `registerWaiter` expected to be bound to
-    // `Ember.Test` 😭
-    //
-    // Once we have dropped support for < 2.8 we should swap this to
-    // use:
-    //
-    // import { registerWaiter } from '@ember/test';
-    Ember.Test.registerWaiter(waiter);
+    // eslint-disable-next-line ember/no-legacy-test-waiters
+    registerWaiter(waiter);
 
     QUnit.on('testEnd', function () {
-      Ember.Test.unregisterWaiter(this._waiter);
+      // eslint-disable-next-line ember/no-legacy-test-waiters
+      unregisterWaiter(this._waiter);
     });
 
     hooks.beforeEach(function () {

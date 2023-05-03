@@ -21,6 +21,7 @@ module('unhandle promise rejections', function (hooks) {
   });
 
   test('RSVP promises cause an unhandled rejection', function (assert) {
+    assert.expect(2);
     let done = assert.async();
 
     window.onerror = (message) => {
@@ -36,7 +37,7 @@ module('unhandle promise rejections', function (hooks) {
     };
 
     // ensure we do not exit this test until the assertion has happened
-    setTimeout(done, 10);
+    setTimeout(() => done(), 10);
 
     new RSVPPromise((resolve) => {
       setTimeout(resolve);
@@ -47,10 +48,11 @@ module('unhandle promise rejections', function (hooks) {
 
   if (HAS_NATIVE_PROMISE && HAS_UNHANDLED_REJECTION_HANDLER) {
     test('native promises cause an unhandled rejection', function (assert) {
+      assert.expect(1);
       let done = assert.async();
 
       // ensure we do not exit this test until the assertion has happened
-      setTimeout(done, 10);
+      setTimeout(() => done(), 10);
 
       new self.Promise((resolve) => {
         setTimeout(resolve);
