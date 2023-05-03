@@ -25,8 +25,10 @@ module('setupApplicationTest tests', function (hooks) {
     });
   });
 
+  setupApplicationTest(hooks);
+
   hooks.beforeEach(function () {
-    setResolverRegistry({
+    setResolverRegistry(this.owner, {
       'router:main': Router,
       'template:application': hbs`
         <div class="nav"><LinkTo @route="posts">posts</LinkTo> | <LinkTo @route="widgets">widgets</LinkTo></div>
@@ -43,7 +45,6 @@ module('setupApplicationTest tests', function (hooks) {
     });
   });
 
-  setupApplicationTest(hooks);
 
   test('can render', async function (assert) {
     await visit('/');
