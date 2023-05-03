@@ -36,7 +36,6 @@
     "@tsconfig/ember": "^2.0.0",
     "@types/qunit": "^2.19.4",
     "@types/rsvp": "^4.0.4",
-    "babel-eslint": "^10.1.0",
     "concurrently": "^8.0.1",
     "ember-angle-bracket-invocation-polyfill": "^3.0.2",
     "ember-auto-import": "^2.6.3",

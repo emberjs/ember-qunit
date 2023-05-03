@@ -45,7 +45,6 @@ module('setupApplicationTest tests', function (hooks) {
     });
   });
 
-
   test('can render', async function (assert) {
     await visit('/');
 
