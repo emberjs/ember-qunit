@@ -25,7 +25,7 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn lint
       - run: yarn test:ember
-        working-directory: addon
+        working-directory: test-app
 
   floating-dependencies:
     name: 'Floating Dependencies'
@@ -37,7 +37,7 @@ jobs:
       - uses: volta-cli/action@v4
       - run: yarn install --no-lockfile
       - run: yarn test:ember
-        working-directory: addon
+        working-directory: test-app
 
   try-scenarios:
     name: 'Try: ${{ matrix.ember-try-scenario }}'
@@ -66,7 +66,7 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: test
         run: node_modules/.bin/ember try:one ${{ matrix.ember-try-scenario }} --skip-cleanup
-        working-directory: addon
+        working-directory: test-app
 
   types:
     runs-on: ubuntu-latest
