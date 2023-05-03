@@ -24,7 +24,7 @@ module('setupRenderingTest tests', function (hooks) {
       'template:components/template-only',
       hbs`template-only component here`
     );
-    await render(hbs`{{template-only}}`);
+    await render(hbs`<TemplateOnly />`);
 
     assert.equal(this.element.textContent, 'template-only component here');
   });
@@ -37,7 +37,7 @@ module('setupRenderingTest tests', function (hooks) {
       })
     );
 
-    await render(hbs`{{js-only}}`);
+    await render(hbs`<JsOnly />`);
 
     assert.ok(
       this.element.querySelector('.js-only'),
