@@ -10,7 +10,8 @@
     "test": "yarn workspaces run test"
   },
   "workspaces": [
-    "addon"
+    "addon", 
+    "test-app"
   ],
   "volta": {
     "node": "16.20.0",
