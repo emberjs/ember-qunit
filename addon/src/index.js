@@ -124,10 +124,12 @@ export function setupTestAdapter() {
  */
 export function setupEmberTesting() {
   QUnit.testStart(() => {
+    // eslint-disable-next-line ember/no-ember-testing-in-module-scope
     Ember.testing = true;
   });
 
   QUnit.testDone(() => {
+    // eslint-disable-next-line ember/no-ember-testing-in-module-scope
     Ember.testing = false;
   });
 }

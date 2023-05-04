@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import TestAdapter from '@ember/test/adapter';
 import * as QUnit from 'qunit';
 import hasEmberVersion from '@ember/test-helpers/has-ember-version';
 
@@ -27,7 +27,7 @@ function unhandledRejectionAssertion(current, error) {
 
 export function nonTestDoneCallback() {}
 
-let Adapter = Ember.Test.Adapter.extend({
+let Adapter = TestAdapter.extend({
   init() {
     this.doneCallbacks = [];
     this.qunit = this.qunit || QUnit;
