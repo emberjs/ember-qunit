@@ -89,7 +89,7 @@ importers:
   test-app:
     dependencies:
       ember-qunit:
-        specifier: link:../addon
+        specifier: workspace:*
         version: link:../addon
     devDependencies:
       '@babel/core':

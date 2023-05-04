@@ -22,7 +22,7 @@
     "test:ember-compatibility": "ember try:each"
   },
   "dependencies": {
-    "ember-qunit": "link:../addon"
+    "ember-qunit": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "^7.21.0",
