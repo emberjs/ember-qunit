@@ -1,4 +1,6 @@
 /* globals Testem */
+import 'qunit/qunit/qunit.css';
+import './test-container-styles.css';
 
 export { default as QUnitAdapter, nonTestDoneCallback } from './adapter';
 export { loadTests } from './test-loader';
