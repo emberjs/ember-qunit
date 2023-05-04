@@ -20,11 +20,9 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: volta-cli/action@v4
-      - run: yarn install --frozen-lockfile
-      - run: yarn lint
-      - run: yarn test:ember
+      - uses: wyvox/action@v1
+      - run: pnpm lint
+      - run: pnpm test:ember
         working-directory: addon
 
   floating-dependencies:
@@ -33,10 +31,10 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: volta-cli/action@v4
-      - run: yarn install --no-lockfile
-      - run: yarn test:ember
+      - uses: wyvox/action@v1
+        with: 
+          pnpm-args: '--no-lockfile'
+      - run: pnpm test:ember
         working-directory: addon
 
   try-scenarios:
@@ -59,10 +57,7 @@ jobs:
           - embroider-optimized
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: volta-cli/action@v4
-      - name: install dependencies
-        run: yarn install --frozen-lockfile
+      - uses: wyvox/action@v1
       - name: test
         run: node_modules/.bin/ember try:one ${{ matrix.ember-try-scenario }} --skip-cleanup
         working-directory: addon
@@ -81,13 +76,10 @@ jobs:
           - next
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: volta-cli/action@v4
-      - name: install dependencies
-        run: yarn install --frozen-lockfile
+      - uses: wyvox/action@v1
       - name: install TS version
-        run: yarn install --dev typescript@${{matrix.ts-version}}
+        run: pnpm install --save-dev typescript@${{matrix.ts-version}}
         working-directory: addon
       - name: test types
-        run: yarn test:types
+        run: pnpm test:types
         working-directory: addon
