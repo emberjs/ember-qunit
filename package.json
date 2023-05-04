@@ -5,9 +5,10 @@
   "license": "MIT",
   "repository": "https://github.com/emberjs/ember-qunit",
   "scripts": {
-    "lint": "yarn workspaces run lint",
-    "lint:fix": "yarn workspaces run lint:fix",
-    "test": "yarn workspaces run test"
+    "prepare": "pnpm --filter ember-qunit build",
+    "lint": "pnpm --filter '*' run lint",
+    "lint:fix": "pnpm --filter '*' run lint:fix",
+    "test": "pnpm --filter '*' run test"
   },
   "workspaces": [
     "addon", 
