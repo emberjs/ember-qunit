@@ -43,6 +43,12 @@ importers:
       concurrently:
         specifier: ^8.0.1
         version: 8.0.1
+      ember-cli-htmlbars:
+        specifier: ^6.2.0
+        version: 6.2.0
+      ember-resolver:
+        specifier: ^10.1.0
+        version: 10.1.0(@ember/string@3.0.1)(ember-source@4.10.0)
       ember-source:
         specifier: ^4.10.0
         version: 4.10.0(@babel/core@7.21.0)(@glimmer/component@1.1.2)(webpack@5.75.0)
