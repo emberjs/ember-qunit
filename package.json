@@ -83,12 +83,12 @@
     "webpack": "^5.75.0"
   },
   "peerDependencies": {
-    "@ember/test-helpers": "^3.0.2",
-    "ember-source": ">=3.28",
+    "@ember/test-helpers": ">=3.0.2",
+    "ember-source": ">=4.0.0",
     "qunit": "^2.13.0"
   },
   "engines": {
-    "node": "14.* || 16.* || >= 18"
+    "node": "16.* || >= 18"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
@@ -125,7 +125,7 @@
     }
   },
   "volta": {
-    "node": "14.19.1",
-    "yarn": "1.22.18"
+    "node": "16.19.1",
+    "yarn": "1.22.19"
   }
 }
