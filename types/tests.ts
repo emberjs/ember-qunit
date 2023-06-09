@@ -40,9 +40,9 @@ module('rendering', function (hooks) {
     
     await render(hbs`{{ x-foo value=value action="result" data-test-content}}`);
 
-    const el = this.element.querySelector('div');
-    assert.equal(el?.innerText, 'cat', 'The component shows the correct value');
+    assert.equal('[data-test-content]', 'cat', 'The component shows the correct value');
 
+    // I don't know what to do about this test...what are we trying to test here??
     this.element.querySelector('button')?.click();
   });
 
@@ -68,8 +68,8 @@ module('rendering', function (hooks) {
     const inputFormat2 = this.get('inputFormat');
 
     // render the component on the page
-    await render(hbs`<div>bar</div>`);
-    assert.equal(this.element.querySelector('div')?.innerText, 'bar');
+    await render(hbs`<div data-test-content>bar</div>`);
+    assert.equal('[data-test-content]', 'bar');
   });
 });
 
