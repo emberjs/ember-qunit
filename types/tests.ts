@@ -25,22 +25,21 @@ setResolver(EmberResolver.create());
 module('rendering', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', function (this: RenderingTestContext, assert) {
+  test('it renders', async function (assert) {
     assert.expect(2);
 
     // setup the outer context
     this.set('value', 'cat');
 
     // render the component
-    this.render(hbs`
+    await render(hbs`
             {{ x-foo value=value action="result" }}
         `);
 
     // has to be a template
-    // @ts-expect-error
-    this.render();
-    // @ts-expect-error
-    this.render('{{ x-foo value=value action="result" }}');
+    await render(hbs);
+    
+    await render(hbs`{{ x-foo value=value action="result" data-test-content}}`);
 
     const el = this.element.querySelector('div');
     assert.equal(el?.innerText, 'cat', 'The component shows the correct value');
@@ -48,7 +47,7 @@ module('rendering', function (hooks) {
     this.element.querySelector('button')?.click();
   });
 
-  test('it renders', async function (this: RenderingTestContext, assert) {
+  test('it renders', async function (assert) {
     assert.expect(1);
 
     // creates the component instance
@@ -70,7 +69,7 @@ module('rendering', function (hooks) {
     const inputFormat2 = this.get('inputFormat');
 
     // render the component on the page
-    this.render(hbs`<div>bar</div>`);
+    await render(hbs`<div>bar</div>`);
     assert.equal(this.element.querySelector('div')?.innerText, 'bar');
   });
 });
@@ -97,10 +96,10 @@ module('misc and async', function (hooks) {
   // This test is intended to ensure the appropriate behavior for @typescript-eslint/no-misused-promises.
   // However, we don't actually use typescript-eslint in this project and tslint has no equivalent,
   // so we can't properly test it.
-  test('it can be async', async function (this: RenderingTestContext, assert) {
+  test('it can be async', async function (assert) {
     assert.expect(1);
 
-    await this.render(hbs`<p>Hello</p>`);
+    await render(hbs`<p>Hello</p>`);
 
     assert.ok(true, 'rendered');
   });
@@ -112,10 +111,10 @@ module('misc and async', function (hooks) {
   // This test is intended to ensure the appropriate behavior for @typescript-eslint/no-misused-promises.
   // However, we don't actually use typescript-eslint in this project and tslint has no equivalent,
   // so we can't properly test it.
-  skip('it can skip async', async function (this: RenderingTestContext, assert) {
+  skip('it can skip async', async function (assert) {
     assert.expect(1);
 
-    await this.render(hbs`<p>Hello</p>`);
+    await render(hbs`<p>Hello</p>`);
 
     assert.ok(true, 'rendered');
   });
@@ -125,10 +124,10 @@ module('misc and async', function (hooks) {
   // so we can't properly test it.
   only(
     'it can only run async',
-    async function (this: RenderingTestContext, assert) {
+    async function (assert) {
       assert.expect(1);
 
-      await this.render(hbs`<p>Hello</p>`);
+      await render(hbs`<p>Hello</p>`);
 
       assert.ok(true, 'rendered');
     }
@@ -139,10 +138,10 @@ module('misc and async', function (hooks) {
   // so we can't properly test it.
   todo(
     'it can have an async todo',
-    async function (this: RenderingTestContext, assert) {
+    async function (assert) {
       assert.expect(1);
 
-      await this.render(hbs`<p>Hello</p>`);
+      await render(hbs`<p>Hello</p>`);
 
       assert.ok(true, 'rendered');
     }
