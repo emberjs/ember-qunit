@@ -1037,10 +1037,10 @@
     mkdirp "^1.0.4"
     silent-error "^1.1.1"
 
-"@ember/test-helpers@^3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-3.0.2.tgz#d601f69c860a1b80ca4bee75f490bf154ac094a5"
-  integrity sha512-FvtZGD4GrAb/VDsKo1thMJv907dZL5xi8lvvOgehgm+297l5ldpuPkRN788NjiSuDmsgpKofXoIb4lW54DQO0A==
+"@ember/test-helpers@^3.0.3":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-3.0.3.tgz#4d278ebc4576fbf5ff5a2643978f2d310d2656cc"
+  integrity sha512-W8fEWritv36W216wmuusOlsUJs+iDFkOvHratI8tw466NV4deq9TVej1p5DtUFeDUUP/E14IxqrNNC3qaYszfQ==
   dependencies:
     "@ember/test-waiters" "^3.0.2"
     "@embroider/macros" "^1.10.0"

@@ -49,7 +49,7 @@
     "@babel/core": "^7.21.0",
     "@babel/eslint-parser": "^7.19.1",
     "@ember/optional-features": "^2.0.0",
-    "@ember/test-helpers": "^3.0.2",
+    "@ember/test-helpers": "^3.0.3",
     "@embroider/test-setup": "^2.1.1",
     "@glimmer/component": "^1.1.2",
     "@tsconfig/ember": "^2.0.0",
@@ -83,7 +83,7 @@
     "webpack": "^5.75.0"
   },
   "peerDependencies": {
-    "@ember/test-helpers": ">=3.0.2",
+    "@ember/test-helpers": ">=3.0.3",
     "ember-source": ">=4.0.0",
     "qunit": "^2.13.0"
   },
