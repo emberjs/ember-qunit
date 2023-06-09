@@ -42,8 +42,6 @@ module('rendering', function (hooks) {
 
     assert.equal('[data-test-content]', 'cat', 'The component shows the correct value');
 
-    // I don't know what to do about this test...what are we trying to test here??
-    this.element.querySelector('button')?.click();
   });
 
   test('it renders', async function (assert) {
