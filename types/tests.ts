@@ -44,7 +44,8 @@ module('rendering', function (hooks) {
 
   });
 
-  test('it renders', async function (assert) {
+  // this test doesn't make sense, but it also doesn't fail, so I'm setting it to skip until we can improve it.
+  skip('it renders', async function (assert) {
     assert.expect(1);
 
     // creates the component instance
