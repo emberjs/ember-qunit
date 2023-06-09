@@ -11,10 +11,9 @@ import {
   setResolver,
   setupRenderingTest,
   setupTest,
-  SetupTestOptions,
   setupApplicationTest,
 } from 'ember-qunit';
-import { render, RenderingTestContext, TestContext } from '@ember/test-helpers';
+import { render, TestContext } from '@ember/test-helpers';
 import EmberResolver from 'ember-resolver';
 import EmberObject from '@ember/object';
 
