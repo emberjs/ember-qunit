@@ -49,7 +49,8 @@
     "@babel/core": "^7.21.0",
     "@babel/eslint-parser": "^7.19.1",
     "@ember/optional-features": "^2.0.0",
-    "@ember/test-helpers": "^2.9.3",
+    "@ember/string": "^3.1.1",
+    "@ember/test-helpers": "^3.0.3",
     "@embroider/test-setup": "^2.1.1",
     "@glimmer/component": "^1.1.2",
     "@tsconfig/ember": "^2.0.0",
@@ -83,12 +84,12 @@
     "webpack": "^5.75.0"
   },
   "peerDependencies": {
-    "@ember/test-helpers": "^2.9.3",
-    "ember-source": ">=3.28",
+    "@ember/test-helpers": ">=3.0.3",
+    "ember-source": ">=4.0.0",
     "qunit": "^2.13.0"
   },
   "engines": {
-    "node": "14.* || 16.* || >= 18"
+    "node": "16.* || >= 18"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
@@ -125,7 +126,7 @@
     }
   },
   "volta": {
-    "node": "14.19.1",
-    "yarn": "1.22.18"
+    "node": "18.16.0",
+    "yarn": "1.22.19"
   }
 }

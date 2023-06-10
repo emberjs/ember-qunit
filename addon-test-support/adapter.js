@@ -12,7 +12,7 @@ function unhandledRejectionAssertion(current, error) {
     message = error;
     source = 'unknown source';
   } else {
-    message = 'unhandledRejection occured, but it had no message';
+    message = 'unhandledRejection occurred, but it had no message';
     source = 'unknown source';
   }
 
