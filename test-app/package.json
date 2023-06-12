@@ -25,7 +25,7 @@
     "ember-qunit": "workspace:*"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.0",
+    "@babel/core": "^7.22.5",
     "@babel/eslint-parser": "^7.22.5",
     "@ember/optional-features": "^2.0.0",
     "@ember/string": "^3.0.1",
