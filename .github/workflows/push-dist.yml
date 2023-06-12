@@ -11,9 +11,7 @@ jobs:
     name: Push dist
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: volta-cli/action@v4
-      - run: yarn install --frozen-lockfile
+      - uses: wyvox/action@v1
       - uses: kategengler/put-built-npm-package-contents-on-branch@v1.0.0
         with:
           branch: dist
