@@ -1485,7 +1485,7 @@ packages:
       '@embroider/macros': 1.11.0
       broccoli-debug: 0.6.5
       broccoli-funnel: 3.0.8
-      ember-auto-import: 2.6.1(webpack@5.86.0)
+      ember-auto-import: 2.6.3(webpack@5.86.0)
       ember-cli-babel: 7.26.11
       ember-cli-htmlbars: 6.2.0
       ember-source: 4.10.0(@babel/core@7.21.0)(@glimmer/component@1.1.2)(webpack@5.86.0)
@@ -1505,7 +1505,7 @@ packages:
       '@embroider/macros': 1.11.0
       broccoli-debug: 0.6.5
       broccoli-funnel: 3.0.8
-      ember-auto-import: 2.6.1(webpack@5.75.0)
+      ember-auto-import: 2.6.3(webpack@5.86.0)
       ember-cli-babel: 7.26.11
       ember-cli-htmlbars: 6.2.0
       ember-source: 5.0.0(@babel/core@7.21.0)(@glimmer/component@1.1.2)
@@ -4924,45 +4924,6 @@ packages:
       - supports-color
     dev: true
 
-  /ember-auto-import@2.6.1(webpack@5.86.0):
-    resolution: {integrity: sha512-3bCRi/pXp4QslmuCXGlSz9xwR7DF5oDx3zZO5OXKzNZihtkqAM1xvGuRIdQSl46pvbAXOkp8Odl5fOen1i0dRw==}
-    engines: {node: 12.* || 14.* || >= 16}
-    dependencies:
-      '@babel/core': 7.21.0
-      '@babel/plugin-proposal-class-properties': 7.18.6(@babel/core@7.21.0)
-      '@babel/plugin-proposal-decorators': 7.19.6(@babel/core@7.21.0)
-      '@babel/preset-env': 7.19.4(@babel/core@7.21.0)
-      '@embroider/macros': 1.10.0
-      '@embroider/shared-internals': 2.0.0
-      babel-loader: 8.2.5(@babel/core@7.21.0)(webpack@5.86.0)
-      babel-plugin-ember-modules-api-polyfill: 3.5.0
-      babel-plugin-htmlbars-inline-precompile: 5.3.1
-      babel-plugin-syntax-dynamic-import: 6.18.0
-      broccoli-debug: 0.6.5
-      broccoli-funnel: 3.0.8
-      broccoli-merge-trees: 4.2.0
-      broccoli-plugin: 4.0.7
-      broccoli-source: 3.0.1
-      css-loader: 5.2.7(webpack@5.86.0)
-      debug: 4.3.4
-      fs-extra: 10.1.0
-      fs-tree-diff: 2.0.1
-      handlebars: 4.7.7
-      js-string-escape: 1.0.1
-      lodash: 4.17.21
-      mini-css-extract-plugin: 2.6.1(webpack@5.86.0)
-      parse5: 6.0.1
-      resolve: 1.22.2
-      resolve-package-path: 4.0.3
-      semver: 7.5.1
-      style-loader: 2.0.0(webpack@5.86.0)
-      typescript-memoize: 1.1.1
-      walk-sync: 3.0.0
-    transitivePeerDependencies:
-      - supports-color
-      - webpack
-    dev: true
-
   /ember-auto-import@2.6.3(webpack@5.86.0):
     resolution: {integrity: sha512-uLhrRDJYWCRvQ4JQ1e64XlSrqAKSd6PXaJ9ZsZI6Tlms9T4DtQFxNXasqji2ZRJBVrxEoLCRYX3RTldsQ0vNGQ==}
     engines: {node: 12.* || 14.* || >= 16}
@@ -5540,7 +5501,7 @@ packages:
       broccoli-funnel: 3.0.8
       broccoli-merge-trees: 4.2.0
       chalk: 4.1.2
-      ember-auto-import: 2.6.3(webpack@5.75.0)
+      ember-auto-import: 2.6.3(webpack@5.86.0)
       ember-cli-babel: 7.26.11
       ember-cli-get-component-path-option: 1.0.0
       ember-cli-is-package-missing: 1.0.0
