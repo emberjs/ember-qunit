@@ -10,6 +10,7 @@ bower_components/
 node_modules/
 
 # misc
+.DS_Store*
 .env*
 .pnp*
 .sass-cache
