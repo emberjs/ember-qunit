@@ -22,7 +22,7 @@ Requirements
 * Node.js v16 or above
 - TypeScript 4.8 and 4.9
   - SemVer policy: [simple majors](https://www.semver-ts.org/#simple-majors)
-  - The public API is defined by the [Usage][#user-content-usage] section below.
+  - The public API is defined by the [Usage](#usage) section below.
 
 If you need support for Node 14 please use v6.2 of this addon.
 
