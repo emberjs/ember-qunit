@@ -34,7 +34,6 @@
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
     "start": "rollup --config --watch",
-    "test:types": "tsc --noEmit --project types",
     "prepack": "rollup --config"
   },
   "dependencies": {
@@ -52,8 +51,6 @@
     "@types/qunit": "^2.19.4",
     "@types/rsvp": "^4.0.4",
     "concurrently": "^8.0.1",
-    "ember-cli-htmlbars": "^6.2.0",
-    "ember-resolver": "^10.1.0",
     "ember-source": "^4.10.0",
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^8.6.0",

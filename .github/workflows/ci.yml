@@ -73,6 +73,8 @@ jobs:
         ts-version:
           - 4.8
           - 4.9
+          - 5.0
+          - 5.1
           - next
 
     steps:
@@ -82,4 +84,4 @@ jobs:
         working-directory: addon
       - name: test types
         run: pnpm test:types
-        working-directory: addon
+        working-directory: test-types

@@ -1,0 +1,4 @@
+{
+  "extends": "@tsconfig/ember",
+  "include": ["src", "types"]
+}
