@@ -9,7 +9,7 @@
     "ember-qunit": "workspace:*"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.0",
+    "@babel/core": "^7.22.5",
     "@ember/string": "^3.1.1",
     "@ember/test-helpers": "^3.0.3",
     "@glimmer/component": "^1.1.2",

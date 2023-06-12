@@ -41,7 +41,7 @@
     "ember-cli-test-loader": "^3.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.0",
+    "@babel/core": "^7.22.5",
     "@babel/eslint-parser": "^7.22.5",
     "@ember/test-helpers": "^3.0.3",
     "@embroider/addon-dev": "^3.0.0",
