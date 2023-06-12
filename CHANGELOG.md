@@ -1,5 +1,20 @@
 
 
+
+## v7.0.0 (2023-06-12)
+
+#### :boom: Breaking Change
+* [#1077](https://github.com/emberjs/ember-qunit/pull/1077) Upgrade ember-test-helpers and node ([@MelSumner](https://github.com/MelSumner))
+
+#### :house: Internal
+* [#1077](https://github.com/emberjs/ember-qunit/pull/1077) Upgrade ember-test-helpers and node ([@MelSumner](https://github.com/MelSumner))
+* [#1028](https://github.com/emberjs/ember-qunit/pull/1028) Release 6.2.0 ([@chriskrycho](https://github.com/chriskrycho))
+
+#### Committers: 2
+- Chris Krycho ([@chriskrycho](https://github.com/chriskrycho))
+- Melanie Sumner ([@MelSumner](https://github.com/MelSumner))
+
+
 ## v6.2.0 (2023-02-25)
 
 #### :rocket: Enhancement
