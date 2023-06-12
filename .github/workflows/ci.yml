@@ -23,7 +23,7 @@ jobs:
       - uses: wyvox/action@v1
       - run: pnpm lint
       - run: pnpm test:ember
-        working-directory: addon
+        working-directory: test-app
 
   floating-dependencies:
     name: 'Floating Dependencies'
@@ -35,7 +35,7 @@ jobs:
         with: 
           pnpm-args: '--no-lockfile'
       - run: pnpm test:ember
-        working-directory: addon
+        working-directory: test-app
 
   try-scenarios:
     name: 'Try: ${{ matrix.ember-try-scenario }}'
@@ -60,7 +60,7 @@ jobs:
       - uses: wyvox/action@v1
       - name: test
         run: node_modules/.bin/ember try:one ${{ matrix.ember-try-scenario }} --skip-cleanup
-        working-directory: addon
+        working-directory: test-app
 
   types:
     runs-on: ubuntu-latest
