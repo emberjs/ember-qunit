@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import * as QUnit from 'qunit';
-import hasEmberVersion from '@ember/test-helpers/has-ember-version';
 
 function unhandledRejectionAssertion(current, error) {
   let message, source;
@@ -59,22 +58,6 @@ let Adapter = Ember.Test.Adapter.extend({
       done();
     }
   },
-
-  // clobber default implementation of `exception` will be added back for Ember
-  // < 2.17 just below...
-  exception: null,
 });
-
-// Ember 2.17 and higher do not require the test adapter to have an `exception`
-// method When `exception` is not present, the unhandled rejection is
-// automatically re-thrown and will therefore hit QUnit's own global error
-// handler (therefore appropriately causing test failure)
-if (!hasEmberVersion(2, 17)) {
-  Adapter = Adapter.extend({
-    exception(error) {
-      unhandledRejectionAssertion(QUnit.config.current, error);
-    },
-  });
-}
 
 export default Adapter;
