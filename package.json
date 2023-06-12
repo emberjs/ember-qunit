@@ -5,15 +5,12 @@
   "license": "MIT",
   "repository": "https://github.com/emberjs/ember-qunit",
   "scripts": {
-    "lint": "yarn workspaces run lint",
-    "lint:fix": "yarn workspaces run lint:fix",
-    "test": "yarn workspaces run test"
+    "lint": "pnpm --filter '*' lint",
+    "lint:fix": "pnpm --filter '*' lint:fix",
+    "test": "pnpm --filter '*' test"
   },
-  "workspaces": [
-    "addon"
-  ],
   "volta": {
     "node": "18.16.0",
-    "yarn": "1.22.19"
+    "pnpm": "8.6.1"
   }
 }
