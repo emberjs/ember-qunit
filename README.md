@@ -22,7 +22,7 @@ Requirements
 * Node.js v16 or above
 - TypeScript 4.8 and 4.9
   - SemVer policy: [simple majors](https://www.semver-ts.org/#simple-majors)
-  - The public API is defined by the [Usage][#usage] section below.
+  - The public API is defined by the [Usage](#usage) section below.
 
 If you need support for Node 14 please use v6.2 of this addon.
 
@@ -121,16 +121,13 @@ It will setup your test context the same way as `setupTest()`, and additionally:
 * Initializes Ember's renderer to be used with the
   [Rendering helpers](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#rendering-helpers),
   specifically `render()`
-* Adds `this.element` to your test context which returns the DOM element
-  representing the wrapper around the elements that were rendered via
-  `render()`
 * sets up the [DOM Interaction Helpers](https://github.com/emberjs/ember-test-helpers/blob/master/API.md#dom-interaction-helpers)
   from `@ember/test-helpers` (`click()`, `fillIn()`, ...)
 
 ```javascript
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, find } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
 module('GravatarImageComponent', function(hooks) {
@@ -138,7 +135,7 @@ module('GravatarImageComponent', function(hooks) {
 
   test('renders', async function() {
     await render(hbs`{{gravatar-image}}`);
-    assert.ok(this.element.querySelector('img'));
+    assert.ok(find('img'));
   });
 });
 ```
@@ -178,11 +175,11 @@ Contributing
 
 * `git clone <repository-url>`
 * `cd ember-qunit`
-* `npm install`
+* `pnpm install`
 
 ### Running tests
 
-* `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
+* `pnpm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
 * `ember test`
 * `ember test --server`
 
