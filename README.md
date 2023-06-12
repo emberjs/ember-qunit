@@ -18,7 +18,7 @@ Requirements
 ------------------------------------------------------------------------------
 
 * Ember.js v4.0 or above
-* Ember CLI v3.28 or above
+* ember-auto-import v2 or above (or embroider) 
 * Node.js v16 or above
 - TypeScript 4.8 and 4.9
   - SemVer policy: [simple majors](https://www.semver-ts.org/#simple-majors)
