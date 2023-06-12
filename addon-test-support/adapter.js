@@ -1,29 +1,6 @@
 import Ember from 'ember';
 import * as QUnit from 'qunit';
 
-function unhandledRejectionAssertion(current, error) {
-  let message, source;
-
-  if (typeof error === 'object' && error !== null) {
-    message = error.message;
-    source = error.stack;
-  } else if (typeof error === 'string') {
-    message = error;
-    source = 'unknown source';
-  } else {
-    message = 'unhandledRejection occurred, but it had no message';
-    source = 'unknown source';
-  }
-
-  current.assert.pushResult({
-    result: false,
-    actual: false,
-    expected: true,
-    message: message,
-    source: source,
-  });
-}
-
 export function nonTestDoneCallback() {}
 
 let Adapter = Ember.Test.Adapter.extend({
