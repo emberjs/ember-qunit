@@ -21,8 +21,8 @@ importers:
         specifier: ^7.21.0
         version: 7.21.0
       '@babel/eslint-parser':
-        specifier: ^7.19.1
-        version: 7.19.1(@babel/core@7.21.0)(eslint@8.42.0)
+        specifier: ^7.22.5
+        version: 7.22.5(@babel/core@7.21.0)(eslint@8.42.0)
       '@ember/test-helpers':
         specifier: ^3.0.3
         version: 3.0.3(ember-source@4.10.0)(webpack@5.86.0)
@@ -100,8 +100,8 @@ importers:
         specifier: ^7.21.0
         version: 7.21.0
       '@babel/eslint-parser':
-        specifier: ^7.19.1
-        version: 7.19.1(@babel/core@7.21.0)(eslint@8.42.0)
+        specifier: ^7.22.5
+        version: 7.22.5(@babel/core@7.21.0)(eslint@8.42.0)
       '@ember/optional-features':
         specifier: ^2.0.0
         version: 2.0.0
@@ -298,8 +298,8 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /@babel/eslint-parser@7.19.1(@babel/core@7.21.0)(eslint@8.42.0):
-    resolution: {integrity: sha512-AqNf2QWt1rtu2/1rLswy6CDP7H9Oh3mMhk177Y67Rg8d7RD9WfOLLv8CGn6tisFvS2htm86yIe1yLF6I1UDaGQ==}
+  /@babel/eslint-parser@7.22.5(@babel/core@7.21.0)(eslint@8.42.0):
+    resolution: {integrity: sha512-C69RWYNYtrgIRE5CmTd77ZiLDXqgBipahJc/jHP3sLcAGj6AJzxNIuKNpVnICqbyK7X3pFUfEvL++rvtbQpZkQ==}
     engines: {node: ^10.13.0 || ^12.13.0 || >=14.0.0}
     peerDependencies:
       '@babel/core': '>=7.11.0'
