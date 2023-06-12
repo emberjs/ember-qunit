@@ -1,5 +1,5 @@
 import { babel } from '@rollup/plugin-babel';
-// import copy from 'rollup-plugin-copy';
+import copy from 'rollup-plugin-copy';
 import { Addon } from '@embroider/addon-dev/rollup';
 
 const addon = new Addon({
@@ -40,11 +40,11 @@ export default {
     addon.clean(),
 
     // Copy Readme and License into published package
-    // copy({
-    //   targets: [
-    //     { src: '../README.md', dest: '.' },
-    //     { src: '../LICENSE.md', dest: '.' },
-    //   ],
-    // }),
+    copy({
+      targets: [
+        { src: '../README.md', dest: '.' },
+        { src: '../LICENSE.md', dest: '.' },
+      ],
+    }),
   ],
 };
