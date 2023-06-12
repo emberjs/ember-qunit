@@ -1,3 +1,4 @@
 packages:
   - addon
   - test-app
+  - test-types
