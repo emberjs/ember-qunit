@@ -24,6 +24,7 @@
   },
   "files": [
     "dist",
+    "types",
     "addon-main.cjs"
   ],
   "types": "types/index.d.ts",
