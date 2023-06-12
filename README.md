@@ -17,12 +17,14 @@ helpers contained in
 Requirements
 ------------------------------------------------------------------------------
 
-* Ember.js v3.28 or above
+* Ember.js v4.0 or above
 * Ember CLI v3.28 or above
-* Node.js v14 or above
+* Node.js v16 or above
 - TypeScript 4.8 and 4.9
   - SemVer policy: [simple majors](https://www.semver-ts.org/#simple-majors)
   - The public API is defined by the [Usage][#usage] section below.
+
+If you need support for Node 14 please use v6.2 of this addon.
 
 If you need support for Node 13 or older Ember CLI versions please use v4.x
 of this addon.
