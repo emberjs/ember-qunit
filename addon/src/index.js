@@ -1,15 +1,12 @@
 /* globals Testem */
 import 'qunit/qunit/qunit.css';
+
 import './test-container-styles.css';
 
 export { default as QUnitAdapter, nonTestDoneCallback } from './adapter';
 export { loadTests } from './test-loader';
 
 import './qunit-configuration';
-
-if (typeof Testem !== 'undefined') {
-  Testem.hookIntoTestFramework();
-}
 
 import { _backburner } from '@ember/runloop';
 import { resetOnerror, getTestMetadata } from '@ember/test-helpers';
@@ -27,6 +24,24 @@ import {
 import { installTestNotIsolatedHook } from './test-isolation-validation';
 
 let waitForSettled = true;
+
+// Installs the globalThis.QUnit variable, required by testem.js
+// Hacks around existing ember-cli assumptions from the v1-addon
+// world, where would would append files to vendor.js, and
+// require test adapters to hook in to this.
+//
+// We should deprecate this behavior for ember-cli@v6 and come up with
+// a better, more modern way to expect when a test framework is present.
+//
+// See: "test-support-suffix"
+//   https://github.com/emberjs/ember-qunit/blob/v7.0.0/vendor/ember-cli/test-support-suffix.js
+//   https://ember-cli.com/api/files/lib_models_project.js.html
+//
+// Ideally, we'd tell ember-cli to not provide this "test-support-suffix" file at all...
+//  It is calling Testem's hookIntoTestFramework before we're ready
+if (typeof Testem !== 'undefined') {
+  Testem.hookIntoTestFramework();
+}
 
 export function setupTest(hooks, _options) {
   let options = { waitForSettled, ..._options };
