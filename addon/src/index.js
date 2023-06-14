@@ -1,12 +1,16 @@
 /* globals Testem */
 import 'qunit/qunit/qunit.css';
+import './qunit-configuration';
 
-import './test-container-styles.css';
+import { macroCondition, getGlobalConfig, importSync } from '@embroider/macros';
+
+console.log(getGlobalConfig());
+
+if (macroCondition(!getGlobalConfig()['ember-qunit']?.disableContainerStyles)) {
+  importSync('./test-container-styles.css');
+}
 
 export { default as QUnitAdapter, nonTestDoneCallback } from './adapter';
-export { loadTests } from './test-loader';
-
-import './qunit-configuration';
 
 import { _backburner } from '@ember/runloop';
 import { resetOnerror, getTestMetadata } from '@ember/test-helpers';
@@ -39,8 +43,11 @@ let waitForSettled = true;
 //
 // Ideally, we'd tell ember-cli to not provide this "test-support-suffix" file at all...
 //  It is calling Testem's hookIntoTestFramework before we're ready
-if (typeof Testem !== 'undefined') {
-  Testem.hookIntoTestFramework();
+if (typeof window.Testem !== 'undefined') {
+  let originalSetup = window.Testem.hookIntoTestFramework;
+  // Prevent ember-cli from running this, because it does so too early
+  window.Testem.hookIntoTestFramework = () => {};
+  originalSetup();
 }
 
 export function setupTest(hooks, _options) {
