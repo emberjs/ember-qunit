@@ -15,9 +15,9 @@
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
     "start": "pnpm sync:injected; ember serve",
-    "test": "pnpm sync:injected; concurrently \"npm:lint\" \"npm:test:*\" --names \"lint,test:\"",
+    "test": "concurrently \"npm:lint\" \"npm:test:*\" --names \"lint,test:\"",
     "test:types": "tsc --noEmit --project types",
-    "test:ember": "ember test",
+    "test:ember": "pnpm sync:injected; ember test",
     "test:ember-compatibility": "ember try:each",
     "sync:injected": "pnpm sync-dependencies-meta-injected"
   },
