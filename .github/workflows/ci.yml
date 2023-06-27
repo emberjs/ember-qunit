@@ -25,6 +25,18 @@ jobs:
       - run: pnpm test:ember
         working-directory: test-app
 
+  buildtime-options-tests:
+    name: "Buildtime Options Tests"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: wyvox/action@v1
+      - run: pnpm lint
+      - run: pnpm test:ember
+        working-directory: test-app
+
+
   floating-dependencies:
     name: 'Floating Dependencies'
     runs-on: ubuntu-latest
