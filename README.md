@@ -168,6 +168,37 @@ module('basic acceptance test', function(hooks) {
 });
 ```
 
+## Configuration 
+
+Configuration is optionally managed via [`@embroider/macros`](https://www.npmjs.com/package/@embroider/macros)
+
+To configure `ember-qunit`, in your `ember-cli-build.js`, add:
+```js 
+'use strict';
+
+const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+
+module.exports = function (defaults) {
+  const app = new EmberApp(defaults, {
+    '@embroider/macros': {
+      setConfig: {
+        'ember-qunit': {
+          /**
+           * default: false
+           *
+           * removes the CSS for the test-container (where the app and components are rendered to)
+           */
+          disableContainerStyles: true,
+        },
+      },
+    },
+    /* ... */ 
+  });
+
+  /* ... */
+};
+```
+
 
 Contributing
 ------------------------------------------------------------------------------

@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: false
+  excludeLinksFromLockfile: false
+
 importers:
 
   .: {}
@@ -9,6 +13,9 @@ importers:
       '@embroider/addon-shim':
         specifier: ^1.0.0
         version: 1.0.0
+      '@embroider/macros':
+        specifier: ^1.11.1
+        version: 1.11.1
       ember-cli-test-loader:
         specifier: ^3.0.0
         version: 3.0.0
@@ -67,9 +74,6 @@ importers:
       prettier:
         specifier: ^2.8.8
         version: 2.8.8
-      qunit:
-        specifier: ^2.19.4
-        version: 2.19.4
       release-it:
         specifier: ^15.11.0
         version: 15.11.0
@@ -1484,7 +1488,7 @@ packages:
       ember-source: ^4.0.0 || ^5.0.0
     dependencies:
       '@ember/test-waiters': 3.0.2
-      '@embroider/macros': 1.11.0
+      '@embroider/macros': 1.11.1
       broccoli-debug: 0.6.5
       broccoli-funnel: 3.0.8
       ember-auto-import: 2.6.3(webpack@5.86.0)
@@ -1595,8 +1599,8 @@ packages:
       - supports-color
     dev: true
 
-  /@embroider/macros@1.11.0:
-    resolution: {integrity: sha512-P/WSB+PqKSja5qXjYvhLyUM0ivcDoI9kkqs+R0GNujfVhS0EIIAMHfD9uHDBbhzFit39pT0QJqgcXGE2rprCPA==}
+  /@embroider/macros@1.11.1:
+    resolution: {integrity: sha512-yg4Pl5Sw26lKrrtLwk2UEgYkKkztq+Hatn67QYL5A3I3T4IE/bRA3o6xvIslrJNnhyER7jCc2pwusxt3O4HubA==}
     engines: {node: 12.* || 14.* || >= 16}
     peerDependencies:
       '@glint/template': ^1.0.0
@@ -1614,7 +1618,6 @@ packages:
       semver: 7.5.1
     transitivePeerDependencies:
       - supports-color
-    dev: true
 
   /@embroider/shared-internals@1.8.3:
     resolution: {integrity: sha512-N5Gho6Qk8z5u+mxLCcMYAoQMbN4MmH+z2jXwQHVs859bxuZTxwF6kKtsybDAASCtd2YGxEmzcc1Ja/wM28824w==}
@@ -1656,7 +1659,6 @@ packages:
       resolve-package-path: 4.0.3
       semver: 7.5.1
       typescript-memoize: 1.1.1
-    dev: true
 
   /@embroider/test-setup@3.0.1:
     resolution: {integrity: sha512-t7R2f10iZDSNw3ovWAPM63GRQTu63uihpVh6CvHev5XkLt8B7tdxcxGyO6RbdF5Hu+pbsUu8sD0kAlR1gopmxg==}
@@ -2824,7 +2826,6 @@ packages:
 
   /assert-never@1.2.1:
     resolution: {integrity: sha512-TaTivMB6pYI1kXwrFlEhLeGfOqoDNdTxjCdwRfFFkEA30Eu+k48W34nlok2EYWJfFFzqaEmichdNM7th6M5HNw==}
-    dev: true
 
   /assign-symbols@1.0.0:
     resolution: {integrity: sha512-Q+JC7Whu8HhmTdBph/Tq59IoRtoy6KAm5zzPv00WdujX82lbAL8K7WVjne7vdCsAmbF4AYaDOPyO3k0kl8qIrw==}
@@ -4914,7 +4915,7 @@ packages:
       '@babel/plugin-proposal-class-properties': 7.18.6(@babel/core@7.22.5)
       '@babel/plugin-proposal-decorators': 7.19.6(@babel/core@7.22.5)
       '@babel/preset-env': 7.19.4(@babel/core@7.22.5)
-      '@embroider/macros': 1.10.0
+      '@embroider/macros': 1.11.1
       '@embroider/shared-internals': 2.0.0
       babel-loader: 8.2.5(@babel/core@7.22.5)(webpack@5.86.0)
       babel-plugin-ember-modules-api-polyfill: 3.5.0
@@ -4942,6 +4943,7 @@ packages:
       typescript-memoize: 1.1.1
       walk-sync: 3.0.0
     transitivePeerDependencies:
+      - '@glint/template'
       - supports-color
       - webpack
     dev: true
@@ -5443,6 +5445,7 @@ packages:
       silent-error: 1.1.1
     transitivePeerDependencies:
       - '@babel/core'
+      - '@glint/template'
       - supports-color
       - webpack
     dev: true
@@ -6493,7 +6496,6 @@ packages:
     dependencies:
       locate-path: 6.0.0
       path-exists: 4.0.0
-    dev: true
 
   /find-up@6.3.0:
     resolution: {integrity: sha512-v2ZsoEuVHYy8ZIlYqwPe/39Cy+cFDzp4dXPaxNvkEuouymu+2Jbz0PxpKarJHYJTmv2HWT3O382qY8l4jMWthw==}
@@ -8407,7 +8409,6 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       p-locate: 5.0.0
-    dev: true
 
   /locate-path@7.2.0:
     resolution: {integrity: sha512-gvVijfZvn7R+2qyPX8mAuKcFGDf6Nc61GdvGafQsHL0sBIxfKzA+usWn4GFC/bk+QdwPUD4kWFJLhElipq+0VA==}
@@ -9726,7 +9727,6 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       yocto-queue: 0.1.0
-    dev: true
 
   /p-limit@4.0.0:
     resolution: {integrity: sha512-5b0R4txpzjPWVw/cXXUResoD4hb6U/x9BH08L7nw+GN1sezDzPdxeRvpc9c433fZhBan/wusjbCsqwqm4EIBIQ==}
@@ -9760,7 +9760,6 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       p-limit: 3.1.0
-    dev: true
 
   /p-locate@6.0.0:
     resolution: {integrity: sha512-wPrq66Llhl7/4AGC6I+cqxT07LhXvWL08LNXz1fENOw0Ap4sRZZ/gZpTTJ5jpurzzzfS2W/Ge9BY3LgLjCShcw==}
@@ -9905,7 +9904,6 @@ packages:
   /path-exists@4.0.0:
     resolution: {integrity: sha512-ak9Qy5Q7jYb2Wwcey5Fpvg2KoAc/ZIhLSLOSBmRmygPsGwkVVt0fZa0qrtMz+m6tJTAHfZQ8FnmB4MG4LWy7/w==}
     engines: {node: '>=8'}
-    dev: true
 
   /path-exists@5.0.0:
     resolution: {integrity: sha512-RjhtfwJOxzcFmNOi6ltcbcu4Iu+FL3zEj83dk4kAS+fVpTxXLO1b38RvJgT/0QwvV/L3aY9TAnyv0EOqW4GoMQ==}
@@ -12733,13 +12731,8 @@ packages:
   /yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
-    dev: true
 
   /yocto-queue@1.0.0:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
     dev: true
-
-settings:
-  autoInstallPeers: false
-  excludeLinksFromLockfile: false

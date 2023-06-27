@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@embroider/addon-shim": "^1.0.0",
+    "@embroider/macros": "^1.11.1",
     "ember-cli-test-loader": "^3.0.0"
   },
   "devDependencies": {
@@ -60,7 +61,6 @@
     "eslint-plugin-prettier": "^4.2.1",
     "expect-type": "^0.15.0",
     "prettier": "^2.8.8",
-    "qunit": "^2.19.4",
     "release-it": "^15.11.0",
     "release-it-lerna-changelog": "^5.0.0",
     "rollup": "^2.67.0",
