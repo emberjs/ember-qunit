@@ -35,6 +35,9 @@ jobs:
       - run: pnpm lint
       - run: pnpm test:ember
         working-directory: test-app
+      - name: embroider test
+        run: node_modules/.bin/ember try:one embroider-optimized --skip-cleanup
+        working-directory: test-app
 
 
   floating-dependencies:
