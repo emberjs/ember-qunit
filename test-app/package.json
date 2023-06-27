@@ -24,6 +24,11 @@
   "dependencies": {
     "ember-qunit": "workspace:*"
   },
+  "dependenciesMeta": {
+    "ember-qunit": {
+      "injected": true
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.22.5",
     "@babel/eslint-parser": "^7.22.5",
