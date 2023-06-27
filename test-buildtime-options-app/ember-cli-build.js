@@ -9,7 +9,9 @@ module.exports = function (defaults) {
 
     '@embroider/macros': {
       setConfig: {
-        'ember-qunit': {},
+        'ember-qunit': {
+          disableContainerStyles: true,
+        },
       },
     },
   });

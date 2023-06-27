@@ -1,12 +1,12 @@
 import { module, test } from 'qunit';
 import { assert as debugAssert } from '@ember/debug';
 
-module('disableContainerStyles', function () {
+module('Default Options | disableContainerStyles', function () {
   function style(element) {
     return window.getComputedStyle(element);
   }
 
-  test('the styles are not present', async function (assert) {
+  test('the styles are present', async function (assert) {
     let qunitFixture = document.getElementById('qunit-fixture');
     let emberTestingContainer = document.getElementById(
       'ember-testing-container'
@@ -17,9 +17,8 @@ module('disableContainerStyles', function () {
     debugAssert(`#ember-testing-container must exist`, emberTestingContainer);
     debugAssert(`#ember-testing must exist`, emberTesting);
 
-    // Defaults
-    assert.strictEqual(style(qunitFixture).position, 'absolute');
-    assert.strictEqual(style(emberTestingContainer).position, 'static');
-    assert.strictEqual(style(emberTesting).transformOrigin, '500px 0px');
+    assert.strictEqual(style(qunitFixture).position, 'relative');
+    assert.strictEqual(style(emberTestingContainer).position, 'fixed');
+    assert.strictEqual(style(emberTesting).transformOrigin, '0px 0px');
   });
 });

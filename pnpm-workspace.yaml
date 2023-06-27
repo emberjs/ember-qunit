@@ -1,4 +1,5 @@
 packages:
   - addon
   - test-app
+  - test-buildtime-options-app
   - test-types
