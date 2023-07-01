@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: false
+  excludeLinksFromLockfile: false
+
 importers:
 
   .: {}
@@ -144,8 +148,8 @@ importers:
         specifier: ^7.26.11
         version: 7.26.11
       ember-cli-dependency-checker:
-        specifier: ^3.3.1
-        version: 3.3.1(ember-cli@4.10.0)
+        specifier: ^3.3.2
+        version: 3.3.2(ember-cli@4.10.0)
       ember-cli-htmlbars:
         specifier: ^6.2.0
         version: 6.2.0
@@ -4987,17 +4991,17 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /ember-cli-dependency-checker@3.3.1(ember-cli@4.10.0):
-    resolution: {integrity: sha512-Tg6OeijjXNKWkDm6057Tr0N9j9Vlz/ITewXWpn1A/+Wbt3EowBx5ZKfvoupqz05EznKgL1B/ecG0t+JN7Qm6MA==}
+  /ember-cli-dependency-checker@3.3.2(ember-cli@4.10.0):
+    resolution: {integrity: sha512-PwkrW5oYsdPWwt+0Tojufmv/hxVETTjkrEdK7ANQB2VSnqpA5UcYubwpQM9ONuR2J8wyNDMwEHlqIrk/FYtBsQ==}
     engines: {node: '>= 6'}
     peerDependencies:
-      ember-cli: ^3.2.0 || ^4.0.0
+      ember-cli: ^3.2.0 || >=4.0.0
     dependencies:
       chalk: 2.4.2
       ember-cli: 4.10.0
       find-yarn-workspace-root: 1.2.1
       is-git-url: 1.0.0
-      resolve: 1.22.1
+      resolve: 1.22.2
       semver: 5.7.1
     transitivePeerDependencies:
       - supports-color
@@ -12739,7 +12743,3 @@ packages:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
     dev: true
-
-settings:
-  autoInstallPeers: false
-  excludeLinksFromLockfile: false
