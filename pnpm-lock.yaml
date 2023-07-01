@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: false
+  excludeLinksFromLockfile: false
+
 importers:
 
   .: {}
@@ -20,8 +24,8 @@ importers:
         specifier: ^7.22.5
         version: 7.22.5(@babel/core@7.22.5)(eslint@8.42.0)
       '@ember/test-helpers':
-        specifier: ^3.0.3
-        version: 3.0.3(ember-source@5.0.0)(webpack@5.86.0)
+        specifier: ^3.2.0
+        version: 3.2.0(ember-source@5.0.0)(webpack@5.86.0)
       '@embroider/addon-dev':
         specifier: ^3.0.0
         version: 3.0.0(rollup@2.67.0)
@@ -105,8 +109,8 @@ importers:
         specifier: ^3.0.1
         version: 3.1.1
       '@ember/test-helpers':
-        specifier: ^3.0.3
-        version: 3.0.3(ember-source@5.0.0)(webpack@5.86.0)
+        specifier: ^3.2.0
+        version: 3.2.0(ember-source@5.0.0)(webpack@5.86.0)
       '@ember/test-waiters':
         specifier: ^3.0.2
         version: 3.0.2
@@ -226,8 +230,8 @@ importers:
         specifier: ^3.1.1
         version: 3.1.1
       '@ember/test-helpers':
-        specifier: ^3.0.3
-        version: 3.0.3(ember-source@5.0.0)(webpack@5.86.0)
+        specifier: ^3.2.0
+        version: 3.2.0(ember-source@5.0.0)(webpack@5.86.0)
       '@glimmer/component':
         specifier: ^1.1.2
         version: 1.1.2(@babel/core@7.22.5)
@@ -1477,14 +1481,15 @@ packages:
       - supports-color
     dev: true
 
-  /@ember/test-helpers@3.0.3(ember-source@5.0.0)(webpack@5.86.0):
-    resolution: {integrity: sha512-W8fEWritv36W216wmuusOlsUJs+iDFkOvHratI8tw466NV4deq9TVej1p5DtUFeDUUP/E14IxqrNNC3qaYszfQ==}
+  /@ember/test-helpers@3.2.0(ember-source@5.0.0)(webpack@5.86.0):
+    resolution: {integrity: sha512-3yWpPsK5O77tUdCwW3HayrAcdlRitIRYMvLIG69Pkal1JMIGdNYVTvJ2R1lenhQh2syd/WFmGM07vQuDAtotQw==}
     engines: {node: 16.* || >= 18}
     peerDependencies:
       ember-source: ^4.0.0 || ^5.0.0
     dependencies:
       '@ember/test-waiters': 3.0.2
       '@embroider/macros': 1.11.0
+      '@simple-dom/interface': 1.4.0
       broccoli-debug: 0.6.5
       broccoli-funnel: 3.0.8
       ember-auto-import: 2.6.3(webpack@5.86.0)
@@ -12739,7 +12744,3 @@ packages:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
     dev: true
-
-settings:
-  autoInstallPeers: false
-  excludeLinksFromLockfile: false

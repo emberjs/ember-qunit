@@ -29,7 +29,7 @@
     "@babel/eslint-parser": "^7.22.5",
     "@ember/optional-features": "^2.0.0",
     "@ember/string": "^3.0.1",
-    "@ember/test-helpers": "^3.0.3",
+    "@ember/test-helpers": "^3.2.0",
     "@ember/test-waiters": "^3.0.2",
     "@embroider/test-setup": "^3.0.1",
     "@glimmer/component": "^1.1.2",
