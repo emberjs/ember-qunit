@@ -48,7 +48,7 @@
     "@embroider/addon-dev": "^3.0.0",
     "@glimmer/component": "^1.1.2",
     "@rollup/plugin-babel": "^5.3.0",
-    "@tsconfig/ember": "^2.0.0",
+    "@tsconfig/ember": "^3.0.0",
     "@types/qunit": "^2.19.4",
     "@types/rsvp": "^4.0.4",
     "concurrently": "^8.0.1",

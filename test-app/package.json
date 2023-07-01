@@ -34,7 +34,7 @@
     "@embroider/test-setup": "^3.0.1",
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
-    "@tsconfig/ember": "^2.0.0",
+    "@tsconfig/ember": "^3.0.0",
     "@types/qunit": "^2.19.4",
     "@types/rsvp": "^4.0.4",
     "concurrently": "^8.0.1",

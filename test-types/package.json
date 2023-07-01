@@ -13,7 +13,7 @@
     "@ember/string": "^3.1.1",
     "@ember/test-helpers": "^3.0.3",
     "@glimmer/component": "^1.1.2",
-    "@tsconfig/ember": "^2.0.0",
+    "@tsconfig/ember": "^3.0.0",
     "@types/qunit": "^2.19.4",
     "ember-cli-htmlbars": "^6.2.0",
     "ember-resolver": "^10.1.0",
