@@ -23,7 +23,7 @@ Requirements
 - TypeScript 4.8 and 4.9
   - SemVer policy: [simple majors](https://www.semver-ts.org/#simple-majors)
   - The public API is defined by the [Usage](#usage) section below.
-* ember-cli v4.8.1+, v4.12.2+, v5.1+
+* ember-cli ~v4.8.1, ~v4.12.2, >= v5.1
 
 If you need support for Node 14 please use v6.2 of this addon.
 
