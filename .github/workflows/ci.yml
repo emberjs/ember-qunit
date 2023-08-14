@@ -25,6 +25,21 @@ jobs:
       - run: pnpm test:ember
         working-directory: test-app
 
+  buildtime-options-tests:
+    name: "Buildtime Options Tests"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: wyvox/action@v1
+      - run: pnpm lint
+      - run: pnpm test:ember
+        working-directory: test-app
+      - name: embroider test
+        run: node_modules/.bin/ember try:one embroider-optimized --skip-cleanup
+        working-directory: test-app
+
+
   floating-dependencies:
     name: 'Floating Dependencies'
     runs-on: ubuntu-latest
@@ -50,6 +65,7 @@ jobs:
         ember-try-scenario:
           - ember-lts-4.4
           - ember-lts-4.8
+          - ember-lts-4.12
           - ember-release
           - ember-beta
           - ember-canary

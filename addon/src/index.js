@@ -1,6 +1,11 @@
 /* globals Testem */
 import 'qunit/qunit/qunit.css';
-import './test-container-styles.css';
+
+import { macroCondition, getOwnConfig, importSync } from '@embroider/macros';
+
+if (macroCondition(!getOwnConfig()?.disableContainerStyles)) {
+  importSync('./test-container-styles.css');
+}
 
 export { default as QUnitAdapter, nonTestDoneCallback } from './adapter';
 export { loadTests } from './test-loader';
