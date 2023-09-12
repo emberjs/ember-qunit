@@ -2,6 +2,38 @@
 
 
 
+## v8.0.0 (2023-09-12)
+
+#### :boom: Breaking Change
+* [#1111](https://github.com/emberjs/ember-qunit/pull/1111) Requires ember-cli ~v4.8.1, ~v4.12.2, >= v5.1 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :rocket: Enhancement
+* [#1134](https://github.com/emberjs/ember-qunit/pull/1134) Update dependencies to latest version ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#1102](https://github.com/emberjs/ember-qunit/pull/1102) Make public `disableContainerStyles` configuration option ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :memo: Documentation
+* [#1094](https://github.com/emberjs/ember-qunit/pull/1094) Readme updates ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#1087](https://github.com/emberjs/ember-qunit/pull/1087) Update README.md ([@MelSumner](https://github.com/MelSumner))
+
+#### :house: Internal
+* [#1135](https://github.com/emberjs/ember-qunit/pull/1135) Add CI publishing ([@kategengler](https://github.com/kategengler))
+* [#1099](https://github.com/emberjs/ember-qunit/pull/1099) Add types directory in the publish output ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#1098](https://github.com/emberjs/ember-qunit/pull/1098) Strict mode deps ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#1096](https://github.com/emberjs/ember-qunit/pull/1096) Update .gitignore ([@MelSumner](https://github.com/MelSumner))
+* [#1064](https://github.com/emberjs/ember-qunit/pull/1064) Convert to native package ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#1062](https://github.com/emberjs/ember-qunit/pull/1062) Extract test app ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#1063](https://github.com/emberjs/ember-qunit/pull/1063) Switch to pnpm ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#1060](https://github.com/emberjs/ember-qunit/pull/1060) V2 Addon conversion prep: convert to single-package monorepo. ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#1090](https://github.com/emberjs/ember-qunit/pull/1090) Add push-dist workflow ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#1089](https://github.com/emberjs/ember-qunit/pull/1089) Remove hasEmberVersion ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 2
+- Katie Gengler ([@kategengler](https://github.com/kategengler))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+- Melanie Sumner ([@MelSumner](https://github.com/MelSumner))
+
+
+
 ## v7.1.0-0 (2023-06-13)
 
 #### :memo: Documentation
