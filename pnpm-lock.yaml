@@ -82,9 +82,6 @@ importers:
       rollup:
         specifier: ^2.67.0
         version: 2.67.0
-      rollup-plugin-copy:
-        specifier: ^3.4.0
-        version: 3.5.0
       typescript:
         specifier: ^4.9.5
         version: 4.9.5
@@ -4664,10 +4661,6 @@ packages:
     hasBin: true
     dev: true
 
-  /colorette@1.4.0:
-    resolution: {integrity: sha512-Y2oEozpomLn7Q3HFP7dpww7AtMJplbM9lGZP6RDfHqmbeRjiwRg4n6VM6j4KLmRke85uWEI7JqF17f3pqdRA0g==}
-    dev: true
-
   /colors@1.0.3:
     resolution: {integrity: sha512-pFGrxThWcWQ2MsAz6RtgeWe4NK2kUE1WfsrvvlctdII745EW9I0yflqhe7++M5LEc7bV2c/9/5zc8sFcpL0Drw==}
     engines: {node: '>=0.1.90'}
@@ -8538,11 +8531,6 @@ packages:
       isobject: 3.0.1
     dev: true
 
-  /is-plain-object@3.0.1:
-    resolution: {integrity: sha512-Xnpx182SBMrr/aBik8y+GuR4U1L9FqMSojwDQwPMmxyC6bvEqly9UBCxhauBF5vNh2gwWJNX6oDV7O+OM4z34g==}
-    engines: {node: '>=0.10.0'}
-    dev: true
-
   /is-plain-object@5.0.0:
     resolution: {integrity: sha512-VRSzKkbMm5jMDoKLbltAkFQ5Qr7VDiTFGXxYFXXowVj387GeGNOCsOH6Msy00SGZ3Fp84b1Naa1psqgcCIEP5Q==}
     engines: {node: '>=0.10.0'}
@@ -11426,17 +11414,6 @@ packages:
     dependencies:
       fs-extra: 7.0.1
       rollup: 2.67.0
-    dev: true
-
-  /rollup-plugin-copy@3.5.0:
-    resolution: {integrity: sha512-wI8D5dvYovRMx/YYKtUNt3Yxaw4ORC9xo6Gt9t22kveWz1enG9QrhVlagzwrxSC455xD1dHMKhIJkbsQ7d48BA==}
-    engines: {node: '>=8.3'}
-    dependencies:
-      '@types/fs-extra': 8.1.2
-      colorette: 1.4.0
-      fs-extra: 8.1.0
-      globby: 10.0.1
-      is-plain-object: 3.0.1
     dev: true
 
   /rollup-plugin-delete@2.0.0:
