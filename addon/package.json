@@ -38,9 +38,9 @@
     "prepack": "rollup --config"
   },
   "dependencies": {
-    "@embroider/addon-shim": "^1.0.0",
-    "@embroider/macros": "^1.11.1",
-    "ember-cli-test-loader": "^3.0.0"
+    "@embroider/addon-shim": "^1.8.6",
+    "@embroider/macros": "^1.13.1",
+    "ember-cli-test-loader": "^3.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.22.5",
