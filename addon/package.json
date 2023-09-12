@@ -18,7 +18,10 @@
     "Steve Calvert"
   ],
   "exports": {
-    ".": "./dist/index.js",
+    ".": {
+      "types": "./types/index.d.ts",
+      "default": "./dist/index.js"
+    },
     "./*": "./dist/*.js",
     "./addon-main.js": "./addon-main.cjs"
   },
