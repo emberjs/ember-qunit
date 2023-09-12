@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.22.5",
-    "@babel/eslint-parser": "^7.22.5",
+    "@babel/eslint-parser": "^7.22.15",
     "@ember/test-helpers": "^3.0.3",
     "@embroider/addon-dev": "^3.0.0",
     "@glimmer/component": "^1.1.2",
