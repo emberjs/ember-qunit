@@ -50,7 +50,7 @@ pnpm install
 * And last (but not least 😁) do your release.
 
 ```sh
-npx release-it
+cd addon && npx release-it
 ```
 
 [release-it](https://github.com/release-it/release-it/) manages the actual
@@ -58,3 +58,5 @@ release process. It will prompt you to to choose the version number after which
 you will have the chance to hand tweak the changelog to be used (for the
 `CHANGELOG.md` and GitHub release), then `release-it` continues on to tagging,
 pushing the tag and commits, etc.
+
+CI will run on the pushed tag and deploy to npm.
