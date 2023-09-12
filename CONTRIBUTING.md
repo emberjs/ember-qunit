@@ -1,0 +1,1 @@
+addon/CONTRIBUTING.md
