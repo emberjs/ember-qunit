@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - main
       - 'v*'
   pull_request:
   schedule:
@@ -47,7 +48,7 @@ jobs:
 
     steps:
       - uses: wyvox/action@v1
-        with: 
+        with:
           pnpm-args: '--no-lockfile'
       - run: pnpm test:ember
         working-directory: test-app
