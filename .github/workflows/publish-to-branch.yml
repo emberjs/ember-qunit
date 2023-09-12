@@ -1,4 +1,4 @@
-name: Push dist
+name: Publish to branch
 
 on:
   push:
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: wyvox/action@v1
-      - uses: kategengler/put-built-npm-package-contents-on-branch@v1.0.0
+      - uses: kategengler/put-built-npm-package-contents-on-branch@v2.0.0
         with:
           branch: dist
           token: ${{ secrets.GITHUB_TOKEN }}
