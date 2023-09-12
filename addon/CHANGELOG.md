@@ -2,6 +2,15 @@
 
 
 
+
+## v8.0.1 (2023-09-12)
+
+#### :bug: Bug Fix
+* [#1137](https://github.com/emberjs/ember-qunit/pull/1137) Add 'types' to package.json#exports because newer typescript versions ignore the package.json#types entry when package.json#exports is present ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## v8.0.0 (2023-09-12)
 
 #### :boom: Breaking Change
