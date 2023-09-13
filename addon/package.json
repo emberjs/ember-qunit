@@ -64,7 +64,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.2.1",
     "expect-type": "^0.16.0",
-    "prettier": "^2.8.8",
+    "prettier": "^3.0.3",
     "qunit": "^2.19.4",
     "release-it": "^16.1.5",
     "rollup": "^2.67.0",
