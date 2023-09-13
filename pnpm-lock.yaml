@@ -20,8 +20,8 @@ importers:
         specifier: ^7.22.5
         version: 7.22.5
       '@babel/eslint-parser':
-        specifier: ^7.22.5
-        version: 7.22.5(@babel/core@7.22.5)(eslint@8.42.0)
+        specifier: ^7.22.15
+        version: 7.22.15(@babel/core@7.22.5)(eslint@8.42.0)
       '@ember/test-helpers':
         specifier: ^3.0.3
         version: 3.0.3(ember-source@5.0.0)
@@ -96,8 +96,8 @@ importers:
         specifier: ^7.22.5
         version: 7.22.5
       '@babel/eslint-parser':
-        specifier: ^7.22.5
-        version: 7.22.5(@babel/core@7.22.5)(eslint@8.42.0)
+        specifier: ^7.22.15
+        version: 7.22.15(@babel/core@7.22.5)(eslint@8.42.0)
       '@ember/optional-features':
         specifier: ^2.0.0
         version: 2.0.0
@@ -232,8 +232,8 @@ importers:
         specifier: ^7.22.5
         version: 7.22.5
       '@babel/eslint-parser':
-        specifier: ^7.22.5
-        version: 7.22.5(@babel/core@7.22.5)(eslint@8.42.0)
+        specifier: ^7.22.15
+        version: 7.22.15(@babel/core@7.22.5)(eslint@8.42.0)
       '@ember/optional-features':
         specifier: ^2.0.0
         version: 2.0.0
@@ -447,18 +447,18 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /@babel/eslint-parser@7.22.5(@babel/core@7.22.5)(eslint@8.42.0):
-    resolution: {integrity: sha512-C69RWYNYtrgIRE5CmTd77ZiLDXqgBipahJc/jHP3sLcAGj6AJzxNIuKNpVnICqbyK7X3pFUfEvL++rvtbQpZkQ==}
+  /@babel/eslint-parser@7.22.15(@babel/core@7.22.5)(eslint@8.42.0):
+    resolution: {integrity: sha512-yc8OOBIQk1EcRrpizuARSQS0TWAcOMpEJ1aafhNznaeYkeL+OhqnDObGFylB8ka8VFF/sZc+S4RzHyO+3LjQxg==}
     engines: {node: ^10.13.0 || ^12.13.0 || >=14.0.0}
     peerDependencies:
-      '@babel/core': '>=7.11.0'
+      '@babel/core': ^7.11.0
       eslint: ^7.5.0 || ^8.0.0
     dependencies:
       '@babel/core': 7.22.5
       '@nicolo-ribaudo/eslint-scope-5-internals': 5.1.1-v1
       eslint: 8.42.0
       eslint-visitor-keys: 2.1.0
-      semver: 6.3.0
+      semver: 6.3.1
     dev: true
 
   /@babel/generator@7.22.5:
@@ -534,7 +534,7 @@ packages:
       debug: 4.3.4
       lodash.debounce: 4.0.8
       resolve: 1.22.4
-      semver: 6.3.0
+      semver: 6.3.1
     transitivePeerDependencies:
       - supports-color
 
@@ -1327,7 +1327,7 @@ packages:
       babel-plugin-polyfill-corejs2: 0.3.3(@babel/core@7.22.5)
       babel-plugin-polyfill-corejs3: 0.6.0(@babel/core@7.22.5)
       babel-plugin-polyfill-regenerator: 0.4.1(@babel/core@7.22.5)
-      semver: 6.3.0
+      semver: 6.3.1
     transitivePeerDependencies:
       - supports-color
 
@@ -1519,7 +1519,7 @@ packages:
       babel-plugin-polyfill-corejs3: 0.6.0(@babel/core@7.22.5)
       babel-plugin-polyfill-regenerator: 0.4.1(@babel/core@7.22.5)
       core-js-compat: 3.26.0
-      semver: 6.3.0
+      semver: 6.3.1
     transitivePeerDependencies:
       - supports-color
 
@@ -3643,7 +3643,7 @@ packages:
       '@babel/compat-data': 7.22.5
       '@babel/core': 7.22.5
       '@babel/helper-define-polyfill-provider': 0.3.3(@babel/core@7.22.5)
-      semver: 6.3.0
+      semver: 6.3.1
     transitivePeerDependencies:
       - supports-color
 
@@ -5498,7 +5498,7 @@ packages:
     engines: {node: '>=0.8'}
     dependencies:
       errlop: 2.2.0
-      semver: 6.3.0
+      semver: 6.3.1
 
   /ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
@@ -5760,7 +5760,7 @@ packages:
       fs-extra: 7.0.1
       resolve: 1.22.4
       rsvp: 4.8.5
-      semver: 6.3.0
+      semver: 6.3.1
       stagehand: 1.0.0
       walk-sync: 1.1.4
     transitivePeerDependencies:
@@ -5780,7 +5780,7 @@ packages:
       fs-extra: 8.1.0
       resolve: 1.22.2
       rsvp: 4.8.5
-      semver: 6.3.0
+      semver: 6.3.1
       stagehand: 1.0.0
       walk-sync: 2.2.0
     transitivePeerDependencies:
@@ -5807,7 +5807,7 @@ packages:
     engines: {node: 8.* || 10.* || >= 12.*}
     dependencies:
       resolve-package-path: 2.0.0
-      semver: 6.3.0
+      semver: 6.3.1
       silent-error: 1.1.1
     transitivePeerDependencies:
       - supports-color
@@ -8094,6 +8094,7 @@ packages:
   /iconv-lite@0.6.3:
     resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
     engines: {node: '>=0.10.0'}
+    requiresBuild: true
     dependencies:
       safer-buffer: 2.1.2
     dev: true
@@ -9302,7 +9303,7 @@ packages:
     resolution: {integrity: sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==}
     engines: {node: '>=8'}
     dependencies:
-      semver: 6.3.0
+      semver: 6.3.1
 
   /make-fetch-happen@9.1.0:
     resolution: {integrity: sha512-+zopwDy7DNknmwPQplem5lAZX/eCOzSvSNNcSKm5eVwTkOBzoktEfXsa9L23J/GIRhxRsaxzkPEhrJEpE2F4Gg==}
@@ -10466,7 +10467,7 @@ packages:
       got: 9.6.0
       registry-auth-token: 4.2.2
       registry-url: 5.1.0
-      semver: 6.3.0
+      semver: 6.3.1
     dev: true
 
   /package-json@8.1.0:
@@ -11607,6 +11608,10 @@ packages:
 
   /semver@6.3.0:
     resolution: {integrity: sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==}
+    hasBin: true
+
+  /semver@6.3.1:
+    resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
 
   /semver@7.5.1:
@@ -13432,7 +13437,6 @@ packages:
     resolution: {directory: addon, type: directory}
     id: file:addon
     name: ember-qunit
-    version: 7.1.0-0
     peerDependencies:
       '@ember/test-helpers': '>=3.0.3'
       ember-source: '>=4.0.0'
