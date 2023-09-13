@@ -193,8 +193,8 @@ importers:
         specifier: ^11.5.2
         version: 11.5.2(eslint@8.42.0)
       eslint-plugin-n:
-        specifier: ^15.7.0
-        version: 15.7.0(eslint@8.42.0)
+        specifier: ^16.1.0
+        version: 16.1.0(eslint@8.42.0)
       eslint-plugin-qunit:
         specifier: ^7.3.4
         version: 7.3.4(eslint@8.42.0)
@@ -329,8 +329,8 @@ importers:
         specifier: ^11.5.2
         version: 11.5.2(eslint@8.42.0)
       eslint-plugin-n:
-        specifier: ^15.7.0
-        version: 15.7.0(eslint@8.42.0)
+        specifier: ^16.1.0
+        version: 16.1.0(eslint@8.42.0)
       eslint-plugin-qunit:
         specifier: ^7.3.4
         version: 7.3.4(eslint@8.42.0)
@@ -1869,6 +1869,11 @@ packages:
 
   /@eslint-community/regexpp@4.5.1:
     resolution: {integrity: sha512-Z5ba73P98O1KUYCCJTUeVpja9RcGoMdncZ6T49FCUl2lN38JtCJ+3WgIDBv0AuY4WChU5PmtJmOCTlN6FZTFKQ==}
+    engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
+    dev: true
+
+  /@eslint-community/regexpp@4.8.1:
+    resolution: {integrity: sha512-PWiOzLIUAjN/w5K17PoF4n6sKBw0gqLHPhywmYHP4t1VFQQVYeb1yWsJwnMVEMl3tUHME7X/SJPZLmtG7XBDxQ==}
     engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
     dev: true
 
@@ -6359,6 +6364,17 @@ packages:
       - supports-color
     dev: true
 
+  /eslint-plugin-es-x@7.2.0(eslint@8.42.0):
+    resolution: {integrity: sha512-9dvv5CcvNjSJPqnS5uZkqb3xmbeqRLnvXKK7iI5+oK/yTusyc46zbBZKENGsOfojm/mKfszyZb+wNqNPAPeGXA==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+    peerDependencies:
+      eslint: '>=8'
+    dependencies:
+      '@eslint-community/eslint-utils': 4.4.0(eslint@8.42.0)
+      '@eslint-community/regexpp': 4.8.1
+      eslint: 8.42.0
+    dev: true
+
   /eslint-plugin-es@3.0.1(eslint@8.42.0):
     resolution: {integrity: sha512-GUmAsJaN4Fc7Gbtl8uOBlayo2DqhwWvEzykMHSCZHU3XdJ+NSzzZcVhXh3VxX5icqQ+oQdIEawXX8xkR3mIFmQ==}
     engines: {node: '>=8.10.0'}
@@ -6370,32 +6386,22 @@ packages:
       regexpp: 3.2.0
     dev: true
 
-  /eslint-plugin-es@4.1.0(eslint@8.42.0):
-    resolution: {integrity: sha512-GILhQTnjYE2WorX5Jyi5i4dz5ALWxBIdQECVQavL6s7cI76IZTDWleTHkxz/QT3kvcs2QlGHvKLYsSlPOlPXnQ==}
-    engines: {node: '>=8.10.0'}
-    peerDependencies:
-      eslint: '>=4.19.1'
-    dependencies:
-      eslint: 8.42.0
-      eslint-utils: 2.1.0
-      regexpp: 3.2.0
-    dev: true
-
-  /eslint-plugin-n@15.7.0(eslint@8.42.0):
-    resolution: {integrity: sha512-jDex9s7D/Qial8AGVIHq4W7NswpUD5DPDL2RH8Lzd9EloWUuvUkHfv4FRLMipH5q2UtyurorBkPeNi1wVWNh3Q==}
-    engines: {node: '>=12.22.0'}
+  /eslint-plugin-n@16.1.0(eslint@8.42.0):
+    resolution: {integrity: sha512-3wv/TooBst0N4ND+pnvffHuz9gNPmk/NkLwAxOt2JykTl/hcuECe6yhTtLJcZjIxtZwN+GX92ACp/QTLpHA3Hg==}
+    engines: {node: '>=16.0.0'}
     peerDependencies:
       eslint: '>=7.0.0'
     dependencies:
+      '@eslint-community/eslint-utils': 4.4.0(eslint@8.42.0)
       builtins: 5.0.1
       eslint: 8.42.0
-      eslint-plugin-es: 4.1.0(eslint@8.42.0)
-      eslint-utils: 3.0.0(eslint@8.42.0)
-      ignore: 5.2.0
-      is-core-module: 2.12.1
+      eslint-plugin-es-x: 7.2.0(eslint@8.42.0)
+      get-tsconfig: 4.7.0
+      ignore: 5.2.4
+      is-core-module: 2.13.0
       minimatch: 3.1.2
-      resolve: 1.22.2
-      semver: 7.5.1
+      resolve: 1.22.4
+      semver: 7.5.4
     dev: true
 
   /eslint-plugin-node@11.1.0(eslint@8.42.0):
@@ -7383,6 +7389,12 @@ packages:
       call-bind: 1.0.2
       get-intrinsic: 1.2.0
 
+  /get-tsconfig@4.7.0:
+    resolution: {integrity: sha512-pmjiZ7xtB8URYm74PlGJozDNyhvsVLUcpBa8DZBG3bWHwaHa9bPiRpiSfovw+fjhwONSCWKRyk+JQHEGZmMrzw==}
+    dependencies:
+      resolve-pkg-maps: 1.0.0
+    dev: true
+
   /get-uri@6.0.1:
     resolution: {integrity: sha512-7ZqONUVqaabogsYNWlYj0t3YZaL6dhuEueZXGF+/YVmf6dHmaFg8/6psJKqhx9QykIDKzpGcy2cn4oV4YC7V/Q==}
     engines: {node: '>= 14'}
@@ -8213,12 +8225,6 @@ packages:
     hasBin: true
     dependencies:
       ci-info: 3.8.0
-    dev: true
-
-  /is-core-module@2.12.1:
-    resolution: {integrity: sha512-Q4ZuBAe2FUsKtyQJoQHlvP8OvBERxO3jEmy1I7hcRXcJBGGHFh/aJBswbXuS9sgrDH2QUO8ilkwNPHvHMd8clg==}
-    dependencies:
-      has: 1.0.3
     dev: true
 
   /is-core-module@2.13.0:
@@ -11151,6 +11157,10 @@ packages:
     dependencies:
       http-errors: 1.6.3
       path-is-absolute: 1.0.1
+    dev: true
+
+  /resolve-pkg-maps@1.0.0:
+    resolution: {integrity: sha512-seS2Tj26TBVOC2NIc2rOe2y2ZO7efxITtLZcGSOnHHNOQ7CkiUBfw0Iw2ck6xkIhPwLhKNLS8BO+hEpngQlqzw==}
     dev: true
 
   /resolve-url@0.2.1:
