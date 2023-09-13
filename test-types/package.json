@@ -15,7 +15,7 @@
     "@glimmer/component": "^1.1.2",
     "@tsconfig/ember": "^2.0.0",
     "@types/qunit": "^2.19.4",
-    "ember-cli-htmlbars": "^6.2.0",
+    "ember-cli-htmlbars": "^6.3.0",
     "ember-resolver": "^10.1.0",
     "ember-source": "^5.0.0",
     "qunit": "^2.19.4",
