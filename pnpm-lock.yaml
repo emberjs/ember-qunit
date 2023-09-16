@@ -145,14 +145,14 @@ importers:
         specifier: ^2.6.3
         version: 2.6.3(webpack@5.86.0)
       ember-cli:
-        specifier: ~5.1.0
-        version: 5.1.0
+        specifier: ~5.2.1
+        version: 5.2.1
       ember-cli-babel:
         specifier: ^7.26.11
         version: 7.26.11
       ember-cli-dependency-checker:
         specifier: ^3.3.1
-        version: 3.3.1(ember-cli@5.1.0)
+        version: 3.3.1(ember-cli@5.2.1)
       ember-cli-htmlbars:
         specifier: ^6.3.0
         version: 6.3.0
@@ -281,14 +281,14 @@ importers:
         specifier: ^2.6.3
         version: 2.6.3(webpack@5.86.0)
       ember-cli:
-        specifier: ~5.1.0
-        version: 5.1.0
+        specifier: ~5.2.1
+        version: 5.2.1
       ember-cli-babel:
         specifier: ^7.26.11
         version: 7.26.11
       ember-cli-dependency-checker:
         specifier: ^3.3.1
-        version: 3.3.1(ember-cli@5.1.0)
+        version: 3.3.1(ember-cli@5.2.1)
       ember-cli-htmlbars:
         specifier: ^6.3.0
         version: 6.3.0
@@ -1539,13 +1539,13 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.0
-    dev: true
 
   /@babel/runtime@7.22.5:
     resolution: {integrity: sha512-ecjvYlnAaZ/KVneE/OdKYBYfgXV3Ptu6zQWmgEF7vwKhQnvVS6bjMD2XYgj+SNvQ1GfK/pjgokfPkC/2CO8CuA==}
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.13.11
+    dev: true
 
   /@babel/template@7.22.15:
     resolution: {integrity: sha512-QPErUVm4uyJa60rkI73qneDacvdvzxshT3kksGqlGWYdOTIUOwJ7RDUL8sGqslY1uXWSL6xMFKEXDS3ox2uF0w==}
@@ -3843,7 +3843,7 @@ packages:
       hash-for-dep: 1.5.1
       heimdalljs: 0.2.6
       heimdalljs-logger: 0.1.10
-      json-stable-stringify: 1.0.1
+      json-stable-stringify: 1.0.2
       rsvp: 4.8.5
       workerpool: 3.1.2
     transitivePeerDependencies:
@@ -4336,7 +4336,7 @@ packages:
     resolution: {integrity: sha512-Quw8a6y8CPmRd6eU+mwypktYCwUcf8yVFIRbNZ6tPQEckX9yd+EBVEPC/GSZZrMWH9e7Vz4pT7XhpmyApRByLQ==}
     engines: {node: 6.* || 8.* || >= 10.*}
     dependencies:
-      json-stable-stringify: 1.0.1
+      json-stable-stringify: 1.0.2
 
   /call-bind@1.0.2:
     resolution: {integrity: sha512-7O+FbCihrB5WGbFYesctwmTKae6rOiIzmz1icreWJ+0aA7LJfuqhEso2T9ncpcFtzMQtzXf2QGGueWJGTYsqrA==}
@@ -5129,7 +5129,7 @@ packages:
     resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
     engines: {node: '>=0.11'}
     dependencies:
-      '@babel/runtime': 7.22.5
+      '@babel/runtime': 7.22.10
     dev: true
 
   /debug@2.6.9:
@@ -5540,14 +5540,14 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /ember-cli-dependency-checker@3.3.1(ember-cli@5.1.0):
+  /ember-cli-dependency-checker@3.3.1(ember-cli@5.2.1):
     resolution: {integrity: sha512-Tg6OeijjXNKWkDm6057Tr0N9j9Vlz/ITewXWpn1A/+Wbt3EowBx5ZKfvoupqz05EznKgL1B/ecG0t+JN7Qm6MA==}
     engines: {node: '>= 6'}
     peerDependencies:
       ember-cli: ^3.2.0 || ^4.0.0
     dependencies:
       chalk: 2.4.2
-      ember-cli: 5.1.0
+      ember-cli: 5.2.1
       find-yarn-workspace-root: 1.2.1
       is-git-url: 1.0.0
       resolve: 1.22.2
@@ -5742,8 +5742,8 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /ember-cli@5.1.0:
-    resolution: {integrity: sha512-TlnfO+V5lZqRQ7eGXt+P8q24Cu90GSXXAS/2NasaCtC1WY7eVzhfMsoNZiOw3Pe1CaB7i5fPDR8jAMsTwx8Tpg==}
+  /ember-cli@5.2.1:
+    resolution: {integrity: sha512-TYojG0uxyvX0rEgb3GkOVVUPCtfLmQbw2YHnAdZxHTJ1d45oRaDHlJmPfsaY8suVbP4EjXOiPR1CkFKoOvAuXg==}
     engines: {node: '>= 16'}
     hasBin: true
     dependencies:
@@ -8716,16 +8716,10 @@ packages:
     resolution: {integrity: sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==}
     dev: true
 
-  /json-stable-stringify@1.0.1:
-    resolution: {integrity: sha512-i/J297TW6xyj7sDFa7AmBPkQvLIxWr2kKPWI26tXydnZrzVAocNqn5DMNT1Mzk0vit1V5UkRM7C1KdVNp7Lmcg==}
-    dependencies:
-      jsonify: 0.0.1
-
   /json-stable-stringify@1.0.2:
     resolution: {integrity: sha512-eunSSaEnxV12z+Z73y/j5N37/In40GK4GmsSy+tEHJMxknvqnA7/djeYtAgW0GsWHUfg+847WJjKaEylk2y09g==}
     dependencies:
       jsonify: 0.0.1
-    dev: true
 
   /json-stringify-safe@5.0.1:
     resolution: {integrity: sha512-ZClg6AaYvamvYEE82d3Iyd3vSSIjQ+odgjaTzRuO3s7toCdFKczob2i0zCh7JE8kWn17yvAWhUVxvqGwUalsRA==}
@@ -10940,12 +10934,11 @@ packages:
 
   /regenerator-runtime@0.14.0:
     resolution: {integrity: sha512-srw17NI0TUWHuGa5CFGGmhfNIeja30WMBfbslPNhf6JrqQlLN5gcrvig1oqPxiVaXb0oW0XRKtH6Nngs5lKCIA==}
-    dev: true
 
   /regenerator-transform@0.15.0:
     resolution: {integrity: sha512-LsrGtPmbYg19bcPHwdtmXwbW+TqNvtY4riE3P83foeHRroMbH6/2ddFBfab3t7kbzc7v7p4wbkIecHImqt0QNg==}
     dependencies:
-      '@babel/runtime': 7.22.5
+      '@babel/runtime': 7.22.10
 
   /regex-not@1.0.2:
     resolution: {integrity: sha512-J6SDjUgDxQj5NusnOtdFxDwN/+HWykR8GELwctJ7mdqhcyy1xEc4SRFHUXvxTp661YaVKAjfRLZ9cCqS6tn32A==}
