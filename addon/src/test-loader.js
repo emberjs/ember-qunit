@@ -1,12 +1,7 @@
 import * as QUnit from 'qunit';
 import AbstractTestLoader, {
-  addModuleExcludeMatcher,
   addModuleIncludeMatcher,
 } from 'ember-cli-test-loader/test-support/index';
-
-addModuleExcludeMatcher(function (moduleName) {
-  return QUnit.urlParams.nolint && moduleName.match(/\.(jshint|lint-test)$/);
-});
 
 addModuleIncludeMatcher(function (moduleName) {
   return moduleName.match(/\.jshint$/);
@@ -46,13 +41,6 @@ export class TestLoader extends AbstractTestLoader {
    Load tests following the default patterns:
 
    * The module name ends with `-test`
-   * The module name ends with `.jshint`
-
-   Excludes tests that match the following
-   patterns when `?nolint` URL param is set:
-
-   * The module name ends with `.jshint`
-   * The module name ends with `-lint-test`
 
    @method loadTests
  */
