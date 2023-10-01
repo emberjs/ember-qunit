@@ -41,7 +41,7 @@
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
     "@tsconfig/ember": "^2.0.0",
-    "@types/qunit": "^2.19.4",
+    "@types/qunit": "^2.19.6",
     "@types/rsvp": "^4.0.4",
     "concurrently": "^8.0.1",
     "ember-angle-bracket-invocation-polyfill": "^3.0.2",
@@ -68,7 +68,7 @@
     "loader.js": "^4.7.0",
     "pnpm-sync-dependencies-meta-injected": "^0.0.9",
     "prettier": "^2.8.8",
-    "qunit": "^2.19.4",
+    "qunit": "^2.20.0",
     "qunit-dom": "^2.0.0",
     "typescript": "^4.9.5",
     "webpack": "^5.86.0"

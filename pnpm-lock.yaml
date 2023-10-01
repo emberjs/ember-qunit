@@ -45,8 +45,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       '@types/qunit':
-        specifier: ^2.19.4
-        version: 2.19.4
+        specifier: ^2.19.6
+        version: 2.19.6
       '@types/rsvp':
         specifier: ^4.0.4
         version: 4.0.4
@@ -78,8 +78,8 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       qunit:
-        specifier: ^2.19.4
-        version: 2.19.4
+        specifier: ^2.20.0
+        version: 2.20.0
       release-it:
         specifier: ^16.1.5
         version: 16.1.5
@@ -94,7 +94,7 @@ importers:
     dependencies:
       ember-qunit:
         specifier: workspace:*
-        version: file:addon(@ember/test-helpers@3.0.3)(ember-source@5.0.0)(qunit@2.19.4)
+        version: file:addon(@ember/test-helpers@3.0.3)(ember-source@5.0.0)(qunit@2.20.0)
     devDependencies:
       '@babel/core':
         specifier: ^7.22.17
@@ -130,8 +130,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       '@types/qunit':
-        specifier: ^2.19.4
-        version: 2.19.4
+        specifier: ^2.19.6
+        version: 2.19.6
       '@types/rsvp':
         specifier: ^4.0.4
         version: 4.0.4
@@ -211,8 +211,8 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       qunit:
-        specifier: ^2.19.4
-        version: 2.19.4
+        specifier: ^2.20.0
+        version: 2.20.0
       qunit-dom:
         specifier: ^2.0.0
         version: 2.0.0
@@ -230,7 +230,7 @@ importers:
     dependencies:
       ember-qunit:
         specifier: workspace:*
-        version: file:addon(@ember/test-helpers@3.0.3)(ember-source@5.0.0)(qunit@2.19.4)
+        version: file:addon(@ember/test-helpers@3.0.3)(ember-source@5.0.0)(qunit@2.20.0)
     devDependencies:
       '@babel/core':
         specifier: ^7.22.17
@@ -266,8 +266,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       '@types/qunit':
-        specifier: ^2.19.4
-        version: 2.19.4
+        specifier: ^2.19.6
+        version: 2.19.6
       '@types/rsvp':
         specifier: ^4.0.4
         version: 4.0.4
@@ -347,8 +347,8 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       qunit:
-        specifier: ^2.19.4
-        version: 2.19.4
+        specifier: ^2.20.0
+        version: 2.20.0
       qunit-dom:
         specifier: ^2.0.0
         version: 2.0.0
@@ -384,8 +384,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       '@types/qunit':
-        specifier: ^2.19.4
-        version: 2.19.4
+        specifier: ^2.19.6
+        version: 2.19.6
       ember-cli-htmlbars:
         specifier: ^6.3.0
         version: 6.3.0
@@ -396,8 +396,8 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0(@babel/core@7.22.17)(@glimmer/component@1.1.2)(webpack@5.86.0)
       qunit:
-        specifier: ^2.19.4
-        version: 2.19.4
+        specifier: ^2.20.0
+        version: 2.20.0
       typescript:
         specifier: ^4.9.5
         version: 4.9.5
@@ -2921,8 +2921,8 @@ packages:
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
     dev: true
 
-  /@types/qunit@2.19.4:
-    resolution: {integrity: sha512-EocRiD2JRWrOaA0dnyyLX083DIo1p3OSBBiGODcHaMzOFhteXtvRRp0kKsiYYqynnBSMqnqRI92iE32axdoXZw==}
+  /@types/qunit@2.19.6:
+    resolution: {integrity: sha512-bz9STa6EHurtpSfn5cNiScBladlw43bM+7luQA985Kd9YlF4dZaLmKt3c5/oSyN1AWAl50YBpqTq0BxCP64nGg==}
     dev: true
 
   /@types/range-parser@1.2.4:
@@ -10819,8 +10819,8 @@ packages:
       - supports-color
     dev: true
 
-  /qunit@2.19.4:
-    resolution: {integrity: sha512-aqUzzUeCqlleWYKlpgfdHHw9C6KxkB9H3wNfiBg5yHqQMzy0xw/pbCRHYFkjl8MsP/t8qkTQE+JTYL71azgiew==}
+  /qunit@2.20.0:
+    resolution: {integrity: sha512-N8Fp1J55waE+QG1KwX2LOyqulZUToRrrPBqDOfYfuAMkEglFL15uwvmH1P4Tq/omQ/mGbBI8PEB3PhIfvUb+jg==}
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
@@ -13305,7 +13305,7 @@ packages:
     engines: {node: '>=12.20'}
     dev: true
 
-  file:addon(@ember/test-helpers@3.0.3)(ember-source@5.0.0)(qunit@2.19.4):
+  file:addon(@ember/test-helpers@3.0.3)(ember-source@5.0.0)(qunit@2.20.0):
     resolution: {directory: addon, type: directory}
     id: file:addon
     name: ember-qunit
@@ -13319,7 +13319,7 @@ packages:
       '@embroider/macros': 1.13.1
       ember-cli-test-loader: 3.1.0
       ember-source: 5.0.0(@babel/core@7.22.17)(@glimmer/component@1.1.2)(webpack@5.86.0)
-      qunit: 2.19.4
+      qunit: 2.20.0
     transitivePeerDependencies:
       - '@glint/template'
       - supports-color
