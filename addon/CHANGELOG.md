@@ -3,6 +3,19 @@
 
 
 
+
+## v8.0.2 (2023-11-02)
+
+#### :bug: Bug Fix
+* [#1140](https://github.com/emberjs/ember-qunit/pull/1140) Remove the "Disable linting" checkbox ([@nelstrom](https://github.com/nelstrom))
+  - no supported version of ember-source / ember-cli has any overlap with the supported versions of libraries that utilized this capability
+* [#1137](https://github.com/emberjs/ember-qunit/pull/1137) Add 'types' to package.json#exports because newer typescript versions ignore the package.json#types entry when package.json#exports is present ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 2
+- Drew Neil ([@nelstrom](https://github.com/nelstrom))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
+
 ## v8.0.1 (2023-09-13)
 
 #### :bug: Bug Fix
