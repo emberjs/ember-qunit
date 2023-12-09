@@ -1,5 +1,6 @@
 /* globals Testem */
 import 'qunit/qunit/qunit.css';
+import 'qunit-theme-ember/qunit.css';
 
 import { macroCondition, getOwnConfig, importSync } from '@embroider/macros';
 
