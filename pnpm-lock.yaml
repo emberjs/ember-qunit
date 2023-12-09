@@ -19,6 +19,9 @@ importers:
       ember-cli-test-loader:
         specifier: ^3.1.0
         version: 3.1.0
+      qunit-theme-ember:
+        specifier: ^0.2.0
+        version: 0.2.0
     devDependencies:
       '@babel/core':
         specifier: ^7.23.2
@@ -11397,6 +11400,10 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /qunit-theme-ember@0.2.0:
+    resolution: {integrity: sha512-o2j4MoGspsGBnPmWk87/vPHmIsvKNzwCtymbc8bpRxCBVgF1JW5ry2uIFi4XYDY8k6RcL9ashCDHiSjzbn8oqw==}
+    dev: false
 
   /qunit@2.20.0:
     resolution: {integrity: sha512-N8Fp1J55waE+QG1KwX2LOyqulZUToRrrPBqDOfYfuAMkEglFL15uwvmH1P4Tq/omQ/mGbBI8PEB3PhIfvUb+jg==}
