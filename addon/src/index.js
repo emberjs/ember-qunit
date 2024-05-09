@@ -2,7 +2,7 @@
 import { macroCondition, getOwnConfig, importSync } from '@embroider/macros';
 
 /**
- * Load qunit-theme-ember by default, if no custom theme is specified.
+ * Load qunit-default theme by default, if no custom theme is specified.
  */
 if (
   macroCondition(
