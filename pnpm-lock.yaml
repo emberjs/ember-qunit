@@ -20,8 +20,8 @@ importers:
         specifier: ^3.1.0
         version: 3.1.0
       qunit-theme-ember:
-        specifier: ^0.2.0
-        version: 0.2.0
+        specifier: ^1.0.0
+        version: 1.0.0
     devDependencies:
       '@babel/core':
         specifier: ^7.23.2
@@ -11401,8 +11401,8 @@ packages:
       - supports-color
     dev: true
 
-  /qunit-theme-ember@0.2.0:
-    resolution: {integrity: sha512-o2j4MoGspsGBnPmWk87/vPHmIsvKNzwCtymbc8bpRxCBVgF1JW5ry2uIFi4XYDY8k6RcL9ashCDHiSjzbn8oqw==}
+  /qunit-theme-ember@1.0.0:
+    resolution: {integrity: sha512-vdMVVo6ecdCkWttMTKeyq1ZTLGHcA6zdze2zhguNuc3ritlJMhOXY5RDseqazOwqZVfCg3rtlmL3fMUyIzUyFQ==}
     dev: false
 
   /qunit@2.20.0:
@@ -13913,6 +13913,7 @@ packages:
       ember-cli-test-loader: 3.1.0
       ember-source: 5.0.0(@babel/core@7.23.2)(@glimmer/component@1.1.2)(webpack@5.86.0)
       qunit: 2.20.0
+      qunit-theme-ember: 1.0.0
     transitivePeerDependencies:
       - '@glint/template'
       - supports-color
