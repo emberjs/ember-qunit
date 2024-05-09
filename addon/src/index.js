@@ -18,11 +18,7 @@ if (macroCondition(!getOwnConfig()?.disableContainerStyles)) {
   importSync('./test-container-styles.css');
 }
 
-if (
-  macroCondition(
-    getOwnConfig()?.theme === undefined || getOwnConfig()?.theme === 'ember'
-  )
-) {
+if (macroCondition(getOwnConfig()?.theme === 'ember')) {
   importSync('qunit-theme-ember/qunit.css');
 }
 

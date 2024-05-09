@@ -190,12 +190,12 @@ module.exports = function (defaults) {
            */
           disableContainerStyles: true,
           /**
-           * default: 'ember'
-           * options: 'ember' | 'qunit-default'
+           * default: 'qunit-default'
+           * options: 'qunit-default' | 'ember'
            * 
            * Sets the theme for the Web UI of the test runner. Use a different value to disable loading any theme, allowing you to provide your own external one.
            */
-          theme: 'ember',
+          theme: 'qunit-default',
         },
       },
     },
