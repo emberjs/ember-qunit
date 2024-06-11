@@ -11,6 +11,7 @@ module.exports = function (defaults) {
       setConfig: {
         'ember-qunit': {
           disableContainerStyles: true,
+          theme: 'qunit-default',
         },
       },
     },

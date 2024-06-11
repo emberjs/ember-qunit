@@ -1,10 +1,25 @@
 /* globals Testem */
-import 'qunit/qunit/qunit.css';
-
 import { macroCondition, getOwnConfig, importSync } from '@embroider/macros';
+
+/**
+ * Load qunit-default theme by default, if no custom theme is specified.
+ */
+if (
+  macroCondition(
+    getOwnConfig()?.theme === undefined ||
+      getOwnConfig()?.theme === 'qunit-default' ||
+      getOwnConfig()?.theme === 'ember'
+  )
+) {
+  importSync('qunit/qunit/qunit.css');
+}
 
 if (macroCondition(!getOwnConfig()?.disableContainerStyles)) {
   importSync('./test-container-styles.css');
+}
+
+if (macroCondition(getOwnConfig()?.theme === 'ember')) {
+  importSync('qunit-theme-ember/qunit.css');
 }
 
 export { default as QUnitAdapter, nonTestDoneCallback } from './adapter';
