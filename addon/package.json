@@ -1,6 +1,6 @@
 {
   "name": "ember-qunit",
-  "version": "8.0.2",
+  "version": "8.1.0",
   "description": "QUnit helpers for testing Ember.js applications",
   "keywords": [
     "ember-addon"
@@ -43,7 +43,8 @@
   "dependencies": {
     "@embroider/addon-shim": "^1.8.6",
     "@embroider/macros": "^1.13.1",
-    "ember-cli-test-loader": "^3.1.0"
+    "ember-cli-test-loader": "^3.1.0",
+    "qunit-theme-ember": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",

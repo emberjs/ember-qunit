@@ -4,6 +4,15 @@
 
 
 
+
+## v8.1.0 (2024-06-11)
+
+#### :rocket: Enhancement
+* [#1166](https://github.com/emberjs/ember-qunit/pull/1166) feat: introduce `theme` config and add `qunit-theme-ember` as option ([@IgnaceMaes](https://github.com/IgnaceMaes))
+
+#### Committers: 1
+- Ignace Maes ([@IgnaceMaes](https://github.com/IgnaceMaes))
+
 ## v8.0.2 (2023-11-02)
 
 #### :bug: Bug Fix
