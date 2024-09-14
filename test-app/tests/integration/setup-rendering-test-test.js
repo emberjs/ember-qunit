@@ -1,10 +1,12 @@
 /* eslint-disable ember/no-classic-components */
 import { module, test } from 'qunit';
-import Component from '@ember/component';
+import Component, { setComponentTemplate } from '@ember/component';
+import templateOnly from '@ember/component/template-only';
 import { helper } from '@ember/component/helper';
 import { hbs } from 'ember-cli-htmlbars';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
+import { macroCondition, dependencySatisfies } from '@embroider/macros';
 
 module('setupRenderingTest tests', function (hooks) {
   setupRenderingTest(hooks);
@@ -16,10 +18,20 @@ module('setupRenderingTest tests', function (hooks) {
   });
 
   test('can invoke template only components', async function (assert) {
-    this.owner.register(
-      'template:components/template-only',
-      hbs`template-only component here`
-    );
+    if (
+      macroCondition(dependencySatisfies('ember-source', '>= 6.0.0-alpha.0'))
+    ) {
+      this.owner.register(
+        'component:template-only',
+        setComponentTemplate(hbs`template-only component here`, templateOnly())
+      );
+    } else {
+      this.owner.register(
+        'template:components/template-only',
+        hbs`template-only component here`
+      );
+    }
+
     await render(hbs`<TemplateOnly />`);
 
     assert.strictEqual(
