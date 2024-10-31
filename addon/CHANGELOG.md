@@ -5,6 +5,21 @@
 
 
 
+
+## v8.1.1 (2024-10-31)
+
+#### :bug: Bug Fix
+* [#1180](https://github.com/emberjs/ember-qunit/pull/1180) Fix @typs/qunit overrides for latest qunit version ([@vstefanovic97](https://github.com/vstefanovic97))
+
+#### :house: Internal
+* [#1178](https://github.com/emberjs/ember-qunit/pull/1178) Remove pauseTest workaround ([@Krinkle](https://github.com/Krinkle))
+* [#1179](https://github.com/emberjs/ember-qunit/pull/1179) Fix tests on ember v6+ ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 3
+- Timo Tijhof ([@Krinkle](https://github.com/Krinkle))
+- Vuk ([@vstefanovic97](https://github.com/vstefanovic97))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## v8.1.0 (2024-06-11)
 
 #### :rocket: Enhancement
