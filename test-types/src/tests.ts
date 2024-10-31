@@ -337,3 +337,45 @@ module('with setup options', function (hooks) {
   setupRenderingTest(hooks, { resolver });
   setupApplicationTest(hooks, { resolver });
 });
+
+module('methods on test function', function () {
+  test.each('example with each', [1,2,3], async function (assert, number) {
+    // setup the outer context
+    this.set('value', 'cat');
+  
+    await render(hbs`{{number}}`);
+  
+    assert.strictEqual(number, 1)
+  });
+
+  test.skip('example with skip', async function (assert) {
+    // setup the outer context
+    this.set('value', 'cat');
+  
+    await render(hbs`{{number}}`);
+
+    assert.ok(this.get('value'));
+  });
+
+  test.skip('example with skip w/o callback');
+
+  test.todo('example with todo', async function (assert) {
+    // setup the outer context
+    this.set('value', 'cat');
+  
+    await render(hbs`{{number}}`);
+
+    assert.ok(this.get('value'));
+  });
+
+  test.todo('example with todo w/o callback');
+
+  test.only('example with only', async function (assert) {
+    // setup the outer context
+    this.set('value', 'cat');
+  
+    await render(hbs`{{number}}`);
+
+    assert.ok(this.get('value'));
+  });
+})
