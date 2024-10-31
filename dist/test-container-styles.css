@@ -1,0 +1,75 @@
+/* Override QUnit's default styles that place #qunit-fixture outside the viewport */
+#qunit-fixture {
+  position: relative;
+  left: auto;
+  top: auto;
+  width: auto;
+  height: auto;
+}
+
+#ember-testing-container {
+  position: fixed;
+
+  background-color: #fff;
+  background-image:
+    linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee),
+    linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee);
+  background-position: 0 0, 10px 10px;
+  background-size: 20px 20px;
+
+  bottom: 0;
+  right: 0;
+  width: 640px;
+  height: 384px;
+  overflow: auto;
+  z-index: 98;
+  border: 1px solid #ccc;
+  margin: 0 auto;
+
+  /* Prevent leaking position fixed elements outside the testing container */
+  transform: translateZ(0);
+}
+
+#ember-testing-container.ember-testing-container-full-screen {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  z-index: 98;
+  border: none;
+  right: 0;
+}
+
+#ember-testing-container.ember-testing-container-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#ember-testing {
+  width: 200%;
+  height: 200%;
+  transform: scale(0.5);
+  transform-origin: top left;
+}
+
+.ember-testing-container-full-screen #ember-testing {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: scale(1);
+}
+
+#qunit-tests > li:last-child {
+  margin-bottom: 384px;
+}
+
+@supports (display: flex) or (display: -webkit-box) {
+  @media (min-height: 500px) {
+    #qunit-tests {
+      overflow: auto;
+    }
+
+    #ember-testing-container {
+      right: 30px;
+    }
+  }
+}
