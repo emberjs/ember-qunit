@@ -180,30 +180,6 @@ declare global {
 
   interface QUnit {
     /**
-     * Add a test to run.
-     *
-     * Add a test to run using `QUnit.test()`.
-     *
-     * The `assert` argument to the callback contains all of QUnit's assertion
-     * methods. Use this argument to call your test assertions.
-     *
-     * `QUnit.test()` can automatically handle the asynchronous resolution of a
-     * Promise on your behalf if you return a thenable Promise as the result of
-     * your callback function.
-     *
-     * @param name Title of unit being tested
-     * @param callback Function to close over assertions
-     */
-    // SAFETY: this is just wildly, impossibly unsafe. QUnit cannot -- ever! --
-    // provide this guarantee. However, it's also the only way to support TS
-    // in tests in Ember until we move the community over entirely to using
-    // `<template>` and local scope.
-    test<TC extends TestContext>(
-      name: string,
-      callback: (this: TC, assert: Assert) => void | Promise<unknown>
-    ): void;
-
-    /**
      * Adds a test to exclusively run, preventing all other tests from running.
      *
      * Use this method to focus your test suite on a specific test. QUnit.only
@@ -268,5 +244,47 @@ declare global {
       name: string,
       callback?: (this: TC, assert: Assert) => void | Promise<unknown>
     ): void;
+  }
+
+  namespace QUnit {
+    interface TestFunction {
+      // SAFETY: this is just wildly, impossibly unsafe. QUnit cannot -- ever! --
+      // provide this guarantee. However, it's also the only way to support TS
+      // in tests in Ember until we move the community over entirely to using
+      // `<template>` and local scope.
+      <TC extends TestContext>(
+        name: string,
+        callback: (this: TC, assert: Assert) => void | Promise<unknown>
+      ): void;
+    }
+
+    interface SkipFunction {
+      <TC extends TestContext>(
+        name: string,
+        callback?: (this: TC, assert: Assert) => void | Promise<unknown>
+      ): void;
+    }
+
+    interface TodoFunction {
+      <TC extends TestContext>(
+        name: string,
+        callback?: (this: TC, assert: Assert) => void | Promise<unknown>
+      ): void;
+    }
+
+    interface OnlyFunction {
+      <TC extends TestContext>(
+        name: string,
+        callback: (this: TC, assert: Assert) => void | Promise<unknown>
+      ): void;
+    }
+
+    interface EachFunction {
+      <TC extends TestContext, T>(
+         name: string,
+         dataset: T[],
+         callback: (this: TC, assert: Assert, data: T) => void | Promise<unknown>
+       ): void;
+   }
   }
 }

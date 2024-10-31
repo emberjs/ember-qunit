@@ -48,8 +48,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       '@types/qunit':
-        specifier: ^2.19.6
-        version: 2.19.6
+        specifier: ^2.19.12
+        version: 2.19.12
       '@types/rsvp':
         specifier: ^4.0.4
         version: 4.0.4
@@ -133,8 +133,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       '@types/qunit':
-        specifier: ^2.19.6
-        version: 2.19.6
+        specifier: ^2.19.12
+        version: 2.19.12
       '@types/rsvp':
         specifier: ^4.0.4
         version: 4.0.4
@@ -269,8 +269,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       '@types/qunit':
-        specifier: ^2.19.6
-        version: 2.19.6
+        specifier: ^2.19.12
+        version: 2.19.12
       '@types/rsvp':
         specifier: ^4.0.4
         version: 4.0.4
@@ -387,8 +387,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       '@types/qunit':
-        specifier: ^2.19.6
-        version: 2.19.6
+        specifier: ^2.19.12
+        version: 2.19.12
       ember-cli-htmlbars:
         specifier: ^6.3.0
         version: 6.3.0
@@ -3416,8 +3416,8 @@ packages:
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
     dev: true
 
-  /@types/qunit@2.19.6:
-    resolution: {integrity: sha512-bz9STa6EHurtpSfn5cNiScBladlw43bM+7luQA985Kd9YlF4dZaLmKt3c5/oSyN1AWAl50YBpqTq0BxCP64nGg==}
+  /@types/qunit@2.19.12:
+    resolution: {integrity: sha512-II+C1wgzUia0g+tGAH+PBb4XiTm8/C/i6sN23r21NNskBYOYrv+qnW0tFQ/IxZzKVwrK4CTglf8YO3poJUclQA==}
     dev: true
 
   /@types/range-parser@1.2.4:
@@ -13902,6 +13902,7 @@ packages:
     resolution: {directory: addon, type: directory}
     id: file:addon
     name: ember-qunit
+    version: 8.1.0
     peerDependencies:
       '@ember/test-helpers': '>=3.0.3'
       ember-source: '>=4.0.0'
