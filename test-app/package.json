@@ -67,7 +67,7 @@
     "expect-type": "^0.16.0",
     "loader.js": "^4.7.0",
     "pnpm-sync-dependencies-meta-injected": "^0.0.9",
-    "prettier": "^2.8.8",
+    "prettier": "^3.2.4",
     "qunit": "^2.20.0",
     "qunit-dom": "^2.0.0",
     "typescript": "^4.9.5",
