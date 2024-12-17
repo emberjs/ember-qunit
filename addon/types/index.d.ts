@@ -112,15 +112,12 @@ interface QUnitStartOptions {
   setupEmberTesting?: boolean | undefined;
 
   /**
-   * If `false` validation of `Ember.onerror` will be disabled.
-   */
-  setupEmberOnerrorValidation?: boolean | undefined;
-
-  /**
    * If `false` test isolation validation will be disabled.
    */
   setupTestIsolationValidation?: boolean | undefined;
 }
+
+export function setupEmberOnerrorValidation(): void;
 
 export function start(options?: QUnitStartOptions): void;
 
@@ -276,10 +273,10 @@ declare global {
 
     interface EachFunction {
       <TC extends TestContext, T>(
-         name: string,
-         dataset: T[],
-         callback: (this: TC, assert: Assert, data: T) => void | Promise<unknown>
-       ): void;
-   }
+        name: string,
+        dataset: T[],
+        callback: (this: TC, assert: Assert, data: T) => void | Promise<unknown>
+      ): void;
+    }
   }
 }
