@@ -187,8 +187,6 @@ export function setupTestIsolationValidation(delay) {
    @param {Boolean} [options.setupEmberTesting] `false` opts out of the
    default behavior of setting `Ember.testing` to `true` before all tests and
    back to `false` after each test will.
-   @param {Boolean} [options.setupEmberOnerrorValidation] If `false` validation
-   of `Ember.onerror` will be disabled.
    @param {Boolean} [options.setupTestIsolationValidation] If `false` test isolation validation
    will be disabled.
    @param {Number} [options.testIsolationValidationDelay] When using
@@ -207,10 +205,6 @@ export function start(options = {}) {
 
   if (options.setupEmberTesting !== false) {
     setupEmberTesting();
-  }
-
-  if (options.setupEmberOnerrorValidation !== false) {
-    setupEmberOnerrorValidation();
   }
 
   if (
