@@ -22,7 +22,10 @@
       "types": "./types/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./*": "./dist/*.js",
+    "./*": {
+      "types": "./types/*.d.ts",
+      "default": "./dist/*.js"
+    },
     "./addon-main.js": "./addon-main.cjs"
   },
   "files": [
@@ -30,7 +33,13 @@
     "types",
     "addon-main.cjs"
   ],
-  "types": "types/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "types/*"
+      ]
+    }
+  },
   "scripts": {
     "build": "rollup --config",
     "lint": "concurrently 'npm:lint:*(!fix)' --names 'lint:'",
