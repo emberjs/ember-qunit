@@ -16,9 +16,6 @@ importers:
       '@embroider/macros':
         specifier: ^1.13.1
         version: 1.13.1
-      ember-cli-test-loader:
-        specifier: ^3.1.0
-        version: 3.1.0
       qunit-theme-ember:
         specifier: ^1.0.0
         version: 1.0.0
@@ -3680,9 +3677,6 @@ packages:
 
   /ajv-formats@2.1.1:
     resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
-    peerDependenciesMeta:
-      ajv:
-        optional: true
     dependencies:
       ajv: 8.11.0
 
@@ -13902,7 +13896,6 @@ packages:
     resolution: {directory: addon, type: directory}
     id: file:addon
     name: ember-qunit
-    version: 8.1.0
     peerDependencies:
       '@ember/test-helpers': '>=3.0.3'
       ember-source: '>=4.0.0'

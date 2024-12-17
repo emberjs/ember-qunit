@@ -1,11 +1,81 @@
-import * as QUnit from 'qunit';
-import AbstractTestLoader, {
-  addModuleIncludeMatcher,
-} from 'ember-cli-test-loader/test-support/index';
+/* globals requirejs, require */
 
-addModuleIncludeMatcher(function (moduleName) {
-  return moduleName.match(/\.jshint$/);
-});
+import * as QUnit from 'qunit';
+
+class TestLoader {
+  static load() {
+    new TestLoader().loadModules();
+  }
+
+  constructor() {
+    this._didLogMissingUnsee = false;
+  }
+
+  shouldLoadModule(moduleName) {
+    return moduleName.match(/[-_]test$/);
+  }
+
+  listModules() {
+    return Object.keys(requirejs.entries);
+  }
+
+  listTestModules() {
+    let moduleNames = this.listModules();
+    let testModules = [];
+    let moduleName;
+
+    for (let i = 0; i < moduleNames.length; i++) {
+      moduleName = moduleNames[i];
+
+      if (this.shouldLoadModule(moduleName)) {
+        testModules.push(moduleName);
+      }
+    }
+
+    return testModules;
+  }
+
+  loadModules() {
+    let testModules = this.listTestModules();
+    let testModule;
+
+    for (let i = 0; i < testModules.length; i++) {
+      testModule = testModules[i];
+      this.require(testModule);
+      this.unsee(testModule);
+    }
+  }
+
+  require(moduleName) {
+    try {
+      require(moduleName);
+    } catch (e) {
+      this.moduleLoadFailure(moduleName, e);
+    }
+  }
+
+  unsee(moduleName) {
+    if (typeof require.unsee === 'function') {
+      require.unsee(moduleName);
+    } else if (!this._didLogMissingUnsee) {
+      this._didLogMissingUnsee = true;
+      if (typeof console !== 'undefined') {
+        console.warn(
+          'unable to require.unsee, please upgrade loader.js to >= v3.3.0'
+        );
+      }
+    }
+  }
+
+  moduleLoadFailure(moduleName, error) {
+    moduleLoadFailures.push(error);
+
+    QUnit.module('TestLoader Failures');
+    QUnit.test(moduleName + ': could not be loaded', function () {
+      throw error;
+    });
+  }
+}
 
 let moduleLoadFailures = [];
 
@@ -25,17 +95,6 @@ QUnit.done(function () {
     moduleLoadFailures = [];
   }
 });
-
-export class TestLoader extends AbstractTestLoader {
-  moduleLoadFailure(moduleName, error) {
-    moduleLoadFailures.push(error);
-
-    QUnit.module('TestLoader Failures');
-    QUnit.test(moduleName + ': could not be loaded', function () {
-      throw error;
-    });
-  }
-}
 
 /**
    Load tests following the default patterns:
