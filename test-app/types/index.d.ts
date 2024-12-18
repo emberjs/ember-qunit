@@ -87,6 +87,8 @@ export class QUnitAdapter extends EmberTestAdapter {}
 
 export { module, test, skip, only, todo } from 'qunit';
 
+export function setupEmberOnerrorValidation(): void;
+
 interface QUnitStartOptions {
   /**
    * If `false` tests will not be loaded automatically.
@@ -115,11 +117,6 @@ interface QUnitStartOptions {
    * to `true` before all tests and back to `false` after each test will.
    */
   setupEmberTesting?: boolean | undefined;
-
-  /**
-   * If `false` validation of `Ember.onerror` will be disabled.
-   */
-  setupEmberOnerrorValidation?: boolean | undefined;
 
   /**
    * If `false` test isolation validation will be disabled.

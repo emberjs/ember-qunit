@@ -23,7 +23,6 @@ if (macroCondition(getOwnConfig()?.theme === 'ember')) {
 }
 
 export { default as QUnitAdapter, nonTestDoneCallback } from './adapter';
-export { loadTests } from './test-loader';
 
 import './qunit-configuration';
 
@@ -33,7 +32,6 @@ if (typeof Testem !== 'undefined') {
 
 import { _backburner } from '@ember/runloop';
 import { resetOnerror, getTestMetadata } from '@ember/test-helpers';
-import { loadTests } from './test-loader';
 import Ember from 'ember';
 import * as QUnit from 'qunit';
 import QUnitAdapter from './adapter';
@@ -180,7 +178,6 @@ export function setupTestIsolationValidation(delay) {
 /**
    @method start
    @param {Object} [options] Options to be used for enabling/disabling behaviors
-   @param {Boolean} [options.loadTests] If `false` tests will not be loaded automatically.
    @param {Boolean} [options.setupTestContainer] If `false` the test container will not
    be setup based on `devmode`, `dockcontainer`, or `nocontainer` URL params.
    @param {Boolean} [options.startTests] If `false` tests will not be automatically started
@@ -190,8 +187,6 @@ export function setupTestIsolationValidation(delay) {
    @param {Boolean} [options.setupEmberTesting] `false` opts out of the
    default behavior of setting `Ember.testing` to `true` before all tests and
    back to `false` after each test will.
-   @param {Boolean} [options.setupEmberOnerrorValidation] If `false` validation
-   of `Ember.onerror` will be disabled.
    @param {Boolean} [options.setupTestIsolationValidation] If `false` test isolation validation
    will be disabled.
    @param {Number} [options.testIsolationValidationDelay] When using
@@ -200,10 +195,6 @@ export function setupTestIsolationValidation(delay) {
    async to have been completed. The default value is 50.
  */
 export function start(options = {}) {
-  if (options.loadTests !== false) {
-    loadTests();
-  }
-
   if (options.setupTestContainer !== false) {
     setupTestContainer();
   }
@@ -214,10 +205,6 @@ export function start(options = {}) {
 
   if (options.setupEmberTesting !== false) {
     setupEmberTesting();
-  }
-
-  if (options.setupEmberOnerrorValidation !== false) {
-    setupEmberOnerrorValidation();
   }
 
   if (
