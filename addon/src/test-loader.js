@@ -2,7 +2,7 @@
 
 import * as QUnit from 'qunit';
 
-class TestLoader {
+export class TestLoader {
   static load() {
     new TestLoader().loadModules();
   }
