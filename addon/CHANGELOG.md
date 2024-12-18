@@ -6,6 +6,18 @@
 
 
 
+
+## v9.0.0 (2024-12-18)
+
+#### :boom: Breaking Change
+* [#1182](https://github.com/emberjs/ember-qunit/pull/1182) Require explicit calls to loadTests and setupEmberOnerrorValidation ([@ef4](https://github.com/ef4))
+
+#### :house: Internal
+* [#1181](https://github.com/emberjs/ember-qunit/pull/1181) Remove unused babel plugins ([@ef4](https://github.com/ef4))
+
+#### Committers: 1
+- Edward Faulkner ([@ef4](https://github.com/ef4))
+
 ## v8.1.1 (2024-10-31)
 
 #### :bug: Bug Fix
