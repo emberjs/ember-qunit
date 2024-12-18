@@ -7,6 +7,15 @@
 
 
 
+
+## v9.0.1 (2024-12-18)
+
+#### :bug: Bug Fix
+* [#1183](https://github.com/emberjs/ember-qunit/pull/1183) Export TestLoader ([@ef4](https://github.com/ef4))
+
+#### Committers: 1
+- Edward Faulkner ([@ef4](https://github.com/ef4))
+
 ## v9.0.0 (2024-12-18)
 
 #### :boom: Breaking Change
