@@ -82,6 +82,26 @@ start();
 Also make sure that you have set `ENV.APP.autoboot = false;` for the `test`
 environment in your `config/environment.js`.
 
+### Load Tests
+
+In environments that use the AMD Loader, `loadTests()` will need to be called
+before `start()`.
+
+```javascript
+import Application from '../app';
+import config from '../config/environment';
+import { setApplication } from '@ember/test-helpers';
+import { start } from 'ember-qunit';
+import { loadTests } from 'ember-qunit/test-loader';
+
+setApplication(Application.create(config.APP));
+
+loadTests()
+start();
+```
+
+In ESM environments, this isn't needed as import.meta.glob can load test files.
+
 ### Setup Tests
 
 The `setupTest()` function can be used to setup a unit test for any kind
