@@ -64,14 +64,15 @@
     "eslint-plugin-ember": "^11.11.1",
     "eslint-plugin-n": "^16.1.0",
     "eslint-plugin-qunit": "^7.3.4",
-    "expect-type": "^0.16.0",
     "loader.js": "^4.7.0",
     "pnpm-sync-dependencies-meta-injected": "^0.0.9",
     "prettier": "^2.8.8",
     "qunit": "^2.20.0",
     "qunit-dom": "^2.0.0",
-    "typescript": "^4.9.5",
-    "webpack": "^5.86.0"
+    "webpack": "^5.0.0",
+    "@embroider/core": "^3.0.0",
+    "@embroider/webpack": "^3.0.0",
+    "@embroider/compat": "^3.0.0"
   },
   "engines": {
     "node": "14.* || 16.* || >= 18"
