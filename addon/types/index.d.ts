@@ -89,6 +89,11 @@ export { module, test, skip, only, todo } from 'qunit';
 
 interface QUnitStartOptions {
   /**
+   * If `false` tests will not be loaded automatically.
+   */
+  loadTests?: boolean | undefined;
+
+  /**
    * If `false` the test container will not be setup based on `devmode`,
    * `dockcontainer`, or `nocontainer` URL params.
    */
