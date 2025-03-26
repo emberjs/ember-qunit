@@ -32,6 +32,7 @@
   "devDependencies": {
     "@babel/core": "^7.23.2",
     "@babel/eslint-parser": "^7.22.15",
+    "@babel/plugin-proposal-decorators": "^7.22.15",
     "@ember/optional-features": "^2.0.0",
     "@ember/string": "^3.0.1",
     "@ember/test-helpers": "^3.0.3",
@@ -57,7 +58,7 @@
     "ember-resolver": "^10.1.0",
     "ember-source": "~5.0.0",
     "ember-source-channel-url": "^3.0.0",
-    "ember-template-lint": "^5.7.3",
+    "ember-template-lint": "^7.0.1",
     "ember-try": "^2.0.0",
     "eslint": "^8.52.0",
     "eslint-plugin-disable-features": "^0.1.3",
