@@ -7,6 +7,7 @@
     "url": "https://github.com/emberjs/ember-qunit.git"
   },
   "license": "MIT",
+  "private": true,
   "scripts": {
     "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\"",
     "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\"",
