@@ -1,5 +1,7 @@
 /* globals Testem */
 import { macroCondition, getOwnConfig, importSync } from '@embroider/macros';
+import { setTesting } from '@ember/debug';
+import { setAdapter } from 'ember-testing/lib/test/adapter';
 
 /**
  * Load qunit-default theme by default, if no custom theme is specified.
@@ -32,7 +34,6 @@ if (typeof Testem !== 'undefined') {
 
 import { _backburner } from '@ember/runloop';
 import { resetOnerror, getTestMetadata } from '@ember/test-helpers';
-import Ember from 'ember';
 import * as QUnit from 'qunit';
 import QUnitAdapter from './adapter';
 import {
@@ -127,7 +128,7 @@ export function startTests() {
    @method setupTestAdapter
  */
 export function setupTestAdapter() {
-  Ember.Test.adapter = QUnitAdapter.create();
+  setAdapter(QUnitAdapter.create());
 }
 
 /**
@@ -138,13 +139,11 @@ export function setupTestAdapter() {
  */
 export function setupEmberTesting() {
   QUnit.testStart(() => {
-    // eslint-disable-next-line ember/no-ember-testing-in-module-scope
-    Ember.testing = true;
+    setTesting(true);
   });
 
   QUnit.testDone(() => {
-    // eslint-disable-next-line ember/no-ember-testing-in-module-scope
-    Ember.testing = false;
+    setTesting(false);
   });
 }
 
