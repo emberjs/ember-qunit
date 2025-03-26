@@ -1,6 +1,6 @@
-import Ember from 'ember';
 import { module } from 'qunit';
 import { setupEmberOnerrorValidation } from 'ember-qunit';
+import { getOnerror, setOnerror } from '@ember/-internals/error-handling';
 
 module('setupEmberOnerrorValidation', function (hooks) {
   hooks.beforeEach(function (assert) {
@@ -12,14 +12,14 @@ module('setupEmberOnerrorValidation', function (hooks) {
       originalPushResult(resultInfo);
     };
 
-    this.originalEmberOnerror = Ember.onerror;
-    Ember.onerror = function () {
+    this.originalEmberOnerror = getOnerror();
+    setOnerror(function () {
       // intentionally swallowing here
-    };
+    });
   });
 
   hooks.afterEach(function () {
-    Ember.onerror = this.originalEmberOnerror;
+    setOnerror(this.originalEmberOnerror);
   });
 
   setupEmberOnerrorValidation();
