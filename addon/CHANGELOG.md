@@ -1,5 +1,29 @@
 # Changelog
 
+## Release (2025-03-26)
+
+* ember-qunit 9.0.2 (patch)
+
+#### :bug: Bug Fix
+* `ember-qunit`
+  * [#1188](https://github.com/emberjs/ember-qunit/pull/1188) Resolve ember barrel deprecations ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :memo: Documentation
+* `ember-qunit`
+  * [#1185](https://github.com/emberjs/ember-qunit/pull/1185) Document loadTests() ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :house: Internal
+* Other
+  * [#1194](https://github.com/emberjs/ember-qunit/pull/1194) Make test packages private ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#1192](https://github.com/emberjs/ember-qunit/pull/1192) Expand TS matrix to include [5.1, 5.8) ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#1191](https://github.com/emberjs/ember-qunit/pull/1191) Expand try matrix to 5.x LTSes ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* `ember-qunit`
+  * [#1190](https://github.com/emberjs/ember-qunit/pull/1190) Add release-plan, remove release-it ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#1189](https://github.com/emberjs/ember-qunit/pull/1189) re-roll lockfile, upgrade pnpm (etc) ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 
 
 
