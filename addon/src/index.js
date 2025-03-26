@@ -1,5 +1,7 @@
 /* globals Testem */
 import { macroCondition, getOwnConfig, importSync } from '@embroider/macros';
+import { setTesting } from '@ember/debug';
+import { setAdapter } from 'ember-testing/lib/setup_for_testing';
 
 /**
  * Load qunit-default theme by default, if no custom theme is specified.
@@ -126,7 +128,7 @@ export function startTests() {
    @method setupTestAdapter
  */
 export function setupTestAdapter() {
-  Ember.Test.adapter = QUnitAdapter.create();
+  setAdapter(QUnitAdapter.create());
 }
 
 /**
