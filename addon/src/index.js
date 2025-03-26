@@ -32,7 +32,6 @@ if (typeof Testem !== 'undefined') {
 
 import { _backburner } from '@ember/runloop';
 import { resetOnerror, getTestMetadata } from '@ember/test-helpers';
-import Ember from 'ember';
 import * as QUnit from 'qunit';
 import QUnitAdapter from './adapter';
 import {
@@ -138,13 +137,11 @@ export function setupTestAdapter() {
  */
 export function setupEmberTesting() {
   QUnit.testStart(() => {
-    // eslint-disable-next-line ember/no-ember-testing-in-module-scope
-    Ember.testing = true;
+    setTesting(true);
   });
 
   QUnit.testDone(() => {
-    // eslint-disable-next-line ember/no-ember-testing-in-module-scope
-    Ember.testing = false;
+    setTesting(false);
   });
 }
 
