@@ -10,9 +10,10 @@
     "lint:fix": "pnpm --filter '*' run lint:fix",
     "test": "pnpm --filter '*' run test"
   },
+  "packageManager": "pnpm@10.7.0",
   "volta": {
     "node": "18.16.0",
-    "pnpm": "8.6.2"
+    "pnpm": "10.7.0"
   },
   "pnpm": {
     "peerDependencyRules": {
