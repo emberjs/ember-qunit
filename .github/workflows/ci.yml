@@ -67,6 +67,9 @@ jobs:
           - ember-lts-4.4
           - ember-lts-4.8
           - ember-lts-4.12
+          - ember-lts-5.4
+          - ember-lts-5.8
+          - ember-lts-5.12
           - ember-release
           - ember-beta
           - ember-canary
@@ -92,6 +95,13 @@ jobs:
           - 4.9
           - 5.0
           - 5.1
+          - 5.2
+          - 5.3
+          - 5.4
+          - 5.5
+          - 5.6
+          - 5.7
+          - 5.8
           - next
 
     steps:

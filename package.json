@@ -2,17 +2,20 @@
   "name": "root",
   "version": "0.0.0",
   "private": true,
-  "license": "MIT",
   "repository": "https://github.com/emberjs/ember-qunit",
+  "license": "MIT",
   "scripts": {
-    "prepare": "pnpm --filter ember-qunit build",
     "lint": "pnpm --filter '*' run lint",
     "lint:fix": "pnpm --filter '*' run lint:fix",
+    "prepare": "pnpm --filter ember-qunit build",
     "test": "pnpm --filter '*' run test"
+  },
+  "devDependencies": {
+    "release-plan": "^0.16.0"
   },
   "packageManager": "pnpm@10.7.0",
   "volta": {
-    "node": "18.16.0",
+    "node": "^18.17.0",
     "pnpm": "10.7.0"
   },
   "pnpm": {
