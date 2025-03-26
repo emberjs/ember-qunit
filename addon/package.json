@@ -50,22 +50,22 @@
     "prepack": "rollup --config"
   },
   "dependencies": {
-    "@embroider/addon-shim": "^1.8.6",
-    "@embroider/macros": "^1.13.1",
+    "@embroider/addon-shim": "^1.9.0",
+    "@embroider/macros": "^1.16.12",
     "qunit-theme-ember": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.2",
-    "@babel/eslint-parser": "^7.22.15",
+    "@babel/core": "^7.26.10",
+    "@babel/eslint-parser": "^7.27.0",
     "@ember/test-helpers": "^3.0.3",
     "@embroider/addon-dev": "^3.0.0",
-    "@glimmer/component": "^1.1.2",
+    "@glimmer/component": "^2.0.0",
     "@release-it-plugins/lerna-changelog": "^6.0.0",
     "@rollup/plugin-babel": "^5.3.0",
     "@tsconfig/ember": "^2.0.0",
     "@types/qunit": "^2.19.12",
     "@types/rsvp": "^4.0.4",
-    "concurrently": "^8.0.1",
+    "concurrently": "^9.1.2",
     "ember-source": "^5.0.0",
     "eslint": "^8.52.0",
     "eslint-config-prettier": "^8.6.0",
@@ -74,7 +74,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "expect-type": "^0.16.0",
     "prettier": "^2.8.8",
-    "qunit": "^2.20.0",
+    "qunit": "^2.24.1",
     "release-it": "^16.1.5",
     "rollup": "^4.2.0",
     "typescript": "^4.9.5"
