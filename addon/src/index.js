@@ -1,7 +1,7 @@
 /* globals Testem */
 import { macroCondition, getOwnConfig, importSync } from '@embroider/macros';
 import { setTesting } from '@ember/debug';
-import { setAdapter } from 'ember-testing/lib/setup_for_testing';
+import { setAdapter } from 'ember-testing/lib/test/adapter';
 
 /**
  * Load qunit-default theme by default, if no custom theme is specified.
