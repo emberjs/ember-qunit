@@ -2,25 +2,17 @@
   "solution": {
     "ember-qunit": {
       "impact": "patch",
-      "oldVersion": "9.0.1",
-      "newVersion": "9.0.2",
+      "oldVersion": "9.0.2",
+      "newVersion": "9.0.3",
       "tagName": "latest",
       "constraints": [
         {
           "impact": "patch",
           "reason": "Appears in changelog section :bug: Bug Fix"
-        },
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :memo: Documentation"
-        },
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :house: Internal"
         }
       ],
       "pkgJSONPath": "./addon/package.json"
     }
   },
-  "description": "## Release (2025-03-26)\n\n* ember-qunit 9.0.2 (patch)\n\n#### :bug: Bug Fix\n* `ember-qunit`\n  * [#1188](https://github.com/emberjs/ember-qunit/pull/1188) Resolve ember barrel deprecations ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :memo: Documentation\n* `ember-qunit`\n  * [#1185](https://github.com/emberjs/ember-qunit/pull/1185) Document loadTests() ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :house: Internal\n* Other\n  * [#1194](https://github.com/emberjs/ember-qunit/pull/1194) Make test packages private ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#1192](https://github.com/emberjs/ember-qunit/pull/1192) Expand TS matrix to include [5.1, 5.8) ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#1191](https://github.com/emberjs/ember-qunit/pull/1191) Expand try matrix to 5.x LTSes ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n* `ember-qunit`\n  * [#1190](https://github.com/emberjs/ember-qunit/pull/1190) Add release-plan, remove release-it ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#1189](https://github.com/emberjs/ember-qunit/pull/1189) re-roll lockfile, upgrade pnpm (etc) ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2025-05-13)\n\n* ember-qunit 9.0.3 (patch)\n\n#### :bug: Bug Fix\n* `ember-qunit`\n  * [#1195](https://github.com/emberjs/ember-qunit/pull/1195) Remove unneeded peer declaration ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }
