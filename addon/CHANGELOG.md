@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-05-13)
+
+* ember-qunit 9.0.3 (patch)
+
+#### :bug: Bug Fix
+* `ember-qunit`
+  * [#1195](https://github.com/emberjs/ember-qunit/pull/1195) Remove unneeded peer declaration ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-03-26)
 
 * ember-qunit 9.0.2 (patch)
