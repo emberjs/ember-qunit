@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-09-12)
+
+* ember-qunit 9.0.4 (patch)
+
+#### :bug: Bug Fix
+* `ember-qunit`
+  * [#1197](https://github.com/emberjs/ember-qunit/pull/1197) Add types for object based test.each() datasets ([@sukima](https://github.com/sukima))
+
+#### Committers: 1
+- Devin Weaver ([@sukima](https://github.com/sukima))
+
 ## Release (2025-05-13)
 
 * ember-qunit 9.0.3 (patch)
