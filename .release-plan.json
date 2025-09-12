@@ -2,8 +2,8 @@
   "solution": {
     "ember-qunit": {
       "impact": "patch",
-      "oldVersion": "9.0.2",
-      "newVersion": "9.0.3",
+      "oldVersion": "9.0.3",
+      "newVersion": "9.0.4",
       "tagName": "latest",
       "constraints": [
         {
@@ -14,5 +14,5 @@
       "pkgJSONPath": "./addon/package.json"
     }
   },
-  "description": "## Release (2025-05-13)\n\n* ember-qunit 9.0.3 (patch)\n\n#### :bug: Bug Fix\n* `ember-qunit`\n  * [#1195](https://github.com/emberjs/ember-qunit/pull/1195) Remove unneeded peer declaration ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2025-09-12)\n\n* ember-qunit 9.0.4 (patch)\n\n#### :bug: Bug Fix\n* `ember-qunit`\n  * [#1197](https://github.com/emberjs/ember-qunit/pull/1197) Add types for object based test.each() datasets ([@sukima](https://github.com/sukima))\n\n#### Committers: 1\n- Devin Weaver ([@sukima](https://github.com/sukima))\n"
 }
