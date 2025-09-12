@@ -274,7 +274,7 @@ declare global {
     interface EachFunction {
       <TC extends TestContext, T>(
         name: string,
-        dataset: T[],
+        dataset: T[] | Record<string, T>,
         callback: (this: TC, assert: Assert, data: T) => void | Promise<unknown>
       ): void;
     }
