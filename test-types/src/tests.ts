@@ -339,7 +339,16 @@ module('with setup options', function(hooks) {
 });
 
 module('methods on test function', function() {
-  test.each('example with each', [1, 2, 3], async function(assert, number) {
+  test.each('example with each (array dataset)', [1, 2, 3], async function(assert, number) {
+    // setup the outer context
+    this.set('value', 'cat');
+
+    await render(hbs`{{number}}`);
+
+    assert.strictEqual(number, 1)
+  });
+
+  test.each('example with each (object dataset)', { one: 1, two: 2, three: 3 }, async function(assert, number) {
     // setup the outer context
     this.set('value', 'cat');
 
