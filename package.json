@@ -19,6 +19,9 @@
     "pnpm": "10.7.0"
   },
   "pnpm": {
+    "overrides": {
+      "ember-cli-htmlbars": "^7.0.1"
+    },
     "peerDependencyRules": {
       "ignoreMissing": [
         "webpack"
