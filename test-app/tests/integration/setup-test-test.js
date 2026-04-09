@@ -1,13 +1,8 @@
 import { module, test } from 'qunit';
 import Service, { inject as injectService } from '@ember/service';
 import { setupTest } from 'ember-qunit';
-import hasEmberVersion from '@ember/test-helpers/has-ember-version';
 
 module('setupTest tests', function (hooks) {
-  if (!hasEmberVersion(2, 4)) {
-    return;
-  }
-
   setupTest(hooks);
 
   test('can be used for unit style testing', function (assert) {
