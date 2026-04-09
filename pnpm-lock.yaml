@@ -15,10 +15,10 @@ importers:
   addon:
     dependencies:
       '@embroider/addon-shim':
-        specifier: ^1.9.0
+        specifier: ^1.10.2
         version: 1.10.2
       '@embroider/macros':
-        specifier: ^1.16.12
+        specifier: ^1.20.2
         version: 1.20.2(@babel/core@7.29.0)
       qunit-theme-ember:
         specifier: ^1.0.0
@@ -34,7 +34,7 @@ importers:
         specifier: ^3.0.3
         version: 3.3.1(@babel/core@7.29.0)(ember-source@5.12.0(@glimmer/component@2.1.1)(rsvp@4.8.5))
       '@embroider/addon-dev':
-        specifier: ^3.0.0
+        specifier: ^3.2.0
         version: 3.2.0(rollup@4.60.1)
       '@glimmer/component':
         specifier: ^2.0.0
@@ -119,10 +119,10 @@ importers:
         specifier: ^3.0.2
         version: 3.1.0
       '@embroider/macros':
-        specifier: ^1.16.12
+        specifier: ^1.20.2
         version: 1.20.2(@babel/core@7.29.0)
       '@embroider/test-setup':
-        specifier: ^3.0.1
+        specifier: ^3.0.3
         version: 3.0.3(@embroider/core@3.5.9)
       '@glimmer/component':
         specifier: ^2.0.0
@@ -146,7 +146,7 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2(@babel/core@7.29.0)
       ember-auto-import:
-        specifier: ^2.10.0
+        specifier: ^2.13.1
         version: 2.13.1(webpack@5.106.0)
       ember-cli:
         specifier: ~6.11.0
@@ -255,10 +255,10 @@ importers:
         specifier: ^3.0.2
         version: 3.1.0
       '@embroider/macros':
-        specifier: ^1.16.12
+        specifier: ^1.20.2
         version: 1.20.2(@babel/core@7.29.0)
       '@embroider/test-setup':
-        specifier: ^3.0.1
+        specifier: ^3.0.3
         version: 3.0.3(@embroider/core@3.5.9)
       '@glimmer/component':
         specifier: ^2.0.0
@@ -282,7 +282,7 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2(@babel/core@7.29.0)
       ember-auto-import:
-        specifier: ^2.10.0
+        specifier: ^2.13.1
         version: 2.13.1(webpack@5.106.0)
       ember-cli:
         specifier: ~6.11.0
