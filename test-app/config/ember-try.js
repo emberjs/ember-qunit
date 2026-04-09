@@ -69,7 +69,7 @@ module.exports = async function () {
           },
           devDependencies: {
             'ember-source': await getChannelURL('release'),
-            'ember-cli': '^5.1.0',
+            'ember-cli': '^6.10.0',
           },
         },
       },
@@ -81,7 +81,7 @@ module.exports = async function () {
           },
           devDependencies: {
             'ember-source': await getChannelURL('beta'),
-            'ember-cli': '^5.1.0',
+            'ember-cli': '^6.10.0',
           },
         },
       },
@@ -93,7 +93,7 @@ module.exports = async function () {
           },
           devDependencies: {
             'ember-source': await getChannelURL('canary'),
-            'ember-cli': '^5.1.0',
+            'ember-cli': '^6.10.0',
           },
         },
       },
