@@ -23,6 +23,7 @@ jobs:
     steps:
       - uses: wyvox/action@v1
       - run: pnpm build
+        working-directory: addon
       - run: pnpm lint
       - run: pnpm test:ember
         working-directory: test-app
@@ -35,6 +36,7 @@ jobs:
     steps:
       - uses: wyvox/action@v1
       - run: pnpm build
+        working-directory: addon
       - run: pnpm lint
       - run: pnpm test:ember
         working-directory: test-app
@@ -53,6 +55,7 @@ jobs:
         with:
           pnpm-args: '--no-lockfile'
       - run: pnpm build
+        working-directory: addon
       - run: pnpm test:ember
         working-directory: test-app
 
@@ -82,6 +85,7 @@ jobs:
     steps:
       - uses: wyvox/action@v1
       - run: pnpm build
+        working-directory: addon
       - name: test
         run: node_modules/.bin/ember try:one ${{ matrix.ember-try-scenario }} --skip-cleanup
         working-directory: test-app
@@ -110,7 +114,6 @@ jobs:
 
     steps:
       - uses: wyvox/action@v1
-      - run: pnpm build
       - name: install TS version
         run: pnpm install --save-dev typescript@${{matrix.ts-version}}
         working-directory: addon
