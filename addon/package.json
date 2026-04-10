@@ -51,7 +51,6 @@
   },
   "dependencies": {
     "@embroider/addon-shim": "^1.10.2",
-    "@embroider/macros": "^1.20.2",
     "qunit-theme-ember": "^1.0.0"
   },
   "devDependencies": {
@@ -59,13 +58,13 @@
     "@babel/eslint-parser": "^7.27.0",
     "@ember/test-helpers": "^5.4.1",
     "@embroider/addon-dev": "^3.2.0",
+    "@embroider/macros": "^1.20.2",
     "@glimmer/component": "^2.0.0",
     "@rollup/plugin-babel": "^5.3.0",
     "@tsconfig/ember": "^2.0.0",
     "@types/qunit": "^2.19.12",
     "@types/rsvp": "^4.0.4",
     "concurrently": "^9.1.2",
-    "ember-source": "^5.0.0",
     "eslint": "^8.52.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-disable-features": "^0.1.3",
