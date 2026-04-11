@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import Service, { inject as injectService } from '@ember/service';
+import Service, { service as injectService } from '@ember/service';
 import { setupTest } from 'ember-qunit';
 
 module('setupTest tests', function (hooks) {
