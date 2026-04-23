@@ -5,10 +5,10 @@ on:
     branches:
       - master
       - main
-      - 'v*'
+      - "v*"
   pull_request:
   schedule:
-    - cron: '0 3 * * *' # daily, at 3am
+    - cron: "0 3 * * *" # daily, at 3am
 
 concurrency:
   group: ci-${{ github.head_ref || github.ref }}
@@ -22,6 +22,8 @@ jobs:
 
     steps:
       - uses: wyvox/action@v1
+      - run: pnpm build
+        working-directory: addon
       - run: pnpm lint
       - run: pnpm test:ember
         working-directory: test-app
@@ -33,6 +35,8 @@ jobs:
 
     steps:
       - uses: wyvox/action@v1
+      - run: pnpm build
+        working-directory: addon
       - run: pnpm lint
       - run: pnpm test:ember
         working-directory: test-app
@@ -40,21 +44,22 @@ jobs:
         run: node_modules/.bin/ember try:one embroider-optimized --skip-cleanup
         working-directory: test-app
 
-
   floating-dependencies:
-    name: 'Floating Dependencies'
+    name: "Floating Dependencies"
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
     steps:
       - uses: wyvox/action@v1
         with:
-          pnpm-args: '--no-lockfile'
+          pnpm-args: "--no-lockfile"
+      - run: pnpm build
+        working-directory: addon
       - run: pnpm test:ember
         working-directory: test-app
 
   try-scenarios:
-    name: 'Try: ${{ matrix.ember-try-scenario }}'
+    name: "Try: ${{ matrix.ember-try-scenario }}"
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -78,6 +83,8 @@ jobs:
 
     steps:
       - uses: wyvox/action@v1
+      - run: pnpm build
+        working-directory: addon
       - name: test
         run: node_modules/.bin/ember try:one ${{ matrix.ember-try-scenario }} --skip-cleanup
         working-directory: test-app

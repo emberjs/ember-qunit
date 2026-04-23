@@ -15,10 +15,13 @@
   },
   "packageManager": "pnpm@10.7.0",
   "volta": {
-    "node": "^18.17.0",
+    "node": "^24.0.0",
     "pnpm": "10.7.0"
   },
   "pnpm": {
+    "overrides": {
+      "ember-cli-htmlbars": "^7.0.1"
+    },
     "peerDependencyRules": {
       "ignoreMissing": [
         "webpack"
