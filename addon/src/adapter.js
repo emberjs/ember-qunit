@@ -3,11 +3,9 @@ import * as QUnit from 'qunit';
 
 export function nonTestDoneCallback() {}
 
-let Adapter = TestAdapter.extend({
-  init() {
-    this.doneCallbacks = [];
-    this.qunit = this.qunit || QUnit;
-  },
+export default class QUnitAdapter extends TestAdapter {
+  doneCallbacks = [];
+  qunit = this.qunit || QUnit;
 
   asyncStart() {
     let currentTest = this.qunit.config.current;
@@ -16,7 +14,7 @@ let Adapter = TestAdapter.extend({
         ? currentTest.assert.async()
         : nonTestDoneCallback;
     this.doneCallbacks.push({ test: currentTest, done });
-  },
+  }
 
   asyncEnd() {
     let currentTest = this.qunit.config.current;
@@ -34,7 +32,5 @@ let Adapter = TestAdapter.extend({
     if (test === currentTest) {
       done();
     }
-  },
-});
-
-export default Adapter;
+  }
+}
