@@ -1,5 +1,26 @@
 # Changelog
 
+## Release (2026-05-16)
+
+* ember-qunit 9.1.0 (minor)
+
+#### :rocket: Enhancement
+* `ember-qunit`
+  * [#1204](https://github.com/emberjs/ember-qunit/pull/1204) Use native class syntax for `QUnitAdapter` ([@bobisjan](https://github.com/bobisjan))
+  * [#1203](https://github.com/emberjs/ember-qunit/pull/1203) Remove `test-support-suffx.js` ([@bobisjan](https://github.com/bobisjan))
+
+#### :house: Internal
+* Other
+  * [#1205](https://github.com/emberjs/ember-qunit/pull/1205) Update release-plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#1202](https://github.com/emberjs/ember-qunit/pull/1202) Bump ember-cli to ~6.12.0 in test apps ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+* `ember-qunit`
+  * [#1200](https://github.com/emberjs/ember-qunit/pull/1200) Ember 7 compat ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 3
+- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+- Jan Bobisud ([@bobisjan](https://github.com/bobisjan))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-09-12)
 
 * ember-qunit 9.0.4 (patch)
