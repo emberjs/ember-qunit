@@ -11,7 +11,7 @@
     "test": "pnpm --filter '*' run test"
   },
   "devDependencies": {
-    "release-plan": "^0.16.0"
+    "release-plan": "^0.18.0"
   },
   "packageManager": "pnpm@10.7.0",
   "volta": {
@@ -19,13 +19,13 @@
     "pnpm": "10.7.0"
   },
   "pnpm": {
-    "overrides": {
-      "ember-cli-htmlbars": "^7.0.1"
-    },
     "peerDependencyRules": {
       "ignoreMissing": [
         "webpack"
       ]
+    },
+    "overrides": {
+      "ember-cli-htmlbars": "^7.0.1"
     }
   }
 }
