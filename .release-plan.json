@@ -1,18 +1,22 @@
 {
   "solution": {
     "ember-qunit": {
-      "impact": "patch",
-      "oldVersion": "9.0.3",
-      "newVersion": "9.0.4",
+      "impact": "minor",
+      "oldVersion": "9.0.4",
+      "newVersion": "9.1.0",
       "tagName": "latest",
       "constraints": [
         {
+          "impact": "minor",
+          "reason": "Appears in changelog section :rocket: Enhancement"
+        },
+        {
           "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
+          "reason": "Appears in changelog section :house: Internal"
         }
       ],
       "pkgJSONPath": "./addon/package.json"
     }
   },
-  "description": "## Release (2025-09-12)\n\n* ember-qunit 9.0.4 (patch)\n\n#### :bug: Bug Fix\n* `ember-qunit`\n  * [#1197](https://github.com/emberjs/ember-qunit/pull/1197) Add types for object based test.each() datasets ([@sukima](https://github.com/sukima))\n\n#### Committers: 1\n- Devin Weaver ([@sukima](https://github.com/sukima))\n"
+  "description": "## Release (2026-05-16)\n\n* ember-qunit 9.1.0 (minor)\n\n#### :rocket: Enhancement\n* `ember-qunit`\n  * [#1204](https://github.com/emberjs/ember-qunit/pull/1204) Use native class syntax for `QUnitAdapter` ([@bobisjan](https://github.com/bobisjan))\n  * [#1203](https://github.com/emberjs/ember-qunit/pull/1203) Remove `test-support-suffx.js` ([@bobisjan](https://github.com/bobisjan))\n\n#### :house: Internal\n* Other\n  * [#1205](https://github.com/emberjs/ember-qunit/pull/1205) Update release-plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#1202](https://github.com/emberjs/ember-qunit/pull/1202) Bump ember-cli to ~6.12.0 in test apps ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n* `ember-qunit`\n  * [#1200](https://github.com/emberjs/ember-qunit/pull/1200) Ember 7 compat ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 3\n- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n- Jan Bobisud ([@bobisjan](https://github.com/bobisjan))\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }
