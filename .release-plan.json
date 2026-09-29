@@ -2,8 +2,8 @@
   "solution": {
     "ember-qunit": {
       "impact": "minor",
-      "oldVersion": "9.0.4",
-      "newVersion": "9.1.0",
+      "oldVersion": "9.1.0",
+      "newVersion": "9.2.0",
       "tagName": "latest",
       "constraints": [
         {
@@ -18,5 +18,5 @@
       "pkgJSONPath": "./addon/package.json"
     }
   },
-  "description": "## Release (2026-05-16)\n\n* ember-qunit 9.1.0 (minor)\n\n#### :rocket: Enhancement\n* `ember-qunit`\n  * [#1204](https://github.com/emberjs/ember-qunit/pull/1204) Use native class syntax for `QUnitAdapter` ([@bobisjan](https://github.com/bobisjan))\n  * [#1203](https://github.com/emberjs/ember-qunit/pull/1203) Remove `test-support-suffx.js` ([@bobisjan](https://github.com/bobisjan))\n\n#### :house: Internal\n* Other\n  * [#1205](https://github.com/emberjs/ember-qunit/pull/1205) Update release-plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#1202](https://github.com/emberjs/ember-qunit/pull/1202) Bump ember-cli to ~6.12.0 in test apps ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n* `ember-qunit`\n  * [#1200](https://github.com/emberjs/ember-qunit/pull/1200) Ember 7 compat ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 3\n- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n- Jan Bobisud ([@bobisjan](https://github.com/bobisjan))\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2026-09-29)\n\n* ember-qunit 9.2.0 (minor)\n\n#### :rocket: Enhancement\n* `ember-qunit`\n  * [#1206](https://github.com/emberjs/ember-qunit/pull/1206) Support qunit 3 ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n\n#### :house: Internal\n* `ember-qunit`\n  * [#1207](https://github.com/emberjs/ember-qunit/pull/1207) Fix canary CI: update @ember/test-helpers to 5.5.2 ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n\n#### Committers: 1\n- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n"
 }
