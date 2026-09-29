@@ -108,6 +108,14 @@ module.exports = async function () {
         },
       },
       {
+        name: 'qunit-3',
+        npm: {
+          devDependencies: {
+            qunit: '^3.0.0',
+          },
+        },
+      },
+      {
         name: 'ember-classic',
         env: {
           EMBER_OPTIONAL_FEATURES: JSON.stringify({
