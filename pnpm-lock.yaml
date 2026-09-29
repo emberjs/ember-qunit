@@ -32,8 +32,8 @@ importers:
         specifier: ^7.27.0
         version: 7.28.6(@babel/core@7.29.0)(eslint@8.57.1)
       '@ember/test-helpers':
-        specifier: ^5.4.1
-        version: 5.4.1(@babel/core@7.29.0)
+        specifier: ^5.5.2
+        version: 5.5.2(@babel/core@7.29.0)
       '@embroider/addon-dev':
         specifier: ^3.2.0
         version: 3.2.0(rollup@4.60.1)
@@ -111,8 +111,8 @@ importers:
         specifier: ^3.0.1
         version: 3.1.1
       '@ember/test-helpers':
-        specifier: ^5.4.1
-        version: 5.4.1(@babel/core@7.29.0)
+        specifier: ^5.5.2
+        version: 5.5.2(@babel/core@7.29.0)
       '@ember/test-waiters':
         specifier: ^4.0.0
         version: 4.1.1(@babel/core@7.29.0)
@@ -241,8 +241,8 @@ importers:
         specifier: ^3.0.1
         version: 3.1.1
       '@ember/test-helpers':
-        specifier: ^5.4.1
-        version: 5.4.1(@babel/core@7.29.0)
+        specifier: ^5.5.2
+        version: 5.5.2(@babel/core@7.29.0)
       '@ember/test-waiters':
         specifier: ^4.0.0
         version: 4.1.1(@babel/core@7.29.0)
@@ -1036,8 +1036,8 @@ packages:
     peerDependencies:
       ember-source: ^4.0.0 || ^5.0.0
 
-  '@ember/test-helpers@5.4.1':
-    resolution: {integrity: sha512-BUdT91ra+QibEWAUwtZmvTGFoDHJCxDU+fkQENA8Zs0FR3pZiICxxP/fgdlNExCjjdm1letut7ENoueBuDdixQ==}
+  '@ember/test-helpers@5.5.2':
+    resolution: {integrity: sha512-XaSfroyfmOZf1d1J8QgqWnulxY3etBd7QEbOMCxfhdhphfadOoijoDVlzNUxkk91S6+C/G8NkjN7IMILTrMnZg==}
 
   '@ember/test-waiters@3.1.0':
     resolution: {integrity: sha512-bb9h95ktG2wKY9+ja1sdsFBdOms2lB19VWs8wmNpzgHv1NCetonBoV5jHBV4DHt0uS1tg9z66cZqhUVlYs96KQ==}
@@ -7143,11 +7143,10 @@ snapshots:
       - supports-color
       - webpack
 
-  '@ember/test-helpers@5.4.1(@babel/core@7.29.0)':
+  '@ember/test-helpers@5.5.2(@babel/core@7.29.0)':
     dependencies:
       '@ember/test-waiters': 4.1.1(@babel/core@7.29.0)
       '@embroider/addon-shim': 1.10.2
-      '@embroider/macros': 1.20.2(@babel/core@7.29.0)
       '@simple-dom/interface': 1.4.0
       decorator-transforms: 2.3.1(@babel/core@7.29.0)
       dom-element-descriptors: 0.5.1
