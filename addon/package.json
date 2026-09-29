@@ -78,7 +78,7 @@
   },
   "peerDependencies": {
     "@ember/test-helpers": ">=3.0.3",
-    "qunit": "^2.13.0"
+    "qunit": "^2.13.0 || ^3.0.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"

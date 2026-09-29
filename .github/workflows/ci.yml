@@ -78,6 +78,7 @@ jobs:
           - ember-release
           - ember-beta
           - ember-canary
+          - qunit-3
           - embroider-safe
           - embroider-optimized
 
