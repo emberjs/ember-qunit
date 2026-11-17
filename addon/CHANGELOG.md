@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-11-17)
+
+* ember-qunit 9.2.1 (patch)
+
+#### :bug: Bug Fix
+* `ember-qunit`
+  * [#1209](https://github.com/emberjs/ember-qunit/pull/1209) `nocontainer` hides the test container but keeps it scaled to 640x384 ([@gitKrystan](https://github.com/gitKrystan))
+
+#### Committers: 1
+- Krystan HuffMenne ([@gitKrystan](https://github.com/gitKrystan))
+
 ## Release (2026-09-29)
 
 * ember-qunit 9.2.0 (minor)
