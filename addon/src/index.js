@@ -91,7 +91,8 @@ export function setupApplicationTest(hooks, _options) {
 /**
    Uses current URL configuration to setup the test container.
 
-   * If `?nocontainer` is set, the test container will be hidden.
+   * If `?nocontainer` is set, the test container will be hidden and made full
+     screen.
    * If `?devmode` or `?fullscreencontainer` is set, the test container will be
      made full screen.
 
@@ -105,7 +106,7 @@ export function setupTestContainer() {
 
   let params = QUnit.urlParams;
 
-  if (params.devmode || params.fullscreencontainer) {
+  if (params.devmode || params.fullscreencontainer || params.nocontainer) {
     testContainer.classList.add('ember-testing-container-full-screen');
   }
 
