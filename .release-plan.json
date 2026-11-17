@@ -1,22 +1,18 @@
 {
   "solution": {
     "ember-qunit": {
-      "impact": "minor",
-      "oldVersion": "9.1.0",
-      "newVersion": "9.2.0",
+      "impact": "patch",
+      "oldVersion": "9.2.0",
+      "newVersion": "9.2.1",
       "tagName": "latest",
       "constraints": [
         {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
-        },
-        {
           "impact": "patch",
-          "reason": "Appears in changelog section :house: Internal"
+          "reason": "Appears in changelog section :bug: Bug Fix"
         }
       ],
       "pkgJSONPath": "./addon/package.json"
     }
   },
-  "description": "## Release (2026-09-29)\n\n* ember-qunit 9.2.0 (minor)\n\n#### :rocket: Enhancement\n* `ember-qunit`\n  * [#1206](https://github.com/emberjs/ember-qunit/pull/1206) Support qunit 3 ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n\n#### :house: Internal\n* `ember-qunit`\n  * [#1207](https://github.com/emberjs/ember-qunit/pull/1207) Fix canary CI: update @ember/test-helpers to 5.5.2 ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n\n#### Committers: 1\n- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n"
+  "description": "## Release (2026-11-17)\n\n* ember-qunit 9.2.1 (patch)\n\n#### :bug: Bug Fix\n* `ember-qunit`\n  * [#1209](https://github.com/emberjs/ember-qunit/pull/1209) `nocontainer` hides the test container but keeps it scaled to 640x384 ([@gitKrystan](https://github.com/gitKrystan))\n\n#### Committers: 1\n- Krystan HuffMenne ([@gitKrystan](https://github.com/gitKrystan))\n"
 }
